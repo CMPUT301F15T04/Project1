@@ -100,8 +100,6 @@ public class AccountTest extends ActivityInstrumentationTestCase2 {
 		assertTrue(accountOne.getCity().equals("Edmonton"));
 		assertTrue(accountOne.getEmail().equals("rupehra@ualberta.ca"));
 	}
-	//US10.02.01
-	//As a user, I should be to edit my profile.
 	//Test if you can edit a Profile in the account
 	public void testEditProfile(){
 		ServerManage SM= new ServerManager();
@@ -119,6 +117,6 @@ public class AccountTest extends ActivityInstrumentationTestCase2 {
 		assertTrue(changeAccountOne.getCity().equals("Not Edmonton"));
         }
 
-
+	
 
 }//end AccountTest

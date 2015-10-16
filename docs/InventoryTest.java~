@@ -169,10 +169,10 @@ public class InventoryTest extends ActivityInstrumentationTestCase2{
 		MyInventory.addItem(item1);
 		//Connect inventory to an account
 		MyAccount.setInventory(MyInventory);
-		///Make sure Inventory is not empty
-		assertFalse(FriendAccount.Inventory().notempty());
-		//Makre sure item detail was saved correctly
-		assertTrue(FriendAccount.Inventory(0).getName(search).equals("Call of Duty"))
+		//Save inventorylist item into an arraylist of items
+		Arratlist<Items> itemlist = MyAccount.myInventory()
+		//Test if we can get item detail
+		assertTrue(itemlist.get(0).getName().equals("Call of Duty"))
 	}
 	
 	
@@ -205,11 +205,9 @@ public class InventoryTest extends ActivityInstrumentationTestCase2{
 		}catch (ShareableException e){
 			assertTrue(ViewInventory.notempty()); 
 		}
-		//Make sure Inventory is not empty
-		assertFalse(FriendAccount.Inventory().notempty());
-		//Makre sure item detail was saved correctly
-		assertTrue(FriendAccount.Inventory(0).getName(search).equals("Call of Duty"))
-		
+		Arraylist<Items> itemlist = ViewInventory.getInventory()
+		//Test if we can get item detail
+		assertTrue(itemlist.get(0).getName().equals("Call of Duty"))
 	}
 	//US03.01.03
 	//As an borrower, I want to search/browse the inventories of my friends by textual query..
