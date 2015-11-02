@@ -16,7 +16,7 @@ public class InventoryTest extends TestCase {
         assertTrue(inventory.hasItem(item_1));
     }//End testADdItemToInventory
 
-    //Test del 1 item from inventory (Del take Obj not Index)
+    //Test del 1 item from inventory (Del take Index not obj)
     public void testDelItemToInventory() {
         Inventory inventory = new Inventory();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
@@ -26,7 +26,7 @@ public class InventoryTest extends TestCase {
         assertFalse(inventory.hasItem(item_1));
     }//End testADdItemToInventory
 
-    //Test del 1 item from inventory of 2 item Del take Obj not Index)
+    //Test del 1 item from inventory of 2 item (Del take Index not obj)
     public void testDelItemToInventory2() {
         Inventory inventory = new Inventory();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
@@ -40,7 +40,7 @@ public class InventoryTest extends TestCase {
         assertFalse(inventory.hasItem(item_2));
     }//End testADdItemToInventory
 
-    //Test if inventory has X item (Del take Obj not Index)
+    //Test if inventory has X item
     public void testInventoryHasItem(){
         Inventory inventory = new Inventory();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");

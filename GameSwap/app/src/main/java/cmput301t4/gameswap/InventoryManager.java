@@ -32,10 +32,6 @@ public class InventoryManager {
         getInstance().replace(item, position);
     }//end replaceItem
 
-    public Item findItem(int position){
-        return getInstance().getItem(position);
-    }//end findItem
-
     public boolean hasItem(Item item){
         return getInstance().hasItem(item);
     }//end hasItem
