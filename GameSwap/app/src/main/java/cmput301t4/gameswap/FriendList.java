@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by sakaluk on 11/1/15.
  */
 public class FriendList {
-    ArrayList<Trader> friendCollection;
+    /*ArrayList<Trader> friendCollection;
 
     public void AddFriend(int FriendID) {
         // TODO: Pull Trader from server by ID
@@ -20,5 +20,5 @@ public class FriendList {
                 friendCollection.remove(friend);
             }
         }
-    }
+    }*/
 }

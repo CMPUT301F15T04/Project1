@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 /**
  * Created by sakaluk on 11/1/15.
  */
-public class Cache {
+public class Cache {/*
     ArrayList<Item> itemsToBePushed;
     ArrayList<Trade> tradesToBePushed;
     int accountID;
@@ -21,5 +21,5 @@ public class Cache {
 
     public void pullFriend(Trader friend) {
 
-    }
+    }*/
 }
