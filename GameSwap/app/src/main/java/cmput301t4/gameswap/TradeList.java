@@ -34,4 +34,12 @@ public class TradeList {
         tradelist.clear();
     }//end clearTradelist
 
+    public boolean isEmpty(){return tradelist.isEmpty();}
+
+    public int getIndex(Trade trade){
+        return tradelist.indexOf(trade);
+    }
+
+
+
 }//end TradeList
