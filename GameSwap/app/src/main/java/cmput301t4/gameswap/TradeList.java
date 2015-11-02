@@ -30,7 +30,7 @@ public class TradeList {
     }//end hasTrade
 
     //Wrote this in for testing, Not sure if we really need
-    public void clearInventory(){
+    public void clearTradelist(){
         tradelist.clear();
     }//end clearTradelist
 
