@@ -3,22 +3,38 @@ package cmput301t4.gameswap;
 import java.util.ArrayList;
 
 /**
- * Created by sakaluk on 11/1/15.
+ * Created by rupehra on 11/1/15.
+ *
+ *
+ * think friendlist is a singleton
+ *
+ *
+ *
  */
+
 public class FriendList {
-    ArrayList<Trader> friendCollection;
+    private ArrayList<Trader> friendList = new ArrayList<Trader>();
 
-    public void AddFriend(int FriendID) {
-        // TODO: Pull Trader from server by ID
-        Trader friend = new Trader();
-        friendCollection.add(friend);
-    }
+    //======Basic Function=====//
+    public void addFriend(Trader trader) {friendList.add(trader);}//end add to tradelist
 
-    public void DeleteFriend(int FriendID) {
-        for(int i = 0; i < friendCollection.size(); i++) {
-            if(friendCollection.get(i).getID() == friendID) {
-                friendCollection.remove(friend);
-            }
-        }
-    }
-}
+    //This del the friend , most likely will
+    //be changed later to take in position
+    public void delFriend(int position) {friendList.remove(friendList.get(position));
+    }//end del
+
+    //Retrieve friend at index
+    public Trader getTrader(int index){return friendList.get(index);}//End getTrade
+
+    //See if friendList contains friend
+    public boolean hasFriend(Trader trader) {
+        return friendList.contains(trader);
+    }//end hasTrade
+
+    //Wrote this in for testing, Not sure if we really need
+    public void clearTradelist(){
+        friendList.clear();
+    }//end clearTradelist
+
+}//end TradeList
+
