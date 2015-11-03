@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UMLTEMP.NewGameEntry"
+            android:label="@string/title_activity_new_game_entry" >
+        </activity>
     </application>
 
 </manifest>
