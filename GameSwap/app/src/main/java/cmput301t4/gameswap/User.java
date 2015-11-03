@@ -1,6 +1,10 @@
 package cmput301t4.gameswap;
 
 
+import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.TradeManager;
+
 /**
  * Created by rupehra on 11/1/15.
  *

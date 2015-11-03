@@ -23,4 +23,7 @@
     <string name="title_activity_new_game_entry">NewGameEntry</string>
     <string name="New_Game">New Game</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_friends__n__trading_">Friends_N_Trading_Activity</string>
+    <string name="title_activity_friends_ntrading">FriendsNTradingActivity</string>
+    <string name="title_activity_trades">TradesActivity</string>
 </resources>

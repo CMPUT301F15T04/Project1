@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.TradeManager;
+
 /**
  * Created by kynan on 11/1/15.
  */

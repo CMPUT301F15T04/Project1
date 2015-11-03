@@ -19,7 +19,7 @@ android:orientation="vertical"
     android:id="@+id/gameSwap"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    android:layout_weight="0.27" />
+    android:layout_weight="0.20" />
 
 <Button
     android:layout_width="match_parent"
@@ -27,8 +27,8 @@ android:orientation="vertical"
     android:text="Inventory"
     android:id="@+id/inventory"
     android:layout_gravity="center_horizontal"
-    android:layout_weight="0.18"
-    android:background="#ff7f98"
+    android:layout_weight="0.20"
+    android:background="#ff869d"
     android:onClick="openInventoryButton" />
 
 <Button
@@ -37,8 +37,9 @@ android:orientation="vertical"
     android:text="Friends"
     android:id="@+id/friends"
     android:layout_gravity="center_horizontal"
-    android:layout_weight="0.19"
-    android:background="#97c1ff" />
+    android:layout_weight="0.20"
+    android:background="#97c1ff"
+    android:onClick="openFriendsButton" />
 
 <Button
     android:layout_width="match_parent"
@@ -47,7 +48,8 @@ android:orientation="vertical"
     android:id="@+id/tradeOffers"
     android:layout_gravity="center_horizontal"
     android:layout_weight="0.20"
-    android:background="#9effb8" />
+    android:background="#9effb8"
+    android:onClick="tradeOffersButton" />
 
 
 </LinearLayout>

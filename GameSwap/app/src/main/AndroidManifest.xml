@@ -7,31 +7,37 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+        <activity android:name=".Activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity
+        <!--
+       <activity
 
              android:name=".clickInventory"
              android:label="@string/title_activity_click_inventory" >
          </activity>
        >
-          -->
-        <activity
-            android:name=".selectTaskActivity"
-            android:label="@string/title_activity_select_task" >
+        -->
+        <activity android:name=".Activities.selectTaskActivity" >
+        </activity>
+        <activity android:name=".Activities.myInventoryActivity" >
         </activity>
         <activity
-            android:name=".myInventoryActivity"
-            android:label="@string/title_activity_my_inventory" >
-            </activity>
-
+            android:name=".Friends_N_Trading_Activity"
+            android:label="@string/title_activity_friends__n__trading_" >
+        </activity>
+        <activity
+            android:name=".Activities.FriendsNTradingActivity"
+            android:label="@string/title_activity_friends_ntrading" >
+        </activity>
+        <activity
+            android:name=".Activities.TradesActivity"
+            android:label="@string/title_activity_trades" >
+        </activity>
     </application>
 
 </manifest>
