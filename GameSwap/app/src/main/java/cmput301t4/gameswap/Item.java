@@ -124,4 +124,25 @@ public class Item {
     public void setPlatform(Integer platform) {
         Platform = platform;
     }
+
+    //===== .equals Override=====//
+    @Override
+    public boolean equals(Object item){
+        Item item1 = (Item) item;
+        if(this.Name.equals(item1.getName())){
+            if(this.Description.equals(item1.getDescription())){
+                if(this.ReleaseDate.equals(item1.getReleaseDate())){
+                    if(this.isPrivate.equals(item1.getIsPrivate())){
+                        if(this.Quality.equals(item1.getQuality())){
+                            if(this.Platform.equals(item1.getPlatform())){
+                                return true;
+                            }//end check platform
+                        }//end check quality
+                    }//end check isPrivate
+                }//end check ReleaseDate
+            }//end check Description
+        }//end check Name
+        return false;
+    }//end item equals override
+
 }//end Item Class

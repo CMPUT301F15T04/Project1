@@ -16,8 +16,8 @@ public class InventoryManager {
 
     //=====Basic Function=====//
 
-    public void addItem(Item item){
-        getInstance().add(item);
+    public void addItem(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description){
+        getInstance().add(new Item(Name, ReleaseDate, isPrivate,Quaility,Platform,Description));
     }//end addItem
 
     public void delItem(int position){

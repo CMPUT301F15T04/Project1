@@ -1,7 +1,12 @@
 package cmput301t4.gameswap;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
+
+import cmput301t4.gameswap.Exceptions.DateFormatException;
 
 /**
  * Created by kynan on 11/1/15.
@@ -16,12 +21,21 @@ public class Trade {
     private ArrayList<Item> BorrowerItems;
     private Date DateTransaction;
 
+
     public Trade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
         this.Ownername = OwnerName;
         this.BorrowerName = BorrowerName;
         this.OwnerItems = OwnerItems;
         this.BorrowerItems = BorrowerItems;
-        this.DateTransaction = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+        Date date = new Date();
+        String datestring = df.format(date);
+        try {
+            this.DateTransaction = df.parse(datestring);
+        } catch (ParseException e) {
+            throw new DateFormatException();
+        }
+        //this.DateTransaction = new Date();
     }//End Trade Constructor
 
 
@@ -65,4 +79,21 @@ public class Trade {
     public void setDateTransaction(Date dateTransaction) {
         DateTransaction = dateTransaction;
     }
+
+    //===== .equals Override =====//
+    @Override
+    public boolean equals(Object trade){
+        Trade trade1 = (Trade) trade;
+        if(this.Ownername.equals(trade1.getOwnername())){
+            if(this.BorrowerName.equals(trade1.getBorrowerName())){
+                if(this.OwnerItems.equals(trade1.getOwnerItems())){
+                    if(this.BorrowerItems.equals(trade1.getBorrowerItems())){
+                        //WE DID NOT ADD THE DATE CHECK YET
+                        return true;
+                    }//end check BorrowerItem
+                }//end check OwnerItem
+            }//end check BorrowerName
+        }//end check OwnerNAme
+        return false;
+    }//end trade equals override
 }//end Trade Class
