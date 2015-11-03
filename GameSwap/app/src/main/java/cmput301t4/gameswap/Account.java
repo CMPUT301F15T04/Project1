@@ -6,20 +6,23 @@ package cmput301t4.gameswap;
         This is a dummy account. We might not need an account at all.
  */
 
+/*
+
+
+    //=====WE MOST LIKELY DO NOT NEED THIS .JAVA AT ALL======//
 
 public class Account {
 
     private String username;
     private String password;
     private Integer accountId;
-    private Trader trader;
+    private User trader;
 
 
     public Account(String username, String password){
         this.username = username;
         this.password = password;
-        this.accountId = 1;                         // need to implement this, use U
-//        this.trader = new Trader();               // this line of code is giving errors
+        this.accountId = 1;
     }
 
     public void setUsername(String username){
@@ -31,9 +34,5 @@ public class Account {
     }
 
 
-
-
-
-
-
 }
+*/

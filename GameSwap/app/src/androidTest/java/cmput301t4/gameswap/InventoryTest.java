@@ -140,7 +140,7 @@ public class InventoryTest extends TestCase {
     public void testC_AddItemToInventory() {
         InventoryManager IM = new InventoryManager();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        IM.addItem(item_1);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
         assertTrue(IM.hasItem(item_1));
         IM.clearInventory();
     }//End testADdItemToInventory
@@ -149,7 +149,7 @@ public class InventoryTest extends TestCase {
     public void testC_DelItemToInventory() {
         InventoryManager IM = new InventoryManager();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        IM.addItem(item_1);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
         assertTrue(IM.hasItem(item_1));
         IM.delItem(0);
         assertFalse(IM.hasItem(item_1));
@@ -161,8 +161,8 @@ public class InventoryTest extends TestCase {
         InventoryManager IM = new InventoryManager();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
         Item item_2 = new Item("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
-        IM.addItem(item_1);
-        IM.addItem(item_2);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
+        IM.addItem("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
         assertTrue(IM.hasItem(item_1));
         assertTrue(IM.hasItem(item_2));
         IM.delItem(1);
@@ -175,7 +175,7 @@ public class InventoryTest extends TestCase {
     public void testC_InventoryHasItem(){
         InventoryManager IM = new InventoryManager();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        IM.addItem(item_1);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
         assertTrue(IM.hasItem(item_1));
         Item returnItem_1 = IM.getItem(0);
         assertTrue((item_1.getName().equals(returnItem_1.getName())));
@@ -191,7 +191,7 @@ public class InventoryTest extends TestCase {
     public void testC_ReplaceItemInInventory(){
         InventoryManager IM = new InventoryManager();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        IM.addItem(item_1);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
         assertTrue(IM.hasItem(item_1));
         Item edit_item = new Item("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
         //==Used 0 for now, later on need a method to get index==//
@@ -210,10 +210,10 @@ public class InventoryTest extends TestCase {
         Item item_2 = new Item("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
         Item item_3 = new Item("Call of Happy", "03-03-3000", true, 9, 7, "BOO");
         Item item_4 = new Item("Call of Whatever", "04-04-5000", false, 3, 12, "BEST THING EVAR");
-        IM.addItem(item_1);
-        IM.addItem(item_2);
-        IM.addItem(item_3);
-        IM.addItem(item_4);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
+        IM.addItem("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
+        IM.addItem("Call of Happy", "03-03-3000", true, 9, 7, "BOO");
+        IM.addItem("Call of Whatever", "04-04-5000", false, 3, 12, "BEST THING EVAR");
         ArrayList<Integer> delItemAtIndex = new ArrayList<Integer>();
         delItemAtIndex.add(0);
         delItemAtIndex.add(2);
@@ -229,14 +229,14 @@ public class InventoryTest extends TestCase {
     public void testC_EditItemParameter(){
         InventoryManager IM = new InventoryManager();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        IM.addItem(item_1);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
         assertTrue(IM.hasItem(item_1));
         IM.getItem(0).setDescription("Never mind it is terrible");
         IM.getItem(0).setPublic();
         IM.getItem(0).setQuality(4);
-        assertTrue((item_1.getDescription().equals("Never mind it is terrible")));
-        assertTrue((item_1.getIsPrivate().equals(true)));
-        assertTrue((item_1.getQuality().equals(4)));
+        assertTrue((IM.getItem(0).getDescription().equals("Never mind it is terrible")));
+        assertTrue((IM.getItem(0).getIsPrivate().equals(true)));
+        assertTrue((IM.getItem(0).getQuality().equals(4)));
         IM.clearInventory();
     }//end testEditItemParameter
 
@@ -249,7 +249,7 @@ public class InventoryTest extends TestCase {
     public void testC_EditItemInOneTime(){
         InventoryManager IM = new InventoryManager();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        IM.addItem(item_1);
+        IM.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
         assertTrue(IM.hasItem(item_1));
         //==Attribute Change==//
         String name = "Doom-a-genton";

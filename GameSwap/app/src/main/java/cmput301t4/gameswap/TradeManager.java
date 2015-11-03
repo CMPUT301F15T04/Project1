@@ -31,6 +31,8 @@ public class TradeManager {
 
     //Create a new trade
     public void createTrade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
+        //String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems
+        //Trade trade = new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems);
         getCurrent().add(new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems));
     }//end createTrade
 
@@ -56,7 +58,7 @@ public class TradeManager {
 
     //check if they have trade object
     /*
-    Used more see the friend tradelist has the trade onject
+    Used more see the friend tradelist has the trade object
     (situtation : counter trade offer)
      */
     public boolean hasTrade(Trade trade){
@@ -91,6 +93,5 @@ public class TradeManager {
         //TradeCancel(trade);
     }//end createCounterTrade
     */
-
 
 }//end TradeManager

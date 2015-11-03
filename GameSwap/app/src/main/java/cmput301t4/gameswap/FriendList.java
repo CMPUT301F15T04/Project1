@@ -13,11 +13,10 @@ import java.util.ArrayList;
  */
 
 public class FriendList {
-
-    private ArrayList<Trader> friendList = new ArrayList<Trader>();
+    private ArrayList<User> friendList = new ArrayList<User>();
 
     //======Basic Function=====//
-    public void addFriend(Trader trader) {friendList.add(trader);}//end add to tradelist
+    public void addFriend(User trader) {friendList.add(trader);}//end add to tradelist
 
     //This del the friend , most likely will
     //be changed later to take in position
@@ -25,15 +24,15 @@ public class FriendList {
     }//end del
 
     //Retrieve friend at index
-    public Trader getTrader(int index){return friendList.get(index);}//End getTrade
+    public User getTrader(int index){return friendList.get(index);}//End getTrade
 
     //See if friendList contains friend
-    public boolean hasFriend(Trader trader) {
+    public boolean hasFriend(User trader) {
         return friendList.contains(trader);
     }//end hasTrade
 
     //Wrote this in for testing, Not sure if we really need
-    public void clearTradelist(){
+    public void clearFriendlist(){
         friendList.clear();
     }//end clearTradelist
 
