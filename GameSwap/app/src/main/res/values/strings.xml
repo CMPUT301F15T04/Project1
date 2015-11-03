@@ -16,5 +16,6 @@
     <string name="title_activity_new_game_entry">NewGameEntry</string>
     <string name="New_Game">New Game</string>
     <string name="hello_world">Hello world!</string>
+    <string name="game_title">Game Name</string>
 
 </resources>
