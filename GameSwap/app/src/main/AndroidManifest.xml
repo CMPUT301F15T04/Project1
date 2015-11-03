@@ -16,6 +16,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".clickInventory"
+            android:label="@string/title_activity_click_inventory" >
+        </activity>
+        <activity
+            android:name=".myInventory"
+            android:label="@string/title_activity_my_inventory" >
+        </activity>
+        <activity
+            android:name=".selectTask"
+            android:label="@string/title_activity_select_task" >
+        </activity>
+        <activity
+            android:name=".selectTaskActivity"
+            android:label="@string/title_activity_select_task" >
+        </activity>
+        <activity
+            android:name=".myInventoryActivity"
+            android:label="@string/title_activity_my_inventory" >
+        </activity>
     </application>
 
 </manifest>
