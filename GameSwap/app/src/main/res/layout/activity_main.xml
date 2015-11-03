@@ -25,7 +25,8 @@
         android:layout_width="167dp"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:id="@+id/button" />
+        android:id="@+id/button"
+        android:onClick="clickedLogin" />
 
     <Button
         android:layout_width="167dp"
