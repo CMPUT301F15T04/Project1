@@ -109,10 +109,7 @@ public class Trade_noServerTest extends TestCase{
         assertTrue(o_tradeitem.contains(item_1));
         assertTrue(b_tradeitem.contains(item_2));
         Trade trade = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
-        Trade trade2 = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
-        Trade trade3 = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
         testing.add(trade); //Add item to suedo friendlist
-        //TM.createTrade("Owner", "Borrower", o_tradeitem, b_tradeitem);
         TM.createTrade("Owner", "Borrower", o_tradeitem, b_tradeitem);
         assertFalse(TM.getCurrent().isEmpty());
         assertTrue(TM.getCurrent().getTrade(0).getOwnername().equals("Owner"));

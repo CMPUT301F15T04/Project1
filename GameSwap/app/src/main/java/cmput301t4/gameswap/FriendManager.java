@@ -16,7 +16,7 @@ public class FriendManager {
 
     public void addFriend(User friend){
         getFriendlist().addFriend(friend);
-    }//end addItem
+    }//end addFriend
 
     //This del the friend , most likely will
     //be changed later to take in position
@@ -24,16 +24,16 @@ public class FriendManager {
     }//end del
 
     //Retrieve friend at index
-    public User getTrader(int index){return getFriendlist().getTrader(index);}//End getTrade
+    public User getUser(int index){return getFriendlist().getFriend(index);}//End getUser
 
     //See if friendList contains friend
     public boolean hasFriend(User trader) {
         return getFriendlist().hasFriend(trader);
-    }//end hasTrade
+    }//end hasFriend
 
     //Wrote this in for testing, Not sure if we really need
-    public void clearTradelist(){
+    public void clearFriendlist(){
         getFriendlist().clearFriendlist();
-    }//end clearTradelist
+    }//end clearFriendlist
 
 }//end FriendManager

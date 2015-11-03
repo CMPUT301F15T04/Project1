@@ -27,16 +27,7 @@ public class User {
         this.userName = "Enter Desired Username";
         this.userEmail = "Enter Email";
         this.userCity = "Enter City";
-        this.userPhoneNumber = "Enter Phone number";
-
-        FriendManager FM = new FriendManager();
-        TradeManager TM = new TradeManager();
-        InventoryManager IM = new InventoryManager();
-        this.inventory = IM.getInstance();
-        this.pendingTrades = TM.getCurrent();
-        this.pastTrades = TM.getPast();
-        this.friendList = FM.getFriendlist();
-
+        this.userPhoneNumber = "Enter Phone Number";
     }//end Trader constuctor
 
 //=====Setters and Getters=====//
@@ -71,6 +62,22 @@ public class User {
 
     public void setUserPhoneNumber(String userPhoneNumber) {
         this.userPhoneNumber = userPhoneNumber;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setFriendList(FriendList friendList) {
+        this.friendList = friendList;
+    }
+
+    public void setPendingTrades(TradeList pendingTrades) {
+        this.pendingTrades = pendingTrades;
+    }
+
+    public void setPastTrades(TradeList pastTrades) {
+        this.pastTrades = pastTrades;
     }
 
     public Inventory getInventory() {
