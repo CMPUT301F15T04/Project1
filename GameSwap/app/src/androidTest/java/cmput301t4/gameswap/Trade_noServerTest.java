@@ -122,15 +122,6 @@ public class Trade_noServerTest extends TestCase{
         assertFalse(TM.getCurrent().isEmpty());
         assertTrue(testing.getTrade(0).equals(trade));
         assertTrue(TM.getCurrent().hasTrade(trade));
-        /*
-        System.out.println(trade.hashCode());
-        System.out.println(trade3.hashCode());
-        assertTrue(trade.equals(trade2));
-        assertNotNull(TM.getCurrent().getIndex(testing.getTrade(0)));
-        Integer i = TM.getCurrent().getIndex(testing.getTrade(0));
-        assertNotNull(testing.getIndex(trade));
-        System.out.println(i);
-           */
         assertTrue(TM.hasTrade(trade));
         TM.clearTradelist();
     }//End testC_AddTradeToTradelist

@@ -9,7 +9,7 @@ public class Cache {/*
     ArrayList<Item> itemsToBePushed;
     ArrayList<Trade> tradesToBePushed;
     int accountID;
-    Trader friend;
+
 
     public void addItemsToCache(ArrayList<Item> items) {
 
@@ -19,7 +19,7 @@ public class Cache {/*
 
     }
 
-    public void pullFriend(Trader friend) {
+    public void pullFriend(User friend) {
 
     }*/
 }
