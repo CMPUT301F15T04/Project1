@@ -5,6 +5,9 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.TradeManager;
+import cmput301t4.gameswap.Models.Item;
+import cmput301t4.gameswap.Models.Trade;
+import cmput301t4.gameswap.Models.TradeList;
 
 /**
  * Created by kynan on 11/1/15.

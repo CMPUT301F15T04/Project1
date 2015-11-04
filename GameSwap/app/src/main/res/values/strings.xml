@@ -26,4 +26,7 @@
     <string name="title_activity_friends__n__trading_">Friends_N_Trading_Activity</string>
     <string name="title_activity_friends_ntrading">FriendsNTradingActivity</string>
     <string name="title_activity_trades">TradesActivity</string>
+    <string name="title_activity_search_friend">SearchFriendActivity</string>
+    <string name="title_activity_search_people">SearchPeopleActivity</string>
+    <string name="title_activity_view_friend_inventory">ViewFriendInventoryActivity</string>
 </resources>

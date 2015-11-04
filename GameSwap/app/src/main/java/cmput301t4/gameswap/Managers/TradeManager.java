@@ -1,11 +1,10 @@
 package cmput301t4.gameswap.Managers;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import cmput301t4.gameswap.Item;
-import cmput301t4.gameswap.Trade;
-import cmput301t4.gameswap.TradeList;
+import cmput301t4.gameswap.Models.Item;
+import cmput301t4.gameswap.Models.Trade;
+import cmput301t4.gameswap.Models.TradeList;
 
 /**
  * Created by kynan on 11/1/15.

@@ -1,7 +1,7 @@
 package cmput301t4.gameswap.Managers;
 
-import cmput301t4.gameswap.FriendList;
-import cmput301t4.gameswap.User;
+import cmput301t4.gameswap.Models.FriendList;
+import cmput301t4.gameswap.Models.User;
 
 /**
  * Created by kynan on 11/2/15.

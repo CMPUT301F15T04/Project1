@@ -1,6 +1,6 @@
 package cmput301t4.gameswap.Managers;
 
-import cmput301t4.gameswap.User;
+import cmput301t4.gameswap.Models.User;
 
 /**
  * Created by rupehra on 11/1/15.

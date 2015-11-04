@@ -38,6 +38,18 @@
             android:name=".Activities.TradesActivity"
             android:label="@string/title_activity_trades" >
         </activity>
+        <activity
+            android:name=".Activities.SearchFriendActivity"
+            android:label="@string/title_activity_search_friend" >
+        </activity>
+        <activity
+            android:name=".Activities.SearchPeopleActivity"
+            android:label="@string/title_activity_search_people" >
+        </activity>
+        <activity
+            android:name=".Activities.ViewFriendInventoryActivity"
+            android:label="@string/title_activity_view_friend_inventory" >
+        </activity>
     </application>
 
 </manifest>
