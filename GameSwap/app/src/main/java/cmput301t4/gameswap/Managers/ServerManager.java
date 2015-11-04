@@ -1,4 +1,4 @@
-package cmput301t4.gameswap;
+package cmput301t4.gameswap.Managers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,16 +28,16 @@ import java.util.List;
  */
 
 
-public class AccessServer {
+public class ServerManager {
 
-    public static void getServer(){
+    public static void getServer(){     //Access Server function
         String url = "http://cmput301.softwareprocess.es:8080/testing/CMPUT301F15T04/name/_source";
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
         HttpResponse response = null;
 
-        try {
+        try {                           //run URL
             response = httpClient.execute(httpGet);
         } catch (ClientProtocolException e1) {
             throw new RuntimeException(e1);
@@ -45,7 +45,7 @@ public class AccessServer {
             throw new RuntimeException(e1);
         }
         BufferedReader rd = null;
-        try {
+        try {                           //read output returned by URL
             rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
             String line = rd.readLine();
             System.out.println(line);
