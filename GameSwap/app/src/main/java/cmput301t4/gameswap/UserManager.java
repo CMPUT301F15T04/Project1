@@ -1,5 +1,8 @@
 package cmput301t4.gameswap;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Created by rupehra on 11/1/15.
  *
@@ -21,6 +24,22 @@ public class UserManager {
         }
         return trader;
     }//end getTrader
+
+    //=====In-Work Notifty=====//
+
+    public void pseduoConstructor(){
+        trader.pseduoConstructor();
+    }
+
+    public void IncreaseNotifiyAmount(Integer type){
+        trader.IncreaseNotifiyAmount(type);
+    }
+
+    public void DisplayNotify(Integer type){
+        trader.DisplayNotify(type);
+    }
+
+    //=====End of Test Notifty related Code=====//
 
     public void editUserName(String username){
         trader.setUserName(username);

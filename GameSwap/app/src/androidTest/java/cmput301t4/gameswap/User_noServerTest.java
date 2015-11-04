@@ -139,6 +139,7 @@ public class User_noServerTest extends TestCase {
         assertTrue(TM.getTrade(0,0).equals(trade));
     }//end testC_FindPendingTrade
 
+
     //=====Basic Test Inventory (With Controller)=====//
 
     public void testC_AddItemUserInventory(){
@@ -167,5 +168,63 @@ public class User_noServerTest extends TestCase {
         assertTrue(UM.getInventory().isEmpty());
         assertFalse(UM.getInventory().hasItem(item_1));
     }//end testC_DelItemUserInventory
+
+    //=====Test In Work Notify=====//
+    public void testC_Notify(){
+        UserManager UM = new UserManager();
+        UM.pseduoConstructor();
+        System.out.println("Test 1");
+        UM.IncreaseNotifiyAmount(0);
+        UM.DisplayNotify(0);
+    }//testC_Notify
+
+    //This is not actually how Notifying you friend going to work
+    public void testC_NotifyFriend(){
+        UserManager UM = new UserManager();
+        FriendManager FM = new FriendManager();
+        User friend = new User();
+        friend.pseduoConstructor();
+        friend.clearNotificationAmount();
+        System.out.println("Test 2");
+        friend.IncreaseNotifiyAmount(1);
+        friend.IncreaseNotifiyAmount(2);
+        friend.IncreaseNotifiyAmount(2);
+        FM.clearFriendlist();
+        UM.setFriendlist(FM.getFriendlist());
+        FM.addFriend(friend);
+        UM.getFriendlist().getFriend(0).IfNotify();
+    }
+
+    //=====Testing Singleton Stuff=====//
+    /*
+    We cannot have two exclusive Managers/Controller
+     */
+    public void testC_TwoSingleton(){
+        UserManager UM_1 = new UserManager();
+        InventoryManager IM_1 = new InventoryManager();
+        UserManager UM_2 = new UserManager();
+        InventoryManager IM_2 = new InventoryManager();
+        //===Clearing List===//
+        UM_1.getInventory().clearInventory();
+        UM_2.getInventory().clearInventory();
+        UM_1.getFriendlist().clearFriendlist();
+        //===Test Start===//
+        UM_2.getTrader().setUserCity("Edmonton");
+        UM_1.setInventory(IM_1.getInstance());
+        UM_2.setInventory(IM_2.getInstance());
+        IM_1.addItem("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
+        IM_2.addItem("Doom", "01-01-2000", false, 5, 5, "It's Okay");
+        assertFalse(UM_1.getInventory().isEmpty());
+        assertFalse(UM_2.getInventory().isEmpty());
+        assertTrue(UM_1.getInventory().getItem(0).getName().equals("Call of Duty"));
+        assertTrue(UM_2.getInventory().getItem(0).getName().equals("Call of Duty"));
+        //assertFalse(UM_1.getInventory().getItem(0).equals(UM_2.getInventory().getItem(0)));
+        FriendManager FM_1 = new FriendManager();
+        UM_1.setFriendlist(FM_1.getFriendlist());
+        UM_1.getFriendlist().addFriend(UM_2.getTrader());
+        assertTrue(UM_1.getFriendlist().hasFriend(UM_2.getTrader()));
+        assertTrue(UM_1.getFriendlist().getFriend(0).getUserCity().equals("Edmonton"));
+        assertTrue(UM_1.getTrader().getUserCity().equals("Edmonton"));
+    }//end testC_TwoSingleton()
 
 }//end User_noServerTest

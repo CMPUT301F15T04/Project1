@@ -1,6 +1,10 @@
 package cmput301t4.gameswap;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * Created by rupehra on 11/1/15.
  *
@@ -22,6 +26,46 @@ public class User {
     private TradeList pendingTrades;
     private TradeList pastTrades;
 
+    //=====In-Work Notifty=====//
+    private ArrayList<String> notification = new ArrayList<String>();
+    // index 0: new Trade 1: Counter Trade 2: Trade Cancel
+    private ArrayList<Integer> notificationAmount = new ArrayList<Integer>(Collections.nCopies(3,0));
+
+    public void pseduoConstructor(){
+        this.notification.add("You have ");
+        this.notification.add(" New Trade");
+        this.notification.add(" New Counter Offer");
+        this.notification.add(" Trade Cancellation");
+    }
+
+    public void IncreaseNotifiyAmount(Integer type){
+        this.notificationAmount.set(type, notificationAmount.get(type) + 1);
+    }
+
+    public void clearNotificationAmount(){
+        this.notificationAmount.set(0,0);
+        this.notificationAmount.set(1,0);
+        this.notificationAmount.set(2,0);
+    }
+
+    public void IfNotify(){
+        for(int i = 0; i < notificationAmount.size(); i++){
+            if (notificationAmount.get(i) != 0){
+                DisplayNotify(i);
+            }
+        }
+    }//end IfNotify
+
+    public void DisplayNotify(Integer type){
+        System.out.println(notification.get(0) + notificationAmount.get(type) + notification.get(type+1));
+        ClearNotify(type);
+    }
+
+    public void ClearNotify(Integer type){
+        this.notificationAmount.set(type, 0);
+    }
+
+    //=====End of Test Notifty related Code=====//
 
     public User() {
         this.userName = "Enter Desired Username";
