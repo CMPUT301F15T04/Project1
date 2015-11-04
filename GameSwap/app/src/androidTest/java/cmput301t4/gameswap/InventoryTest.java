@@ -4,6 +4,10 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.Item;
+
 public class InventoryTest extends TestCase {
 
     //=====Basic Inventory Test (No Inventory Controller)=====//
