@@ -14,12 +14,13 @@
     <string name="title_activity_click_inventory">Game Swap</string>
     <string name="title_activity_my_inventory">Inventory</string>
     <string name="title_activity_select_task">Game Swap</string>
-    <string name="gameSwap">Game Swap</string>
+    <string name="gameTitle">Game Title</string>
     <string name="add">Add</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="save_profile">Save Profile</string>
     <string name="cancel">Cancel</string>
+    <string name="save_game">Save Game</string>
     <string name="title_activity_new_game_entry">NewGameEntry</string>
     <string name="New_Game">New Game</string>
     <string name="searchFriend">Search Friend</string>
@@ -30,4 +31,9 @@
     <string name="title_activity_search_friend">SearchFriendActivity</string>
     <string name="title_activity_search_people">SearchPeopleActivity</string>
     <string name="title_activity_view_friend_inventory">ViewFriendInventoryActivity</string>
+    <string name="release_date">Release Date</string>
+    <string name="quality">Quality</string>
+    <string name="platform">Platform</string>
+    <string name="private_public">Private/Public</string>
+    <string name="description">Description</string>
 </resources>
