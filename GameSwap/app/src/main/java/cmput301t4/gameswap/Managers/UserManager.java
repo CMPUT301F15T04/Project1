@@ -2,6 +2,9 @@ package cmput301t4.gameswap.Managers;
 
 import cmput301t4.gameswap.Models.User;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Created by rupehra on 11/1/15.
  *
@@ -24,6 +27,22 @@ public class UserManager {
         return trader;
     }//end getTrader
 
+    //=====In-Work Notifty=====//
+
+    public void pseduoConstructor(){
+        trader.pseduoConstructor();
+    }
+
+    public void IncreaseNotifiyAmount(Integer type){
+        trader.IncreaseNotifiyAmount(type);
+    }
+
+    public void DisplayNotify(Integer type){
+        trader.DisplayNotify(type);
+    }
+
+    //=====End of Test Notifty related Code=====//
+
     public void editUserName(String username){
         trader.setUserName(username);
     }
@@ -39,5 +58,39 @@ public class UserManager {
     public void editCity(String city){
         trader.setUserCity(city);
     }
+
+    //=====Setter for Arraylist of User=====//
+    public void setInventory(Inventory inventory){
+        trader.setInventory(inventory);
+    }//end set inventory
+
+    public void setFriendlist(FriendList friendlist){
+        trader.setFriendList(friendlist);
+    }//end set friendlist
+
+    public void setPendinglist(TradeList pendinglist){
+        trader.setPendingTrades(pendinglist);
+    }//end setPendingList
+
+    public void setPastlist(TradeList pastlist){
+        trader.setPastTrades(pastlist);
+    }//end setPastlist
+
+    //=====Getter for Arraylist of User=====//
+    public Inventory getInventory(){
+        return trader.getInventory();
+    }//end getInventory
+
+    public FriendList getFriendlist(){
+        return trader.getFriendList();
+    }//end getFriendlist
+
+    public TradeList getPendingList(){
+        return trader.getPendingTrades();
+    }//end getPendingList
+
+    public TradeList getPastList(){
+        return trader.getPastTrades();
+    }//end getPastlist
 
 }//end UserManager
