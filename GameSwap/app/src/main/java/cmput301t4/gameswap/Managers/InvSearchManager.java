@@ -37,7 +37,7 @@ public class InvSearchManager {
         return matching;//returns an inventory
     }
 
-    public Inventory searchItembyQuality(Inventory inv, int quality){//finds all items by platform
+    public Inventory searchItembyQuality(Inventory inv, int quality){//finds all items by quality
         Inventory matching = new Inventory();
         for(int i = 0; i < inv.size(); i++){
             if(inv.getItem(i).getQuality() == quality){

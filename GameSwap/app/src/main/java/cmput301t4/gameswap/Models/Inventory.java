@@ -43,6 +43,10 @@ public class Inventory {
         inventory.clear();
     }//end clearInventory
 
+    public boolean isEmpty(){
+        return inventory.isEmpty();
+    }//end isEmpty
+
     //=====Advance Functions=====//
 
     //Bulk delete item from inventory based on given inventory indexs
