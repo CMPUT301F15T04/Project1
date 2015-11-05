@@ -18,7 +18,7 @@ public class ExpandableListActivity extends Activity {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -30,5 +30,5 @@ public class ExpandableListActivity extends Activity {
         expListView.setAdapter(listAdapter);
     }
 
-
+*/
 }

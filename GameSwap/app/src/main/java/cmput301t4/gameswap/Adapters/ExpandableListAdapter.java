@@ -17,6 +17,7 @@ import cmput301t4.gameswap.R;
  * Created by preyanshu on 11/5/15.
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
+
     private Context _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
@@ -55,6 +56,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public int getChildrenCount(int groupPosition) {
         return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
     }
+    @Override
+    public Object getGroup(int groupPosition) {
+        return this._listDataHeader.get(groupPosition);
+    }
+
     @Override
     public int getGroupCount() {
         return this._listDataHeader.size();
