@@ -16,7 +16,7 @@
         android:text="Game Swap"
         android:id="@+id/textView12"
         android:gravity="center"
-        android:layout_weight="0.20" />
+        android:layout_weight="0.28" />
 
     <Button
         android:layout_width="match_parent"
