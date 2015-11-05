@@ -77,4 +77,8 @@ public class Inventory {
         return ConvertedDate;
     }//End dateToString
 
+    public int size(){          //gets size of array of items
+        return inventory.size();
+    }
+
 }//end Inventory
