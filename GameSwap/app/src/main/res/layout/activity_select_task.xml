@@ -28,7 +28,6 @@ android:orientation="vertical"
     android:id="@+id/inventory"
     android:layout_gravity="center_horizontal"
     android:layout_weight="0.20"
-    android:background="#ff869d"
     android:onClick="openInventoryButton" />
 
 <Button
@@ -38,7 +37,6 @@ android:orientation="vertical"
     android:id="@+id/friends"
     android:layout_gravity="center_horizontal"
     android:layout_weight="0.20"
-    android:background="#97c1ff"
     android:onClick="openFriendsButton" />
 
 <Button
@@ -48,7 +46,6 @@ android:orientation="vertical"
     android:id="@+id/tradeOffers"
     android:layout_gravity="center_horizontal"
     android:layout_weight="0.20"
-    android:background="#9effb8"
     android:onClick="tradeOffersButton" />
 
 
