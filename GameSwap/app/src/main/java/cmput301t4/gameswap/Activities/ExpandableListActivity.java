@@ -14,21 +14,31 @@ import cmput301t4.gameswap.R;
  * Created by preyanshu on 11/5/15.
  */
 public class ExpandableListActivity extends Activity {
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
+    ExpandableListAdapter consolelistAdapter;
+    ExpandableListAdapter qualitylistAdapter;
+    ExpandableListAdapter privatepubliclistAdapter;
+    ExpandableListView consoleexpListView;
+    ExpandableListView qualityexpListView;
+    ExpandableListView privatepublicexpListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-/*
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game_entry);
-        expListView=(ExpandableListView) findViewById(R.id.platformchoice);
+        consoleexpListView=(ExpandableListView) findViewById(R.id.platformchoice);
+        qualityexpListView=(ExpandableListView) findViewById(R.id.qualityChoice);
+        privatepublicexpListView=(ExpandableListView) findViewById(R.id.privatepublicChoice);
         prepareListData();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        consolelistAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        qualitylistAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        privatepubliclistAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         // setting list adapter
-        expListView.setAdapter(listAdapter);
+        consoleexpListView.setAdapter(consolelistAdapter);
+    }
+    private void prepareListData() {
+        
     }
 
-*/
 }
