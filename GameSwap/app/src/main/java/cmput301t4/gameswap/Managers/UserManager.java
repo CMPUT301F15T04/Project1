@@ -1,5 +1,8 @@
 package cmput301t4.gameswap.Managers;
 
+import cmput301t4.gameswap.Models.FriendList;
+import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.Models.User;
 
 import java.util.ArrayList;
