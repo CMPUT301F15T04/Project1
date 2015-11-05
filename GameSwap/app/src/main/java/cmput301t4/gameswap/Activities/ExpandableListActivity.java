@@ -2,12 +2,12 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 import java.util.HashMap;
 import java.util.List;
 
+import cmput301t4.gameswap.Adapters.ExpandableListAdapter;
 import cmput301t4.gameswap.R;
 
 /**
