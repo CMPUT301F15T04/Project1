@@ -26,6 +26,12 @@ public class CreateProfileActivity extends Activity {
         EditText cityEditText = (EditText) findViewById(R.id.user_city);
         EditText phoneNumberEditText = (EditText) findViewById(R.id.user_phone_num);
         myUser = new User(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString());
+        //TODO: Give this created user to UserManager
+        this.finish();
+    }
+
+    public void cancelButton(View view) {
+        this.finish();
     }
 
     public User getUser() {

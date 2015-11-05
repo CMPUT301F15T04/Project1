@@ -25,7 +25,11 @@
          </activity>
        >
         -->
-        <activity android:name=".Activities.selectTaskActivity" >
+        <activity
+            android:name=".Activities.selectTaskActivity"
+            android:parentActivityName=".Activities.MainActivity" >
+        </activity>
+        <activity android:name=".Activities.CreateProfileActivity" >
         </activity>
         <activity android:name=".Activities.myInventoryActivity" >
         </activity>
