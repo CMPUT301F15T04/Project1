@@ -40,7 +40,12 @@ public class MainActivity extends Activity {
     }
 
     public void clickedLogin(View view){
-        Intent intent = new Intent(MainActivity.this,selectTaskActivity.class);
+        Intent intent = new Intent(MainActivity.this, selectTaskActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickedRegister(View view){
+        Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
         startActivity(intent);
     }
 
