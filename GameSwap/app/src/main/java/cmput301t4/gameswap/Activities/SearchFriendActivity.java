@@ -2,17 +2,61 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {
 
+    private ArrayAdapter<String> adapter;
+    private ListView friendListView;
+    private ArrayList<String> names;
+
+    private ArrayList<String> popUpContents;
+    PopupWindow popupWindowDogs;
+    Button buttonShowDropDown;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
+
+        friendListView = (ListView) findViewById(R.id.listView);
+        names = new ArrayList<String>();
+        names.add("Rupehra");
+        names.add("Kittu");
+        popUpContents = new ArrayList<String>();
+       // names.addAll(data);
+        adapter = new ArrayAdapter<String>(this,R.layout.listviewtext,names);
+        friendListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        popUpContents.add("Trade");
+        popUpContents.add("View Profile");
+        popUpContents.add("Remove");
+
+        friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getBaseContext(),"Yay",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
     }
 
     @Override
