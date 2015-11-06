@@ -5,9 +5,6 @@ import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.Models.User;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 /**
  * Created by rupehra on 11/1/15.
  *
@@ -25,8 +22,9 @@ public class UserManager {
 
     static public User getTrader(){
         if(trader == null){
-            trader = new User();
+            trader = new User("", "", "", "");
         }
+
         return trader;
     }//end getTrader
 

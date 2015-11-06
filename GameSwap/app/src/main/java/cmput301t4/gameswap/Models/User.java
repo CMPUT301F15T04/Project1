@@ -2,15 +2,6 @@ package cmput301t4.gameswap.Models;
 
 
 import java.util.ArrayList;
-
-import cmput301t4.gameswap.Managers.FriendManager;
-import cmput301t4.gameswap.Managers.InventoryManager;
-import cmput301t4.gameswap.Managers.TradeManager;
-import cmput301t4.gameswap.Models.FriendList;
-import cmput301t4.gameswap.Models.Inventory;
-import cmput301t4.gameswap.Models.TradeList;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -73,14 +64,14 @@ public class User {
         this.notificationAmount.set(type, 0);
     }
 
-    //=====End of Test Notifty related Code=====//
+    //=====End of Test Notify related Code=====//
 
-    public User() {
-        this.userName = "Enter Desired Username";
-        this.userEmail = "Enter Email";
-        this.userCity = "Enter City";
-        this.userPhoneNumber = "Enter Phone Number";
-    }//end Trader constuctor
+    public User(String username, String email, String city, String phoneNumber) {
+        this.userName = username;
+        this.userEmail = email;
+        this.userCity = city;
+        this.userPhoneNumber = phoneNumber;
+    }//end Trader constructor
 
 //=====Setters and Getters=====//
 

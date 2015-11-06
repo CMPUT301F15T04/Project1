@@ -24,7 +24,7 @@ public class User_noServerTest extends TestCase {
 
     //Test create a user
     public void testCreateUser(){
-        User user = new User();
+        User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         assertTrue(user.getUserName().equals("Enter Desired Username"));
         assertTrue(user.getUserEmail().equals("Enter Email"));
         assertTrue(user.getUserCity().equals("Enter City"));
@@ -37,7 +37,7 @@ public class User_noServerTest extends TestCase {
 
     //test edit attribute of user
     public void testEditUserInfo(){
-        User user = new User();
+        User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         assertTrue(user.getUserName().equals("Enter Desired Username"));
         assertTrue(user.getUserEmail().equals("Enter Email"));
         assertTrue(user.getUserCity().equals("Enter City"));
@@ -50,7 +50,7 @@ public class User_noServerTest extends TestCase {
 
     //test add a friend for user
     public void testC_AddFriendForUser(){
-        User friend = new User();
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -63,7 +63,7 @@ public class User_noServerTest extends TestCase {
 
     //test del a friend for user
     public void testC_DelFriend(){
-        User friend = new User();
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -82,7 +82,7 @@ public class User_noServerTest extends TestCase {
     Did not account for public and private
      */
     public void testC_FindFriendInventory(){
-        User friend = new User();
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -103,7 +103,7 @@ public class User_noServerTest extends TestCase {
 
     //test if we can find pending trade of user
     public void testC_FindPendingTrade(){
-        User friend = new User();
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         TradeManager TM = new TradeManager();
@@ -128,7 +128,7 @@ public class User_noServerTest extends TestCase {
     Also see if move trade works as intended
      */
     public void testC_FindPastTrade(){
-        User friend = new User();
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         TradeManager TM = new TradeManager();
@@ -193,7 +193,7 @@ public class User_noServerTest extends TestCase {
     public void testC_NotifyFriend(){
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
-        User friend = new User();
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.pseduoConstructor();
         friend.clearNotificationAmount();
         System.out.println("Test 2");
