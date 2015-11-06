@@ -7,8 +7,8 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:label="@string/app_name" >
+ //android:theme="@style/AppTheme"
         <activity android:name=".Activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +24,7 @@
          </activity>
        >
         -->
-        <activity
-            android:name=".Activities.selectTaskActivity" >
+        <activity android:name=".Activities.selectTaskActivity" >
         </activity>
         <activity
             android:name=".Activities.CreateProfileActivity"
@@ -63,6 +62,18 @@
         <activity
             android:name=".Activities.FriendProfile"
             android:label="@string/title_activity_friend_profile" >
+        </activity>
+        <activity
+            android:name=".Activities.MyProfile"
+            android:label="@string/title_activity_my_profile" >
+        </activity>
+        <activity
+            android:name=".Activities.FriendProfileActivity"
+            android:label="@string/title_activity_friend_profile" >
+        </activity>
+        <activity
+            android:name=".Activities.EditProfileActivity"
+            android:label="@string/title_activity_edit_profile" >
         </activity>
     </application>
 

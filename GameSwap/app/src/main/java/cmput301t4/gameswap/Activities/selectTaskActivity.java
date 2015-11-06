@@ -20,6 +20,7 @@ public class selectTaskActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        //super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_select_task, menu);
         return true;
     }
@@ -36,8 +37,16 @@ public class selectTaskActivity extends Activity {
             return true;
         }
 
+        else if(id ==R.id.editProfile){
+            Intent intent = new Intent(selectTaskActivity.this,EditProfileActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
     public void openInventoryButton(View view){
         Intent intent = new Intent(selectTaskActivity.this,myInventoryActivity.class);

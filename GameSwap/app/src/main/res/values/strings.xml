@@ -38,4 +38,10 @@
     <string name="private_public">Private/Public</string>
     <string name="description">Description</string>
     <string name="title_activity_friend_profile">FriendProfile</string>
+    <string name="my_profile">My Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="title_activity_my_profile">MyProfile</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="changeName">Name</string>
+
 </resources>
