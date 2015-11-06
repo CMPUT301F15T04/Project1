@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cmput301t4.gameswap.Activities.EditProfileActivity"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Edit Your Profile!"
+        android:gravity="center"
+        android:id="@+id/textView10"
+        android:layout_weight="0.28" />
+
+    <EditText
+        android:id="@+id/changeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/changeName"
+        android:layout_weight="0.30"
+ />
+
+    <EditText
+        android:id="@+id/changeCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/city"
+        android:layout_weight="0.30"
+        />
+
+
+    <EditText
+        android:id="@+id/changePhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_num"
+        android:layout_weight="0.30"
+        android:layout_above="@+id/button10"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentTop="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:id="@+id/buttonRelative">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancelButton"
+            android:layout_gravity="bottom"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/textView11"
+            android:onClick="clickCancelButton" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/saveButton"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView11"
+            android:onClick="clickSaveButton" />
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
