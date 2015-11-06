@@ -35,7 +35,7 @@ public class ExpandableListActivity extends Activity {
         //loads it upon saving
         super.onCreate(savedInstanceState);
         //sets it to the activity
-        setContentView(R.layout.activity_new_game_entry);
+        setContentView(R.layout.activity_add_item);
         //sets what the ELVs are
         consoleexpListView=(ExpandableListView) findViewById(R.id.platformchoice);
         qualityexpListView=(ExpandableListView) findViewById(R.id.qualityChoice);
