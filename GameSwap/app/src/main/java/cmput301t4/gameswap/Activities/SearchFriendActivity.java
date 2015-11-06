@@ -64,7 +64,6 @@ public class SearchFriendActivity extends Activity {
                                 Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                                 return true;
 
-
                         }
 
 
