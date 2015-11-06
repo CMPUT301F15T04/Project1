@@ -45,7 +45,7 @@
                     android:inputType="textPersonName"
                     android:hint="@string/gameTitle"
                     android:ems="10"
-                    android:id="@+id/username"
+                    android:id="@+id/gameTitle"
                     android:layout_gravity="center_horizontal"
                     android:layout_column="7" />
             </TableRow>
@@ -65,10 +65,10 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="@string/release_date"
+                    android:inputType="date"
+                    android:hint="dd-MM-yyyy"
                     android:ems="10"
-                    android:id="@+id/email_user"
+                    android:id="@+id/releaseDateEdit"
                     android:layout_column="7" />
             </TableRow>
 
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText"
+                    android:id="@+id/descriptionBox"
                     android:layout_column="7" />
             </TableRow>
 
@@ -172,7 +172,8 @@
             android:id="@+id/cancelButton"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="35dp" />
+            android:layout_marginStart="35dp"
+            android:onClick="cancelButtonClick" />
 
         <Button
             android:layout_width="wrap_content"
@@ -181,7 +182,8 @@
             android:id="@+id/saveButton"
             android:layout_alignBottom="@+id/cancelButton"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="31dp" />
+            android:layout_marginEnd="31dp"
+            android:onClick="saveButtonClick" />
     </RelativeLayout>
 
 </LinearLayout>
