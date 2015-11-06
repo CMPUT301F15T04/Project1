@@ -36,6 +36,8 @@ public class myInventoryActivity extends Activity{
         setContentView(R.layout.activity_my_inventory);
 
         //TODO: Fix this hacky nonsense
+        InventoryManager.addItem("Duck Hunt", "02-01-1972", Boolean.FALSE, 1, 1, "Soooo cool");
+        InventoryManager.addItem("Halo", "15-10-2001", Boolean.FALSE, 1, 1, "Even cooler");
         items = InventoryManager.getItems();
 
 
