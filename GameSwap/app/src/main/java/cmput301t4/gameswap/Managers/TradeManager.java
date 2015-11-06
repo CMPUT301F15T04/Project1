@@ -19,6 +19,7 @@ public class TradeManager {
         if (currentList == null){
             currentList = new TradeList();
         }
+        //TODO: pull cache trades and add them to this list
         return currentList;
     }//end getInstance
 
