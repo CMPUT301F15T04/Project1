@@ -47,6 +47,10 @@ public class Inventory {
         return inventory.isEmpty();
     }//end isEmpty
 
+    public int size(){          //gets size of array of items
+        return inventory.size();
+    }//end size
+
     //=====Advance Functions=====//
 
     //Bulk delete item from inventory based on given inventory indexs
@@ -81,8 +85,5 @@ public class Inventory {
         return ConvertedDate;
     }//End dateToString
 
-    public int size(){          //gets size of array of items
-        return inventory.size();
-    }
 
 }//end Inventory

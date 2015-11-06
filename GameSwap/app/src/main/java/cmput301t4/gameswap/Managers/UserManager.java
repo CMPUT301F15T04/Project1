@@ -46,7 +46,6 @@ public class UserManager {
         trader.DisplayNotify(type);
     }
 
-
     //=====End of Test Notifty related Code=====//
 
     //=====In-Work Trade Notifty=====//
@@ -63,28 +62,29 @@ public class UserManager {
         return null;
     }//end findBorrower
 
+    //Increment the friend's notify
     public void SendNewTradeNotify(User friend){
         friend.IncreaseNotifiyAmount(0);
-    }
+    }//end SendnewTradeNotify
 
 
     //=====End In-Work Trade Notifty=====//
 
     static public void createUser(String username, String email, String city, String phoneNumber) {
         trader = new User(username, email, city, phoneNumber);
-    }
+    }//end Create User
 
     static public void editUserName(String username){
         trader.setUserName(username);
-    }
+    }//end editUserName
 
     static public void editPhoneNumber(String phoneNumber){
         trader.setUserPhoneNumber(phoneNumber);
-    }
+    }//end EditPhoneNumber
 
     public void editEmail(String email){
         trader.setUserEmail(email);
-    }
+    }//end editEmail
 
     static public void editCity(String city){
         trader.setUserCity(city);

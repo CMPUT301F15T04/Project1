@@ -35,8 +35,7 @@ public class Trade {
         }
         //this.DateTransaction = new Date();
 
-        //=====CODE FOR NOTIFICATION GOES HERE=====//
-
+        //=====CODE FOR NOTIFICATION GOES HERE (WHEN WE DO SERVER)=====//
 
 
         //=====END CODE FOR NOTIFICATION=====//

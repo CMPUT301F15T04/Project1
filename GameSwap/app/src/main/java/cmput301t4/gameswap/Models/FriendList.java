@@ -49,9 +49,10 @@ public class FriendList {
         friendList.clear();
     }//end clearFriendlist
 
+    //====Code mainly used for testing=====//
     public boolean isEmpty(){
         return friendList.isEmpty();
-    }
+    }//end isEmpty
 
 }//end TradeList
 

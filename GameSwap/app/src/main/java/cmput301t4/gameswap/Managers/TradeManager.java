@@ -77,7 +77,7 @@ public class TradeManager {
     }//end clearTradelist
 
 
-    //==More Advance Function==//
+    //==More Advance Function (NOT IMPLEMENTED)==//
     /*
     These will be added once we implment server
     */
