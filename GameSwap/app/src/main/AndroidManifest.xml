@@ -76,8 +76,13 @@
             android:label="@string/title_activity_edit_profile" >
         </activity>
         <activity
+<<<<<<< HEAD
+            android:name=".Activities.EditItemActivity"
+            android:label="@string/title_activity_edit_item" >
+=======
             android:name=".Activities.ExpandableListActivity"
             android:label="ExpandableListActivity">
+>>>>>>> 54f4e9a557c10b93f9edc5f7ed641cd975eae226
         </activity>
     </application>
 

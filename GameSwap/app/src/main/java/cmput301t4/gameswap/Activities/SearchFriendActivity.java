@@ -13,13 +13,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.User;
+import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {
 
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<User> adapter;
     private ListView friendListView;
-    private ArrayList<String> names;
 
     protected int friendListViewItemPosition;
 
@@ -29,11 +30,10 @@ public class SearchFriendActivity extends Activity {
         setContentView(R.layout.activity_search_friend);
 
         friendListView = (ListView) findViewById(R.id.listView);
-        names = new ArrayList<String>();
-        names.add("Rupehra");
-        names.add("Kittu");
-        // names.addAll(data);
-        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, names);
+        FriendManager.addFriend(new User("Mike", "me@2.ca", "Hometown", "5551234567"));
+        FriendManager.addFriend(new User("Cory", "me@2.ca", "Hometown", "5551234567"));
+        FriendManager.addFriend(new User("Terri", "me@2.ca", "Hometown", "5551234567"));
+        adapter = new ArrayAdapter<User>(this, R.layout.listviewtext, FriendManager.getAllUsers());
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -63,7 +63,6 @@ public class SearchFriendActivity extends Activity {
                             case R.id.removeFriendMenuId:
                                 Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                                 return true;
-
 
                         }
 
