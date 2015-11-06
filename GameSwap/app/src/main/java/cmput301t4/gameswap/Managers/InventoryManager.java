@@ -32,6 +32,8 @@ public class InventoryManager {
         return getInstance().getItem(position);
     }//end getItem
 
+    static public ArrayList<Item> getItems() { return getInstance().getItems(); }
+
     public void replaceItem(Item item, int position){
         getInstance().replace(item, position);
     }//end replaceItem

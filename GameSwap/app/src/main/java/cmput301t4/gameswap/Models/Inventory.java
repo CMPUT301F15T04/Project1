@@ -33,6 +33,8 @@ public class Inventory {
         return inventory.get(index);
     }//End getItem
 
+    public ArrayList<Item> getItems() { return inventory; }
+
     //See if inventory contain item
     public boolean hasItem(Item item) {
         return inventory.contains(item);

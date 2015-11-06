@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
@@ -25,32 +26,21 @@ public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;
     private ArrayList<Item> items;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Item> adapter;
     protected int myInventoryListViewPosition;
     private Item item;
-    ArrayList<String> allItemsNamesNStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_inventory);
 
-        allItemsNamesNStatus = new ArrayList<String>();
-        items = new ArrayList<Item>();
-        Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        Item item_2 = new Item("Call of Duty 2", "01-01-2000", false, 5, 5, "It's bad");
-
-        //items contains all the items with all the attributes
-        items.add(item_1);
-        items.add(item_2);
-
-        //allItemsNames contains the names of all the items
-        allItemsNamesNStatus.add(items.get(0).getName().toString()+"           "+ items.get(0).getIsPrivate().toString());
-        allItemsNamesNStatus.add(items.get(1).getName().toString()+"           "+ items.get(1).getIsPrivate().toString());
+        //TODO: Fix this hacky nonsense
+        items = InventoryManager.getItems();
 
 
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,allItemsNamesNStatus);
+        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, items);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
