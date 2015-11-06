@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,15 +44,26 @@ public class SearchFriendActivity extends Activity {
         adapter = new ArrayAdapter<String>(this,R.layout.listviewtext,names);
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        popUpContents.add("Trade");
-        popUpContents.add("View Profile");
-        popUpContents.add("Remove");
+
+        //popUpContents.add("Trade");
+        //popUpContents.add("View Profile");
+        //popUpContents.add("Remove");
+
+
+
+
 
         friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(),"Yay",Toast.LENGTH_SHORT).show();
+                DisplayMetrics dm = new DisplayMetrics();
 
+                getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+                int width = dm.widthPixels;
+                int height = dm.heightPixels;
+                getWindow().setLayout((int)(width*0.5),(int)(height*0.5));
             }
         });
 

@@ -24,6 +24,7 @@
     <string name="title_activity_new_game_entry">NewGameEntry</string>
     <string name="New_Game">New Game</string>
     <string name="searchFriend">Search Friend</string>
+    <string name="searchTraders">Search Traders</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_friends__n__trading_">Friends_N_Trading_Activity</string>
     <string name="title_activity_friends_ntrading">FriendsNTradingActivity</string>
@@ -36,4 +37,5 @@
     <string name="platform">Platform</string>
     <string name="private_public">Private/Public</string>
     <string name="description">Description</string>
+    <string name="title_activity_friend_profile">FriendProfile</string>
 </resources>

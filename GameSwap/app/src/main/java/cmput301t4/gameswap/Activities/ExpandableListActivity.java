@@ -24,10 +24,10 @@ public class ExpandableListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game_entry);
         expListView=(ExpandableListView) findViewById(R.id.platformchoice);
-        prepareListData();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+       // prepareListData();
+        //listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         // setting list adapter
-        expListView.setAdapter(listAdapter);
+        //expListView.setAdapter(listAdapter);
     }
 
 
