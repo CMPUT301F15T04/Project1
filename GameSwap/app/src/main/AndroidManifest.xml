@@ -16,14 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
-       <activity
-
-             android:name=".clickInventory"
-             android:label="@string/title_activity_click_inventory" >
-         </activity>
-       >
-        -->
         <activity android:name=".Activities.selectTaskActivity" >
         </activity>
         <activity
@@ -83,6 +75,11 @@
         <activity
             android:name=".Activities.AddItemActivity"
             android:label="@string/title_activity_add_item" >
+        </activity>
+        <activity
+            android:name=".Activities.DeleteItemActivity"
+            android:label="@string/title_activity_delete_item" >
+
         </activity>
     </application>
 

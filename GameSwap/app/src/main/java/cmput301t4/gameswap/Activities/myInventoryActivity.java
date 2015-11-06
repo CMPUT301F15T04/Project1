@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,10 +64,16 @@ public class myInventoryActivity extends Activity{
                         switch (item.getItemId()){
 
                             case R.id.editItemMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(myInventoryActivity.this,EditItemActivity.class);
+                                startActivity(intent);
+
                                 return true;
                             case R.id.deleteItemMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent(myInventoryActivity.this,DeleteItemActivity.class);
+                                startActivity(intent1);
+
                                 return true;
                         }
 

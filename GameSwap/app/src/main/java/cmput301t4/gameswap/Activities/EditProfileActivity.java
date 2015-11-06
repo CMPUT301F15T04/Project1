@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class EditProfileActivity extends Activity {
@@ -14,7 +16,13 @@ public class EditProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        //TODO: Get current user data from TraderManager
+        EditText nameEditText = (EditText) findViewById(R.id.changeName);
+        EditText cityEditText = (EditText) findViewById(R.id.changeCity);
+        EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
+
+        nameEditText.setText(UserManager.getTrader().getUserName());
+        cityEditText.setText(UserManager.getTrader().getUserCity());
+        phoneEditText.setText(UserManager.getTrader().getUserPhoneNumber());
     }
 
     @Override
@@ -40,7 +48,13 @@ public class EditProfileActivity extends Activity {
     }
 
     public void clickSaveButton(View view) {
-        //TODO: Edit the fields through TraderManager
+        EditText nameEditText = (EditText) findViewById(R.id.changeName);
+        EditText cityEditText = (EditText) findViewById(R.id.changeCity);
+        EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
+
+        UserManager.editUserName(nameEditText.getText().toString());
+        UserManager.editCity(cityEditText.getText().toString());
+        UserManager.editPhoneNumber(phoneEditText.getText().toString());
         this.finish();
     }
 
