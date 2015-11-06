@@ -15,6 +15,14 @@ import java.util.ArrayList;
 public class FriendList {
     private ArrayList<User> friendList = new ArrayList<User>();
 
+    //=====Function for Trade Notify=====//
+
+    public Integer getFriendlistSize(){
+        return friendList.size();
+    }
+
+    //=====Function for Trade Notify=====//
+
     //======Basic Function=====//
     public void addFriend(User trader) {friendList.add(trader);}//end add to tradelist
 
