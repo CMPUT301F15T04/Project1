@@ -1,6 +1,7 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,10 +27,7 @@ public class SearchFriendActivity extends Activity {
     private ListView friendListView;
     private ArrayList<String> names;
 
-    private ArrayList<String> popUpContents;
-    PopupWindow popupWindowDogs;
-    Button buttonShowDropDown;
-
+    protected int friendListViewItemPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,37 +38,38 @@ public class SearchFriendActivity extends Activity {
         names = new ArrayList<String>();
         names.add("Rupehra");
         names.add("Kittu");
-        popUpContents = new ArrayList<String>();
-       // names.addAll(data);
-        adapter = new ArrayAdapter<String>(this,R.layout.listviewtext,names);
+        // names.addAll(data);
+        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, names);
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        //popUpContents.add("Trade");
-        //popUpContents.add("View Profile");
-        //popUpContents.add("Remove");
 
-
-
-
-
+        //http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
+        //http://stackoverflow.com/questions/7201159/is-using-menuitem-getitemid-valid-in-finding-which-menuitem-is-selected-by-use
+        //http://stackoverflow.com/questions/4554435/how-to-get-the-index-and-string-of-the-selected-item-in-listview-in-android
         friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(),"Yay",Toast.LENGTH_SHORT).show();
-                DisplayMetrics dm = new DisplayMetrics();
+            public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {
+                Toast.makeText(getBaseContext(), "Yay", Toast.LENGTH_SHORT).show();
 
-                getWindowManager().getDefaultDisplay().getMetrics(dm);
+                PopupMenu popupMenu = new PopupMenu(SearchFriendActivity.this, childView);
+                popupMenu.getMenuInflater().inflate(R.menu.friend_popup, popupMenu.getMenu());
 
-                int width = dm.widthPixels;
-                int height = dm.heightPixels;
-                getWindow().setLayout((int)(width*0.5),(int)(height*0.5));
+                friendListViewItemPosition = position;
+
+                // onPrepareOptionsMenu(popupMenu.getMenu());
+
             }
+
         });
-
-
-
     }
+
+
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

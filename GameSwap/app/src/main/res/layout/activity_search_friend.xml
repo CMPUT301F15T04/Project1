@@ -27,6 +27,26 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="51dp">
+
+        <EditText
+            android:id="@+id/edit_message"
+            android:layout_width="277dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/searchFriend"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/textView18"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/edit_message" />
+
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -39,16 +59,6 @@
             android:layout_alignTop="@+id/edit_message"
             android:layout_toEndOf="@+id/edit_message"
             android:layout_gravity="right" />
-
-        <EditText
-            android:id="@+id/edit_message"
-            android:layout_width="277dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/searchFriend"
-
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true" />
 
     </RelativeLayout>
 </LinearLayout>

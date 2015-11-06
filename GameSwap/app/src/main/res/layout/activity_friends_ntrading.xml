@@ -13,21 +13,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Game Swap"
         android:id="@+id/textView12"
         android:gravity="center"
-        android:layout_weight="0.28" />
+        android:layout_gravity="center_horizontal"
+
+        android:layout_weight="0.08" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="274dp"
         android:layout_height="wrap_content"
         android:text="Search People"
         android:id="@+id/button3"
         android:layout_weight="0.20"
+        android:layout_gravity="center_horizontal"
+
         android:onClick="searchPeopleButton" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView16"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.08" />
+
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="274dp"
         android:layout_height="wrap_content"
         android:text="Search Friends"
         android:id="@+id/button4"
@@ -35,11 +45,20 @@
         android:layout_weight="0.20"
         android:onClick="searchFriendButton" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView17"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.08" />
+
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="274dp"
         android:layout_height="wrap_content"
         android:text="Friend Inventory"
         android:id="@+id/button5"
         android:layout_weight="0.20"
+        android:layout_gravity="center_horizontal"
+
         android:onClick="viewFriendInventoryButton" />
 </LinearLayout>
