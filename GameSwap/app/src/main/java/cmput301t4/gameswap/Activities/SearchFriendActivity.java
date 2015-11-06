@@ -19,13 +19,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {
 
     private ArrayAdapter<String> adapter;
     private ListView friendListView;
-    private ArrayList<String> names;
+    private ArrayList<FriendList> names;
 
     protected int friendListViewItemPosition;
 
@@ -35,7 +36,7 @@ public class SearchFriendActivity extends Activity {
         setContentView(R.layout.activity_search_friend);
 
         friendListView = (ListView) findViewById(R.id.listView);
-        names = new ArrayList<String>();
+        names = new ArrayList<FriendList>();
         names.add("Rupehra");
         names.add("Kittu");
         // names.addAll(data);
@@ -50,13 +51,37 @@ public class SearchFriendActivity extends Activity {
         friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {
-                Toast.makeText(getBaseContext(), "Yay", Toast.LENGTH_SHORT).show();
 
                 PopupMenu popupMenu = new PopupMenu(SearchFriendActivity.this, childView);
                 popupMenu.getMenuInflater().inflate(R.menu.friend_popup, popupMenu.getMenu());
 
                 friendListViewItemPosition = position;
 
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    // @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
+
+                            case R.id.tradeFriendMenuId:
+                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.removeFriendMenuId:
+                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                return true;
+
+
+                        }
+
+
+                        return false;
+                    }
+                });
+
+
+
+                popupMenu.show();
                 // onPrepareOptionsMenu(popupMenu.getMenu());
 
             }

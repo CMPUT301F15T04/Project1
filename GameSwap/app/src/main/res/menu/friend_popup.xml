@@ -3,9 +3,11 @@
 
     <item
         android:title="Trade"
+        android:id="@+id/tradeFriendMenuId"
         />
     <item
         android:title="Remove"
+        android:id="@+id/removeFriendMenuId"
         />
 
 
