@@ -60,7 +60,7 @@
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
         <activity
-            android:name=".Activities.FriendProfile"
+            android:name=".Activities.FriendProfileActivity"
             android:label="@string/title_activity_friend_profile" >
         </activity>
         <activity
