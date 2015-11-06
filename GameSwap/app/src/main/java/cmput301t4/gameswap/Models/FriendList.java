@@ -1,5 +1,6 @@
 package cmput301t4.gameswap.Models;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +26,10 @@ public class FriendList {
 
     //Retrieve friend at index
     public User getFriend(int index){return friendList.get(index);}//End getUser
+
+    public ArrayList<User> getAllFriends() {
+        return friendList;
+    }
 
     //See if friendList contains friend
     public boolean hasFriend(User trader) {
