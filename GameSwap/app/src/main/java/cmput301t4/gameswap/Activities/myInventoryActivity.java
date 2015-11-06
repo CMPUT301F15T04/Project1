@@ -103,4 +103,7 @@ public class myInventoryActivity extends Activity{
 
         return super.onOptionsItemSelected(item);
     }
+    public void addNewItem(View view){
+            
+    }
 }

@@ -30,7 +30,8 @@
         android:layout_height="wrap_content"
         android:text="Add Item"
         android:id="@+id/button9"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:onClick="addNewItem" />
 
 
 </LinearLayout>

@@ -80,6 +80,10 @@
             android:label="@string/title_activity_my_profile"
             android:parentActivityName=".Activities.selectTaskActivity" >
         </activity>
+        <activity
+            android:name=".Activities.AddItemActivity"
+            android:label="@string/title_activity_add_item" >
+        </activity>
     </application>
 
 </manifest>
