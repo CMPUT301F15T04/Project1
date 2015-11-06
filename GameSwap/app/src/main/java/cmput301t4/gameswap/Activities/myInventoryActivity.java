@@ -2,6 +2,9 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,28 +61,52 @@ public class myInventoryActivity extends Activity{
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup,popupMenu.getMenu());
 
                 myInventoryListViewPosition = position;
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
-                    public boolean onMenuItemClick(MenuItem item){
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
 
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
 
                             case R.id.editItemMenuId:
                                 //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(myInventoryActivity.this,EditItemActivity.class);
+                                Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 startActivity(intent);
 
                                 return true;
                             case R.id.deleteItemMenuId:
                                 //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                                Intent intent1 = new Intent(myInventoryActivity.this,DeleteItemActivity.class);
-                                startActivity(intent1);
+                                //Intent intent1 = new Intent(myInventoryActivity.this,DeleteItemActivity.class);
+                                //startActivity(intent1);
+                                //public void open(View view){
+
+                                AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
+                                alert.setMessage("Are you sure, you want to delete this item");
+
+                                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        Toast.makeText(myInventoryActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                                alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+
+                                AlertDialog alertDialog = alert.create();
+                                alertDialog.show();
 
                                 return true;
-                        }
 
-                        return false;
+                            default:;
+
                     }
-                });
+
+                    return false;
+                }
+            });
 
                 popupMenu.show();
 
@@ -87,6 +114,8 @@ public class myInventoryActivity extends Activity{
         });
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
