@@ -13,6 +13,7 @@ import java.util.List;
 import cmput301t4.gameswap.Adapters.ExpandableListAdapter;
 import cmput301t4.gameswap.R;
 
+//code taken from http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
 public class AddItemActivity extends Activity {
     //create the unique list views and adapters for console, quality, and public and private
     ExpandableListAdapter consolelistAdapter;
@@ -126,6 +127,5 @@ public class AddItemActivity extends Activity {
         consoleDataChild.put(consoleDataHeader.get(0), consoles);
         qualityDataChild.put(qualityDataHeader.get(0), quality);
         privatepublicDataChild.put(privatepublicDataHeader.get(0), private_public);
-
     }
 }
