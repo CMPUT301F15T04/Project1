@@ -70,11 +70,15 @@ public class UserManager {
 
     //=====End In-Work Trade Notifty=====//
 
-    public void editUserName(String username){
+    static public void createUser(String username, String email, String city, String phoneNumber) {
+        trader = new User(username, email, city, phoneNumber);
+    }
+
+    static public void editUserName(String username){
         trader.setUserName(username);
     }
 
-    public void editPhoneNumber(String phoneNumber){
+    static public void editPhoneNumber(String phoneNumber){
         trader.setUserPhoneNumber(phoneNumber);
     }
 
@@ -82,7 +86,7 @@ public class UserManager {
         trader.setUserEmail(email);
     }
 
-    public void editCity(String city){
+    static public void editCity(String city){
         trader.setUserCity(city);
     }
 

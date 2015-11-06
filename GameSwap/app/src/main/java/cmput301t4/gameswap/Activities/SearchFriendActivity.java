@@ -1,6 +1,8 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,13 +15,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.User;
+import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {
 
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<User> adapter;
     private ListView friendListView;
-    private ArrayList<String> names;
 
     protected int friendListViewItemPosition;
 
@@ -29,11 +32,10 @@ public class SearchFriendActivity extends Activity {
         setContentView(R.layout.activity_search_friend);
 
         friendListView = (ListView) findViewById(R.id.listView);
-        names = new ArrayList<String>();
-        names.add("Rupehra");
-        names.add("Kittu");
-        // names.addAll(data);
-        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, names);
+        FriendManager.addFriend(new User("Mike", "me@2.ca", "Hometown", "5551234567"));
+        FriendManager.addFriend(new User("Cory", "me@2.ca", "Hometown", "5551234567"));
+        FriendManager.addFriend(new User("Terri", "me@2.ca", "Hometown", "5551234567"));
+        adapter = new ArrayAdapter<User>(this, R.layout.listviewtext, FriendManager.getAllUsers());
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -58,12 +60,32 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.tradeFriendMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.removeFriendMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                                return true;
+                               // Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
 
+                                AlertDialog.Builder alert = new AlertDialog.Builder(SearchFriendActivity.this);
+                                alert.setMessage("Are you sure, you want to remove friend");
+
+                                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        //Toast.makeText(SearchFriendActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                                alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+
+                                AlertDialog alertDialog = alert.create();
+                                alertDialog.show();
+
+                                return true;
 
                         }
 
@@ -83,16 +105,10 @@ public class SearchFriendActivity extends Activity {
     }
 
 
-
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_friend, menu);
+        //getMenuInflater().inflate(R.menu.menu_search_friend, menu);
 
         return true;
     }

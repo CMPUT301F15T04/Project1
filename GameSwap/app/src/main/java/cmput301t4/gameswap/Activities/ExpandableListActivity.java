@@ -13,12 +13,15 @@ import cmput301t4.gameswap.R;
 
 
 public class ExpandableListActivity extends Activity {
+    //create the unique list views and adapters for console, quality, and public and private
     ExpandableListAdapter consolelistAdapter;
     ExpandableListAdapter qualitylistAdapter;
     ExpandableListAdapter privatepubliclistAdapter;
     ExpandableListView consoleexpListView;
     ExpandableListView qualityexpListView;
     ExpandableListView privatepublicexpListView;
+
+    //what will be held in each of the ELV
     List<String> consoleDataHeader;
     HashMap<String, List<String>> consoleDataChild;
     List<String> qualityDataHeader;
@@ -29,17 +32,24 @@ public class ExpandableListActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        //loads it upon saving
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_game_entry);
+        //sets it to the activity
+        setContentView(R.layout.activity_add_item);
+        //sets what the ELVs are
         consoleexpListView=(ExpandableListView) findViewById(R.id.platformchoice);
         qualityexpListView=(ExpandableListView) findViewById(R.id.qualityChoice);
         privatepublicexpListView=(ExpandableListView) findViewById(R.id.privatepublicChoice);
+        //sets the data for all the ELVs
         prepareListData();
+        //sets the unique adapters
         consolelistAdapter = new ExpandableListAdapter(this, consoleDataHeader, consoleDataChild);
         qualitylistAdapter = new ExpandableListAdapter(this, qualityDataHeader, qualityDataChild);
         privatepubliclistAdapter = new ExpandableListAdapter(this, privatepublicDataHeader, privatepublicDataChild);
         // setting list adapter
         consoleexpListView.setAdapter(consolelistAdapter);
+        qualityexpListView.setAdapter(qualitylistAdapter);
+        privatepublicexpListView.setAdapter(privatepubliclistAdapter);
     }
     private void prepareListData() {
         consoleDataHeader = new ArrayList<String>();

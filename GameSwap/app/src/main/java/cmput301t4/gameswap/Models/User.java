@@ -25,6 +25,11 @@ public class User {
     private TradeList pendingTrades;
     private TradeList pastTrades;
 
+    @Override
+    public String toString() {
+        return userName;
+    }
+
     //=====In-Work Notifty=====//
     private ArrayList<String> notification = new ArrayList<String>();
     // index 0: new Trade 1: Counter Trade 2: Trade Cancel

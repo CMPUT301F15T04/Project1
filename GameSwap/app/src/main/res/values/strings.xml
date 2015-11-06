@@ -44,5 +44,7 @@
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="changeName">Name</string>
     <string name="viewFriends">Friends</string>
-
+    <string name="title_activity_edit_item">EditItemActivity</string>
+    <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="title_activity_delete_item">DeleteItemActivity</string>
 </resources>
