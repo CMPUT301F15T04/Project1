@@ -16,14 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
-       <activity
-
-             android:name=".clickInventory"
-             android:label="@string/title_activity_click_inventory" >
-         </activity>
-       >
-        -->
         <activity android:name=".Activities.selectTaskActivity" >
         </activity>
         <activity
@@ -60,29 +52,27 @@
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
         <activity
+
             android:name=".Activities.FriendProfileActivity"
             android:label="@string/title_activity_friend_profile" >
         </activity>
-        <activity
-            android:name=".Activities.MyProfile"
-            android:label="@string/title_activity_my_profile" >
-        </activity>
-        <activity
-            android:name=".Activities.FriendProfileActivity"
-            android:label="@string/title_activity_friend_profile" >
-        </activity>
+
         <activity
             android:name=".Activities.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
         </activity>
         <activity
-<<<<<<< HEAD
             android:name=".Activities.EditItemActivity"
             android:label="@string/title_activity_edit_item" >
-=======
+        </activity>
+        <activity
             android:name=".Activities.ExpandableListActivity"
-            android:label="ExpandableListActivity">
->>>>>>> 54f4e9a557c10b93f9edc5f7ed641cd975eae226
+            android:label="ExpandableListActivity" >
+        </activity>
+        <activity
+            android:name=".Activities.MyProfileActivity"
+            android:label="@string/title_activity_my_profile"
+            android:parentActivityName=".Activities.selectTaskActivity" >
         </activity>
     </application>
 
