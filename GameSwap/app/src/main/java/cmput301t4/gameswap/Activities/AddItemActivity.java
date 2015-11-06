@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cmput301t4.gameswap.Adapters.ExpandableListAdapter;
+import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.R;
 
 public class AddItemActivity extends Activity {
@@ -127,5 +130,21 @@ public class AddItemActivity extends Activity {
         qualityDataChild.put(qualityDataHeader.get(0), quality);
         privatepublicDataChild.put(privatepublicDataHeader.get(0), private_public);
 
+    }
+
+    public void saveButtonClick(View view) {
+        EditText titleEditText = (EditText) findViewById(R.id.gameTitle);
+        EditText releaseEditText = (EditText) findViewById(R.id.releaseDateEdit);
+        EditText descEditText = (EditText) findViewById(R.id.descriptionBox);
+        int qual = qualityDataChild.get(qualityDataHeader.get(0)).indexOf(qualityexpListView.getSelectedItem());
+        int console = consoleDataChild.get(consoleDataHeader.get(0)).indexOf(consoleexpListView.getSelectedItem());
+        int priPub = privatepublicDataChild.get(privatepublicDataHeader.get(0)).indexOf(privatepublicexpListView.getSelectedItem());
+        boolean isPrivate = (priPub == privatepublicDataChild.get(privatepublicDataHeader.get(0)).indexOf("Private"));
+        InventoryManager.addItem(titleEditText.getText().toString(), releaseEditText.getText().toString(), isPrivate, qual, console, descEditText.getText().toString());
+        this.finish();
+    }
+
+    public void cancelButtonClick(View view) {
+        this.finish();
     }
 }
