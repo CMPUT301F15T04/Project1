@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="cmput301t4.gameswap.Activities.TradesActivity">
 
-    <item android:id="@+id/pendingtrade"
-        android:title="Pending Trades"
+    <item android:id="@+id/acceptTrade"
+        android:title="Accept Trade"
         android:orderInCategory="1"
         android:showAsAction="never" />
 
-    <item android:id="@+id/pasttrade"
-        android:title="Past Trades"
+    <item android:id="@+id/rejectTrade"
+        android:title="Reject Trade"
         android:orderInCategory="1"
         android:showAsAction="never" />
 
