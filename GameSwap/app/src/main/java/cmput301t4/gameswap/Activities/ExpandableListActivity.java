@@ -1,5 +1,5 @@
 package cmput301t4.gameswap.Activities;
-/*
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
@@ -96,4 +96,4 @@ public class ExpandableListActivity extends Activity {
 
     }
 
-}*/
+}
