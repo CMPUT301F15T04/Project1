@@ -14,6 +14,7 @@ public class InventoryManager {
         if (inventory == null){
             inventory = new Inventory();
         }
+        //TODO: pull the cached items and add them to this list
         return inventory;
     }//end getInstance
 
