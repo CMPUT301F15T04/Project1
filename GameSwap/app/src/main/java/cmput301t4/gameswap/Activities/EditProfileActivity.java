@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import cmput301t4.gameswap.R;
 
@@ -13,6 +14,7 @@ public class EditProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        //TODO: Get current user data from TraderManager
     }
 
     @Override
@@ -35,5 +37,14 @@ public class EditProfileActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void clickSaveButton(View view) {
+        //TODO: Edit the fields through TraderManager
+        this.finish();
+    }
+
+    public void clickCancelButton(View view) {
+        this.finish();
     }
 }
