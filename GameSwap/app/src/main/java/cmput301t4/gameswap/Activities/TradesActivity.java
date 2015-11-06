@@ -146,7 +146,7 @@ public class TradesActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-     
+
         return super.onOptionsItemSelected(item);
     }
 }
