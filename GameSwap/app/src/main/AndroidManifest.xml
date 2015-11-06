@@ -52,11 +52,9 @@
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
         <activity
-
             android:name=".Activities.FriendProfileActivity"
             android:label="@string/title_activity_friend_profile" >
         </activity>
-
         <activity
             android:name=".Activities.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
@@ -73,6 +71,10 @@
             android:name=".Activities.MyProfileActivity"
             android:label="@string/title_activity_my_profile"
             android:parentActivityName=".Activities.selectTaskActivity" >
+        </activity>
+        <activity
+            android:name=".Activities.DeleteItemActivity"
+            android:label="@string/title_activity_delete_item" >
         </activity>
     </application>
 
