@@ -1,5 +1,5 @@
 package cmput301t4.gameswap.Activities;
-
+/*
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
@@ -11,9 +11,7 @@ import java.util.List;
 import cmput301t4.gameswap.Adapters.ExpandableListAdapter;
 import cmput301t4.gameswap.R;
 
-/**
- * Created by preyanshu on 11/5/15.
- */
+
 public class ExpandableListActivity extends Activity {
     ExpandableListAdapter consolelistAdapter;
     ExpandableListAdapter qualitylistAdapter;
@@ -98,4 +96,4 @@ public class ExpandableListActivity extends Activity {
 
     }
 
-}
+}*/
