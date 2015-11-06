@@ -84,7 +84,7 @@ public class myInventoryActivity extends Activity{
                                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
-                                        Toast.makeText(myInventoryActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(myInventoryActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
                                     }
                                 });
 
