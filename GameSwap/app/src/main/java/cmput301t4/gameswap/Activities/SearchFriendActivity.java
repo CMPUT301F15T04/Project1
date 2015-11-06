@@ -1,32 +1,25 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {
 
     private ArrayAdapter<String> adapter;
     private ListView friendListView;
-    private ArrayList<FriendList> names;
+    private ArrayList<String> names;
 
     protected int friendListViewItemPosition;
 
@@ -36,7 +29,7 @@ public class SearchFriendActivity extends Activity {
         setContentView(R.layout.activity_search_friend);
 
         friendListView = (ListView) findViewById(R.id.listView);
-        names = new ArrayList<FriendList>();
+        names = new ArrayList<String>();
         names.add("Rupehra");
         names.add("Kittu");
         // names.addAll(data);
