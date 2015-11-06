@@ -24,17 +24,21 @@ public class FriendList {
     }//end del
 
     //Retrieve friend at index
-    public User getTrader(int index){return friendList.get(index);}//End getTrade
+    public User getFriend(int index){return friendList.get(index);}//End getUser
 
     //See if friendList contains friend
     public boolean hasFriend(User trader) {
         return friendList.contains(trader);
-    }//end hasTrade
+    }//end hasFriend
 
     //Wrote this in for testing, Not sure if we really need
     public void clearFriendlist(){
         friendList.clear();
-    }//end clearTradelist
+    }//end clearFriendlist
+
+    public boolean isEmpty(){
+        return friendList.isEmpty();
+    }
 
 }//end TradeList
 

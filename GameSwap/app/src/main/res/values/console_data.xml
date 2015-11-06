@@ -2,9 +2,9 @@
 <resources><string-array name="Console">
     <item>Playstation 4</item>
     <item>Xbox ONE</item>
+    <item>PC</item>
     <item>Wii U</item>
     <item>Nintendo 3DS</item>
-    <item>PC</item>
     <item>Playstation 3</item>
     <item>Playstation Vita</item>
     <item>Xbox 360</item>
@@ -19,7 +19,5 @@
     <item>Nintendo 64</item>
     <item>Game Boy</item>
     <item>SNES</item>
-    <item>Sega Dreamcast</item>
     <item>NES</item>
-    <item>Sega Genesis</item>
 </string-array></resources>

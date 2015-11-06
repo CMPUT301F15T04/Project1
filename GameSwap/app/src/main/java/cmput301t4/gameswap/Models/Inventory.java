@@ -43,6 +43,10 @@ public class Inventory {
         inventory.clear();
     }//end clearInventory
 
+    public boolean isEmpty(){
+        return inventory.isEmpty();
+    }//end isEmpty
+
     //=====Advance Functions=====//
 
     //Bulk delete item from inventory based on given inventory indexs
@@ -76,5 +80,9 @@ public class Inventory {
         String ConvertedDate = formatter.format(date);
         return ConvertedDate;
     }//End dateToString
+
+    public int size(){          //gets size of array of items
+        return inventory.size();
+    }
 
 }//end Inventory
