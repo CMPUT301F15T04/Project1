@@ -38,6 +38,7 @@ public class TradeManager {
         //String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems
         //Trade trade = new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems);
         getCurrent().add(new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems));
+
     }//end createTrade
 
     //Del trade from current Trade (most likely only used offline)

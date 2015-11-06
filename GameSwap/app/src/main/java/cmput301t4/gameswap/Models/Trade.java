@@ -20,7 +20,6 @@ public class Trade {
     private ArrayList<Item> BorrowerItems;
     private Date DateTransaction;
 
-
     public Trade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
         this.Ownername = OwnerName;
         this.BorrowerName = BorrowerName;
@@ -35,7 +34,15 @@ public class Trade {
             throw new DateFormatException();
         }
         //this.DateTransaction = new Date();
+
+        //=====CODE FOR NOTIFICATION GOES HERE=====//
+
+
+
+        //=====END CODE FOR NOTIFICATION=====//
+
     }//End Trade Constructor
+
 
 
     //=====Getters and Setters=====//

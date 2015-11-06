@@ -35,6 +35,10 @@ public class User {
     // index 0: new Trade 1: Counter Trade 2: Trade Cancel
     private ArrayList<Integer> notificationAmount = new ArrayList<Integer>(Collections.nCopies(3,0));
 
+    public ArrayList<Integer> getNotificationAmount() {
+        return notificationAmount;
+    }
+
     public void pseduoConstructor(){
         this.notification.add("You have ");
         this.notification.add(" New Trade");
@@ -46,6 +50,7 @@ public class User {
         this.notificationAmount.set(type, notificationAmount.get(type) + 1);
     }
 
+    // index 0: new Trade 1: Counter Trade 2: Trade Cancel
     public void clearNotificationAmount(){
         this.notificationAmount.set(0,0);
         this.notificationAmount.set(1,0);

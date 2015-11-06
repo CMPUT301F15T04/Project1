@@ -1,7 +1,11 @@
 package cmput301t4.gameswap.Managers;
 
+import java.util.ArrayList;
+
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.Item;
+import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.Models.User;
 
@@ -42,7 +46,29 @@ public class UserManager {
         trader.DisplayNotify(type);
     }
 
+
     //=====End of Test Notifty related Code=====//
+
+    //=====In-Work Trade Notifty=====//
+
+    // index 0: new Trade 1: Counter Trade 2: Trade Cancel
+    public User findBorrowerFriend(String BorrowerName){
+        for(int i = 0; i < trader.getFriendList().getFriendlistSize(); i++){
+            if (trader.getFriendList().getFriend(i).getUserName().equals(BorrowerName)){
+                return trader.getFriendList().getFriend(i);
+            } else {
+                return null;
+            }
+        }//end for looop
+        return null;
+    }//end findBorrower
+
+    public void SendNewTradeNotify(User friend){
+        friend.IncreaseNotifiyAmount(0);
+    }
+
+
+    //=====End In-Work Trade Notifty=====//
 
     static public void createUser(String username, String email, String city, String phoneNumber) {
         trader = new User(username, email, city, phoneNumber);

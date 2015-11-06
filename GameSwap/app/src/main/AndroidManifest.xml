@@ -64,10 +64,6 @@
             android:label="@string/title_activity_edit_item" >
         </activity>
         <activity
-            android:name=".Activities.ExpandableListActivity"
-            android:label="ExpandableListActivity" >
-        </activity>
-        <activity
             android:name=".Activities.MyProfileActivity"
             android:label="@string/title_activity_my_profile"
             android:parentActivityName=".Activities.selectTaskActivity" >
@@ -75,11 +71,6 @@
         <activity
             android:name=".Activities.AddItemActivity"
             android:label="@string/title_activity_add_item" >
-        </activity>
-        <activity
-            android:name=".Activities.DeleteItemActivity"
-            android:label="@string/title_activity_delete_item" >
-
         </activity>
     </application>
 
