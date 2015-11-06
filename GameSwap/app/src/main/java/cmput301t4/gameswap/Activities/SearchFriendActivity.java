@@ -1,6 +1,8 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,10 +60,31 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.tradeFriendMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.removeFriendMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                                AlertDialog.Builder alert = new AlertDialog.Builder(SearchFriendActivity.this);
+                                alert.setMessage("Are you sure, you want to remove friend");
+
+                                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        //Toast.makeText(SearchFriendActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                                alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+
+                                AlertDialog alertDialog = alert.create();
+                                alertDialog.show();
+
                                 return true;
 
                         }
@@ -82,16 +105,10 @@ public class SearchFriendActivity extends Activity {
     }
 
 
-
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_friend, menu);
+        //getMenuInflater().inflate(R.menu.menu_search_friend, menu);
 
         return true;
     }

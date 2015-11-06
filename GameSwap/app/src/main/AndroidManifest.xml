@@ -76,11 +76,6 @@
             android:name=".Activities.AddItemActivity"
             android:label="@string/title_activity_add_item" >
         </activity>
-        <activity
-            android:name=".Activities.DeleteItemActivity"
-            android:label="@string/title_activity_delete_item" >
-
-        </activity>
     </application>
 
 </manifest>
