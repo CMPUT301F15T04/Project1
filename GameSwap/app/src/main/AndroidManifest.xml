@@ -75,6 +75,10 @@
             android:name=".Activities.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
         </activity>
+        <activity
+            android:name=".Activities.ExpandableListActivity"
+            android:label="ExpandableListActivity">
+        </activity>
     </application>
 
 </manifest>

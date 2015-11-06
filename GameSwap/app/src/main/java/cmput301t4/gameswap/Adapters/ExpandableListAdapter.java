@@ -18,28 +18,29 @@ import cmput301t4.gameswap.R;
  * Created by preyanshu on 11/5/15.
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
+
     private Context _context;
-    private List<String> _listDataHeader; // header titles
+    private List<String> _listDataHeader; // header for each category
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
-
+    //give the ELA its pieces
     public ExpandableListAdapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
     }
-
+    //gets the child itself
     @Override
     public Object getChild(int groupPosition, int childPosition){
         return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosition);
     }
-
+    //gives id of the child
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
     }
-
+    //can show the child to the user
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent){
@@ -52,20 +53,25 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         txtListChild.setText(childText);
         return convertView;
     }
+    //if you need the amount of children
     @Override
     public int getChildrenCount(int groupPosition) {
         return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
     }
+    //gets position of the list view itself
     @Override
     public Object getGroup(int groupPosition){return this._listDataHeader.get(groupPosition);}
+    //gives amount of ELVs
     @Override
     public int getGroupCount() {
         return this._listDataHeader.size();
     }
+    //gives ELV id
     @Override
     public long getGroupId(int groupPosition){
         return groupPosition;
     }
+    //outputs the ELV itself
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent){
         String headerTitle= (String) getGroup(groupPosition);
@@ -78,10 +84,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
         return convertView;
         }
+    //checks stability
     @Override
     public boolean hasStableIds(){
         return false;
     }
+    //checks if you can select the child
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition){
         return true;
