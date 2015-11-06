@@ -111,6 +111,7 @@ public class myInventoryActivity extends Activity{
         return super.onOptionsItemSelected(item);
     }
     public void addNewItem(View view){
-            
+        Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
+        startActivity(intent);
     }
 }
