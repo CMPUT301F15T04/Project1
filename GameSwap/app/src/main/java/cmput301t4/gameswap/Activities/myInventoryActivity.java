@@ -14,26 +14,39 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;
-    private ArrayList<String> items;
+    private ArrayList<Item> items;
     private ArrayAdapter<String> adapter;
     protected int myInventoryListViewPosition;
-
+    private Item item;
+    ArrayList<String> allItemsNamesNStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_inventory);
 
-        myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        items.add("Call of Duty");
-        items.add("Halo");
+        allItemsNamesNStatus = new ArrayList<String>();
+        items = new ArrayList<Item>();
+        Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
+        Item item_2 = new Item("Call of Duty 2", "01-01-2000", false, 5, 5, "It's bad");
 
-        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,items);
+        //items contains all the items with all the attributes
+        items.add(item_1);
+        items.add(item_2);
+
+        //allItemsNames contains the names of all the items
+        allItemsNamesNStatus.add(items.get(0).getName().toString()+"           "+ items.get(0).getIsPrivate().toString());
+        allItemsNamesNStatus.add(items.get(1).getName().toString()+"           "+ items.get(1).getIsPrivate().toString());
+
+
+        myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
+        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,allItemsNamesNStatus);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -57,28 +70,21 @@ public class myInventoryActivity extends Activity{
                                 return true;
                         }
 
-
                         return false;
                     }
                 });
-
 
                 popupMenu.show();
 
             }
         });
 
-
-
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_inventory, menu);
+        //getMenuInflater().inflate(R.menu.menu_my_inventory, menu);
         return super.onCreateOptionsMenu(menu);
         // return true;
     }
