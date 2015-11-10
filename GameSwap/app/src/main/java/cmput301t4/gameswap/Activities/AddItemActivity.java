@@ -7,6 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +21,7 @@ import cmput301t4.gameswap.Adapters.ExpandableListAdapter;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.R;
 
-//code taken from http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
+//code taken from
 public class AddItemActivity extends Activity {
     //create the unique list views and adapters for console, quality, and public and private
     ExpandableListAdapter consolelistAdapter;

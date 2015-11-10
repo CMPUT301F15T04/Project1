@@ -47,4 +47,43 @@
     <string name="title_activity_edit_item">EditItemActivity</string>
     <string name="title_activity_add_item">AddItemActivity</string>
     <string name="title_activity_delete_item">DeleteItemActivity</string>
+    <string name="dd_mm_yyyy">dd mm yyyy</string>
+
+    <string-array name="Console">
+        <item>Playstation 4</item>
+        <item>Xbox ONE</item>
+        <item>PC</item>
+        <item>Wii U</item>
+        <item>Nintendo 3DS</item>
+        <item>Playstation 3</item>
+        <item>Playstation Vita</item>
+        <item>Xbox 360</item>
+        <item>Nintendo Wii</item>
+        <item>Nintendo DS</item>
+        <item>PlayStation 2</item>
+        <item>Xbox</item>
+        <item>Nintendo Gamecube</item>
+        <item>Game Boy Advanced</item>
+        <item>Playstation Portable</item>
+        <item>PlayStation</item>
+        <item>Nintendo 64</item>
+        <item>Game Boy</item>
+        <item>SNES</item>
+        <item>NES</item>
+    </string-array>
+
+    <string-array name="Quality">
+        <item>5-Perfect Condition/Unopened/Download Code</item>
+        <item>4-Opened No Scratches/Damage</item>
+        <item>3-Light Scratches/Damage</item>
+        <item>2-Decent Scratches/Damage</item>
+        <item>1-Heavy Scratches/Damage</item>
+    </string-array>
+
+    <string-array name="Public_or_Private">
+        <item>Public</item>
+        <item>Private</item>
+    </string-array>
+
+
 </resources>
