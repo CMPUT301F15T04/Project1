@@ -22,8 +22,9 @@ import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.R;
 
 //code taken from
-public class AddItemActivity extends Activity {
+public class AddItemActivity extends Activity implements OnItemSelectedListener{
     //create the unique list views and adapters for console, quality, and public and private
+    private Spinner consoleSpinner, qualitySpinner, publiciprivateSpinner;
     ExpandableListAdapter consolelistAdapter;
     ExpandableListAdapter qualitylistAdapter;
     ExpandableListAdapter privatepubliclistAdapter;
@@ -45,6 +46,13 @@ public class AddItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         //sets it to the activity
         setContentView(R.layout.activity_add_item);
+        //setting spinners
+        Spinner consoleSpinner = (Spinner) findViewById(R.id.platformspinner);
+        Spinner qualitySpinner = (Spinner) findViewById(R.id.qualityspinner);
+        Spinner publicprivateSpinner = (Spinner) findViewById(R.id.publicprivatespinner);
+
+        prepareSpinnerdata();
+
         //sets what the ELVs are
         consoleexpListView=(ExpandableListView) findViewById(R.id.platformchoice);
         qualityexpListView=(ExpandableListView) findViewById(R.id.qualityChoice);
@@ -81,6 +89,41 @@ public class AddItemActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void prepareSpinnerdata(){
+        //function creates spinner data for us for the three spinners here.
+        // Create an ArrayAdapter for console array
+        ArrayAdapter<CharSequence> console_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Console, android.R.layout.simple_spinner_item);
+        // Specify the layout to be dropdown
+        console_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the console spinner
+        consoleSpinner.setAdapter(console_adapter);
+
+        // Create Array adapter for quality array
+        ArrayAdapter<CharSequence> quality_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Quality, android.R.layout.simple_spinner_item);
+        // Specify the layout to be a dropdown
+        quality_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the quality spinner
+        qualitySpinner.setAdapter(quality_adapter);
+
+        // Create Array adapter for the array we wish to use for private/public
+        ArrayAdapter<CharSequence> public_private_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Public_or_Private, android.R.layout.simple_spinner_item);
+        // use the layout for public and private
+        public_private_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        publiciprivateSpinner.setAdapter(public_private_adapter);
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
     private void prepareListData() {

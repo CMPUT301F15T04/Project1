@@ -17,7 +17,8 @@
         android:id="@+id/textView3"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="56dp" />
+        android:textSize="32dp"
+        android:textIsSelectable="true" />
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -168,7 +169,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
         <Button
