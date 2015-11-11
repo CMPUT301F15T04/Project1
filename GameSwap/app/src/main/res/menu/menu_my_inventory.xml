@@ -1,10 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="cmput301t4.gameswap.Activities.myInventoryActivity">
-    <item android:id="@+id/addItem"
-        android:title="@string/add"
-        android:orderInCategory="1"
-        android:showAsAction="ifRoom" />
+
 
     <item android:id="@+id/editItem"
         android:title="@string/edit"

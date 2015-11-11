@@ -21,6 +21,11 @@ public class Item {
     private Integer Quality;
     private Integer Platform;
 
+    @Override
+    public String toString() {
+        return Name;
+    }
+
     //Contructor for Item without setting Image
     public Item(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description) throws NameTooLongException {
         this.setNameText(Name);
