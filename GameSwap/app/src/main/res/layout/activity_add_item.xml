@@ -28,7 +28,7 @@
             android:layout_height="match_parent">
 
             <TableRow
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <TextView
@@ -37,7 +37,8 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/gameTitle"
                     android:id="@+id/Title"
-                    android:layout_gravity="bottom" />
+                    android:layout_gravity="bottom"
+                    android:layout_column="6" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -46,8 +47,8 @@
                     android:hint="@string/gameTitle"
                     android:ems="10"
                     android:id="@+id/gameTitle"
-                    android:layout_gravity="center_horizontal"
                     android:layout_column="7" />
+
             </TableRow>
 
             <TableRow
@@ -60,7 +61,8 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/release_date"
                     android:id="@+id/releaseDate"
-                    android:layout_gravity="bottom" />
+                    android:layout_gravity="bottom"
+                    android:layout_column="6" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -82,12 +84,14 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/platform"
                     android:id="@+id/Platform"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_column="6" />
 
-                <ExpandableListView
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/platformchoice"
+                    android:id="@+id/consoleSpinner"
+                    android:entries="@array/Console"
                     android:layout_column="7" />
 
             </TableRow>
@@ -102,14 +106,15 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/quality"
                     android:id="@+id/Quality"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_column="6" />
 
-                <ExpandableListView
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/qualityChoice"
-                    android:layout_column="7"
-                    android:headerDividersEnabled="false" />
+                    android:id="@+id/qualitySpinner"
+                    android:entries="@array/Quality"
+                    android:layout_column="7" />
 
             </TableRow>
 
@@ -123,15 +128,16 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/private_public"
                     android:id="@+id/Private"
-                    android:layout_column="0"
+                    android:layout_column="6"
                     android:layout_gravity="center_vertical" />
 
-                <ExpandableListView
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/privatepublicChoice"
-                    android:layout_column="7"
-                    android:headerDividersEnabled="false" />
+                    android:id="@+id/privatepublicSpinner"
+                    android:entries="@array/Public_or_Private"
+                    android:layout_column="7" />
+
             </TableRow>
 
             <TableRow
@@ -144,7 +150,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/description"
                     android:id="@+id/description"
-                    android:layout_column="0"
+                    android:layout_column="6"
                     android:layout_gravity="center_vertical" />
 
                 <EditText
