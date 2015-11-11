@@ -47,12 +47,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         //sets it to the activity
         setContentView(R.layout.activity_add_item);
         //setting spinners
-        Spinner consoleSpinner = (Spinner) findViewById(R.id.platformspinner);
-        Spinner qualitySpinner = (Spinner) findViewById(R.id.qualityspinner);
-        Spinner publicprivateSpinner = (Spinner) findViewById(R.id.publicprivatespinner);
+        Spinner consoleSpinner = (Spinner) findViewById(R.id.consoleSpinner);
+        Spinner qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
+        Spinner publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
 
         prepareSpinnerdata();
 
+    /*
         //sets what the ELVs are
         consoleexpListView=(ExpandableListView) findViewById(R.id.platformchoice);
         qualityexpListView=(ExpandableListView) findViewById(R.id.qualityChoice);
@@ -67,6 +68,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         consoleexpListView.setAdapter(consolelistAdapter);
         qualityexpListView.setAdapter(qualitylistAdapter);
         privatepublicexpListView.setAdapter(privatepubliclistAdapter);
+        */
     }
 
     @Override
@@ -125,7 +127,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
-
+/*
     private void prepareListData() {
         consoleDataHeader = new ArrayList<String>();
         consoleDataChild = new HashMap<String, List<String>>();
@@ -179,7 +181,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         qualityDataChild.put(qualityDataHeader.get(0), quality);
         privatepublicDataChild.put(privatepublicDataHeader.get(0), private_public);
     }
-
+*/
     public void saveButtonClick(View view) {
         EditText titleEditText = (EditText) findViewById(R.id.gameTitle);
         EditText releaseEditText = (EditText) findViewById(R.id.releaseDateEdit);
