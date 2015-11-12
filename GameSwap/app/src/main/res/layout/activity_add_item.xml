@@ -84,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/platform"
+                    android:singleLine="false"
                     android:id="@+id/Platform"
                     android:layout_gravity="center_vertical"
                     android:layout_column="6" />
@@ -106,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/quality"
+                    android:singleLine="false"
                     android:id="@+id/Quality"
                     android:layout_gravity="center_vertical"
                     android:layout_column="6" />
@@ -128,6 +130,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/private_public"
+                    android:singleLine="false"
                     android:id="@+id/Private"
                     android:layout_column="6"
                     android:layout_gravity="center_vertical" />
