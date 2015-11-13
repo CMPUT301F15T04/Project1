@@ -15,10 +15,19 @@ import android.widget.Spinner;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.R;
 
-//code taken from
+/**
+ * Adds item to user inventory based off of user input
+ */
 public class AddItemActivity extends Activity implements OnItemSelectedListener{
     //create the unique list views and adapters for console, quality, and public and private
-    private Spinner consoleSpinner, qualitySpinner, publicprivateSpinner;
+
+    /** The spinner to choose the console */
+    private Spinner consoleSpinner;
+    /** The spinner to choose the quality */
+    private Spinner qualitySpinner;
+    /** The spinner to choose if the item is public or private */
+    private Spinner publicprivateSpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
 
         prepareSpinnerdata();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
