@@ -9,13 +9,14 @@ import java.util.Collection;
 public class FriendList {
     private ArrayList<User> friendList = new ArrayList<User>();
 
-    //=====Function for Trade Notify=====//
-
-    public Integer getFriendlistSize(){
+    /**
+     * Checks how many friends the current user has
+     *
+     * @return The number of friends the current user has
+     */
+    public int getFriendlistSize() {
         return friendList.size();
     }
-
-    //=====Function for Trade Notify=====//
 
     /**
      * Stores a User as a friend
@@ -73,7 +74,8 @@ public class FriendList {
 
     /**
      * Checks if the current user has any friends :(
-     * @return
+     *
+     * @return A boolean that is true if the current user has no friends
      */
     public boolean isEmpty(){
         return friendList.isEmpty();
