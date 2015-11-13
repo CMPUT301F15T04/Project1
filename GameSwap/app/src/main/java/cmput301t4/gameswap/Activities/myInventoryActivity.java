@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,10 +26,11 @@ import cmput301t4.gameswap.R;
 public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;
-    private ArrayList<Item> items;
+    private ArrayList<Item> inventory;
     private ArrayAdapter<Item> adapter;
     protected int myInventoryListViewPosition;
     private Item item;
+    private InventoryManager im;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,23 +38,24 @@ public class myInventoryActivity extends Activity{
         setContentView(R.layout.activity_my_inventory);
 
         //TODO: Fix this hacky nonsense
-        InventoryManager.addItem("Duck Hunt", "02-01-1972", Boolean.FALSE, 1, 1, "Soooo cool");
-        InventoryManager.addItem("Halo", "15-10-2001", Boolean.FALSE, 1, 1, "Even cooler");
-        items = InventoryManager.getItems();
+        im.addItem("Duck Hunt", "02-01-1972", Boolean.FALSE, 1, 1, "Soooo cool");
+        im.addItem("Halo", "15-10-2001", Boolean.FALSE, 1, 1, "Even cooler");
+        inventory = im.getItems();
 
 
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, items);
+        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         myInventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {
-                PopupMenu popupMenu = new PopupMenu(myInventoryActivity.this,childView);
+            public void onItemClick(AdapterView<?> parent, View childView, final int position, long id) {
+                final PopupMenu popupMenu = new PopupMenu(myInventoryActivity.this,childView);
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup,popupMenu.getMenu());
 
                 myInventoryListViewPosition = position;
+
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
 
@@ -60,30 +63,31 @@ public class myInventoryActivity extends Activity{
 
                             case R.id.editItemMenuId:
                                 //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
+                                final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 startActivity(intent);
 
                                 return true;
                             case R.id.deleteItemMenuId:
-                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                                //Intent intent1 = new Intent(myInventoryActivity.this,DeleteItemActivity.class);
-                                //startActivity(intent1);
-                                //public void open(View view){
 
-                                AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
+                                final AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
                                 alert.setMessage("Are you sure, you want to delete this item");
 
                                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
-                                        //Toast.makeText(myInventoryActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+
+                                        inventory.remove(position);
+                                        resetAdapter();
+
                                     }
+
                                 });
 
                                 alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        finish();
+                                       // finish();
+                                        dialog.dismiss();
                                     }
                                 });
 
@@ -134,5 +138,11 @@ public class myInventoryActivity extends Activity{
     public void addNewItem(View view){
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);
+    }
+
+
+    private void resetAdapter(){
+        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
+        myInventoryListView.setAdapter(adapter);
     }
 }
