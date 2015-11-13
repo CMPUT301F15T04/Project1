@@ -1,5 +1,7 @@
 package cmput301t4.gameswap.Activities;
 
+//commented out the adapter line
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

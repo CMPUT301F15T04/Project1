@@ -51,7 +51,8 @@ public class FriendList {
      *
      * @return The Collection of all friends of that user
      */
-    public Collection<? extends User> getAllFriends() {
+   // public Collection<? extends User> getAllFriends() {
+    public ArrayList<User> getAllFriends(){
         return friendList;
     }
 

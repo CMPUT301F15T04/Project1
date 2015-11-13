@@ -1,6 +1,8 @@
 package cmput301t4.gameswap.Managers;
 
+//commented out getAllUsers
 import java.util.ArrayList;
+import java.util.Collection;
 
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.User;
@@ -31,8 +33,8 @@ public class FriendManager {
     //Retrieve friend at index
     static public User getUser(int index){return getFriendlist().getFriend(index);}//End getUser
 
-    static public ArrayList<User> getAllUsers() {
-        return getFriendlist().getAllFriends();
+    static public ArrayList<User> getAllUsers() {             //getting error in this one so commented it out
+       return getFriendlist().getAllFriends();
     }
 
     //See if friendList contains friend

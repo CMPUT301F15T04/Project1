@@ -1,5 +1,6 @@
 package cmput301t4.gameswap.Models;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,7 +57,8 @@ public class Inventory {
      *
      * @return A Collection of Items that the current user owns
      */
-    public Collection<? extends Item> getItems() {
+    //public Collection<? extends Item> getItems() {
+    public ArrayList<Item> getItems(){
         return inventory;
     }
 
