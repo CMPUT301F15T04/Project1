@@ -1,6 +1,5 @@
 package cmput301t4.gameswap.Managers;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Models.FriendList;
@@ -43,7 +42,7 @@ public class FriendManager {
 
     //Wrote this in for testing, Not sure if we really need
     static public void clearFriendlist(){
-        getFriendlist().clearFriendlist();
-    }//end clearFriendlist
+        getFriendlist().clearFriendList();
+    }//end clearFriendList
 
 }//end FriendManager
