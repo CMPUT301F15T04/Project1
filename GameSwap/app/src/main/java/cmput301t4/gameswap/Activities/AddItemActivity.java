@@ -6,26 +6,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.Spinner;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import cmput301t4.gameswap.Adapters.ExpandableListAdapter;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.R;
 
 //code taken from
 public class AddItemActivity extends Activity implements OnItemSelectedListener{
     //create the unique list views and adapters for console, quality, and public and private
-    private Spinner consoleSpinner, qualitySpinner, publiciprivateSpinner;
+    private Spinner consoleSpinner, qualitySpinner, publicprivateSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +27,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         //sets it to the activity
         setContentView(R.layout.activity_add_item);
         //setting spinners
-        Spinner consoleSpinner = (Spinner) findViewById(R.id.consoleSpinner);
-        Spinner qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
-        Spinner publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
+        consoleSpinner = (Spinner) findViewById(R.id.consoleSpinner);
+        qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
+        publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
 
         prepareSpinnerdata();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -85,7 +79,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
                 R.array.Public_or_Private, android.R.layout.simple_spinner_item);
         // use the layout for public and private
         public_private_adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
-        publiciprivateSpinner.setAdapter(public_private_adapter);
+        publicprivateSpinner.setAdapter(public_private_adapter);
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -97,33 +91,28 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         //code referenced from http://stackoverflow.com/questions/13431644/save-and-retrieve-selected-spinner-position
         int userChoiceConsole = consoleSpinner.getSelectedItemPosition();
         int userChoiceQuality = qualitySpinner.getSelectedItemPosition();
-        int userChoicePrivate = publiciprivateSpinner.getSelectedItemPosition();
-        SharedPreferences sharedPref = getSharedPreferences("FileName",0);
+        int userChoicePrivate = publicprivateSpinner.getSelectedItemPosition();
+        SharedPreferences sharedPref = getSharedPreferences("FileName", 0);
         SharedPreferences.Editor prefEditor = sharedPref.edit();
-        prefEditor.putInt("userChoiceSpinner",userChoiceConsole);
-        prefEditor.putInt("userChoiceSpinner",userChoiceQuality);
-        prefEditor.putInt("userChoiceSpinner",userChoicePrivate);
+        prefEditor.putInt("userChoiceSpinner", userChoiceConsole);
+        prefEditor.putInt("userChoiceSpinner", userChoiceQuality);
+        prefEditor.putInt("userChoiceSpinner", userChoicePrivate);
         prefEditor.commit();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
+
     public void saveButtonClick(View view) {
-/*
-        SharedPreferences sharedPref = getSharedPreferences("FileName",MODE_PRIVATE);
-        int consoleValue = sharedPref.getInt"userChoiceSpinner",-1);
-        if(consoleValue != -1)
-            // set the value of the spinner
-            consoleSpinner.setSelection(consoleValue);
-*/
         EditText titleEditText = (EditText) findViewById(R.id.gameTitle);
         EditText releaseEditText = (EditText) findViewById(R.id.releaseDateEdit);
         EditText descEditText = (EditText) findViewById(R.id.descriptionBox);
-        int qual = qualityDataChild.get(qualityDataHeader.get(0)).indexOf(qualityexpListView.getSelectedItem());
-        int console = consoleDataChild.get(consoleDataHeader.get(0)).indexOf(consoleexpListView.getSelectedItem());
-        int priPub = privatepublicDataChild.get(privatepublicDataHeader.get(0)).indexOf(privatepublicexpListView.getSelectedItem());
-        boolean isPrivate = (priPub == privatepublicDataChild.get(privatepublicDataHeader.get(0)).indexOf("Private"));
+
+        int console = consoleSpinner.getSelectedItemPosition();
+        int qual = qualitySpinner.getSelectedItemPosition();
+        boolean isPrivate = (publicprivateSpinner.getSelectedItemPosition() == 1);
+
         InventoryManager.addItem(titleEditText.getText().toString(), releaseEditText.getText().toString(), isPrivate, qual, console, descEditText.getText().toString());
         this.finish();
     }
