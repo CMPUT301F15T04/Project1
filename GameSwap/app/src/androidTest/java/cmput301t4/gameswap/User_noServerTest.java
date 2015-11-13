@@ -67,7 +67,7 @@ public class User_noServerTest extends TestCase {
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
-        UM.getFriendlist().clearFriendlist();
+        UM.getFriendlist().clearFriendList();
         assertTrue(UM.getTrader().getFriendList().isEmpty());
         UM.setFriendlist(FM.getFriendlist());
         assertNotNull(UM.getTrader().getFriendList());
@@ -86,7 +86,7 @@ public class User_noServerTest extends TestCase {
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
-        UM.getFriendlist().clearFriendlist();
+        UM.getFriendlist().clearFriendList();
         assertTrue(UM.getTrader().getFriendList().isEmpty());
         UM.setFriendlist(FM.getFriendlist());
         assertNotNull(UM.getTrader().getFriendList());
@@ -298,7 +298,7 @@ public class User_noServerTest extends TestCase {
         //===Clearing List===//
         UM_1.getInventory().clearInventory();
         UM_2.getInventory().clearInventory();
-        UM_1.getFriendlist().clearFriendlist();
+        UM_1.getFriendlist().clearFriendList();
         //===Test Start===//
         UM_2.getTrader().setUserCity("Edmonton");
         UM_1.setInventory(IM_1.getInstance());

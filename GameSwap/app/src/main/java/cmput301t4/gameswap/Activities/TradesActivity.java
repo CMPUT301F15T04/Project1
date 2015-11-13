@@ -1,19 +1,11 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -51,6 +43,7 @@ public class TradesActivity extends Activity {
         pendingtradeListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+        /*
         pendingtradeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {
@@ -124,7 +117,7 @@ public class TradesActivity extends Activity {
 
             }
         });
-
+        */
 
 
 

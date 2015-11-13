@@ -8,18 +8,33 @@ import java.util.ArrayList;
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 
 /**
- * Created by kynan on 11/1/15.
+ * Created by kynan on 11/1/15. Gives information and functionality of the trade
  */
 public class Trade {
     //Ownername =  the one who initiated the trade
     //BorrowerName = the one who can accept the trade
     //Ownername/Borrower are String (TEMP not sure if we want to use ID,etc)
+    /** The one initiating the trades name */
     private String Ownername;
+    /** The name of the person receiving the trade */
     private String BorrowerName;
+    /** The items that the initiating trader is offering */
     private ArrayList<Item> OwnerItems;
+    /** The items that the initiator wants from the other trader*/
     private ArrayList<Item> BorrowerItems;
+    /** The date of the trade */
     private Date DateTransaction;
 
+
+    /**
+     * Creates a new trade between two people
+     *
+     * @param OwnerName The name of the Initiator
+     * @param BorrowerName The name of the Receiver
+     * @param OwnerItems The Initiators items that are being offered
+     * @param BorrowerItems The Receivers items that the Initiator wants
+     * @throws DateFormatException This occurs when an improper date is given and can't be parsed
+     */
     public Trade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
         this.Ownername = OwnerName;
         this.BorrowerName = BorrowerName;

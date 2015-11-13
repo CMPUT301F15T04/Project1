@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string-array name="Quality">
-    <item>5-Perfect Condition/Unopened/Download Code</item>
-    <item>4-Opened No Scratches/Damage</item>
-    <item>3-Light Scratches/Damage</item>
-    <item>2-Decent Scratches/Damage</item>
-    <item>1-Heavy Scratches/Damage</item>
-</string-array></resources>

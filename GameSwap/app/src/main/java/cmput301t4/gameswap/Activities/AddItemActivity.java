@@ -1,38 +1,33 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
+import android.widget.Spinner;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import cmput301t4.gameswap.Adapters.ExpandableListAdapter;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.R;
 
-//code taken from http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
-public class AddItemActivity extends Activity {
+/**
+ * Adds item to user inventory based off of user input
+ */
+public class AddItemActivity extends Activity implements OnItemSelectedListener{
     //create the unique list views and adapters for console, quality, and public and private
-    ExpandableListAdapter consolelistAdapter;
-    ExpandableListAdapter qualitylistAdapter;
-    ExpandableListAdapter privatepubliclistAdapter;
-    ExpandableListView consoleexpListView;
-    ExpandableListView qualityexpListView;
-    ExpandableListView privatepublicexpListView;
 
-    //what will be held in each of the ELV
-    List<String> consoleDataHeader;
-    HashMap<String, List<String>> consoleDataChild;
-    List<String> qualityDataHeader;
-    HashMap<String, List<String>> qualityDataChild;
-    List<String> privatepublicDataHeader;
-    HashMap<String, List<String>> privatepublicDataChild;
+    /** The spinner to choose the console */
+    private Spinner consoleSpinner;
+    /** The spinner to choose the quality */
+    private Spinner qualitySpinner;
+    /** The spinner to choose if the item is public or private */
+    private Spinner publicprivateSpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +35,14 @@ public class AddItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         //sets it to the activity
         setContentView(R.layout.activity_add_item);
-        //sets what the ELVs are
-        consoleexpListView=(ExpandableListView) findViewById(R.id.platformchoice);
-        qualityexpListView=(ExpandableListView) findViewById(R.id.qualityChoice);
-        privatepublicexpListView=(ExpandableListView) findViewById(R.id.privatepublicChoice);
-        //sets the data for all the ELVs
-        prepareListData();
-        //sets the unique adapters
-        consolelistAdapter = new ExpandableListAdapter(this, consoleDataHeader, consoleDataChild);
-        qualitylistAdapter = new ExpandableListAdapter(this, qualityDataHeader, qualityDataChild);
-        privatepubliclistAdapter = new ExpandableListAdapter(this, privatepublicDataHeader, privatepublicDataChild);
-        // setting list adapter
-        consoleexpListView.setAdapter(consolelistAdapter);
-        qualityexpListView.setAdapter(qualitylistAdapter);
-        privatepublicexpListView.setAdapter(privatepubliclistAdapter);
+        //setting spinners
+        consoleSpinner = (Spinner) findViewById(R.id.consoleSpinner);
+        qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
+        publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
+
+        prepareSpinnerdata();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,68 +66,63 @@ public class AddItemActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void prepareListData() {
-        consoleDataHeader = new ArrayList<String>();
-        consoleDataChild = new HashMap<String, List<String>>();
-        qualityDataHeader = new ArrayList<String>();
-        qualityDataChild = new HashMap<String, List<String>>();
-        privatepublicDataHeader = new ArrayList<String>();
-        privatepublicDataChild = new HashMap<String, List<String>>();
+    private void prepareSpinnerdata(){
+        //function creates spinner data for us for the three spinners here.
+        // Create an ArrayAdapter for console array
+        ArrayAdapter<CharSequence> console_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Console, android.R.layout.simple_spinner_item);
+        // Specify the layout to be dropdown
+        console_adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
+        // Apply the adapter to the console spinner
+        consoleSpinner.setAdapter(console_adapter);
 
-        //names of the dropdown menues
-        consoleDataHeader.add("Console");
-        qualityDataHeader.add("Quality");
-        privatepublicDataHeader.add("Private/Public");
+        // Create Array adapter for quality array
+        ArrayAdapter<CharSequence> quality_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Quality, android.R.layout.simple_spinner_item);
+        // Specify the layout to be a dropdown
+        quality_adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
+        // Apply the adapter to the quality spinner
+        qualitySpinner.setAdapter(quality_adapter);
 
+        // Create Array adapter for the array we wish to use for private/public
+        ArrayAdapter<CharSequence> public_private_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Public_or_Private, android.R.layout.simple_spinner_item);
+        // use the layout for public and private
+        public_private_adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
+        publicprivateSpinner.setAdapter(public_private_adapter);
+    }
 
-        //making list data
-        List<String> consoles = new ArrayList<String>();
-        consoles.add("Playstation 4");
-        consoles.add("Xbox ONE");
-        consoles.add("PC");
-        consoles.add("Wii U");
-        consoles.add("Nintendo 3DS");
-        consoles.add("Playstation 3");
-        consoles.add("Playstation Vita");
-        consoles.add("Xbox 360");
-        consoles.add("Nintendo Wii");
-        consoles.add("Nintendo DS");
-        consoles.add("Playstation 2");
-        consoles.add("Xbox");
-        consoles.add("Nintendo Gamecube");
-        consoles.add("Game Boy Advance");
-        consoles.add("Playstation Portable");
-        consoles.add("Playstation");
-        consoles.add("Nintendo 64");
-        consoles.add("Gameboy");
-        consoles.add("SNES");
-        consoles.add("NES");
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+        // On selecting a spinner item
+        //String item = parent.getItemAtPosition(pos).toString();
 
-        List<String> quality = new ArrayList<String>();
-        quality.add("5-Perfect Condition/Unopened/Download Code");
-        quality.add("4-Opened No Scratches/Damage");
-        quality.add("3-Light Scratches/Damage");
-        quality.add("2-Decent Scratches/Damage");
-        quality.add("1-Heavy Scratches/Damage");
+        //code referenced from http://stackoverflow.com/questions/13431644/save-and-retrieve-selected-spinner-position
+        int userChoiceConsole = consoleSpinner.getSelectedItemPosition();
+        int userChoiceQuality = qualitySpinner.getSelectedItemPosition();
+        int userChoicePrivate = publicprivateSpinner.getSelectedItemPosition();
+        SharedPreferences sharedPref = getSharedPreferences("FileName", 0);
+        SharedPreferences.Editor prefEditor = sharedPref.edit();
+        prefEditor.putInt("userChoiceSpinner", userChoiceConsole);
+        prefEditor.putInt("userChoiceSpinner", userChoiceQuality);
+        prefEditor.putInt("userChoiceSpinner", userChoicePrivate);
+        prefEditor.commit();
+    }
 
-        List<String> private_public = new ArrayList<String>();
-        private_public.add("Public");
-        private_public.add("Private");
-
-        //showing it all
-        consoleDataChild.put(consoleDataHeader.get(0), consoles);
-        qualityDataChild.put(qualityDataHeader.get(0), quality);
-        privatepublicDataChild.put(privatepublicDataHeader.get(0), private_public);
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
     public void saveButtonClick(View view) {
         EditText titleEditText = (EditText) findViewById(R.id.gameTitle);
         EditText releaseEditText = (EditText) findViewById(R.id.releaseDateEdit);
         EditText descEditText = (EditText) findViewById(R.id.descriptionBox);
-        int qual = qualityDataChild.get(qualityDataHeader.get(0)).indexOf(qualityexpListView.getSelectedItem());
-        int console = consoleDataChild.get(consoleDataHeader.get(0)).indexOf(consoleexpListView.getSelectedItem());
-        int priPub = privatepublicDataChild.get(privatepublicDataHeader.get(0)).indexOf(privatepublicexpListView.getSelectedItem());
-        boolean isPrivate = (priPub == privatepublicDataChild.get(privatepublicDataHeader.get(0)).indexOf("Private"));
+
+        int console = consoleSpinner.getSelectedItemPosition();
+        int qual = qualitySpinner.getSelectedItemPosition();
+        boolean isPrivate = (publicprivateSpinner.getSelectedItemPosition() == 1);
+
         InventoryManager.addItem(titleEditText.getText().toString(), releaseEditText.getText().toString(), isPrivate, qual, console, descEditText.getText().toString());
         this.finish();
     }

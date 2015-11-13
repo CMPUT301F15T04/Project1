@@ -1,58 +1,84 @@
 package cmput301t4.gameswap.Models;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
- * Created by rupehra on 11/1/15.
- *
- *
- * think friendlist is a singleton
- *
- *
- *
+ * Stores the list of Users that the current user has added as friends
  */
-
 public class FriendList {
     private ArrayList<User> friendList = new ArrayList<User>();
 
-    //=====Function for Trade Notify=====//
-
-    public Integer getFriendlistSize(){
+    /**
+     * Checks how many friends the current user has
+     *
+     * @return The number of friends the current user has
+     */
+    public int getFriendlistSize() {
         return friendList.size();
     }
 
-    //=====Function for Trade Notify=====//
+    /**
+     * Stores a User as a friend
+     *
+     * @param trader The User that the user has added as a friend
+     */
+    public void addFriend(User trader) {
+        friendList.add(trader);
+    }
 
-    //======Basic Function=====//
-    public void addFriend(User trader) {friendList.add(trader);}//end add to tradelist
+    /**
+     * Removes a friend based on the position in the list
+     *
+     * @param position The position in the list of the friend
+     */
+    public void delFriend(int position) {
+        friendList.remove(position);
+    }
 
-    //This del the friend , most likely will
-    //be changed later to take in position
-    public void delFriend(int position) {friendList.remove(friendList.get(position));
-    }//end del
+    /**
+     * Simple getter to retrieve a friend based on their position in the list
+     *
+     * @param index The position in the list of the friend
+     * @return The User at the provided position
+     */
+    public User getFriend(int index){
+        return friendList.get(index);
+    }
 
-    //Retrieve friend at index
-    public User getFriend(int index){return friendList.get(index);}//End getUser
-
-    public ArrayList<User> getAllFriends() {
+    /**
+     * Generic getter to retrieve all friends of a user
+     *
+     * @return The Collection of all friends of that user
+     */
+    public Collection<? extends User> getAllFriends() {
         return friendList;
     }
 
-    //See if friendList contains friend
+    /**
+     * Check if a User is a friend of the current user
+     *
+     * @param trader The User to be checked
+     * @return A boolean that is true if the provided User is a friend of the current user
+     */
     public boolean hasFriend(User trader) {
         return friendList.contains(trader);
-    }//end hasFriend
+    }
 
-    //Wrote this in for testing, Not sure if we really need
-    public void clearFriendlist(){
+    /**
+     * Removes all of the current user's friends
+     */
+    public void clearFriendList(){
         friendList.clear();
-    }//end clearFriendlist
+    }
 
-    //====Code mainly used for testing=====//
+    /**
+     * Checks if the current user has any friends :(
+     *
+     * @return A boolean that is true if the current user has no friends
+     */
     public boolean isEmpty(){
         return friendList.isEmpty();
-    }//end isEmpty
-
-}//end TradeList
+    }
+}
 
