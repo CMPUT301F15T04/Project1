@@ -38,8 +38,8 @@ public class myInventoryActivity extends Activity{
         setContentView(R.layout.activity_my_inventory);
 
         //TODO: Fix this hacky nonsense
-        im.addItem("Duck Hunt", "02-01-1972", Boolean.FALSE, 1, 1, "Soooo cool");
-        im.addItem("Halo", "15-10-2001", Boolean.FALSE, 1, 1, "Even cooler");
+        //im.addItem("Duck Hunt", "02-01-1972", Boolean.FALSE, 1, 1, "Soooo cool");
+        //im.addItem("Halo", "15-10-2001", Boolean.FALSE, 1, 1, "Even cooler");
         inventory = im.getItems();
 
 
@@ -138,6 +138,7 @@ public class myInventoryActivity extends Activity{
     public void addNewItem(View view){
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
 

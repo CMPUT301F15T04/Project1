@@ -1,8 +1,10 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,9 +12,18 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 /**
@@ -27,6 +38,15 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
     private Spinner qualitySpinner;
     /** The spinner to choose if the item is public or private */
     private Spinner publicprivateSpinner;
+
+    final static String DATE_FORMAT = "dd-MM-yyyy";
+
+    private String title;
+    private String releaseDate;
+    private String description;
+    private Date date;
+    private Boolean isDateValid;
+
 
 
     @Override
@@ -115,6 +135,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
     }
 
     public void saveButtonClick(View view) {
+        //Toast.makeText(getBaseContext(), "Saving", Toast.LENGTH_SHORT).show();
+
         EditText titleEditText = (EditText) findViewById(R.id.gameTitle);
         EditText releaseEditText = (EditText) findViewById(R.id.releaseDateEdit);
         EditText descEditText = (EditText) findViewById(R.id.descriptionBox);
@@ -123,11 +145,38 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         int qual = qualitySpinner.getSelectedItemPosition();
         boolean isPrivate = (publicprivateSpinner.getSelectedItemPosition() == 1);
 
-        InventoryManager.addItem(titleEditText.getText().toString(), releaseEditText.getText().toString(), isPrivate, qual, console, descEditText.getText().toString());
-        this.finish();
-    }
+        title = titleEditText.getText().toString();
+        releaseDate = releaseEditText.getText().toString();
+        description = descEditText.getText().toString();
 
+        isDateValid = checkDate(releaseDate);
+        if (isDateValid == false)
+            Toast.makeText(getBaseContext(), "Wrong date format!", Toast.LENGTH_SHORT).show();
+
+        else if (TextUtils.isEmpty(title) || TextUtils.isEmpty(releaseDate) || TextUtils.isEmpty(description)) {
+            Toast.makeText(getBaseContext(), "At least one of the fields is empty!", Toast.LENGTH_SHORT).show();
+        } else {
+            InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
+            this.finish();
+            Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
+            startActivity(intent);
+        }
+
+    }
     public void cancelButtonClick(View view) {
         this.finish();
     }
+
+    public static boolean checkDate(String date)
+    {
+        try {
+            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+            df.setLenient(false);
+            df.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
 }
