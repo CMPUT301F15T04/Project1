@@ -18,6 +18,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Models.Item;
@@ -26,11 +27,16 @@ import cmput301t4.gameswap.R;
 public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;
-    private ArrayList<Item> inventory;
     private ArrayAdapter<Item> adapter;
+    private ArrayList<Item> inventory;
     protected int myInventoryListViewPosition;
-    private Item item;
     private InventoryManager im;
+
+    private String Name;
+    /** A description of the Item */
+    private String Description;
+    /** The date when the game was released for purchase */
+    private Date ReleaseDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +69,17 @@ public class myInventoryActivity extends Activity{
 
                             case R.id.editItemMenuId:
                                 //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                                Name = inventory.get(position).getName().toString();
+                                Description = inventory.get(position).getDescription().toString();
+                                ReleaseDate = inventory.get(position).getReleaseDate();
+
                                 final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
+                                intent.putExtra("name",Name);
+                                intent.putExtra("description",Description);
+                                intent.putExtra("releaseDate",ReleaseDate);
+                                intent.putExtra("index",myInventoryListViewPosition);
+
                                 startActivity(intent);
 
                                 return true;
@@ -110,7 +126,6 @@ public class myInventoryActivity extends Activity{
         });
 
     }
-
 
 
     @Override
