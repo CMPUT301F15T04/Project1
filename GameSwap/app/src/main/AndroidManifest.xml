@@ -28,44 +28,39 @@
         </activity>
         <activity
             android:name=".Activities.FriendsNTradingActivity"
-            android:label="@string/title_activity_friends_ntrading"
             android:parentActivityName=".Activities.selectTaskActivity" >
         </activity>
         <activity
             android:name=".Activities.TradesActivity"
-            android:label="@string/title_activity_trades"
             android:parentActivityName=".Activities.selectTaskActivity" >
         </activity>
         <activity
             android:name=".Activities.SearchFriendActivity"
-            android:label="@string/title_activity_search_friend"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
         <activity
             android:name=".Activities.SearchPeopleActivity"
-            android:label="@string/title_activity_search_people"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
         <activity
             android:name=".Activities.ViewFriendInventoryActivity"
-            android:label="@string/title_activity_view_friend_inventory"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
         <activity
             android:name=".Activities.FriendProfileActivity"
-            android:label="@string/title_activity_friend_profile" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".Activities.EditProfileActivity"
-            android:label="@string/title_activity_edit_profile" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".Activities.EditItemActivity"
-            android:label="@string/title_activity_edit_item" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".Activities.MyProfileActivity"
-            android:label="@string/title_activity_my_profile"
+            android:label="@string/app_name"
             android:parentActivityName=".Activities.selectTaskActivity" >
         </activity>
         <activity

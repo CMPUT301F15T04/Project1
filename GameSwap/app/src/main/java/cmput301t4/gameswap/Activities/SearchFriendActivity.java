@@ -46,25 +46,25 @@ public class SearchFriendActivity extends Activity {
         friendList = FriendManager.getAllUsers();
         size = friendList.size();
 
-        if (friendList.isEmpty()) {
-            FriendManager.addFriend(new User("Mike", "me@2.ca", "Hometown", "5551234567"));
-            FriendManager.addFriend(new User("Cory", "me@2.ca", "Hometown", "5551234567"));
-            FriendManager.addFriend(new User("Terri", "me@2.ca", "Hometown", "5551234567"));
-            adapter = new ArrayAdapter<User>(this, R.layout.listviewtext, FriendManager.getAllUsers());
-            friendListView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            size = FriendManager.getAllUsers().size();
-            Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
+
+        FriendManager.addFriend(new User("Mike", "me@2.ca", "Hometown", "5551234567"));
+        FriendManager.addFriend(new User("Cory", "me@2.ca", "Hometown", "5551234567"));
+        FriendManager.addFriend(new User("Terri", "me@2.ca", "Hometown", "5551234567"));
+        adapter = new ArrayAdapter<User>(this, R.layout.listviewtext, FriendManager.getAllUsers());
+        friendListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        size = FriendManager.getAllUsers().size();
+           // Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
 
             //for (int i = 0; i < friendList.size(); i++) {
               //  friendNameList.add(friendList.get(i).getUserName().toString());
             //}
 
-        }
-        else{
-            Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
 
-        }
+        //else{
+          //  Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
+
+       // }
 
 
         //http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
@@ -174,6 +174,9 @@ public class SearchFriendActivity extends Activity {
 
             if (friend.toLowerCase().equals(friendList.get(i).getUserName().toString().toLowerCase()) ){
                 Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
+                Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+                startActivity(intent);
+                finish();
             }
         }
 

@@ -94,7 +94,6 @@ public class EditItemActivity extends Activity {
 
         prepareSpinnerdata();
 
-        //saveOrCancel();
     }
 
 
@@ -190,9 +189,6 @@ public class EditItemActivity extends Activity {
             //inventory = InventoryManager.getItems();
             IM.replaceItem(item, index);
             saveToFile();
-//            this.finish();
-            Intent intent = new Intent(EditItemActivity.this, myInventoryActivity.class);
-            startActivity(intent);
             this.finish();
         }
 
