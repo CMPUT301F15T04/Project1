@@ -40,6 +40,8 @@ public class selectTaskActivity extends Activity {
         else if(id ==R.id.editProfile){
             Intent intent = new Intent(selectTaskActivity.this,EditProfileActivity.class);
             startActivity(intent);
+        }else if(id == R.id.my_profile){
+            //put stuff here when you want to view your profile
         }
 
         return super.onOptionsItemSelected(item);
