@@ -67,7 +67,7 @@ public class User_noServerTest extends TestCase {
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
-        UM.getFriendlist().clearFriendlist();
+        UM.getFriendlist().clearFriendList();
         assertTrue(UM.getTrader().getFriendList().isEmpty());
         UM.setFriendlist(FM.getFriendlist());
         assertNotNull(UM.getTrader().getFriendList());
@@ -86,7 +86,7 @@ public class User_noServerTest extends TestCase {
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
-        UM.getFriendlist().clearFriendlist();
+        UM.getFriendlist().clearFriendList();
         assertTrue(UM.getTrader().getFriendList().isEmpty());
         UM.setFriendlist(FM.getFriendlist());
         assertNotNull(UM.getTrader().getFriendList());
@@ -204,7 +204,87 @@ public class User_noServerTest extends TestCase {
         UM.setFriendlist(FM.getFriendlist());
         FM.addFriend(friend);
         UM.getFriendlist().getFriend(0).IfNotify();
-    }
+    }//end testC_NotifyFriend
+
+    //Test finding friend via their name and sending them a notify
+    public void testC_SendNewTradeNotifyToFriend(){
+        System.out.println("Test 3");
+        UserManager UM = new UserManager();
+        FriendManager FM = new FriendManager();
+        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number");
+        friend.pseduoConstructor();
+        FM.clearFriendlist();
+        UM.setFriendlist(FM.getFriendlist());
+        FM.addFriend(friend);
+        UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
+        assertTrue(friend.getNotificationAmount().get(0).equals(1));
+        friend.IfNotify();
+    }//end testC_SendNotifyToFriend
+
+    //Test finding a friend add trade + notify
+    public void testC_Send_Add_Trade_NotifyToFriend(){
+        System.out.println("Test 4");
+        UserManager UM = new UserManager();
+        FriendManager FM = new FriendManager();
+        TradeManager TM = new TradeManager();
+        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number");
+        TradeList friendPending = new TradeList();
+        friend.setPendingTrades(friendPending);
+        friend.pseduoConstructor();
+        FM.clearFriendlist();
+        UM.setFriendlist(FM.getFriendlist());
+        FM.addFriend(friend);
+        ArrayList<Item> o_tradeitem = new ArrayList<Item>();
+        ArrayList<Item> b_tradeitem = new ArrayList<Item>();
+        Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
+        Item item_2 = new Item("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
+        o_tradeitem.add(item_1);
+        b_tradeitem.add(item_2);
+        TM.createTrade("Owner", "Borrower", o_tradeitem, b_tradeitem);
+        assertNotNull(UM.findBorrowerFriend("Bob"));
+        UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
+        assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
+        UM.findBorrowerFriend("Bob").getPendingTrades().add(new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem));
+        Trade check = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
+        assertTrue(UM.getPendingList().getTrade(0).equals(check));
+        assertTrue(UM.getFriendlist().getFriend(0).getPendingTrades().getTrade(0).equals(check));
+    }//end testC_Send_Add_Trade_NotifyToFriend
+
+    public void testC_CancelTrade(){
+        System.out.println("Test 4");
+        UserManager UM = new UserManager();
+        FriendManager FM = new FriendManager();
+        TradeManager TM = new TradeManager();
+        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number");
+        TradeList friendPending = new TradeList();
+        friend.setPendingTrades(friendPending);
+        friend.pseduoConstructor();
+        FM.clearFriendlist();
+        TM.clearTradelist();
+        UM.setFriendlist(FM.getFriendlist());
+        UM.setPendinglist(TM.getCurrent());
+        FM.addFriend(friend);
+        ArrayList<Item> o_tradeitem = new ArrayList<Item>();
+        ArrayList<Item> b_tradeitem = new ArrayList<Item>();
+        Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
+        Item item_2 = new Item("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
+        o_tradeitem.add(item_1);
+        b_tradeitem.add(item_2);
+        TM.createTrade("Owner", "Borrower", o_tradeitem, b_tradeitem);
+        assertNotNull(UM.findBorrowerFriend("Bob"));
+        UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
+        assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
+        UM.findBorrowerFriend("Bob").getPendingTrades().add(new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem));
+        Trade check = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
+        assertTrue(UM.getPendingList().getTrade(0).equals(check));
+        assertTrue(UM.getFriendlist().getFriend(0).getPendingTrades().getTrade(0).equals(check));
+        UM.getPendingList().del(0);
+        UM.findBorrowerFriend("Bob").getPendingTrades().del(0);
+        assertTrue(UM.getPendingList().isEmpty());
+        assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
+    }//end testC_CancelTrade
+
+    //=====End Test Notify Stuff=====//
 
     //=====Testing Singleton Stuff=====//
     /*
@@ -218,7 +298,7 @@ public class User_noServerTest extends TestCase {
         //===Clearing List===//
         UM_1.getInventory().clearInventory();
         UM_2.getInventory().clearInventory();
-        UM_1.getFriendlist().clearFriendlist();
+        UM_1.getFriendlist().clearFriendList();
         //===Test Start===//
         UM_2.getTrader().setUserCity("Edmonton");
         UM_1.setInventory(IM_1.getInstance());
@@ -238,4 +318,5 @@ public class User_noServerTest extends TestCase {
         assertTrue(UM_1.getTrader().getUserCity().equals("Edmonton"));
     }//end testC_TwoSingleton()
 
+    //=====End Test Singleton Stuff=====//
 }//end User_noServerTest

@@ -8,20 +8,40 @@ import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Exceptions.NameTooLongException;
 
 /**
- * Created by kynan on 10/30/15.
+ * Stores the information about a given game
  */
 public class Item {
 
-    //=====Item Attributes=====//
+    /** The name of the Item */
     private String Name;
+    /** A description of the Item */
     private String Description;
+    /** The date when the game was released for purchase */
     private Date ReleaseDate;
     //Private Image
+    /** A boolean that is true if the Item is only visible to the current user */
     private Boolean isPrivate;
+    /** A numeric representation of the quality of the Item */
     private Integer Quality;
+    /** The intended platform of the game mapped to a number */
     private Integer Platform;
 
-    //Contructor for Item without setting Image
+    @Override
+    public String toString() {
+        return Name + ReleaseDate.toString();
+    }
+
+    /**
+     * Creates a new Item without a picture
+     *
+     * @param Name The name of the Item
+     * @param ReleaseDate The date when the game was released for purchase
+     * @param isPrivate A boolean that is true if the Item is only visible to the current user
+     * @param Quaility A numeric  representation of the quality of the Item
+     * @param Platform The intended platform of the game mapped to a number
+     * @param Description A description of the Item
+     * @throws NameTooLongException This occurs if the provided Item name is more than 140 characters
+     */
     public Item(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description) throws NameTooLongException {
         this.setNameText(Name);
         this.checkDate(ReleaseDate);
@@ -29,7 +49,7 @@ public class Item {
         this.Quality = Quaility;
         this.Platform = Platform;
         this.Description = Description;
-    }//End Item without image constructor
+    }
 
     //Contructor for Item with Image (Not Yet Implemented)
     /*

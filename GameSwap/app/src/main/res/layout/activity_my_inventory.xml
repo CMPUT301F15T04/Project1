@@ -21,7 +21,17 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="352dp"
         android:id="@+id/myInventoryListView"
         android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Item"
+        android:id="@+id/button9"
+        android:layout_gravity="right"
+        android:onClick="addNewItem" />
+
+
 </LinearLayout>

@@ -1,5 +1,9 @@
 package cmput301t4.gameswap.Managers;
 
+//commented out getAllUsers
+import java.util.ArrayList;
+import java.util.Collection;
+
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.User;
 
@@ -17,26 +21,30 @@ public class FriendManager {
         return friendList;
     }//end getFriendList
 
-    public void addFriend(User friend){
+    static public void addFriend(User friend){
         getFriendlist().addFriend(friend);
     }//end addFriend
 
     //This del the friend , most likely will
     //be changed later to take in position
-    public void delFriend(int position) {getFriendlist().delFriend(position);
+    static public void delFriend(int position) {getFriendlist().delFriend(position);
     }//end del
 
     //Retrieve friend at index
-    public User getUser(int index){return getFriendlist().getFriend(index);}//End getUser
+    static public User getUser(int index){return getFriendlist().getFriend(index);}//End getUser
+
+    static public ArrayList<User> getAllUsers() {             //getting error in this one so commented it out
+       return getFriendlist().getAllFriends();
+    }
 
     //See if friendList contains friend
-    public boolean hasFriend(User trader) {
+    static public boolean hasFriend(User trader) {
         return getFriendlist().hasFriend(trader);
     }//end hasFriend
 
     //Wrote this in for testing, Not sure if we really need
-    public void clearFriendlist(){
-        getFriendlist().clearFriendlist();
-    }//end clearFriendlist
+    static public void clearFriendlist(){
+        getFriendlist().clearFriendList();
+    }//end clearFriendList
 
 }//end FriendManager

@@ -2,7 +2,12 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,16 +17,40 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Date;
+
+import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;
-    private ArrayList<String> items;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Item> adapter;
+    private ArrayList<Item> inventory;
     protected int myInventoryListViewPosition;
+    private InventoryManager im;
+
+    private String Name;
+    /** A description of the Item */
+    private String Description;
+    /** The date when the game was released for purchase */
+    private Date ReleaseDate;
+
+    private static final String FILENAME = "file.sav"; // model
 
 
     @Override
@@ -30,55 +59,86 @@ public class myInventoryActivity extends Activity{
         setContentView(R.layout.activity_my_inventory);
 
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        items.add("Call of Duty");
-        items.add("Halo");
-
-        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,items);
-        myInventoryListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
         myInventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {
-                PopupMenu popupMenu = new PopupMenu(myInventoryActivity.this,childView);
+            public void onItemClick(AdapterView<?> parent, View childView, final int position, long id) {
+                final PopupMenu popupMenu = new PopupMenu(myInventoryActivity.this,childView);
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup,popupMenu.getMenu());
 
                 myInventoryListViewPosition = position;
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
-                    public boolean onMenuItemClick(MenuItem item){
 
-                        switch (item.getItemId()){
+                inventory = InventoryManager.getInstance().getItems();
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
 
                             case R.id.editItemMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                                Name = inventory.get(position).getName().toString();
+                                Description = inventory.get(position).getDescription().toString();
+                                ReleaseDate = inventory.get(position).getReleaseDate();
+
+                                final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
+                                intent.putExtra("name",Name);
+                                intent.putExtra("description",Description);
+                                intent.putExtra("releaseDate",ReleaseDate);
+                                intent.putExtra("index",myInventoryListViewPosition);
+
+                                startActivity(intent);
+
                                 return true;
                             case R.id.deleteItemMenuId:
-                                Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                                final AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
+                                alert.setMessage("Are you sure, you want to delete this item");
+
+                                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+
+                                        inventory.remove(position);
+                                        resetAdapter();
+
+                                    }
+
+                                });
+
+                                alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                       // finish();
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                AlertDialog alertDialog = alert.create();
+                                alertDialog.show();
+
                                 return true;
-                        }
 
+                            default:;
 
-                        return false;
                     }
-                });
 
+                    return false;
+                }
+            });
 
                 popupMenu.show();
 
             }
         });
 
-
-
-
-
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_inventory, menu);
+        //getMenuInflater().inflate(R.menu.menu_my_inventory, menu);
         return super.onCreateOptionsMenu(menu);
         // return true;
     }
@@ -97,4 +157,75 @@ public class myInventoryActivity extends Activity{
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onStart(){
+
+        super.onStart();
+        loadFromFile();
+        myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
+        inventory = InventoryManager.getInstance().getItems();
+        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
+
+        myInventoryListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    public void addNewItem(View view){
+
+        Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
+        startActivity(intent);
+        this.finish();
+
+    }
+
+    private void resetAdapter(){
+
+        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
+        myInventoryListView.setAdapter(adapter);
+        saveToFile();
+
+    }
+
+    private void loadFromFile(){
+
+        try {
+
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type arraylistType = new TypeToken<ArrayList<Item>>() {}.getType();
+            ArrayList<Item> items = gson.fromJson(in, arraylistType);
+            InventoryManager.getInstance().setItems(items);
+        } catch (FileNotFoundException e) {
+            ArrayList<Item> items = InventoryManager.getInstance().getItems();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void saveToFile() {
+
+        try {
+            ArrayList<Item> items = InventoryManager.getInstance().getItems();
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(items, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

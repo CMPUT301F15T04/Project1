@@ -25,41 +25,57 @@ public class User {
     private TradeList pendingTrades;
     private TradeList pastTrades;
 
+    @Override
+    public String toString() {
+        return userName;
+    }
+
     //=====In-Work Notifty=====//
     private ArrayList<String> notification = new ArrayList<String>();
     // index 0: new Trade 1: Counter Trade 2: Trade Cancel
     private ArrayList<Integer> notificationAmount = new ArrayList<Integer>(Collections.nCopies(3,0));
 
+    public ArrayList<Integer> getNotificationAmount() {
+        return notificationAmount;
+    }
+
+    /*
+    The pseduo constructor will be added if we ddem that the notify code
+    works when we implement server
+     */
     public void pseduoConstructor(){
         this.notification.add("You have ");
         this.notification.add(" New Trade");
         this.notification.add(" New Counter Offer");
         this.notification.add(" Trade Cancellation");
-    }
+    }//end pseduoContructor
 
     public void IncreaseNotifiyAmount(Integer type){
         this.notificationAmount.set(type, notificationAmount.get(type) + 1);
-    }
+    }//end IncreaseNotifiyAmount
 
+    // index 0: new Trade 1: Counter Trade 2: Trade Cancel
     public void clearNotificationAmount(){
         this.notificationAmount.set(0,0);
         this.notificationAmount.set(1,0);
         this.notificationAmount.set(2,0);
-    }
+    }//end clearNotification
 
     public void IfNotify(){
         for(int i = 0; i < notificationAmount.size(); i++){
             if (notificationAmount.get(i) != 0){
                 DisplayNotify(i);
-            }
-        }
+            }//end If
+        }//end For loop
     }//end IfNotify
 
+    //Display the notification for one category
     public void DisplayNotify(Integer type){
         System.out.println(notification.get(0) + notificationAmount.get(type) + notification.get(type+1));
         ClearNotify(type);
-    }
+    }//end DisplayNotify
 
+    //Just clear noitify (you seen the update)
     public void ClearNotify(Integer type){
         this.notificationAmount.set(type, 0);
     }
