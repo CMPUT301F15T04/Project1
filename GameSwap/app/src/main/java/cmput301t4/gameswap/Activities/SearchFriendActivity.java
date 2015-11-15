@@ -6,17 +6,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.R;
@@ -25,8 +28,10 @@ public class SearchFriendActivity extends Activity {
 
     private ArrayAdapter<User> adapter;
     private ListView friendListView;
-
+    private ArrayList<User> friendList;
     protected int friendListViewItemPosition;
+    private EditText searchFriendText;
+    private String friendName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,30 +79,26 @@ public class SearchFriendActivity extends Activity {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         //Toast.makeText(SearchFriendActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                                        FriendManager.delFriend(friendListViewItemPosition);
+                                        resetAdapter();
                                     }
                                 });
 
                                 alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        finish();
+                                        dialog.dismiss();
+                                        //finish();
                                     }
                                 });
 
                                 AlertDialog alertDialog = alert.create();
                                 alertDialog.show();
-
                                 return true;
-
                         }
-
-
                         return false;
                     }
                 });
-
-
-
                 popupMenu.show();
                 // onPrepareOptionsMenu(popupMenu.getMenu());
 
@@ -129,4 +130,34 @@ public class SearchFriendActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void resetAdapter(){
+        adapter = new ArrayAdapter<User>(this,R.layout.listviewtext, FriendManager.getAllUsers());
+        friendListView.setAdapter(adapter);
+    }
+
+
+
+    public void searchFriendButton(View view){
+
+        searchFriendText = (EditText) findViewById(R.id.searchFriendEditText);
+        friendName = searchFriendText.getText().toString().trim();
+        searchFriend(friendName);
+
+    }
+
+    public void searchFriend(String friend){
+        friendList = FriendManager.getAllUsers();
+        for(int i=0; i< friendList.size();i++){
+
+            if (friend.toLowerCase().equals(friendList.get(i).getUserName().toString().toLowerCase()) ){
+                Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+
+
 }

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
 
 public class SearchPeopleActivity extends Activity {
@@ -23,8 +24,16 @@ public class SearchPeopleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_people);
 
+
+        //creating some dummy users
+        User user_1 = new User("Kynan", "kynan@ualberta.ca", "Edmonton", "780-999-8888");
+        User user_2 = new User("Daneil", "dren@ualberta.ca", "Edmonton", "780-999-8887");
+        User user_3 = new User("Preyanshu", "pre@ualberta.ca", "Edmonton", "780-999-8886");
+
+
+
         sButton = (Button)findViewById(R.id.button7);
-        traderEditText = (EditText) findViewById(R.id.edit_message);
+        traderEditText = (EditText) findViewById(R.id.searchFriendEditText);
 
         sButton.setOnClickListener(new View.OnClickListener() {
             @Override
