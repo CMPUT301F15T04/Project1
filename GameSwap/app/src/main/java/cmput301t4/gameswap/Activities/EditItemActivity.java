@@ -16,6 +16,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,11 +36,17 @@ import cmput301t4.gameswap.R;
 
 public class EditItemActivity extends Activity {
 
-    /** The spinner to choose the console */
+    /**
+     * The spinner to choose the console
+     */
     private Spinner consoleSpinner;
-    /** The spinner to choose the quality */
+    /**
+     * The spinner to choose the quality
+     */
     private Spinner qualitySpinner;
-    /** The spinner to choose if the item is public or private */
+    /**
+     * The spinner to choose if the item is public or private
+     */
     private Spinner publicprivateSpinner;
 
     final static String DATE_FORMAT = "dd-MM-yyyy";
@@ -47,11 +60,12 @@ public class EditItemActivity extends Activity {
     private EditText releaseEditText;
     private EditText descEditText;
     private Integer index;
-    private InventoryManager im;
+    private InventoryManager IM = new InventoryManager();
     private ArrayList<Item> inventory;
 
     private Button saveEditItemButton;
 
+    private static final String FILENAME = "file.sav"; // model
 
 
     @Override
@@ -72,7 +86,7 @@ public class EditItemActivity extends Activity {
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
-        if(b!= null){
+        if (b != null) {
             titleEditText.setText(b.getString("name"));
             descEditText.setText(b.getString("description"));
             index = b.getInt("index");
@@ -80,14 +94,14 @@ public class EditItemActivity extends Activity {
 
         prepareSpinnerdata();
 
-        saveOrCancel();
+        //saveOrCancel();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_item, menu);
+        //getMenuInflater().inflate(R.menu.menu_add_item, menu);
         return true;
     }
 
@@ -106,7 +120,7 @@ public class EditItemActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void prepareSpinnerdata(){
+    private void prepareSpinnerdata() {
         //function creates spinner data for us for the three spinners here.
         // Create an ArrayAdapter for console array
         ArrayAdapter<CharSequence> console_adapter = ArrayAdapter.createFromResource(this,
@@ -174,7 +188,8 @@ public class EditItemActivity extends Activity {
         } else {
             Item item = new Item(title, releaseDate, isPrivate, qual, console, description);
             //inventory = InventoryManager.getItems();
-            im.replaceItem(item,index);
+            IM.replaceItem(item, index);
+            saveToFile();
 //            this.finish();
             Intent intent = new Intent(EditItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
@@ -187,8 +202,7 @@ public class EditItemActivity extends Activity {
         this.finish();
     }
 
-    public static boolean checkDate(String date)
-    {
+    public static boolean checkDate(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
             df.setLenient(false);
@@ -200,19 +214,22 @@ public class EditItemActivity extends Activity {
     }
 
 
-    public void saveOrCancel(){
+    private void saveToFile() {
 
-        saveEditItemButton = (Button) findViewById(R.id.editItemSaveButton);
-
-        saveEditItemButton.setOnClickListener(new View.OnClickListener(){
-
-            public void onClick(View v){
-                Toast.makeText(getBaseContext(), "Saving...", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
+        try {
+            ArrayList<Item> items = InventoryManager.getInstance().getItems();
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(items, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
     }
-
-
 }
