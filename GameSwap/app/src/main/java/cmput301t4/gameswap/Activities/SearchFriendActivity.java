@@ -5,6 +5,7 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -29,9 +30,12 @@ public class SearchFriendActivity extends Activity {
     private ArrayAdapter<User> adapter;
     private ListView friendListView;
     private ArrayList<User> friendList;
+    private ArrayList<String> friendNameList;
+
     protected int friendListViewItemPosition;
     private EditText searchFriendText;
     private String friendName;
+    private int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +43,28 @@ public class SearchFriendActivity extends Activity {
         setContentView(R.layout.activity_search_friend);
 
         friendListView = (ListView) findViewById(R.id.listView);
-        FriendManager.addFriend(new User("Mike", "me@2.ca", "Hometown", "5551234567"));
-        FriendManager.addFriend(new User("Cory", "me@2.ca", "Hometown", "5551234567"));
-        FriendManager.addFriend(new User("Terri", "me@2.ca", "Hometown", "5551234567"));
-        adapter = new ArrayAdapter<User>(this, R.layout.listviewtext, FriendManager.getAllUsers());
-        friendListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        friendList = FriendManager.getAllUsers();
+        size = friendList.size();
+
+        if (friendList.isEmpty()) {
+            FriendManager.addFriend(new User("Mike", "me@2.ca", "Hometown", "5551234567"));
+            FriendManager.addFriend(new User("Cory", "me@2.ca", "Hometown", "5551234567"));
+            FriendManager.addFriend(new User("Terri", "me@2.ca", "Hometown", "5551234567"));
+            adapter = new ArrayAdapter<User>(this, R.layout.listviewtext, FriendManager.getAllUsers());
+            friendListView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            size = FriendManager.getAllUsers().size();
+            Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
+
+            //for (int i = 0; i < friendList.size(); i++) {
+              //  friendNameList.add(friendList.get(i).getUserName().toString());
+            //}
+
+        }
+        else{
+            Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
+
+        }
 
 
         //http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
@@ -65,6 +85,10 @@ public class SearchFriendActivity extends Activity {
                     public boolean onMenuItemClick(MenuItem item) {
 
                         switch (item.getItemId()) {
+
+                            case R.id.viewFriendProfileMenuId:
+                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                startActivity(intent);
 
                             case R.id.tradeFriendMenuId:
                                 //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -135,8 +159,6 @@ public class SearchFriendActivity extends Activity {
         adapter = new ArrayAdapter<User>(this,R.layout.listviewtext, FriendManager.getAllUsers());
         friendListView.setAdapter(adapter);
     }
-
-
 
     public void searchFriendButton(View view){
 

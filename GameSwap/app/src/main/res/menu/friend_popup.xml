@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:title="View Profile"
+        android:id="@+id/viewFriendProfileMenuId"
+        />
+    <item
         android:title="Trade"
         android:id="@+id/tradeFriendMenuId"
         />

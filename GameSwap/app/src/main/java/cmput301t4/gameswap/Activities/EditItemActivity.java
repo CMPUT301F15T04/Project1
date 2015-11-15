@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -49,6 +50,8 @@ public class EditItemActivity extends Activity {
     private InventoryManager im;
     private ArrayList<Item> inventory;
 
+    private Button saveEditItemButton;
+
 
 
     @Override
@@ -76,6 +79,8 @@ public class EditItemActivity extends Activity {
         }
 
         prepareSpinnerdata();
+
+        saveOrCancel();
     }
 
 
@@ -178,8 +183,6 @@ public class EditItemActivity extends Activity {
 
     }
 
-
-
     public void cancelButtonClick(View view) {
         this.finish();
     }
@@ -195,5 +198,21 @@ public class EditItemActivity extends Activity {
             return false;
         }
     }
+
+
+    public void saveOrCancel(){
+
+        saveEditItemButton = (Button) findViewById(R.id.editItemSaveButton);
+
+        saveEditItemButton.setOnClickListener(new View.OnClickListener(){
+
+            public void onClick(View v){
+                Toast.makeText(getBaseContext(), "Saving...", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
 
 }

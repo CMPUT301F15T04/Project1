@@ -14,6 +14,8 @@ import cmput301t4.gameswap.Exceptions.DateFormatException;
 public class Inventory {
     private ArrayList<Item> inventory = new ArrayList<Item>();
 
+    private int ItemArrayPosition;
+
     /**
      * Adds an Item to the current users Inventory
      *
@@ -71,6 +73,11 @@ public class Inventory {
     public boolean hasItem(Item item) {
         return inventory.contains(item);
     }
+
+    /**
+     * loads items from the file and put them in the inventory
+     */
+    public void setItems(ArrayList<Item> items) {inventory = items;}
 
     /**
      * Empties the Inventory of the current user
@@ -148,4 +155,11 @@ public class Inventory {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         return formatter.format(date);
     }
+
+    public void setItemArrayPosition(int itemArrayPosition) {
+        ItemArrayPosition = itemArrayPosition;
+    }
+
+
+
 }

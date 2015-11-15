@@ -16,9 +16,22 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
@@ -29,14 +42,20 @@ import cmput301t4.gameswap.R;
 /**
  * Adds item to user inventory based off of user input
  */
-public class AddItemActivity extends Activity implements OnItemSelectedListener{
+public class AddItemActivity extends Activity implements OnItemSelectedListener {
     //create the unique list views and adapters for console, quality, and public and private
 
-    /** The spinner to choose the console */
+    /**
+     * The spinner to choose the console
+     */
     private Spinner consoleSpinner;
-    /** The spinner to choose the quality */
+    /**
+     * The spinner to choose the quality
+     */
     private Spinner qualitySpinner;
-    /** The spinner to choose if the item is public or private */
+    /**
+     * The spinner to choose if the item is public or private
+     */
     private Spinner publicprivateSpinner;
 
     final static String DATE_FORMAT = "dd-MM-yyyy";
@@ -44,8 +63,14 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
     private String title;
     private String releaseDate;
     private String description;
-    private Date date;
     private Boolean isDateValid;
+    private static final String FILENAME = "file.sav"; // model
+
+    private EditText titleEditText;
+    private EditText descEditText;
+    private EditText releaseEditText;
+
+    private ArrayAdapter<Item> adapter;
 
 
 
@@ -61,6 +86,9 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
 
         prepareSpinnerdata();
+
+        loadFromFile();
+
     }
 
 
@@ -86,7 +114,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         return super.onOptionsItemSelected(item);
     }
 
-    private void prepareSpinnerdata(){
+    private void prepareSpinnerdata() {
         //function creates spinner data for us for the three spinners here.
         // Create an ArrayAdapter for console array
         ArrayAdapter<CharSequence> console_adapter = ArrayAdapter.createFromResource(this,
@@ -135,11 +163,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
     }
 
     public void saveButtonClick(View view) {
-        //Toast.makeText(getBaseContext(), "Saving", Toast.LENGTH_SHORT).show();
 
-        EditText titleEditText = (EditText) findViewById(R.id.gameTitle);
-        EditText releaseEditText = (EditText) findViewById(R.id.releaseDateEdit);
-        EditText descEditText = (EditText) findViewById(R.id.descriptionBox);
+        titleEditText = (EditText) findViewById(R.id.gameTitle);
+        releaseEditText = (EditText) findViewById(R.id.releaseDateEdit);
+        descEditText = (EditText) findViewById(R.id.descriptionBox);
 
         int console = consoleSpinner.getSelectedItemPosition();
         int qual = qualitySpinner.getSelectedItemPosition();
@@ -157,18 +184,24 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
             Toast.makeText(getBaseContext(), "At least one of the fields is empty!", Toast.LENGTH_SHORT).show();
         } else {
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
+
+            saveToFile();
+            //adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
+
+            //adapter.notifyDataSetChanged();
+
             this.finish();
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
         }
 
     }
+
     public void cancelButtonClick(View view) {
         this.finish();
     }
 
-    public static boolean checkDate(String date)
-    {
+    public static boolean checkDate(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
             df.setLenient(false);
@@ -179,4 +212,45 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener{
         }
     }
 
+
+    private void saveToFile() {
+
+        try {
+            ArrayList<Item> items = InventoryManager.getInstance().getItems();
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(items, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+    
+    private void loadFromFile(){
+
+        try {
+
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type arraylistType = new TypeToken<ArrayList<Item>>() {}.getType();
+            ArrayList<Item> items = gson.fromJson(in, arraylistType);
+            InventoryManager.getInstance().setItems(items);
+        } catch (FileNotFoundException e) {
+            ArrayList<Item> items = InventoryManager.getInstance().getItems();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
+

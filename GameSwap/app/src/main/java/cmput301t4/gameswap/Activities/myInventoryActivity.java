@@ -17,6 +17,18 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -38,21 +50,15 @@ public class myInventoryActivity extends Activity{
     /** The date when the game was released for purchase */
     private Date ReleaseDate;
 
+    private static final String FILENAME = "file.sav"; // model
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_inventory);
 
-        //TODO: Fix this hacky nonsense
-        //im.addItem("Duck Hunt", "02-01-1972", Boolean.FALSE, 1, 1, "Soooo cool");
-        //im.addItem("Halo", "15-10-2001", Boolean.FALSE, 1, 1, "Even cooler");
-        inventory = im.getItems();
-
-
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
-        myInventoryListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
         myInventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,6 +68,7 @@ public class myInventoryActivity extends Activity{
 
                 myInventoryListViewPosition = position;
 
+                inventory = InventoryManager.getInstance().getItems();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
 
@@ -150,15 +157,75 @@ public class myInventoryActivity extends Activity{
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onStart(){
+
+        super.onStart();
+        loadFromFile();
+        myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
+        inventory = InventoryManager.getInstance().getItems();
+        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
+
+        myInventoryListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
     public void addNewItem(View view){
+
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);
         this.finish();
-    }
 
+    }
 
     private void resetAdapter(){
+
         adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
         myInventoryListView.setAdapter(adapter);
+        saveToFile();
+
     }
+
+    private void loadFromFile(){
+
+        try {
+
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type arraylistType = new TypeToken<ArrayList<Item>>() {}.getType();
+            ArrayList<Item> items = gson.fromJson(in, arraylistType);
+            InventoryManager.getInstance().setItems(items);
+        } catch (FileNotFoundException e) {
+            ArrayList<Item> items = InventoryManager.getInstance().getItems();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void saveToFile() {
+
+        try {
+            ArrayList<Item> items = InventoryManager.getInstance().getItems();
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(items, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

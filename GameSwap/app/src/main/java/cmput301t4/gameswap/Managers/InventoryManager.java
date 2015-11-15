@@ -53,6 +53,13 @@ public class InventoryManager {
         getInstance().bulkdel(delList);
     }//end bulkDel
 
+
+    //adding this function - Rupehra also need to write a test case for this
+    public void setItems(int itemsPosition) {
+        getInstance().setItemArrayPosition(itemsPosition);
+    }
+
+
     public void editItem(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description, int index){
         getInstance().editItem(Name,ReleaseDate,isPrivate, Quaility, Platform, Description, index);
     }//end editItem
