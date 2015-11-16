@@ -67,9 +67,9 @@ public class SearchFriendActivity extends Activity {
        // }
 
 
-        //http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
-        //http://stackoverflow.com/questions/7201159/is-using-menuitem-getitemid-valid-in-finding-which-menuitem-is-selected-by-use
-        //http://stackoverflow.com/questions/4554435/how-to-get-the-index-and-string-of-the-selected-item-in-listview-in-android
+        //code referenced from http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
+        //code referenced from http://stackoverflow.com/questions/7201159/is-using-menuitem-getitemid-valid-in-finding-which-menuitem-is-selected-by-use
+        //code referenced from http://stackoverflow.com/questions/4554435/how-to-get-the-index-and-string-of-the-selected-item-in-listview-in-android
         friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {

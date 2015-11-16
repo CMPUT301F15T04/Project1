@@ -41,10 +41,11 @@ import cmput301t4.gameswap.R;
 
 /**
  * Adds item to user inventory based off of user input
+ * Created by Preyanshu and Blake 2015-11-04
  */
 public class AddItemActivity extends Activity implements OnItemSelectedListener {
     //create the unique list views and adapters for console, quality, and public and private
-
+    //code referenced from http://developer.android.com/guide/topics/ui/controls/spinner.html
     /**
      * The spinner to choose the console
      */

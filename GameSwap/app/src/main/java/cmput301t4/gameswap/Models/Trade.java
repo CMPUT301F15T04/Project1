@@ -100,6 +100,13 @@ public class Trade {
         DateTransaction = dateTransaction;
     }
 
+
+    /**
+     * Sets the values the user wants in the trade
+     *
+     * @param trade the trade that the user wants to create
+     * @throws DateFormatException This occurs when an improper date is given and can't be parsed
+     */
     //===== .equals Override =====//
     @Override
     public boolean equals(Object trade){

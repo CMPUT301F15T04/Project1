@@ -195,7 +195,7 @@ public class myInventoryActivity extends Activity{
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
-            // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            //code referenced from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
             Type arraylistType = new TypeToken<ArrayList<Item>>() {}.getType();
             ArrayList<Item> items = gson.fromJson(in, arraylistType);
             InventoryManager.getInstance().setItems(items);
