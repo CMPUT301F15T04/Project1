@@ -30,6 +30,10 @@ public class FriendManager {
     static public void delFriend(int position) {getFriendlist().delFriend(position);
     }//end del
 
+    static public void setFriendsToUser(){
+        UserManager.getTrader().setFriendList(friendList);
+    }
+
     //Retrieve friend at index
     static public User getUser(int index){return getFriendlist().getFriend(index);}//End getUser
 

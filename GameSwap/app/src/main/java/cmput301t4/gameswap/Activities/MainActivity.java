@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class MainActivity extends Activity {
@@ -40,8 +44,14 @@ public class MainActivity extends Activity {
     }
 
     public void clickedLogin(View view){
-        Intent intent = new Intent(MainActivity.this, selectTaskActivity.class);
-        startActivity(intent);
+        UserManager.loadUserLocally(this);
+        EditText username = (EditText) findViewById(R.id.textView);
+        if(UserManager.getTrader().getUserName().equals(username.getText().toString())){
+            Intent intent = new Intent(MainActivity.this, selectTaskActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getBaseContext(), "Wrong username, please make an account", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void clickedRegister(View view){

@@ -26,7 +26,7 @@ public class CreateProfileActivity extends Activity {
         EditText emailEditText = (EditText) findViewById(R.id.email_user);
         EditText cityEditText = (EditText) findViewById(R.id.user_city);
         EditText phoneNumberEditText = (EditText) findViewById(R.id.user_phone_num);
-        UserManager.createUser(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString());
+        UserManager.createUser(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString(), this);
         this.finish();
     }
 

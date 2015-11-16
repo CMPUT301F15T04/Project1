@@ -1,5 +1,18 @@
 package cmput301t4.gameswap.Managers;
 
+import android.content.Context;
+
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Models.FriendList;
@@ -70,8 +83,9 @@ public class UserManager {
 
     //=====End In-Work Trade Notifty=====//
 
-    static public void createUser(String username, String email, String city, String phoneNumber) {
+    static public void createUser(String username, String email, String city, String phoneNumber, Context context) {
         trader = new User(username, email, city, phoneNumber);
+        saveUserLocally(context);
     }//end Create User
 
     static public void editUserName(String username){
@@ -81,6 +95,34 @@ public class UserManager {
     static public void editPhoneNumber(String phoneNumber){
         trader.setUserPhoneNumber(phoneNumber);
     }//end EditPhoneNumber
+    static public void saveUserLocally(Context context){
+        try {
+            FileOutputStream fos = context.openFileOutput("user.sav", 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(trader, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }//end try catch block
+    }//end save
+    static public void loadUserLocally(Context context){
+        try {
+            FileInputStream fis = context.openFileInput("user.sav");
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            trader = gson.fromJson(in, User.class);
+        } catch (FileNotFoundException e) {
+            //do nothing
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void editEmail(String email){
         trader.setUserEmail(email);
