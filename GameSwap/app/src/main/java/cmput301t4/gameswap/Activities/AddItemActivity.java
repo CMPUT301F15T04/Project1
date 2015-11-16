@@ -46,29 +46,65 @@ import cmput301t4.gameswap.R;
 public class AddItemActivity extends Activity implements OnItemSelectedListener {
     //create the unique list views and adapters for console, quality, and public and private
     //code referenced from http://developer.android.com/guide/topics/ui/controls/spinner.html
+
     /**
      * The spinner to choose the console
      */
     private Spinner consoleSpinner;
+
     /**
      * The spinner to choose the quality
      */
     private Spinner qualitySpinner;
+
     /**
      * The spinner to choose if the item is public or private
      */
     private Spinner publicprivateSpinner;
 
+    /**
+     * The Date for the item being added
+     */
     final static String DATE_FORMAT = "dd-MM-yyyy";
 
+    /**
+     * The title for the item being added
+     */
     private String title;
+
+    /**
+     * The release date for the item being added
+     */
     private String releaseDate;
+
+    /**
+     * The description for the item being added
+     */
     private String description;
+
+    /**
+     * The check for if the date added is valid
+     */
     private Boolean isDateValid;
+
+    /**
+     * The file were our information will be added
+     */
     private static final String FILENAME = "file.sav"; // model
 
+    /**
+     * The text if the user wants to edit the title of the item
+     */
     private EditText titleEditText;
+
+    /**
+     * The text if the user wants to edit the description of the item
+     */
     private EditText descEditText;
+
+    /**
+     * The text if the user wants to edit the release date of the item
+     */
     private EditText releaseEditText;
 
     private ArrayAdapter<Item> adapter;
@@ -115,6 +151,9 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Prepares the data for the different spinners that we have
+     */
     private void prepareSpinnerdata() {
         //function creates spinner data for us for the three spinners here.
         // Create an ArrayAdapter for console array
@@ -141,6 +180,9 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         publicprivateSpinner.setAdapter(public_private_adapter);
     }
 
+    /**
+     * A necessary function that must be added to choose the item in the spinner
+     */
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
@@ -158,11 +200,14 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         prefEditor.putInt("userChoiceSpinner", userChoicePrivate);
         prefEditor.commit();
     }
-
+    /**
+     * A necessary function to implement spinners if nothing is chosen
+     */
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
     }
-
+    /**
+     * Saves the data from the inputs we enter
+     */
     public void saveButtonClick(View view) {
 
         titleEditText = (EditText) findViewById(R.id.gameTitle);
@@ -213,7 +258,9 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         }
     }
 
-
+    /**
+     * Saves our added item to a Gson file
+     */
     private void saveToFile() {
 
         try {
@@ -233,7 +280,9 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         }
 
     }
-
+    /**
+     * Loads our item from the Gson file if needed
+     */
     private void loadFromFile(){
 
         try {
