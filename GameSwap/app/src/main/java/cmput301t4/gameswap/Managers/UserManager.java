@@ -12,38 +12,34 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.Inventory;
-import cmput301t4.gameswap.Models.Item;
-import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.Models.User;
 
 /**
- * Created by rupehra on 11/1/15.
- *
- *
  * functions needed to include: editUserName(), EditPhoneNumber(),EditEmail()
  * EditCity(), CreateTrader() ?, DeleteTrader() ?, AddFriend(), DeleteFriend()
- *
- *
  */
 public class UserManager {
 
     private static User trader = null;
 
-    //=====Singleton Code=====//
+    /**
+     * Used to get the app-wide singleton of <code>User</code>
+     *
+     * @return The last <code>User</code> that was logged in if they didn't log out or a blank <code>User</code>.
+     */
+    static public User getTrader() {
+        //TODO: Add call to CacheManager to see if there is a previous login on the phone
 
-    static public User getTrader(){
         if(trader == null){
             trader = new User("", "", "", "");
         }
 
         return trader;
-    }//end getTrader
+    }
 
     //=====In-Work Notifty=====//
 
@@ -80,22 +76,50 @@ public class UserManager {
         friend.IncreaseNotifiyAmount(0);
     }//end SendnewTradeNotify
 
-
     //=====End In-Work Trade Notifty=====//
 
+    /**
+     * Calls the default constructor of <code>User</code> to create a profile in the app
+     *
+     * @param username The desired username
+     * @param email The email of the user
+     * @param city The city of the user
+     * @param phoneNumber The phone number of the user
+     * @param context The <code>Context</code> of the running app
+     */
     static public void createUser(String username, String email, String city, String phoneNumber, Context context) {
+        //TODO: Add call to server to see if username is available
         trader = new User(username, email, city, phoneNumber);
         saveUserLocally(context);
-    }//end Create User
+    }
 
+    /**
+     * Changes the name of the singleton <code>User</code>
+     *
+     * @param username A new name for the user
+     */
     static public void editUserName(String username){
+        //TODO: Add call to server to see if username is available
         trader.setUserName(username);
-    }//end editUserName
+    }
 
+    /**
+     * Changes the phone number of the singleton <code>User</code>
+     *
+     * @param phoneNumber A new phone number for the user
+     */
     static public void editPhoneNumber(String phoneNumber){
         trader.setUserPhoneNumber(phoneNumber);
-    }//end EditPhoneNumber
+    }
+
+    /**
+     * Saves the singleton <code>User</code> using the <code>Context</code> of the app
+     *
+     * @param context The <code>Context</code> of the running app
+     */
     static public void saveUserLocally(Context context){
+        //TODO: Move this into CacheManager
+
         try {
             FileOutputStream fos = context.openFileOutput("user.sav", 0);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
@@ -110,8 +134,16 @@ public class UserManager {
             // TODO Auto-generated catch block
             throw new RuntimeException(e);
         }//end try catch block
-    }//end save
+    }
+
+    /**
+     * Pulls the information on the last user to login
+     *
+     * @param context The <code>Context</code> of the running app
+     */
     static public void loadUserLocally(Context context){
+        //TODO: Move to CacheManager
+
         try {
             FileInputStream fis = context.openFileInput("user.sav");
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
@@ -124,46 +156,94 @@ public class UserManager {
         }
     }
 
-    public void editEmail(String email){
+    /**
+     * Changes the email of the singleton <code>User</code>
+     *
+     * @param email A new email for the user
+     */
+    static public void editEmail(String email){
         trader.setUserEmail(email);
-    }//end editEmail
+    }
 
+    /**
+     * Changes the city of the singleton <code>User</code>
+     *
+     * @param city A new city for the user
+     */
     static public void editCity(String city){
         trader.setUserCity(city);
     }
 
-    //=====Setter for Arraylist of User=====//
-    public void setInventory(Inventory inventory){
+    /**
+     * Changes the <code>Inventory</code> of the singleton <code>User</code>
+     *
+     * @param inventory The replacement <code>Inventory</code>
+     */
+    static public void setInventory(Inventory inventory){
         trader.setInventory(inventory);
-    }//end set inventory
+    }
 
-    public void setFriendlist(FriendList friendlist){
+    /**
+     * Changes the <code>FriendList</code> of the singleton <code>User</code>
+     *
+     * @param friendlist The replacement <code>FriendList</code>
+     */
+    static public void setFriendlist(FriendList friendlist){
         trader.setFriendList(friendlist);
-    }//end set friendlist
+    }
 
-    public void setPendinglist(TradeList pendinglist){
+    /**
+     * Changes the pending <code>TradeList</code> of the singleton <code>User</code>
+     *
+     * @param pendinglist The replacement <code>TradeList</code>
+     */
+    static public void setPendinglist(TradeList pendinglist){
         trader.setPendingTrades(pendinglist);
-    }//end setPendingList
+    }
 
-    public void setPastlist(TradeList pastlist){
+    /**
+     * Changes the past <code>TradeList</code> of the singleton <code>User</code>
+     *
+     * @param pastlist the replacement <code>TradeList</code>
+     */
+    static public void setPastlist(TradeList pastlist){
         trader.setPastTrades(pastlist);
-    }//end setPastlist
+    }
 
-    //=====Getter for Arraylist of User=====//
-    public Inventory getInventory(){
+    /**
+     * Retrieves the <code>Inventory</code> of the singleton <code>User</code>
+     *
+     * @return The <code>Inventory</code> of the current user
+     */
+    static public Inventory getInventory(){
         return trader.getInventory();
-    }//end getInventory
+    }
 
-    public FriendList getFriendlist(){
+    /**
+     * Retrieves the <code>FriendList</code> of the singleton <code>User</code>
+     *
+     * @return The <code>FriendList</code> of the current user
+     */
+    static public FriendList getFriendlist(){
         return trader.getFriendList();
-    }//end getFriendlist
+    }
 
-    public TradeList getPendingList(){
+    /**
+     * Retrieves the pending <code>TradeList</code> of the singleton <code>User</code>
+     *
+     * @return The pending <code>TradeList</code> of the current user
+     */
+    static public TradeList getPendingList(){
         return trader.getPendingTrades();
-    }//end getPendingList
+    }
 
+    /**
+     * Retrieves the past <code>TradeList</code> of the singleton <code>User</code>
+     *
+     * @return The past <code>TradeList</code> of the current user
+     */
     public TradeList getPastList(){
         return trader.getPastTrades();
-    }//end getPastlist
+    }
 
-}//end UserManager
+}
