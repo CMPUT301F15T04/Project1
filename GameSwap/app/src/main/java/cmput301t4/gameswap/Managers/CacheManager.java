@@ -22,7 +22,7 @@ import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 
 /**
- * Created by Blake on 2015-11-06.
+ * CThe MVC controller used for all accesses to <code>Cache</code>
  */
 public class CacheManager {
 
@@ -30,6 +30,12 @@ public class CacheManager {
     final static String TRADES_SAVE_FILE = "gameswap_local_trades.sav";
     private static Cache cache = null;
 
+    /**
+     * Used to get the app-wide singleton of <code>Cache</code>
+     *
+     * @return The cache used to store pending <code>Trades</code> and <code>Items</code> that
+     * were created offline as well as the last friend that was viewed by the user
+     */
     static public Cache getInstance() {
         if(cache == null) {
             cache = new Cache();
@@ -38,7 +44,12 @@ public class CacheManager {
         return cache;
     }
 
-    public void saveToFile(Context context) {
+    /**
+     * Stores all cache data to local files for persistence between sessions
+     *
+     * @param context The <code>Context</code> of the running app
+     */
+    static public void saveToFile(Context context) {
         try {
             FileOutputStream fos = context.openFileOutput(ITEMS_SAVE_FILE, 0);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
@@ -72,6 +83,11 @@ public class CacheManager {
         //TODO: store saved friend to file
     }
 
+    /**
+     * Used to pull in cache data that was created in a previous app instance
+     *
+     * @param context The <code>Context</code> of the running app
+     */
     private void loadFromFile(Context context) {
         try {
             FileInputStream fis = context.openFileInput(ITEMS_SAVE_FILE);
@@ -106,27 +122,59 @@ public class CacheManager {
         //TODO: load friend from save file
     }
 
-    public void cacheItem(Item item) {
+    /**
+     * Adds a single <code>Item</code> to the singleton <code>Cache</code>
+     *
+     * @param item The <code>Item</code> to be cached
+     */
+    static public void cacheItem(Item item) {
         getInstance().addItemToCache(item);
     }
 
-    public void cacheItems(Collection<? extends Item> items) {
+    /**
+     * Adds a generic list of <code>Items</code> to the <code>Cache</code>
+     *
+     * @param items A <code>Collection</code> of objects that can be up-cast to <code>Item</code>
+     */
+    static public void cacheItems(Collection<? extends Item> items) {
         getInstance().addItemsToCache(items);
     }
 
-    public Collection<? extends Item> pullItemCache() {
+    /**
+     * Retrieves the <code>ArrayList</code> of <code>Items</code> that are waiting to
+     * be pushed to the server
+     *
+     * @return An <code>ArrayList</code> of <code>Items</code>
+     */
+    static public ArrayList<Item> pullItemCache() {
         return getInstance().getPendingItems();
     }
 
-    public void cacheTrade(Trade trade) {
+    /**
+     * Adds a single <code>Trade</code> to the singleton <code>Cache</code>
+     *
+     * @param trade The <code>Trade</code> te be cached
+     */
+    static public void cacheTrade(Trade trade) {
         getInstance().addTradeToCache(trade);
     }
 
-    public void cacheTrades(Collection<? extends Trade> trades) {
+    /**
+     * Adds a generic list of <code>Trades</code> to the <code>Cache</code>
+     *
+     * @param trades A <code>Collection</code> of objects that can be up-cast to <code>Trade</code>
+     */
+    static public void cacheTrades(Collection<? extends Trade> trades) {
         getInstance().addTradesToCache(trades);
     }
 
-    public Collection<? extends Trade> pullTradeCache() {
+    /**
+     * Retrieves the <code>ArrayList</code> of <code>Trades</code> that are waiting to
+     * be pushed to the server
+     *
+     * @return An <code>ArrayList</code> of <code>Trades</code>
+     */
+    static public ArrayList<Trade> pullTradeCache() {
         return getInstance().getPendingTrades();
     }
 }
