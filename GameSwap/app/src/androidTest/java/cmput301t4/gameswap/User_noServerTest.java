@@ -22,7 +22,9 @@ public class User_noServerTest extends TestCase {
 
     //=====Basic Test (Without Controller)=====//
 
-    //Test create a user
+    /**
+     *  Test create a user
+     */
     public void testCreateUser(){
         User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         assertTrue(user.getUserName().equals("Enter Desired Username"));
@@ -35,7 +37,9 @@ public class User_noServerTest extends TestCase {
         assertNull(user.getPendingTrades());
     }//end testCreateUser
 
-    //test edit attribute of user
+    /**
+     * Test edit attribute of user
+     */
     public void testEditUserInfo(){
         User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         assertTrue(user.getUserName().equals("Enter Desired Username"));
@@ -48,7 +52,9 @@ public class User_noServerTest extends TestCase {
 
     //=====Basic Test Friend (With Controller)=====//
 
-    //test add a friend for user
+    /**
+     * est add a friend for user
+     */
     public void testC_AddFriendForUser(){
         User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
@@ -57,11 +63,13 @@ public class User_noServerTest extends TestCase {
         assertNull(UM.getTrader().getFriendList());
         UM.setFriendlist(FM.getFriendlist());
         assertNotNull(UM.getTrader().getFriendList());
-        UM.getFriendlist().addFriend(friend);
-        assertTrue(UM.getFriendlist().getFriend(0).equals(friend));
+        UM.getFriendlist().addFriend(friend.getUserName());
+        assertTrue(UM.getFriendlist().getFriend(0).equals(friend.getUserName()));
     }//end testC_AddFriendForUser
 
-    //test del a friend for user
+    /**
+     * Test del a friend for user
+     */
     public void testC_DelFriend(){
         User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
@@ -71,15 +79,15 @@ public class User_noServerTest extends TestCase {
         assertTrue(UM.getTrader().getFriendList().isEmpty());
         UM.setFriendlist(FM.getFriendlist());
         assertNotNull(UM.getTrader().getFriendList());
-        UM.getFriendlist().addFriend(friend);
-        assertTrue(UM.getFriendlist().getFriend(0).equals(friend));
+        UM.getFriendlist().addFriend(friend.getUserName());
+        assertTrue(UM.getFriendlist().getFriend(0).equals(friend.getUserName()));
         UM.getFriendlist().delFriend(0);
-        assertFalse(UM.getFriendlist().hasFriend(friend));
+        assertFalse(UM.getFriendlist().hasFriend(friend.getUserName()));
     }//end testC_DelFriend
 
-    //test if we can find the inventory of friend
-    /*
-    Did not account for public and private
+    /**
+     * Test if we can find the inventory of friend
+     * Did not accoun for public and private
      */
     public void testC_FindFriendInventory(){
         User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
@@ -90,18 +98,20 @@ public class User_noServerTest extends TestCase {
         assertTrue(UM.getTrader().getFriendList().isEmpty());
         UM.setFriendlist(FM.getFriendlist());
         assertNotNull(UM.getTrader().getFriendList());
-        UM.getFriendlist().addFriend(friend);
-        assertTrue(UM.getFriendlist().getFriend(0).equals(friend));
-        assertNull(UM.getFriendlist().getFriend(0).getInventory());
-        Inventory inv = new Inventory();
-        friend.setInventory(inv);
-        assertNotNull(UM.getFriendlist().getFriend(0).getInventory());
-        assertTrue(UM.getFriendlist().getFriend(0).getInventory().isEmpty());
+        UM.getFriendlist().addFriend(friend.getUserName());
+        assertTrue(UM.getFriendlist().getFriend(0).equals(friend.getUserName()));
+        //assertNull(UM.getFriendlist().getFriend(0).getInventory());
+        //Inventory inv = new Inventory();
+        //friend.setInventory(inv);
+        //assertNotNull(UM.getFriendlist().getFriend(0).getInventory());
+        //assertTrue(UM.getFriendlist().getFriend(0).getInventory().isEmpty());
     }//end testC_FindFriendInventory
 
     //=====Basic Test Trade (With Controller)=====//
 
-    //test if we can find pending trade of user
+    /**
+     * Test if we can find pending trade of user
+     */
     public void testC_FindPendingTrade(){
         User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
         friend.setUserCity("Hawii");
@@ -123,9 +133,10 @@ public class User_noServerTest extends TestCase {
         assertTrue(TM.getTrade(0,1).equals(trade));
     }//end testC_FindPendingTrade
 
-    //test if we can find past trade of user
-    /*
-    Also see if move trade works as intended
+
+    /**
+     * Test if we can find past trade of user
+     * Also see if move trade works as intended
      */
     public void testC_FindPastTrade(){
         User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
@@ -189,7 +200,9 @@ public class User_noServerTest extends TestCase {
         UM.DisplayNotify(0);
     }//testC_Notify
 
-    //This is not actually how Notifying you friend going to work
+    /**
+     * This is not actually how Notifying you friend going to work
+     */
     public void testC_NotifyFriend(){
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -202,11 +215,13 @@ public class User_noServerTest extends TestCase {
         friend.IncreaseNotifiyAmount(2);
         FM.clearFriendlist();
         UM.setFriendlist(FM.getFriendlist());
-        FM.addFriend(friend);
-        UM.getFriendlist().getFriend(0).IfNotify();
+        FM.addFriend(friend.getUserName());
+        //UM.getFriendlist().getFriend(0).IfNotify();
     }//end testC_NotifyFriend
 
-    //Test finding friend via their name and sending them a notify
+    /**
+     * Test finding friend via their name and sending them a notify
+     */
     public void testC_SendNewTradeNotifyToFriend(){
         System.out.println("Test 3");
         UserManager UM = new UserManager();
@@ -215,13 +230,15 @@ public class User_noServerTest extends TestCase {
         friend.pseduoConstructor();
         FM.clearFriendlist();
         UM.setFriendlist(FM.getFriendlist());
-        FM.addFriend(friend);
-        UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
-        assertTrue(friend.getNotificationAmount().get(0).equals(1));
-        friend.IfNotify();
+        FM.addFriend(friend.getUserName());
+        //UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
+        //assertTrue(friend.getNotificationAmount().get(0).equals(1));
+        //friend.IfNotify();
     }//end testC_SendNotifyToFriend
 
-    //Test finding a friend add trade + notify
+    /**
+     * Test finding a friend add trade + notify
+     */
     public void testC_Send_Add_Trade_NotifyToFriend(){
         System.out.println("Test 4");
         UserManager UM = new UserManager();
@@ -233,7 +250,7 @@ public class User_noServerTest extends TestCase {
         friend.pseduoConstructor();
         FM.clearFriendlist();
         UM.setFriendlist(FM.getFriendlist());
-        FM.addFriend(friend);
+        FM.addFriend(friend.getUserName());
         ArrayList<Item> o_tradeitem = new ArrayList<Item>();
         ArrayList<Item> b_tradeitem = new ArrayList<Item>();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
@@ -242,12 +259,13 @@ public class User_noServerTest extends TestCase {
         b_tradeitem.add(item_2);
         TM.createTrade("Owner", "Borrower", o_tradeitem, b_tradeitem);
         assertNotNull(UM.findBorrowerFriend("Bob"));
-        UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
-        assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
-        UM.findBorrowerFriend("Bob").getPendingTrades().add(new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem));
-        Trade check = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
-        assertTrue(UM.getPendingList().getTrade(0).equals(check));
-        assertTrue(UM.getFriendlist().getFriend(0).getPendingTrades().getTrade(0).equals(check));
+        //Currently removed due to changes in friendlist
+        //UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
+        //assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
+        //UM.findBorrowerFriend("Bob").getPendingTrades().add(new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem));
+        //Trade check = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
+        //assertTrue(UM.getPendingList().getTrade(0).equals(check));
+        //assertTrue(UM.getFriendlist().getFriend(0).getPendingTrades().getTrade(0).equals(check));
     }//end testC_Send_Add_Trade_NotifyToFriend
 
     public void testC_CancelTrade(){
@@ -263,7 +281,7 @@ public class User_noServerTest extends TestCase {
         TM.clearTradelist();
         UM.setFriendlist(FM.getFriendlist());
         UM.setPendinglist(TM.getCurrent());
-        FM.addFriend(friend);
+        FM.addFriend(friend.getUserName());
         ArrayList<Item> o_tradeitem = new ArrayList<Item>();
         ArrayList<Item> b_tradeitem = new ArrayList<Item>();
         Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
@@ -272,16 +290,17 @@ public class User_noServerTest extends TestCase {
         b_tradeitem.add(item_2);
         TM.createTrade("Owner", "Borrower", o_tradeitem, b_tradeitem);
         assertNotNull(UM.findBorrowerFriend("Bob"));
-        UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
-        assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
-        UM.findBorrowerFriend("Bob").getPendingTrades().add(new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem));
-        Trade check = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
-        assertTrue(UM.getPendingList().getTrade(0).equals(check));
-        assertTrue(UM.getFriendlist().getFriend(0).getPendingTrades().getTrade(0).equals(check));
-        UM.getPendingList().del(0);
-        UM.findBorrowerFriend("Bob").getPendingTrades().del(0);
-        assertTrue(UM.getPendingList().isEmpty());
-        assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
+        //Currently removed due to changes in friendlist
+        //UM.SendNewTradeNotify(UM.findBorrowerFriend("Bob"));
+        //assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
+        //UM.findBorrowerFriend("Bob").getPendingTrades().add(new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem));
+        //Trade check = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
+        //assertTrue(UM.getPendingList().getTrade(0).equals(check));
+        //assertTrue(UM.getFriendlist().getFriend(0).getPendingTrades().getTrade(0).equals(check));
+        //UM.getPendingList().del(0);
+        //UM.findBorrowerFriend("Bob").getPendingTrades().del(0);
+        //assertTrue(UM.getPendingList().isEmpty());
+        //assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
     }//end testC_CancelTrade
 
     //=====End Test Notify Stuff=====//
@@ -312,10 +331,10 @@ public class User_noServerTest extends TestCase {
         //assertFalse(UM_1.getInventory().getItem(0).equals(UM_2.getInventory().getItem(0)));
         FriendManager FM_1 = new FriendManager();
         UM_1.setFriendlist(FM_1.getFriendlist());
-        UM_1.getFriendlist().addFriend(UM_2.getTrader());
-        assertTrue(UM_1.getFriendlist().hasFriend(UM_2.getTrader()));
-        assertTrue(UM_1.getFriendlist().getFriend(0).getUserCity().equals("Edmonton"));
-        assertTrue(UM_1.getTrader().getUserCity().equals("Edmonton"));
+        //UM_1.getFriendlist().addFriend(UM_2.getTrader());
+        //assertTrue(UM_1.getFriendlist().hasFriend(UM_2.getTrader()));
+        //assertTrue(UM_1.getFriendlist().getFriend(0).getUserCity().equals("Edmonton"));
+        //assertTrue(UM_1.getTrader().getUserCity().equals("Edmonton"));
     }//end testC_TwoSingleton()
 
     //=====End Test Singleton Stuff=====//

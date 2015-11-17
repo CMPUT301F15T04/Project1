@@ -7,7 +7,7 @@ import java.util.Collection;
  * Stores the list of Users that the current user has added as friends
  */
 public class FriendList {
-    private ArrayList<User> friendList = new ArrayList<User>();
+    private ArrayList <String> friendList = new ArrayList<String>();
 
     /**
      * Checks how many friends the current user has
@@ -23,7 +23,7 @@ public class FriendList {
      *
      * @param trader The User that the user has added as a friend
      */
-    public void addFriend(User trader) {
+    public void addFriend(String trader) {
         friendList.add(trader);
     }
 
@@ -42,7 +42,7 @@ public class FriendList {
      * @param index The position in the list of the friend
      * @return The User at the provided position
      */
-    public User getFriend(int index){
+    public String getFriend(int index){
         return friendList.get(index);
     }
 
@@ -52,7 +52,7 @@ public class FriendList {
      * @return The Collection of all friends of that user
      */
    // public Collection<? extends User> getAllFriends() {
-    public ArrayList<User> getAllFriends(){
+    public ArrayList<String> getAllFriends(){
         return friendList;
     }
 
@@ -62,7 +62,7 @@ public class FriendList {
      * @param trader The User to be checked
      * @return A boolean that is true if the provided User is a friend of the current user
      */
-    public boolean hasFriend(User trader) {
+    public boolean hasFriend(String trader) {
         return friendList.contains(trader);
     }
 
@@ -81,5 +81,5 @@ public class FriendList {
     public boolean isEmpty(){
         return friendList.isEmpty();
     }
-}
+}//end FriendLis
 

@@ -27,9 +27,9 @@ import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {
 
-    private ArrayAdapter<User> adapter;
+    private ArrayAdapter<String> adapter;
     private ListView friendListView;
-    private ArrayList<User> friendList;
+    private ArrayList<String> friendList;
     private ArrayList<String> friendNameList;
 
     protected int friendListViewItemPosition;
@@ -47,10 +47,10 @@ public class SearchFriendActivity extends Activity {
         size = friendList.size();
 
 
-        FriendManager.addFriend(new User("Mike", "me@2.ca", "Hometown", "5551234567"));
-        FriendManager.addFriend(new User("Cory", "me@2.ca", "Hometown", "5551234567"));
-        FriendManager.addFriend(new User("Terri", "me@2.ca", "Hometown", "5551234567"));
-        adapter = new ArrayAdapter<User>(this, R.layout.listviewtext, FriendManager.getAllUsers());
+        FriendManager.addFriend("Mike");
+        FriendManager.addFriend("Cory");
+        FriendManager.addFriend("Terri");
+        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, FriendManager.getAllUsers());
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         size = FriendManager.getAllUsers().size();
@@ -156,7 +156,7 @@ public class SearchFriendActivity extends Activity {
     }
 
     private void resetAdapter(){
-        adapter = new ArrayAdapter<User>(this,R.layout.listviewtext, FriendManager.getAllUsers());
+        adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, FriendManager.getAllUsers());
         friendListView.setAdapter(adapter);
     }
 
@@ -172,7 +172,7 @@ public class SearchFriendActivity extends Activity {
         friendList = FriendManager.getAllUsers();
         for(int i=0; i< friendList.size();i++){
 
-            if (friend.toLowerCase().equals(friendList.get(i).getUserName().toString().toLowerCase()) ){
+            if (friend.toLowerCase().equals(friendList.get(i).toString().toLowerCase()) ){
                 Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
                 Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
                 startActivity(intent);

@@ -21,7 +21,7 @@ public class FriendManager {
         return friendList;
     }//end getFriendList
 
-    static public void addFriend(User friend){
+    static public void addFriend(String friend){
         getFriendlist().addFriend(friend);
     }//end addFriend
 
@@ -35,14 +35,14 @@ public class FriendManager {
     }
 
     //Retrieve friend at index
-    static public User getUser(int index){return getFriendlist().getFriend(index);}//End getUser
+    static public String getUser(int index){return getFriendlist().getFriend(index);}//End getUser
 
-    static public ArrayList<User> getAllUsers() {             //getting error in this one so commented it out
+    static public ArrayList<String> getAllUsers() {             //getting error in this one so commented it out
        return getFriendlist().getAllFriends();
     }
 
     //See if friendList contains friend
-    static public boolean hasFriend(User trader) {
+    static public boolean hasFriend(String trader) {
         return getFriendlist().hasFriend(trader);
     }//end hasFriend
 

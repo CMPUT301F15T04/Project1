@@ -64,9 +64,9 @@ public class UserManager {
     //=====In-Work Trade Notifty=====//
 
     // index 0: new Trade 1: Counter Trade 2: Trade Cancel
-    public User findBorrowerFriend(String BorrowerName){
+    public String findBorrowerFriend(String BorrowerName){
         for(int i = 0; i < trader.getFriendList().getFriendlistSize(); i++){
-            if (trader.getFriendList().getFriend(i).getUserName().equals(BorrowerName)){
+            if (trader.getFriendList().getFriend(i).equals(BorrowerName)){
                 return trader.getFriendList().getFriend(i);
             } else {
                 return null;
