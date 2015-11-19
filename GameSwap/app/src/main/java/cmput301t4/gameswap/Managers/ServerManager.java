@@ -37,6 +37,11 @@ import cmput301t4.gameswap.Models.User;
 
 
 public class ServerManager {
+    /*
+    Servers will not be able to run on the main UI thread. Trying to call these functions from any views will
+    probably create errors, working on fixing that.
+    */
+
 
 
     /**
