@@ -37,9 +37,9 @@ public class Cache {
      *
      * @return The Collection of Items waiting to be pushed to the server
      */
-	public Collection<? extends Item> getPendingItems() {
+	public ArrayList<Item> getPendingItems() {
 		return itemsToBePushed;
-	}
+	}//modified from original Collection<? extends Item> to ArrayList<Item>
 
     /**
      * Generic method to add a Collection of Trades to the Cache
@@ -64,9 +64,9 @@ public class Cache {
      *
      * @return The Collection of Trades waiting to be pushed to the server
      */
-	public Collection<? extends Trade> getPendingTrades() {
+	public ArrayList<Trade> getPendingTrades() {
 		return tradesToBePushed;
-	}
+	}//modified from original Collection<? extends Trade> to ArrayList<Trade>
 
     /**
      * Saves the data of the most recently viewed friend in the Cache

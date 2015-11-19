@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
@@ -27,6 +28,7 @@ public class CreateProfileActivity extends Activity {
         EditText cityEditText = (EditText) findViewById(R.id.user_city);
         EditText phoneNumberEditText = (EditText) findViewById(R.id.user_phone_num);
         UserManager.createUser(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString(), this);
+        ServerManager.saveUserOnline(UserManager.getTrader());
         this.finish();
     }
 

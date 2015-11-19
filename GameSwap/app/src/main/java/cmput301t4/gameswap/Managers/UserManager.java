@@ -41,6 +41,9 @@ public class UserManager {
         return trader;
     }
 
+    public static void setTrader(User user){
+        trader = user;
+    }
     //=====In-Work Notifty=====//
 
     public void pseduoConstructor(){

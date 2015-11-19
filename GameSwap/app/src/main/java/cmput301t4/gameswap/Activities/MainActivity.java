@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
 
 public class MainActivity extends Activity {
@@ -44,8 +46,9 @@ public class MainActivity extends Activity {
     }
 
     public void clickedLogin(View view){
-        UserManager.loadUserLocally(this);
         EditText username = (EditText) findViewById(R.id.textView);
+
+        System.out.println(UserManager.getTrader().getUserName() + " username from users");
         if(UserManager.getTrader().getUserName().equals(username.getText().toString())){
             Intent intent = new Intent(MainActivity.this, selectTaskActivity.class);
             startActivity(intent);
@@ -57,6 +60,34 @@ public class MainActivity extends Activity {
     public void clickedRegister(View view){
         Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
         startActivity(intent);
+    }
+
+    class SaveThread extends Thread {
+        private User user;
+
+        public SaveThread(User user) {
+            this.user = user;
+        }
+
+        @Override
+        public void run() {
+            ServerManager server = new ServerManager();
+            server.saveUserOnline(user);
+        }
+    }
+
+    class LoadThread extends Thread {
+        private String username;
+
+        public LoadThread(String user) {
+            this.username = user;
+        }
+
+        @Override
+        public void run() {
+            ServerManager server = new ServerManager();
+            server.getUserOnline(username);
+        }
     }
 
 }

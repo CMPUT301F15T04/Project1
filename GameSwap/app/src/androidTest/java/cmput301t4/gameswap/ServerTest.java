@@ -11,6 +11,6 @@ public class ServerTest extends TestCase {
 
     public void testServerGet(){
         ServerManager server = new ServerManager();
-        ServerManager.getServer();
+        ServerManager.getUserOnline("daniel");
     }
 }
