@@ -46,9 +46,9 @@ public class MainActivity extends Activity {
     }
 
     public void clickedLogin(View view){
+        UserManager.loadUserLocally(this);
         EditText username = (EditText) findViewById(R.id.textView);
 
-        System.out.println(UserManager.getTrader().getUserName() + " username from users");
         if(UserManager.getTrader().getUserName().equals(username.getText().toString())){
             Intent intent = new Intent(MainActivity.this, selectTaskActivity.class);
             startActivity(intent);
