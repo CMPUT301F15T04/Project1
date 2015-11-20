@@ -177,9 +177,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/private_public"
+                    android:text="Image"
                     android:singleLine="false"
-                    android:id="@+id/image"
+                    android:id="@+id/editimage"
                     android:layout_column="6"
                     android:layout_gravity="center_vertical" />
 
@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/editImageSpinner"
-                    android:entries="@array/Public_or_Private"
+                    android:entries="@array/Image"
                     android:layout_column="7" />
 
             </TableRow>

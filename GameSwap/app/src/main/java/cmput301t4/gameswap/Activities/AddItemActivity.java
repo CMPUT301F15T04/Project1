@@ -64,6 +64,11 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     private Spinner publicprivateSpinner;
 
     /**
+     *The spinner is to select an operation for image
+     */
+    private Spinner imageSpinner;
+
+    /**
      * The Date for the item being added
      */
     final static String DATE_FORMAT = "dd-MM-yyyy";
@@ -124,6 +129,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         consoleSpinner = (Spinner) findViewById(R.id.consoleSpinner);
         qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
         publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
+        imageSpinner = (Spinner) findViewById(R.id.addImageSpinner);
         userImage= (ImageView) findViewById(R.id.imageButton);
 
         prepareSpinnerdata();
@@ -182,6 +188,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         // use the layout for public and private
         public_private_adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
         publicprivateSpinner.setAdapter(public_private_adapter);
+
+        // Create Array adapter for the array we wish to use for selecting an image
+        ArrayAdapter<CharSequence> image_Adapter = ArrayAdapter.createFromResource(this,
+                R.array.Image, android.R.layout.simple_spinner_item);
+        // use the layout for image
+        image_Adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
+        imageSpinner.setAdapter(image_Adapter);
     }
 
     /**
@@ -197,11 +210,15 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         int userChoiceConsole = consoleSpinner.getSelectedItemPosition();
         int userChoiceQuality = qualitySpinner.getSelectedItemPosition();
         int userChoicePrivate = publicprivateSpinner.getSelectedItemPosition();
+        int userChoiceImage = imageSpinner.getSelectedItemPosition();
         SharedPreferences sharedPref = getSharedPreferences("FileName", 0);
         SharedPreferences.Editor prefEditor = sharedPref.edit();
         prefEditor.putInt("userChoiceSpinner", userChoiceConsole);
         prefEditor.putInt("userChoiceSpinner", userChoiceQuality);
         prefEditor.putInt("userChoiceSpinner", userChoicePrivate);
+
+
+
         prefEditor.commit();
     }
     /**

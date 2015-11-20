@@ -85,6 +85,12 @@
         <item>Public</item>
         <item>Private</item>
     </string-array>
+
+
+    <string-array name="Image">
+        <item>Capture</item>
+        <item>Gallery</item>
+    </string-array>
     <string name="title_activity_top_trades">TopTradesActivity</string>
 
 </resources>
