@@ -7,12 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import cmput301t4.gameswap.Managers.ServerManager;
-import cmput301t4.gameswap.Managers.UserManager;
-import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
 
 public class MainActivity extends Activity {
@@ -45,16 +42,32 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void clickedLogin(View view){
+    public void clickedLogin(View view) {
         //UserManager.loadUserLocally(this);
         EditText username = (EditText) findViewById(R.id.textView);
-        ServerManager.getUserOnline(username.getText().toString());
+        final String user = username.getText().toString();
 
-        if(UserManager.getTrader().getUserName().equals(username.getText().toString())){
-            Intent intent = new Intent(MainActivity.this, selectTaskActivity.class);
+        Thread loginThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ServerManager.searchForUser(user);
+            }
+        });
+
+        loginThread.start();
+
+        try {
+            loginThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+
+        if(ServerManager.checkResult()) {
+            ServerManager.getUserOnline(username.getText().toString());
+            Intent intent = new Intent(this, selectTaskActivity.class);
             startActivity(intent);
-        }else{
-            Toast.makeText(getBaseContext(), "Wrong username, please make an account", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getBaseContext(), "User not found", Toast.LENGTH_SHORT).show();
         }
     }
 
