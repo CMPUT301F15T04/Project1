@@ -30,8 +30,8 @@ public class MyProfileActivity extends Activity {
         locationTextView = (TextView) findViewById(R.id.locationTextView);
         contactTextView = (TextView) findViewById(R.id.contactTextView);
 
-        nameTextView.setText(UserManager.getTrader().getUserName().toString());
-        locationTextView.setText(UserManager.getTrader().getUserCity().toString());
+        nameTextView.setText(" " +UserManager.getTrader().getUserName().toString().toUpperCase());
+        locationTextView.setText(" "+ UserManager.getTrader().getUserCity().toString().toUpperCase());
         contactTextView.setText(UserManager.getTrader().getUserEmail()+ "  "+UserManager
                 .getTrader().getUserPhoneNumber());
     }

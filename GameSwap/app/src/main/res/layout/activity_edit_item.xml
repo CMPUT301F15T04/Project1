@@ -169,6 +169,30 @@
                     android:layout_column="7" />
             </TableRow>
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Image"
+                    android:singleLine="false"
+                    android:id="@+id/editimage"
+                    android:layout_column="6"
+                    android:layout_gravity="center_vertical" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editImageSpinner"
+                    android:entries="@array/Image"
+                    android:layout_column="7" />
+
+            </TableRow>
+
+
         </TableLayout>
 
     </ScrollView>
