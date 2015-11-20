@@ -36,4 +36,11 @@ public class FriendProfileActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        this.finish();
+    }
 }
