@@ -14,7 +14,4 @@
         android:id="@+id/removeFriendMenuId"
         />
 
-
-
-
 </menu>

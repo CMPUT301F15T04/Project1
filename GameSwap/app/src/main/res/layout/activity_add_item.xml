@@ -9,29 +9,40 @@
     android:weightSum="1">
 
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/New_Game"
-        android:gravity="center"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="32dp"
-        android:textIsSelectable="true"
-        android:layout_weight="0.25" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="104dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="31dp"
+            android:minHeight="75dp"
+            android:minWidth="70dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/New_Game"
+            android:id="@+id/newgametext"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_weight="0.57">
+        android:layout_height="290dp"
+        android:id="@+id/scrollView">
         <TableLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableRow
+            <TableRow>
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
@@ -54,23 +65,10 @@
                     android:layout_column="7" />
 
             </TableRow>
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/image"
-                    android:id="@+id/image"
-                    android:layout_column="6" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageButton"
-                    android:layout_column="7" />
             </TableRow>
 
             <TableRow
@@ -186,6 +184,30 @@
                     android:id="@+id/descriptionBox"
                     android:layout_column="7" />
             </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Image"
+                    android:singleLine="false"
+                    android:id="@+id/addImage"
+                    android:layout_column="6"
+                    android:layout_gravity="center_vertical" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/addImageSpinner"
+                    android:entries="@array/Image"
+                    android:layout_column="7" />
+
+            </TableRow>
+
 
         </TableLayout>
 

@@ -6,11 +6,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
 
 public class EditProfileActivity extends Activity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,8 @@ public class EditProfileActivity extends Activity {
         EditText nameEditText = (EditText) findViewById(R.id.changeName);
         EditText cityEditText = (EditText) findViewById(R.id.changeCity);
         EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
+
+
 
         nameEditText.setText(UserManager.getTrader().getUserName());
         cityEditText.setText(UserManager.getTrader().getUserCity());
@@ -55,6 +61,9 @@ public class EditProfileActivity extends Activity {
         UserManager.editUserName(nameEditText.getText().toString());
         UserManager.editCity(cityEditText.getText().toString());
         UserManager.editPhoneNumber(phoneEditText.getText().toString());
+
+
+
         this.finish();
     }
 

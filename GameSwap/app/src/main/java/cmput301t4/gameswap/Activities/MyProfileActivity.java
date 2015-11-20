@@ -1,18 +1,39 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class MyProfileActivity extends Activity {
+
+    private Button editProfileButton;
+    private TextView nameTextView;
+    private TextView locationTextView;
+    private TextView contactTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
+        editProfileButton = (Button) findViewById(R.id.editProfile);
+        nameTextView = (TextView) findViewById(R.id.nameTextView);
+        locationTextView = (TextView) findViewById(R.id.locationTextView);
+        contactTextView = (TextView) findViewById(R.id.contactTextView);
+
+        nameTextView.setText(" " +UserManager.getTrader().getUserName().toString().toUpperCase());
+        locationTextView.setText(" "+ UserManager.getTrader().getUserCity().toString().toUpperCase());
+        contactTextView.setText(UserManager.getTrader().getUserEmail()+ "  "+UserManager
+                .getTrader().getUserPhoneNumber());
     }
 
     @Override
@@ -36,4 +57,13 @@ public class MyProfileActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void editProfileButtonClicked(View view){
+        Intent intent = new Intent(MyProfileActivity.this,EditProfileActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
 }
