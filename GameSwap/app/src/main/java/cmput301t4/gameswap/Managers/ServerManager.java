@@ -42,98 +42,114 @@ public class ServerManager {
     probably create errors, working on fixing that.
     */
 
-
-
     /**
      * Get the user from with the username given
      * and set the User to it.
      * @param username
      */
-    public static void getUserOnline(String username){     //Access Server function
-        String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username + "/_source";
-        System.out.println(url);
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(url);
-        HttpResponse response = null;
+    public static void getUserOnline(final String username){     //Access Server function
 
-        try {                           //run URL
-            response = httpClient.execute(httpGet);
-        } catch (ClientProtocolException e1) {
-            throw new RuntimeException(e1);
-        } catch (IOException e1) {
-            throw new RuntimeException(e1);
-        }
-        BufferedReader rd = null;
-        User sr = null;
-        Gson gson = new Gson();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username + "/_source";
+                System.out.println(url);
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(url);
+                HttpResponse response = null;
 
-        try {
-            rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
-            //String line = rd.readLine();
-            //System.out.println(line);
-            sr = gson.fromJson(rd, User.class);
-            System.out.println(sr.getUserName() + " username from servermanager");
-        } catch (JsonIOException e) {
-            throw new RuntimeException(e);
-        } catch (JsonSyntaxException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalStateException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        UserManager.setTrader(sr);
-    }
+                try {                           //run URL
+                    response = httpClient.execute(httpGet);
+                } catch (ClientProtocolException e1) {
+                    throw new RuntimeException(e1);
+                } catch (IOException e1) {
+                    throw new RuntimeException(e1);
+                }
+                BufferedReader rd = null;
+                User sr = null;
+                Gson gson = new Gson();
+
+                try {
+                    rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
+                    //String line = rd.readLine();
+                    //System.out.println(line);
+                    sr = gson.fromJson(rd, User.class);
+                    System.out.println(sr.getUserName() + " username from servermanager");
+                } catch (JsonIOException e) {
+                    throw new RuntimeException(e);
+                } catch (JsonSyntaxException e) {
+                    throw new RuntimeException(e);
+                } catch (IllegalStateException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                UserManager.setTrader(sr);
+            }
+        };
+        Thread serverThread = new Thread(runnable);
+        serverThread.start();
+
+    }//end getUserOnline
 
     /**
      * Loads user into server
      * @param user
      */
-    public static void saveUserOnline(User user){//code obtained from elastic search and ESDemo
-        String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + user.getUserName();
-        HttpClient httpclient = new DefaultHttpClient();
-        Gson gson = new Gson();
-        HttpPost httpPost = new HttpPost(url);
+    public static void saveUserOnline(final User user){//code obtained from elastic search and ESDemo
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + user.getUserName();
+                HttpClient httpclient = new DefaultHttpClient();
+                Gson gson = new Gson();
+                HttpPost httpPost = new HttpPost(url);
 
-        StringEntity stringentity = null;
+                StringEntity stringentity = null;
 
-        try {
-            stringentity = new StringEntity(gson.toJson(user));
-            System.out.println(gson.toJson(user));
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        httpPost.setHeader("Accept","application/json");
+                try {
+                    stringentity = new StringEntity(gson.toJson(user));
+                    System.out.println(gson.toJson(user));
+                } catch (UnsupportedEncodingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                httpPost.setHeader("Accept","application/json");
 
-        httpPost.setEntity(stringentity);
-        HttpResponse response = null;
-        try {
-            response = httpclient.execute(httpPost);
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+                httpPost.setEntity(stringentity);
+                HttpResponse response = null;
+                try {
+                    response = httpclient.execute(httpPost);
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
-        String status = response.getStatusLine().toString();
-        System.out.println(status);
-        HttpEntity entity = response.getEntity();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
-            String output;
-            System.err.println("Output from Server -> ");
-            while ((output = br.readLine()) != null) {
-                System.err.println(output);
+                String status = response.getStatusLine().toString();
+                System.out.println(status);
+                HttpEntity entity = response.getEntity();
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output;
+                    System.err.println("Output from Server -> ");
+                    while ((output = br.readLine()) != null) {
+                        System.err.println(output);
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-}
+        };
+
+        Thread serverThread = new Thread(runnable);
+        serverThread.start();
+
+    }//end saveUserOnline
+}//end Server Manager

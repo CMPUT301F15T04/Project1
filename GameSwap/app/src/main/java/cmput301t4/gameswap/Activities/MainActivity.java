@@ -46,8 +46,9 @@ public class MainActivity extends Activity {
     }
 
     public void clickedLogin(View view){
-        UserManager.loadUserLocally(this);
+        //UserManager.loadUserLocally(this);
         EditText username = (EditText) findViewById(R.id.textView);
+        ServerManager.getUserOnline(username.getText().toString());
 
         if(UserManager.getTrader().getUserName().equals(username.getText().toString())){
             Intent intent = new Intent(MainActivity.this, selectTaskActivity.class);
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    class SaveThread extends Thread {
+    /*class SaveThread extends Thread {
         private User user;
 
         public SaveThread(User user) {
@@ -88,6 +89,6 @@ public class MainActivity extends Activity {
             ServerManager server = new ServerManager();
             server.getUserOnline(username);
         }
-    }
+    }*/
 
 }
