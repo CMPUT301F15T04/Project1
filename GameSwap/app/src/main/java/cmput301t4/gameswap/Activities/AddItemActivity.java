@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -107,6 +108,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
      */
     private EditText releaseEditText;
 
+    private ImageView userImage;
+
     private ArrayAdapter<Item> adapter;
 
 
@@ -121,6 +124,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         consoleSpinner = (Spinner) findViewById(R.id.consoleSpinner);
         qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
         publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
+        userImage= (ImageView) findViewById(R.id.imageButton);
 
         prepareSpinnerdata();
 
