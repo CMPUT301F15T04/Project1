@@ -67,6 +67,10 @@
             android:name=".Activities.AddItemActivity"
             android:label="@string/title_activity_add_item" >
         </activity>
+        <activity
+            android:name=".Activities.TopTradesActivity"
+            android:label="@string/title_activity_top_trades" >
+        </activity>
     </application>
 
 </manifest>
