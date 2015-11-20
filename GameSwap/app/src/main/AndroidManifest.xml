@@ -3,6 +3,13 @@
     package="cmput301t4.gameswap" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--- http://www.c-sharpcorner.com/UploadFile/e14021/capture-image-from-camera-and-selecting-image-from-gallery-o/-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
 
     <application
         android:allowBackup="true"
