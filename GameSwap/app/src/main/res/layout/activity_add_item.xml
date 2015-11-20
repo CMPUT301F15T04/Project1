@@ -13,15 +13,35 @@
         android:layout_width="match_parent"
         android:layout_height="104dp">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="31dp"
-            android:minHeight="75dp"
-            android:minWidth="70dp" />
+            android:layout_toEndOf="@+id/newgametext">
+
+            <ImageButton
+                android:layout_width="160dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageButton"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="31dp"
+                android:minHeight="85dp"
+                android:minWidth="105dp"
+                android:layout_gravity="right|top"
+                android:nestedScrollingEnabled="false" />
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:text="@string/image"
+                android:textColor="#990500">
+            </TextView>
+
+        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,6 +51,7 @@
             android:id="@+id/newgametext"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
+
     </RelativeLayout>
 
     <ScrollView
@@ -64,11 +85,6 @@
                     android:ems="10"
                     android:id="@+id/gameTitle"
                     android:layout_column="7" />
-
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
             </TableRow>
 
