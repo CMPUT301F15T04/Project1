@@ -26,9 +26,9 @@ public class SearchPeopleActivity extends Activity {
     private SearchView search;
     private FriendList friendList;
 
-    private UsersList usersList;
     private User user_1;
     private User user_2;
+    private User user_3;
 
 
     @Override
@@ -42,11 +42,20 @@ public class SearchPeopleActivity extends Activity {
          */
         user_1 = new User("kynan","kynan@ualberta.ca","Edmonton","780-999-1234",null);
         user_2 = new User("Blake","blake@ualberta.ca","Edmonton","780-444-1234",null);
-        usersList = UserListManager.getInstance();
-        if (usersList== null) {
+        user_3 = new User("Daniel","dren@ualberta.ca","Edmonton","780-444-1244",null);
+
+        int userListSize = UserListManager.getUserListSize();
+        if (userListSize == 0) {
             UserListManager.addUser(user_1);
             UserListManager.addUser(user_2);
+            UserListManager.addUser(user_3);
         }
+
+        int size = UserListManager.getUserListSize();
+        String sizeStr = String.valueOf(size);
+        Toast.makeText(getBaseContext(),sizeStr , Toast.LENGTH_SHORT).show();
+
+
         /**
          * Code from - http://sampleprogramz.com/android/searchview.php
          */
@@ -79,13 +88,20 @@ public class SearchPeopleActivity extends Activity {
     }
 
     public void findTrader(String trader){
-        traderName = search.getQuery().toString();
+        traderName = search.getQuery().toString().toLowerCase();
         if (FriendManager.getFriendlist().hasFriend(trader)) {
             Toast.makeText(getBaseContext(), "Already a friend", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Intent intent = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
+            Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
             startActivity(intent);
+        } else {
+            if(UserListManager.hasUser(traderName)) {
+                Intent intent = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
+                startActivity(intent);
+            }
+            else
+                Toast.makeText(getBaseContext(), "Doesn't exist", Toast.LENGTH_SHORT).show();
+
+
         }
         this.finish();
     }

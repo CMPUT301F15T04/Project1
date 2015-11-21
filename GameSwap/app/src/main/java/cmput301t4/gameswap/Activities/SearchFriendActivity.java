@@ -223,7 +223,8 @@ public class SearchFriendActivity extends Activity {
         super.onStart();
         loadFromFile();
         friendListView = (ListView) findViewById(R.id.friendlistView);
-        friendList = UserManager.getTrader().getFriendList().getAllFriends();
+//        friendList = UserManager.getTrader().getFriendList().getAllFriends();
+        friendList = FriendManager.getFriendlist().getAllFriends();
         adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList);
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

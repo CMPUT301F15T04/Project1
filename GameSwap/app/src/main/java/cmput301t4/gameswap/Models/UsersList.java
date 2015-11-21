@@ -24,22 +24,26 @@ public class UsersList {
      * Getter to return the username of the user
      */
     public String getUser(String user){
-        int index = hasUser(user);
-        if (index!= -1){
-            return userList.get(index).getUserName().toString();
+        if (hasUser(user)){
+            return userList.get(userList.indexOf(user)).getUserName().toString();
         }
         else
             return "null";
     }
-
     /**
      * Checks if the user exists
      */
-    public int hasUser(String user){
+    public boolean hasUser(String user){
         if (userList.contains(user)){
-            return userList.indexOf(user);
+            return true;
         }
         else
-            return -1;
+            return false;
+    }
+    /**
+     * Get the size of the user list
+     */
+    public int getUserListSize(){
+        return userList.size();
     }
 }
