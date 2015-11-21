@@ -1,14 +1,9 @@
 package cmput301t4.gameswap.Managers;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,18 +13,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 
 import cmput301t4.gameswap.Models.User;
+import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 
 /**
  * Created by dren on 11/2/15.
@@ -41,6 +33,8 @@ public class ServerManager {
     Servers will not be able to run on the main UI thread. Trying to call these functions from any views will
     probably create errors, working on fixing that.
     */
+
+    private static boolean foundResult = Boolean.FALSE;
 
     /**
      * Get the user from with the username given
@@ -91,6 +85,60 @@ public class ServerManager {
         serverThread.start();
 
     }//end getUserOnline
+
+    /**
+     * Adapted from https://github.com/rayzhangcl/ESDemo on November 20, 2015
+     *
+     * @param username
+     * @return
+     */
+    public static void searchForUser(final String username) {
+        Thread serverThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/_search?pretty=1&q=" + username);
+                searchRequest.setHeader("Accept", "application/json");
+                HttpResponse response = null;
+
+                try {
+                    response = httpclient.execute(searchRequest);
+                } catch (IOException e) {
+                    throw new RuntimeException();
+                }
+                Gson gson = new Gson();
+
+                String json = null;
+
+                try {
+                    json = getEntityContent(response);
+                } catch (IOException e) {
+                    throw new RuntimeException();
+                }
+
+                Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<User>>(){}.getType();
+                ElasticSearchSearchResponse<User> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+
+                System.out.println(esResponse.getHits().size());
+
+                if(esResponse.getHits().size() != 0) { ServerManager.resultFound(); } else {ServerManager.resultNotFound();}
+            }
+        });
+
+        serverThread.start();
+        
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    private static void resultFound() {foundResult = Boolean.TRUE;}
+
+    private static void resultNotFound() {foundResult = Boolean.FALSE;}
+
+    public static boolean checkResult() {return foundResult;}
 
     /**
      * Loads user into server
@@ -152,4 +200,23 @@ public class ServerManager {
         serverThread.start();
 
     }//end saveUserOnline
+
+    /**
+     * get the http response and return json string
+     * Taken from https://github.com/rayzhangcl/ESDemo on November 20, 2015
+     */
+    private static String getEntityContent(HttpResponse response) throws IOException {
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader((response.getEntity().getContent())));
+        String output;
+        System.err.println("Output from Server -> ");
+        String json = "";
+        while ((output = br.readLine()) != null) {
+            System.err.println(output);
+            json += output;
+        }
+        System.err.println("JSON:"+json);
+        return json;
+    }
+
 }//end Server Manager
