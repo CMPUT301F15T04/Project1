@@ -60,7 +60,6 @@ public class myInventoryActivity extends Activity{
 
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
 
-        myInventoryListView.setOnLongClickListener();
         myInventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View childView, final int position, long id) {
