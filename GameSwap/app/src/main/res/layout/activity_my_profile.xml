@@ -81,7 +81,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.05" />
+        android:layout_weight="0.05"
+         />
 
     <TextView
         android:layout_width="match_parent"
@@ -91,6 +92,23 @@
         android:id="@+id/contactTextView"
         android:textSize="25sp"
         android:textAllCaps="true"
+        android:layout_weight="0.13" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/email"
+        android:hint="email"
+        android:textSize="25sp"
+        android:textAllCaps="true"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="0.13" />
 
     <Space
