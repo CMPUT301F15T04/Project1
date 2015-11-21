@@ -8,6 +8,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 
 
@@ -45,10 +46,21 @@
             android:name=".Activities.SearchFriendActivity"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
+
+        <!---http://sampleprogramz.com/android/searchview.php -->
         <activity
             android:name=".Activities.SearchPeopleActivity"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
         </activity>
+
+
+
         <activity
             android:name=".Activities.ViewFriendInventoryActivity"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >

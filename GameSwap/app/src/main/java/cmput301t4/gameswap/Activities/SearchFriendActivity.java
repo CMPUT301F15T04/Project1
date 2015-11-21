@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class SearchFriendActivity extends Activity {
     private String friendName;
     private int size;
 
+    private SearchView search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +57,6 @@ public class SearchFriendActivity extends Activity {
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         size = FriendManager.getAllUsers().size();
-           // Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
-
-            //for (int i = 0; i < friendList.size(); i++) {
-              //  friendNameList.add(friendList.get(i).getUserName().toString());
-            //}
-
-
-        //else{
-          //  Toast.makeText(getBaseContext(),size , Toast.LENGTH_SHORT).show();
-
-       // }
-
 
         //code referenced from http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
         //code referenced from http://stackoverflow.com/questions/7201159/is-using-menuitem-getitemid-valid-in-finding-which-menuitem-is-selected-by-use
@@ -129,6 +120,31 @@ public class SearchFriendActivity extends Activity {
             }
 
         });
+
+        search = (SearchView) findViewById(R.id.searchViewFriend);
+        search.setQueryHint("Search Friend");
+        search.setIconifiedByDefault(false);
+        search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                //Toast.makeText(getBaseContext(), "searching...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //Toast.makeText(getBaseContext(), query,
+                //Toast.LENGTH_SHORT).show();
+                searchFriend(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 
@@ -160,11 +176,13 @@ public class SearchFriendActivity extends Activity {
         friendListView.setAdapter(adapter);
     }
 
-    public void searchFriendButton(View view){
+    public void searchFriend(View view){
 
-        searchFriendText = (EditText) findViewById(R.id.searchFriendEditText);
-        friendName = searchFriendText.getText().toString().trim();
-        searchFriend(friendName);
+        friendName = search.getQuery().toString();
+        //Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+        startActivity(intent);
+        this.finish();
 
     }
 

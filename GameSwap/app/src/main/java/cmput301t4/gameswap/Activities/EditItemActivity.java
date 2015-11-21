@@ -49,10 +49,6 @@ public class EditItemActivity extends Activity {
      */
     private Spinner publicprivateSpinner;
 
-    /**
-     * The spinner is to select an operation for image
-     */
-    private Spinner imageSpinner;
 
     final static String DATE_FORMAT = "dd-MM-yyyy";
 
@@ -83,7 +79,6 @@ public class EditItemActivity extends Activity {
         consoleSpinner = (Spinner) findViewById(R.id.editconsoleSpinner);
         qualitySpinner = (Spinner) findViewById(R.id.editqualitySpinner);
         publicprivateSpinner = (Spinner) findViewById(R.id.editprivatepublicSpinner);
-        imageSpinner = (Spinner) findViewById(R.id.editImageSpinner);
 
         titleEditText = (EditText) findViewById(R.id.editGameTitle);
         releaseEditText = (EditText) findViewById(R.id.editReleaseDate);
@@ -151,12 +146,7 @@ public class EditItemActivity extends Activity {
         publicprivateSpinner.setAdapter(public_private_adapter);
 
 
-        // Create Array adapter for the array we wish to use for selecting an image
-        ArrayAdapter<CharSequence> image_Adapter = ArrayAdapter.createFromResource(this,
-                R.array.Image, android.R.layout.simple_spinner_item);
-        // use the layout for image
-        image_Adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
-        imageSpinner.setAdapter(image_Adapter);
+
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
