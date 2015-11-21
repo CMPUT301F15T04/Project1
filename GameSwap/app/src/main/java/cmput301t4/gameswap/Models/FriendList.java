@@ -1,5 +1,7 @@
 package cmput301t4.gameswap.Models;
 
+import android.content.pm.FeatureInfo;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -45,6 +47,11 @@ public class FriendList {
     public String getFriend(int index){
         return friendList.get(index);
     }
+
+    /* Setter to set the friendsList
+    */
+    public void setFriendList(ArrayList<String> friends){friendList = friends;}
+
 
     /**
      * Generic getter to retrieve all friends of a user

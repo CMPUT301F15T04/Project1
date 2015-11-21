@@ -11,7 +11,11 @@ import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.UserListManager;
+import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.User;
+import cmput301t4.gameswap.Models.UsersList;
 import cmput301t4.gameswap.R;
 
 public class SearchPeopleActivity extends Activity {
@@ -20,18 +24,29 @@ public class SearchPeopleActivity extends Activity {
     EditText traderEditText;
     String traderName;
     private SearchView search;
+    private FriendList friendList;
+
+    private UsersList usersList;
+    private User user_1;
+    private User user_2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_people);
 
-
-        //creating some dummy users
-        User user_1 = new User("Kynan", "kynan@ualberta.ca", "Edmonton", "780-999-8888");
-        User user_2 = new User("Daneil", "dren@ualberta.ca", "Edmonton", "780-999-8887");
-        User user_3 = new User("Preyanshu", "pre@ualberta.ca", "Edmonton", "780-999-8886");
-
+        friendList = FriendManager.getFriendlist();
+        /**
+         * including some more users in the app
+         */
+        user_1 = new User("kynan","kynan@ualberta.ca","Edmonton","780-999-1234",null);
+        user_2 = new User("Blake","blake@ualberta.ca","Edmonton","780-444-1234",null);
+        usersList = UserListManager.getInstance();
+        if (usersList== null) {
+            UserListManager.addUser(user_1);
+            UserListManager.addUser(user_2);
+        }
         /**
          * Code from - http://sampleprogramz.com/android/searchview.php
          */
@@ -65,9 +80,13 @@ public class SearchPeopleActivity extends Activity {
 
     public void findTrader(String trader){
         traderName = search.getQuery().toString();
-        //Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SearchPeopleActivity.this,FriendProfileActivity.class);
-        startActivity(intent);
+        if (FriendManager.getFriendlist().hasFriend(trader)) {
+            Toast.makeText(getBaseContext(), "Already a friend", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
+            startActivity(intent);
+        }
         this.finish();
     }
 

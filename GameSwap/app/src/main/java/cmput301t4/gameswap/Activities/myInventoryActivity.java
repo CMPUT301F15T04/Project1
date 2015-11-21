@@ -183,7 +183,7 @@ public class myInventoryActivity extends Activity{
     }
 
     @Override
-    protected void onStart(){
+      protected void onStart(){
 
         super.onStart();
         loadFromFile();

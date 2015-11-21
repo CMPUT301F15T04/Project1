@@ -93,5 +93,6 @@
     </string-array>
     <string name="title_activity_top_trades">TopTradesActivity</string>
     <string name="title_activity_view_item">ViewItemActivity</string>
+    <string name="title_activity_add_friend">AddFriendActivity</string>
 
 </resources>
