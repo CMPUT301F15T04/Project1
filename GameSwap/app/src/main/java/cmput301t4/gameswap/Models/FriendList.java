@@ -26,7 +26,7 @@ public class FriendList {
      * @param trader The User that the user has added as a friend
      */
     public void addFriend(String trader) {
-        friendList.add(trader);
+        friendList.add(trader.toLowerCase());
     }
 
     /**
@@ -70,7 +70,7 @@ public class FriendList {
      * @return A boolean that is true if the provided User is a friend of the current user
      */
     public boolean hasFriend(String trader) {
-        return friendList.contains(trader);
+        return friendList.contains(trader.toLowerCase());
     }
 
     /**
@@ -88,5 +88,18 @@ public class FriendList {
     public boolean isEmpty(){
         return friendList.isEmpty();
     }
+
+    public int getFriendIndex(String friendName) {
+        int index = -1;
+        for (int i=0;i< friendList.size();i++){
+            if (friendList.get(i).toLowerCase().equals(friendName.toLowerCase())){
+                index = i;
+                break;
+            }
+
+        }
+        return index;
+    }
+
 }//end FriendLis
 

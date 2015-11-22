@@ -23,20 +23,28 @@ public class UsersList {
     /**
      * Getter to return the username of the user
      */
-    public String getUser(String user){
-        if (hasUser(user)){
-            return userList.get(userList.indexOf(user)).getUserName().toString();
-        }
-        else
-            return "null";
+    public String getUserName(String user) {
+        String name="";
+        for (int i = 0; i < userList.size(); i++)
+            if (userList.get(i).getUserName().toLowerCase().equals(user)) {
+               name =userList.get(i).getUserName().toLowerCase();
+            }
+        return name;
     }
     /**
      * Checks if the user exists
      */
-    public boolean hasUser(String user){
-        if (userList.contains(user)){
-            return true;
+    public boolean hasUserName(String username) {
+        int answer = 0;
+
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserName().toLowerCase().equals(username)) {
+                answer = 1;
+                break;
+            }
         }
+        if(1 == answer)
+            return true;
         else
             return false;
     }

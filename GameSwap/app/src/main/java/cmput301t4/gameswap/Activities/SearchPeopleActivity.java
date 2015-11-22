@@ -40,9 +40,9 @@ public class SearchPeopleActivity extends Activity {
         /**
          * including some more users in the app
          */
-        user_1 = new User("kynan","kynan@ualberta.ca","Edmonton","780-999-1234",null);
-        user_2 = new User("Blake","blake@ualberta.ca","Edmonton","780-444-1234",null);
-        user_3 = new User("Daniel","dren@ualberta.ca","Edmonton","780-444-1244",null);
+        user_1 = new User("kynan".toLowerCase(),"kynan@ualberta.ca","Edmonton","780-999-1234",null);
+        user_2 = new User("Blake".toLowerCase(),"blake@ualberta.ca","Edmonton","780-444-1234",null);
+        user_3 = new User("Daniel".toLowerCase(),"dren@ualberta.ca","Edmonton","780-444-1244",null);
 
         int userListSize = UserListManager.getUserListSize();
         if (userListSize == 0) {
@@ -93,17 +93,17 @@ public class SearchPeopleActivity extends Activity {
             Toast.makeText(getBaseContext(), "Already a friend", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
             startActivity(intent);
+            //this.finish();
         } else {
-            if(UserListManager.hasUser(traderName)) {
+            if(UserListManager.hasUserName(traderName)) {
                 Intent intent = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
+                intent.putExtra("name",traderName.toLowerCase());
                 startActivity(intent);
+                //this.finish();
             }
             else
                 Toast.makeText(getBaseContext(), "Doesn't exist", Toast.LENGTH_SHORT).show();
-
-
         }
-        this.finish();
     }
 
 

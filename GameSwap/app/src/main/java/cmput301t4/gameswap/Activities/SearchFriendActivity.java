@@ -67,9 +67,9 @@ public class SearchFriendActivity extends Activity {
         size = friendList.size();
 
 
-        FriendManager.addFriend("Mike");
-        FriendManager.addFriend("Cory");
-        FriendManager.addFriend("Terri");
+        //FriendManager.addFriend("Mike");
+       // FriendManager.addFriend("Cory");
+        //FriendManager.addFriend("Terri");
         adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, FriendManager.getAllUsers());
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

@@ -1,20 +1,34 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.R;
 
 public class AddFriendActivity extends Activity {
 
+    private Button addTrader;
+    private String traderName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
+
+        addTrader = (Button) findViewById(R.id.addtrader);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+
+        if (b != null) {
+          traderName = (b.getString("name"));
+        }
+
     }
 
     @Override
@@ -40,7 +54,12 @@ public class AddFriendActivity extends Activity {
     }
 
     public void addTraderClicked(View v){
+        FriendManager.addFriend(traderName);
         Toast.makeText(getBaseContext(), "Added", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AddFriendActivity.this,FriendProfileActivity.class);
+        intent.putExtra("name", traderName);
+        startActivity(intent);
+        finish();
 
     }
 

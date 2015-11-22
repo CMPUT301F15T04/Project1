@@ -19,12 +19,12 @@ public class UserListManager {
 
     static public void addUser(User user){getInstance().addUser(user);}
 
-    static public String getUser(String user){return getInstance().getUser(user);}
+    static public String getUserName(String user){return getInstance().getUserName(user);}
 
     static public int getUserListSize(){return getInstance().getUserListSize();}
 
-    static public boolean hasUser(String user){
-        if(getInstance().hasUser(user)){
+    static public boolean hasUserName(String username){
+        if(getInstance().hasUserName(username)){
             return true;
         }
         return false;

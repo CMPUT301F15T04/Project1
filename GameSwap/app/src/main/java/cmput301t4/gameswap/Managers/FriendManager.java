@@ -56,4 +56,8 @@ public class FriendManager {
         getFriendlist().clearFriendList();
     }//end clearFriendList
 
+    static public int getFriendIndex(String friendName){
+        return getFriendlist().getFriendIndex(friendName);
+    }
+
 }//end FriendManager
