@@ -96,6 +96,7 @@ public class SearchFriendActivity extends Activity {
 
                             case R.id.viewFriendProfileMenuId:
                                 Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
                                 startActivity(intent);
 
                             case R.id.tradeFriendMenuId:

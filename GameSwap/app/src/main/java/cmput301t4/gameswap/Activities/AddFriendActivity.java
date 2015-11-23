@@ -16,9 +16,12 @@ public class AddFriendActivity extends Activity {
 
     private Button addTrader;
     private String traderName;
+
+    private AddFriendActivity activity = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Toast.makeText(getBaseContext(), "I am here", Toast.LENGTH_SHORT).show();
         setContentView(R.layout.activity_add_friend);
 
         addTrader = (Button) findViewById(R.id.addtrader);
@@ -58,8 +61,11 @@ public class AddFriendActivity extends Activity {
         Toast.makeText(getBaseContext(), "Added", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddFriendActivity.this,FriendProfileActivity.class);
         intent.putExtra("name", traderName);
-        startActivity(intent);
         finish();
+        startActivity(intent);
+
+
+
 
     }
 

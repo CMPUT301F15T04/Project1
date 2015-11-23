@@ -21,6 +21,7 @@ public class UserListManager {
 
     static public String getUserName(String user){return getInstance().getUserName(user);}
 
+    //static public String getUserCity(String user){return getInstance().getUserCity(user)}
     static public int getUserListSize(){return getInstance().getUserListSize();}
 
     static public boolean hasUserName(String username){

@@ -32,6 +32,7 @@ public class FriendProfileActivity extends Activity {
             traderNameTextView.setText(b.getString("name"));
         }
         traderName = traderNameTextView.getText().toString();
+
     }
 
     @Override
@@ -64,8 +65,8 @@ public class FriendProfileActivity extends Activity {
     }
 
     public void removeTraderButtonClicked(View view){
-        int index;
-        index = FriendManager.getFriendIndex(traderName);
-        FriendManager.delFriend(index);
+        //int index;
+        //index = FriendManager.getFriendIndex(traderName);
+       // FriendManager.delFriend(index);
     }
 }

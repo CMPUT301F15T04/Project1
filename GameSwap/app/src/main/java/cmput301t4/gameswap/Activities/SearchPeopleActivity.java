@@ -26,9 +26,13 @@ public class SearchPeopleActivity extends Activity {
     private SearchView search;
     private FriendList friendList;
 
+    private SearchPeopleActivity activity = this;
+
+
     private User user_1;
     private User user_2;
     private User user_3;
+
 
 
     @Override
@@ -77,7 +81,7 @@ public class SearchPeopleActivity extends Activity {
                 //Toast.makeText(getBaseContext(), query,
                 //Toast.LENGTH_SHORT).show();
                 findTrader(query);
-                return false;
+                return true;
             }
 
             @Override
@@ -92,18 +96,25 @@ public class SearchPeopleActivity extends Activity {
         if (FriendManager.getFriendlist().hasFriend(trader)) {
             Toast.makeText(getBaseContext(), "Already a friend", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
+            activity.finish();
             startActivity(intent);
-            //this.finish();
+
+        } else if(UserListManager.hasUserName(traderName)) {
+
+                Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
+                intent2.putExtra("name",traderName.toLowerCase());
+               // Toast.makeText(getBaseContext(), "I'm about to open a new activity", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getBaseContext(), "-----------------", Toast.LENGTH_SHORT).show();
+                search.clearChildFocus(search);
+                activity.finish();
+                startActivity(intent2);
+
         } else {
-            if(UserListManager.hasUserName(traderName)) {
-                Intent intent = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
-                intent.putExtra("name",traderName.toLowerCase());
-                startActivity(intent);
-                //this.finish();
-            }
-            else
-                Toast.makeText(getBaseContext(), "Doesn't exist", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "NO user exist", Toast.LENGTH_SHORT).show();
         }
+
+
+
     }
 
 
