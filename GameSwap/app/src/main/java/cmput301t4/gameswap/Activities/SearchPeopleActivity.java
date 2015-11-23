@@ -71,15 +71,12 @@ public class SearchPeopleActivity extends Activity {
         search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                //Toast.makeText(getBaseContext(), "searching...", Toast.LENGTH_SHORT).show();
             }
         });
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //Toast.makeText(getBaseContext(), query,
-                //Toast.LENGTH_SHORT).show();
                 findTrader(query);
                 return true;
             }
@@ -93,18 +90,16 @@ public class SearchPeopleActivity extends Activity {
 
     public void findTrader(String trader){
         traderName = search.getQuery().toString().toLowerCase();
+
         if (FriendManager.getFriendlist().hasFriend(trader)) {
-            Toast.makeText(getBaseContext(), "Already a friend", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
+            intent.putExtra("name",traderName.toLowerCase());
             activity.finish();
             startActivity(intent);
 
         } else if(UserListManager.hasUserName(traderName)) {
-
                 Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
                 intent2.putExtra("name",traderName.toLowerCase());
-               // Toast.makeText(getBaseContext(), "I'm about to open a new activity", Toast.LENGTH_SHORT).show();
-               // Toast.makeText(getBaseContext(), "-----------------", Toast.LENGTH_SHORT).show();
                 search.clearChildFocus(search);
                 activity.finish();
                 startActivity(intent2);

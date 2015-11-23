@@ -24,7 +24,7 @@ public class AddFriendActivity extends Activity {
         //Toast.makeText(getBaseContext(), "I am here", Toast.LENGTH_SHORT).show();
         setContentView(R.layout.activity_add_friend);
 
-        addTrader = (Button) findViewById(R.id.addtrader);
+        addTrader = (Button) findViewById(R.id.addTraderButton);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 

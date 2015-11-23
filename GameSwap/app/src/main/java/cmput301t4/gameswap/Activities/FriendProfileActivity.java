@@ -65,8 +65,13 @@ public class FriendProfileActivity extends Activity {
     }
 
     public void removeTraderButtonClicked(View view){
-        //int index;
-        //index = FriendManager.getFriendIndex(traderName);
-       // FriendManager.delFriend(index);
+        int index;
+        index = FriendManager.getFriendIndex(traderName);
+        FriendManager.delFriend(index);
+        Intent intent = new Intent(FriendProfileActivity.this,AddFriendActivity.class);
+        //intent.putExtra("")
+        startActivity(intent);
+        finish();
+
     }
 }

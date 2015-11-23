@@ -19,6 +19,8 @@ public class UserListManager {
 
     static public void addUser(User user){getInstance().addUser(user);}
 
+    static public void getUser(String username){getInstance().getUser(username);}
+
     static public String getUserName(String user){return getInstance().getUserName(user);}
 
     //static public String getUserCity(String user){return getInstance().getUserCity(user)}

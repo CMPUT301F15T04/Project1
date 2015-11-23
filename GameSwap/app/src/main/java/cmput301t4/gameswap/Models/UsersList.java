@@ -13,24 +13,29 @@ public class UsersList {
     /**
      * Stores all the users of the App
      */
-    public void addUser(User user){userList.add(user);}
+    public void addUser(User user) {
+        userList.add(user);
+    }
 
     /**
      * Removes a user from the userlist
      */
-    public void delUser(int position){userList.remove(position);}
+    public void delUser(int position) {
+        userList.remove(position);
+    }
 
     /**
      * Getter to return the username of the user
      */
     public String getUserName(String user) {
-        String name="";
+        String name = "";
         for (int i = 0; i < userList.size(); i++)
             if (userList.get(i).getUserName().toLowerCase().equals(user)) {
-               name =userList.get(i).getUserName().toLowerCase();
+                name = userList.get(i).getUserName().toLowerCase();
             }
         return name;
     }
+
     /**
      * Checks if the user exists
      */
@@ -43,15 +48,27 @@ public class UsersList {
                 break;
             }
         }
-        if(1 == answer)
+        if (1 == answer)
             return true;
         else
             return false;
     }
+
     /**
      * Get the size of the user list
      */
-    public int getUserListSize(){
+    public int getUserListSize() {
         return userList.size();
+    }
+
+    public User getUser(String username) {
+        User user = new User("", "", "", "", null);
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserName().toString().toLowerCase().equals(username.toLowerCase())) {
+                user = userList.get(i);
+                break;
+            }
+        }
+        return user;
     }
 }
