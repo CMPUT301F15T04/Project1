@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class FriendProfileActivity extends Activity {
@@ -66,8 +68,10 @@ public class FriendProfileActivity extends Activity {
 
     public void removeTraderButtonClicked(View view){
         int index;
-        index = FriendManager.getFriendIndex(traderName);
-        FriendManager.delFriend(index);
+        //index = FriendManager.getFriendIndex(traderName);
+        index = UserManager.getTrader().getFriendList().getFriendIndex(traderName);
+        UserManager.getTrader().getFriendList().delFriend(index);
+        ServerManager.saveUserOnline(UserManager.getTrader());
         Intent intent = new Intent(FriendProfileActivity.this,AddFriendActivity.class);
         //intent.putExtra("")
         startActivity(intent);

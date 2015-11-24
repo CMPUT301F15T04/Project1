@@ -46,7 +46,7 @@ public class SearchFriendActivity extends Activity {
 
     private ArrayAdapter<String> adapter;
     private ListView friendListView;
-    private ArrayList<String> friendList;
+    private FriendList friendList;
 
     protected int friendListViewItemPosition;
     private EditText searchFriendText;
@@ -63,17 +63,17 @@ public class SearchFriendActivity extends Activity {
         setContentView(R.layout.activity_search_friend);
 
         friendListView = (ListView) findViewById(R.id.friendlistView);
-        friendList = FriendManager.getAllUsers();
-        size = friendList.size();
+        friendList = UserManager.getTrader().getFriendList();
+        size = friendList.getFriendlistSize();
 
 
         //FriendManager.addFriend("Mike");
        // FriendManager.addFriend("Cory");
         //FriendManager.addFriend("Terri");
-        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, FriendManager.getAllUsers());
+        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList.getAllFriends());
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        size = FriendManager.getAllUsers().size();
+        //size = FriendManager.getAllUsers().size();
 
         //code referenced from http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
         //code referenced from http://stackoverflow.com/questions/7201159/is-using-menuitem-getitemid-valid-in-finding-which-menuitem-is-selected-by-use
@@ -112,7 +112,7 @@ public class SearchFriendActivity extends Activity {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         //Toast.makeText(SearchFriendActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
-                                        FriendManager.delFriend(friendListViewItemPosition);
+                                        friendList.delFriend(friendListViewItemPosition);
                                         resetAdapter();
                                     }
                                 });
@@ -190,7 +190,7 @@ public class SearchFriendActivity extends Activity {
     }
 
     private void resetAdapter(){
-        adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, FriendManager.getAllUsers());
+        adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, friendList.getAllFriends());
         friendListView.setAdapter(adapter);
     }
 
@@ -205,10 +205,10 @@ public class SearchFriendActivity extends Activity {
     }
 
     public void searchFriend(String friend){
-        friendList = FriendManager.getAllUsers();
-        for(int i=0; i< friendList.size();i++){
+        friendList = UserManager.getTrader().getFriendList();
+        for(int i=0; i< friendList.getFriendlistSize();i++){
 
-            if (friend.toLowerCase().equals(friendList.get(i).toString().toLowerCase()) ){
+            if (friend.toLowerCase().equals(friendList.getFriend(i).toString().toLowerCase()) ){
                 Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
                 Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
                 startActivity(intent);
@@ -222,11 +222,11 @@ public class SearchFriendActivity extends Activity {
     protected void onStart() {
 
         super.onStart();
-        loadFromFile();
+        //loadFromFile();
         friendListView = (ListView) findViewById(R.id.friendlistView);
 //        friendList = UserManager.getTrader().getFriendList().getAllFriends();
-        friendList = FriendManager.getFriendlist().getAllFriends();
-        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList);
+        friendList = UserManager.getTrader().getFriendList();
+        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList.getAllFriends());
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -248,7 +248,6 @@ public class SearchFriendActivity extends Activity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.UserListManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.Models.UsersList;
@@ -40,7 +41,7 @@ public class SearchPeopleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_people);
 
-        friendList = FriendManager.getFriendlist();
+        friendList = UserManager.getFriendlist();
         /**
          * including some more users in the app
          */
@@ -91,9 +92,9 @@ public class SearchPeopleActivity extends Activity {
     public void findTrader(String trader){
         traderName = search.getQuery().toString().toLowerCase();
 
-        if (FriendManager.getFriendlist().hasFriend(trader)) {
+        if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
-            intent.putExtra("name",traderName.toLowerCase());
+            intent.putExtra("name", traderName.toLowerCase());
             activity.finish();
             startActivity(intent);
 
