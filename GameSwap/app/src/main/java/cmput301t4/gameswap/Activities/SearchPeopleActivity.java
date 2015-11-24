@@ -93,7 +93,19 @@ public class SearchPeopleActivity extends Activity {
 
     public void findTrader(String trader){
         traderName = search.getQuery().toString().toLowerCase();
-        ServerManager.searchForUser(traderName);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ServerManager.searchForUser(traderName);
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+
         if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
             ServerManager.getFriendOnline(traderName);

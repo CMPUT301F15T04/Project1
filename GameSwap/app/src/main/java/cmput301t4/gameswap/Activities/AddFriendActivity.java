@@ -35,6 +35,7 @@ public class AddFriendActivity extends Activity {
         traderName = (UserManager.getFriend().getUserName());
         TextView username = (TextView) findViewById(R.id.userNameTextView);
         username.setText(traderName);
+        username.setTextColor(0xFFFFFF);
 
 
     }

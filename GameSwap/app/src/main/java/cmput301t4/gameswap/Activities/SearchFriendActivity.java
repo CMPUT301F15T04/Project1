@@ -133,6 +133,7 @@ public class SearchFriendActivity extends Activity {
 
                                 AlertDialog alertDialog = alert.create();
                                 alertDialog.show();
+
                                 return true;
                         }
                         return false;
