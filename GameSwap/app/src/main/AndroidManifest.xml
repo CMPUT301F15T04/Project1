@@ -3,14 +3,14 @@
     package="cmput301t4.gameswap" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--- http://www.c-sharpcorner.com/UploadFile/e14021/capture-image-from-camera-and-selecting-image-from-gallery-o/-->
+    <!-- - http://www.c-sharpcorner.com/UploadFile/e14021/capture-image-from-camera-and-selecting-image-from-gallery-o/ -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
-
 
     <application
         android:allowBackup="true"
@@ -47,20 +47,18 @@
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
         </activity>
 
-        <!---http://sampleprogramz.com/android/searchview.php -->
+        <!-- -http://sampleprogramz.com/android/searchview.php -->
         <activity
             android:name=".Activities.SearchPeopleActivity"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
         </activity>
-
-
-
         <activity
             android:name=".Activities.ViewFriendInventoryActivity"
             android:parentActivityName=".Activities.FriendsNTradingActivity" >
@@ -89,6 +87,14 @@
         <activity
             android:name=".Activities.TopTradesActivity"
             android:label="@string/title_activity_top_trades" >
+        </activity>
+        <activity
+            android:name=".Activities.ViewItemActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Activities.AddFriendActivity"
+            android:label="@string/title_activity_add_friend" >
         </activity>
     </application>
 

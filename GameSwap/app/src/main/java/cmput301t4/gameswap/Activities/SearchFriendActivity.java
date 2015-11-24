@@ -17,9 +17,30 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
+
+import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.FriendList;
 
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.User;
@@ -30,8 +51,7 @@ public class SearchFriendActivity extends Activity {
 
     private ArrayAdapter<String> adapter;
     private ListView friendListView;
-    private ArrayList<String> friendList;
-    private ArrayList<String> friendNameList;
+    private FriendList friendList;
 
     protected int friendListViewItemPosition;
     private EditText searchFriendText;
@@ -39,24 +59,26 @@ public class SearchFriendActivity extends Activity {
     private int size;
 
     private SearchView search;
+    private static final String FILENAME = "friends.sav"; // model
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
 
-        friendListView = (ListView) findViewById(R.id.listView);
-        friendList = FriendManager.getAllUsers();
-        size = friendList.size();
+        friendListView = (ListView) findViewById(R.id.friendlistView);
+        friendList = UserManager.getTrader().getFriendList();
+        size = friendList.getFriendlistSize();
 
 
-        FriendManager.addFriend("Mike");
-        FriendManager.addFriend("Cory");
-        FriendManager.addFriend("Terri");
-        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, FriendManager.getAllUsers());
+        //FriendManager.addFriend("Mike");
+       // FriendManager.addFriend("Cory");
+        //FriendManager.addFriend("Terri");
+        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList.getAllFriends());
         friendListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        size = FriendManager.getAllUsers().size();
+        //size = FriendManager.getAllUsers().size();
 
         //code referenced from http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
         //code referenced from http://stackoverflow.com/questions/7201159/is-using-menuitem-getitemid-valid-in-finding-which-menuitem-is-selected-by-use
@@ -78,7 +100,22 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.viewFriendProfileMenuId:
+
+                                Thread thread = new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ServerManager.getFriendOnline(UserManager.getTrader().getFriendList().getFriend(friendListViewItemPosition));
+                                    }
+                                });
+                                thread.start();
+                                try {
+                                    thread.join();
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException();
+                                }
+
                                 Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
                                 startActivity(intent);
 
                             case R.id.tradeFriendMenuId:
@@ -94,12 +131,13 @@ public class SearchFriendActivity extends Activity {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         //Toast.makeText(SearchFriendActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
-                                        FriendManager.delFriend(friendListViewItemPosition);
+                                        UserManager.getFriendlist().delFriend(friendListViewItemPosition);
+                                        ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
                                     }
                                 });
 
-                                alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
@@ -109,6 +147,7 @@ public class SearchFriendActivity extends Activity {
 
                                 AlertDialog alertDialog = alert.create();
                                 alertDialog.show();
+
                                 return true;
                         }
                         return false;
@@ -172,7 +211,7 @@ public class SearchFriendActivity extends Activity {
     }
 
     private void resetAdapter(){
-        adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, FriendManager.getAllUsers());
+        adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, friendList.getAllFriends());
         friendListView.setAdapter(adapter);
     }
 
@@ -187,10 +226,10 @@ public class SearchFriendActivity extends Activity {
     }
 
     public void searchFriend(String friend){
-        friendList = FriendManager.getAllUsers();
-        for(int i=0; i< friendList.size();i++){
+        friendList = UserManager.getTrader().getFriendList();
+        for(int i=0; i< friendList.getFriendlistSize();i++){
 
-            if (friend.toLowerCase().equals(friendList.get(i).toString().toLowerCase()) ){
+            if (friend.toLowerCase().equals(friendList.getFriend(i).toString().toLowerCase()) ){
                 Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
                 Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
                 startActivity(intent);
@@ -201,6 +240,82 @@ public class SearchFriendActivity extends Activity {
     }
 
 
+    public boolean searchFriendOnline(final String friend){
+        if(friend.equals(UserManager.getTrader().getUserName())){
+           return false;
+        }
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ServerManager.searchForUser(friend);
+                if(ServerManager.checkResult()){
+                    ServerManager.getFriendOnline(friend);
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+        if(ServerManager.checkResult()){
+            Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+        }
+        return true;
+    }
 
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        //loadFromFile();
+        friendListView = (ListView) findViewById(R.id.friendlistView);
+//        friendList = UserManager.getTrader().getFriendList().getAllFriends();
+        friendList = UserManager.getTrader().getFriendList();
+        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList.getAllFriends());
+        friendListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void loadFromFile(){
+
+        try {
+
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //code referenced from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type arraylistType = new TypeToken<ArrayList<String>>() {}.getType();
+            ArrayList<String> friends = gson.fromJson(in, arraylistType);
+            FriendManager.getFriendlist().setFriendList(friends);
+            } catch (FileNotFoundException e) {
+            ArrayList<String> friends = FriendManager.getFriendlist().getAllFriends();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private void saveToFile() {
+
+        try {
+            ArrayList<String> friends = FriendManager.getFriendlist().getAllFriends();
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(friends, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }

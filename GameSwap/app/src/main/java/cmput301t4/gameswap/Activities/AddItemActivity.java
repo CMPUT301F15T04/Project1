@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -192,6 +193,14 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     }
 
+    private void selectImage(){
+
+        Intent choosePicIntent=new Intent();
+        choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+        Intent takePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    }
+
     /**
      * A necessary function that must be added to choose the item in the spinner
      */
@@ -246,7 +255,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 
             saveToFile();
-
             this.finish();
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);

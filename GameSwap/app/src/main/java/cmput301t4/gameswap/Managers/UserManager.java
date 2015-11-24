@@ -25,6 +25,7 @@ import cmput301t4.gameswap.Models.User;
 public class UserManager {
 
     private static User trader = null;
+    private static User friend = null;
 
     /**
      * Used to get the app-wide singleton of <code>User</code>
@@ -35,11 +36,21 @@ public class UserManager {
         //TODO: Add call to CacheManager to see if there is a previous login on the phone
 
         if(trader == null){
-            trader = new User("", "", "", "");
+            trader = new User("", "", "", "",null);
         }
 
         return trader;
     }
+
+    static public User getFriend(){
+
+        if(friend == null){
+            friend = new User("", "", "", "", null);
+        }
+        return friend;
+    }
+
+    public static void setFriend(User user) { friend = user; }
 
     public static void setTrader(User user){
         trader = user;
@@ -92,7 +103,9 @@ public class UserManager {
      */
     static public void createUser(String username, String email, String city, String phoneNumber, Context context) {
         //TODO: Add call to server to see if username is available
-        trader = new User(username, email, city, phoneNumber);
+        //null is just for an empty friendlist
+        trader = new User(username, email, city, phoneNumber,null);
+        trader.setFriendList(new FriendList());
         saveUserLocally(context);
     }
 

@@ -29,9 +29,9 @@
                 android:layout_marginEnd="31dp"
                 android:minHeight="85dp"
                 android:minWidth="105dp"
+                android:onClick="addImageOption"
                 android:layout_gravity="right|top"
-                android:nestedScrollingEnabled="false" />
-
+></ImageButton>
             <TextView
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"

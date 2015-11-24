@@ -1,5 +1,7 @@
 package cmput301t4.gameswap.Models;
 
+import android.content.pm.FeatureInfo;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -24,7 +26,7 @@ public class FriendList {
      * @param trader The User that the user has added as a friend
      */
     public void addFriend(String trader) {
-        friendList.add(trader);
+        friendList.add(trader.toLowerCase());
     }
 
     /**
@@ -46,6 +48,11 @@ public class FriendList {
         return friendList.get(index);
     }
 
+    /* Setter to set the friendsList
+    */
+    public void setFriendList(ArrayList<String> friends){friendList = friends;}
+
+
     /**
      * Generic getter to retrieve all friends of a user
      *
@@ -63,7 +70,7 @@ public class FriendList {
      * @return A boolean that is true if the provided User is a friend of the current user
      */
     public boolean hasFriend(String trader) {
-        return friendList.contains(trader);
+        return friendList.contains(trader.toLowerCase());
     }
 
     /**
@@ -81,5 +88,17 @@ public class FriendList {
     public boolean isEmpty(){
         return friendList.isEmpty();
     }
+
+    public int getFriendIndex(String friendName) {
+       int i;
+        for (i=0;i < friendList.size();i++){
+            System.out.println(friendName + " " + i);
+            if (friendList.get(i).toLowerCase().equals(friendName.toLowerCase())){
+               return i;
+            }
+        }
+        return i;
+    }
+
 }//end FriendLis
 

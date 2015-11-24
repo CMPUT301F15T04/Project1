@@ -83,6 +83,11 @@ public class ServerManager {
         };
         Thread serverThread = new Thread(runnable);
         serverThread.start();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
 
     }//end getUserOnline
 
@@ -215,8 +220,58 @@ public class ServerManager {
             System.err.println(output);
             json += output;
         }
-        System.err.println("JSON:"+json);
+        System.err.println("JSON:" + json);
         return json;
     }
+
+    public static void getFriendOnline(final String username){     //Access Server function
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username + "/_source";
+                System.out.println(url);
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(url);
+                HttpResponse response = null;
+
+                try {                           //run URL
+                    response = httpClient.execute(httpGet);
+                } catch (ClientProtocolException e1) {
+                    throw new RuntimeException(e1);
+                } catch (IOException e1) {
+                    throw new RuntimeException(e1);
+                }
+                BufferedReader rd = null;
+                User sr = null;
+                Gson gson = new Gson();
+
+                try {
+                    rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
+                    //String line = rd.readLine();
+                    //System.out.println(line);
+                    sr = gson.fromJson(rd, User.class);
+                    System.out.println(sr.getUserName() + " username from servermanager");
+                } catch (JsonIOException e) {
+                    throw new RuntimeException(e);
+                } catch (JsonSyntaxException e) {
+                    throw new RuntimeException(e);
+                } catch (IllegalStateException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                UserManager.setFriend(sr);
+            }
+        };
+        Thread serverThread = new Thread(runnable);
+        serverThread.start();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+
+    }//end getUserOnline
 
 }//end Server Manager

@@ -11,7 +11,13 @@ import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserListManager;
+import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.User;
+import cmput301t4.gameswap.Models.UsersList;
 import cmput301t4.gameswap.R;
 
 public class SearchPeopleActivity extends Activity {
@@ -20,17 +26,42 @@ public class SearchPeopleActivity extends Activity {
     EditText traderEditText;
     String traderName;
     private SearchView search;
+    private FriendList friendList;
+
+    private SearchPeopleActivity activity = this;
+
+
+    private User user_1;
+    private User user_2;
+    private User user_3;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_people);
 
+        friendList = UserManager.getTrader().getFriendList();
+        /**
+         * including some more users in the app
+         */
+        /*user_1 = new User("kynan".toLowerCase(),"kynan@ualberta.ca","Edmonton","780-999-1234",null);
+        user_2 = new User("Blake".toLowerCase(),"blake@ualberta.ca","Edmonton","780-444-1234",null);
+        user_3 = new User("Daniel".toLowerCase(),"dren@ualberta.ca","Edmonton","780-444-1244",null);
 
-        //creating some dummy users
-        User user_1 = new User("Kynan", "kynan@ualberta.ca", "Edmonton", "780-999-8888");
-        User user_2 = new User("Daneil", "dren@ualberta.ca", "Edmonton", "780-999-8887");
-        User user_3 = new User("Preyanshu", "pre@ualberta.ca", "Edmonton", "780-999-8886");
+        int userListSize = UserListManager.getUserListSize();
+        if (userListSize == 0) {
+            UserListManager.addUser(user_1);
+            UserListManager.addUser(user_2);
+            UserListManager.addUser(user_3);
+        }
+
+        int size = UserListManager.getUserListSize();*/
+
+        //String sizeStr = String.valueOf(size);
+        //Toast.makeText(getBaseContext(),sizeStr , Toast.LENGTH_SHORT).show();
+
 
         /**
          * Code from - http://sampleprogramz.com/android/searchview.php
@@ -43,17 +74,14 @@ public class SearchPeopleActivity extends Activity {
         search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                //Toast.makeText(getBaseContext(), "searching...", Toast.LENGTH_SHORT).show();
             }
         });
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //Toast.makeText(getBaseContext(), query,
-                //Toast.LENGTH_SHORT).show();
                 findTrader(query);
-                return false;
+                return true;
             }
 
             @Override
@@ -64,11 +92,52 @@ public class SearchPeopleActivity extends Activity {
     }
 
     public void findTrader(String trader){
-        traderName = search.getQuery().toString();
-        //Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SearchPeopleActivity.this,FriendProfileActivity.class);
-        startActivity(intent);
-        this.finish();
+        traderName = search.getQuery().toString().toLowerCase();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ServerManager.searchForUser(traderName);
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+
+        if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
+            Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
+            ServerManager.getFriendOnline(traderName);
+            //intent.putExtra("name", traderName.toLowerCase());
+            activity.finish();
+            startActivity(intent);
+
+        } else if(ServerManager.checkResult()) {
+                Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
+                Thread thread2 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ServerManager.getFriendOnline(traderName);
+                    }
+                });
+                thread2.start();
+                try {
+                    thread2.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException();
+                }
+                //intent2.putExtra("name",traderName.toLowerCase());
+                search.clearChildFocus(search);
+                activity.finish();
+                startActivity(intent2);
+
+        } else {
+            Toast.makeText(getBaseContext(), "NO user exist", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
 

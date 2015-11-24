@@ -12,6 +12,7 @@ import cmput301t4.gameswap.Models.User;
  */
 public class FriendManager {
 
+
     private static FriendList friendList = null;
     //=====Singleton Code=====//
     static public FriendList getFriendlist(){
@@ -34,6 +35,11 @@ public class FriendManager {
         UserManager.getTrader().setFriendList(friendList);
     }
 
+    /*
+     */
+    public void setFriendList(ArrayList<String> friends)
+    {getFriendlist().setFriendList(friends);}
+
     //Retrieve friend at index
     static public String getUser(int index){return getFriendlist().getFriend(index);}//End getUser
 
@@ -50,5 +56,9 @@ public class FriendManager {
     static public void clearFriendlist(){
         getFriendlist().clearFriendList();
     }//end clearFriendList
+
+    static public int getFriendIndex(String friendName){
+        return getFriendlist().getFriendIndex(friendName);
+    }
 
 }//end FriendManager

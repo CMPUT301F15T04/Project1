@@ -22,9 +22,14 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="345dp"
-        android:id="@+id/listView"
+        android:id="@+id/friendlistView"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.45" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
 
     <SearchView
         android:layout_width="match_parent"
