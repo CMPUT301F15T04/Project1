@@ -198,7 +198,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         Intent choosePicIntent=new Intent();
         choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-        Intent takePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent takePicIntent = new Intent;
+        takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
     }
 
     /**
@@ -273,7 +274,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(getBaseContext(), "Yay", Toast.LENGTH_SHORT).show();
+                //Intent choosePicIntent=new Intent();
+                //choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
+                Intent takePicIntent = new Intent;
+                takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                 return true;
             }
         });
