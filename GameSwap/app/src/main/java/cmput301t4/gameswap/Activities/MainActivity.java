@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.R;
 
@@ -63,7 +64,19 @@ public class MainActivity extends Activity {
         }
 
         if(ServerManager.checkResult()) {
-            ServerManager.getUserOnline(username.getText().toString());
+            Thread LoadUser = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    ServerManager.getUserOnline(user);
+                }
+            });
+            LoadUser.start();
+            try {
+                LoadUser.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException();
+            }
+            //ServerManager.getUserOnline(username.getText().toString());
             Intent intent = new Intent(this, selectTaskActivity.class);
             startActivity(intent);
         } else {

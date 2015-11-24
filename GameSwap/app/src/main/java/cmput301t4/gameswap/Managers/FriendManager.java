@@ -12,6 +12,7 @@ import cmput301t4.gameswap.Models.User;
  */
 public class FriendManager {
 
+
     private static FriendList friendList = null;
     //=====Singleton Code=====//
     static public FriendList getFriendlist(){

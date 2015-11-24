@@ -83,6 +83,11 @@ public class ServerManager {
         };
         Thread serverThread = new Thread(runnable);
         serverThread.start();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
 
     }//end getUserOnline
 
