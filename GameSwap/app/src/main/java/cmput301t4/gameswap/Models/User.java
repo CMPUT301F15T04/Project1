@@ -82,11 +82,12 @@ public class User {
 
     //=====End of Test Notify related Code=====//
 
-    public User(String username, String email, String city, String phoneNumber) {
+    public User(String username, String email, String city, String phoneNumber,FriendList friendList) {
         this.userName = username;
         this.userEmail = email;
         this.userCity = city;
         this.userPhoneNumber = phoneNumber;
+        this.friendList = friendList;
     }//end Trader constructor
 
 //=====Setters and Getters=====//

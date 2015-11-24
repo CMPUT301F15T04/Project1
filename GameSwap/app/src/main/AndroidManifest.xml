@@ -92,6 +92,10 @@
             android:name=".Activities.ViewItemActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".Activities.AddFriendActivity"
+            android:label="@string/title_activity_add_friend" >
+        </activity>
     </application>
 
 </manifest>

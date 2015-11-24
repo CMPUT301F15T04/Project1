@@ -88,7 +88,7 @@ public class myInventoryActivity extends Activity{
                                 final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 intent.putExtra("name", Name);
                                 intent.putExtra("description", Description);
-                                intent.putExtra("releaseDate", ReleaseDate);
+                                intent.putExtra("releaseDate", ReleaseDate.toString());
                                 intent.putExtra("index", myInventoryListViewPosition);
 
                                 startActivity(intent);
@@ -183,7 +183,7 @@ public class myInventoryActivity extends Activity{
     }
 
     @Override
-    protected void onStart(){
+      protected void onStart(){
 
         super.onStart();
         loadFromFile();

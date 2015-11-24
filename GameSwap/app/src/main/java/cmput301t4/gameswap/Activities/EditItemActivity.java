@@ -90,6 +90,7 @@ public class EditItemActivity extends Activity {
         if (b != null) {
             titleEditText.setText(b.getString("name"));
             descEditText.setText(b.getString("description"));
+            releaseEditText.setText(b.getString("releaseDate"));
             index = b.getInt("index");
         }
 

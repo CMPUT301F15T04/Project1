@@ -34,6 +34,11 @@ public class FriendManager {
         UserManager.getTrader().setFriendList(friendList);
     }
 
+    /*
+     */
+    public void setFriendList(ArrayList<String> friends)
+    {getFriendlist().setFriendList(friends);}
+
     //Retrieve friend at index
     static public String getUser(int index){return getFriendlist().getFriend(index);}//End getUser
 
@@ -51,5 +56,8 @@ public class FriendManager {
         getFriendlist().clearFriendList();
     }//end clearFriendList
 
+    static public int getFriendIndex(String friendName){
+        return getFriendlist().getFriendIndex(friendName);
+    }
 
 }//end FriendManager

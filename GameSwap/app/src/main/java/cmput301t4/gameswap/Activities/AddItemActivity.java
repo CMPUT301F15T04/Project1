@@ -246,7 +246,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 
             saveToFile();
-
             this.finish();
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);

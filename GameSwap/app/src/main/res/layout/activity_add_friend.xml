@@ -2,19 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cmput301t4.gameswap.Activities.FriendProfile"
-    android:weightSum="1"
-    >
+    tools:context="cmput301t4.gameswap.Activities.AddFriendActivity"
+    android:weightSum="1">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_weight="0.19">
+        android:layout_weight="0.24">
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/tweety"
-            android:id="@+id/imageView"
+            android:id="@+id/imageView1"
             android:layout_weight="0.20"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true" />
@@ -23,25 +23,25 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remove Trader"
-            android:id="@+id/removeTraderButton"
+            android:text="Add Trader"
+            android:id="@+id/addTraderButton"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="30dp"
-            android:onClick="removeTraderButtonClicked"/>
+            android:onClick="addTraderClicked"/>
 
     </RelativeLayout>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.23" />
+        android:layout_weight="0.19" />
 
     <TextView
         android:layout_width="133dp"
         android:layout_height="41dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/traderNameTextView"
+        android:id="@+id/userNameTextView"
         android:text="Name"
         android:layout_gravity="center_vertical"
         android:layout_weight="0.04" />
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="City"
-        android:id="@+id/traderCityTextView"
+        android:id="@+id/userCityTextView"
         android:layout_weight="0.12" />
 
     <TextView
@@ -59,29 +59,16 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Phone"
-        android:id="@+id/traderPhoneTextView"
+        android:id="@+id/userPhoneTextView"
         android:layout_weight="0.12" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="E-mail"
-        android:id="@+id/traderEmailTextView"
+        android:text="E-Mail"
+        android:id="@+id/userEmailTextView"
         android:layout_weight="0.12" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Inventory"
-        android:id="@+id/friendInventoryButton"
-        android:layout_weight="0.10" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Trade"
-        android:id="@+id/friendTradeButton"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10" />
 
 </LinearLayout>
