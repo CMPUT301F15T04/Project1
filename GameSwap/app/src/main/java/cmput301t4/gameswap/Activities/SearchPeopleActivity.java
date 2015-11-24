@@ -115,7 +115,18 @@ public class SearchPeopleActivity extends Activity {
 
         } else if(ServerManager.checkResult()) {
                 Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
-                ServerManager.getFriendOnline(traderName);
+                Thread thread2 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ServerManager.getFriendOnline(traderName);
+                    }
+                });
+                thread2.start();
+                try {
+                    thread2.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException();
+                }
                 //intent2.putExtra("name",traderName.toLowerCase());
                 search.clearChildFocus(search);
                 activity.finish();

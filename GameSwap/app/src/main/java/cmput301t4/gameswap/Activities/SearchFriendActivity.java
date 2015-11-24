@@ -100,7 +100,20 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.viewFriendProfileMenuId:
-                                ServerManager.getFriendOnline(UserManager.getTrader().getFriendList().getFriend(friendListViewItemPosition));
+
+                                Thread thread = new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ServerManager.getFriendOnline(UserManager.getTrader().getFriendList().getFriend(friendListViewItemPosition));
+                                    }
+                                });
+                                thread.start();
+                                try {
+                                    thread.join();
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException();
+                                }
+
                                 Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
                                 //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
                                 startActivity(intent);
@@ -118,12 +131,13 @@ public class SearchFriendActivity extends Activity {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         //Toast.makeText(SearchFriendActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
-                                        friendList.delFriend(friendListViewItemPosition);
+                                        UserManager.getFriendlist().delFriend(friendListViewItemPosition);
+                                        ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
                                     }
                                 });
 
-                                alert.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();

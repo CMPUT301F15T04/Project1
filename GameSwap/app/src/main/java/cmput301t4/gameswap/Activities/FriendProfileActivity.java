@@ -33,8 +33,8 @@ public class FriendProfileActivity extends Activity {
 
 
         traderNameTextView.setText(UserManager.getFriend().getUserName());
-
         traderName = traderNameTextView.getText().toString();
+        System.out.println(UserManager.getFriend().getUserName() + " testing location 3");
 
     }
 
@@ -71,6 +71,7 @@ public class FriendProfileActivity extends Activity {
         int index;
         //index = FriendManager.getFriendIndex(traderName);
         index = UserManager.getTrader().getFriendList().getFriendIndex(traderName);
+        System.out.println(traderName + " testing location 2");
         UserManager.getTrader().getFriendList().delFriend(index);
         ServerManager.saveUserOnline(UserManager.getTrader());
         Intent intent = new Intent(FriendProfileActivity.this,AddFriendActivity.class);
