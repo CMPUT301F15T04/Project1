@@ -25,6 +25,7 @@ import cmput301t4.gameswap.Models.User;
 public class UserManager {
 
     private static User trader = null;
+    private static User friend = null;
 
     /**
      * Used to get the app-wide singleton of <code>User</code>
@@ -40,6 +41,16 @@ public class UserManager {
 
         return trader;
     }
+
+    static public User getFriend(){
+
+        if(friend == null){
+            friend = new User("", "", "", "");
+        }
+        return friend;
+    }
+
+    public static void setFriend(User user) { friend = user; }
 
     public static void setTrader(User user){
         trader = user;

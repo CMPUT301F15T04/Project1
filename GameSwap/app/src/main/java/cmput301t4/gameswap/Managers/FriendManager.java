@@ -51,4 +51,5 @@ public class FriendManager {
         getFriendlist().clearFriendList();
     }//end clearFriendList
 
+
 }//end FriendManager

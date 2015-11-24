@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.Managers.FriendManager;
@@ -200,6 +202,30 @@ public class SearchFriendActivity extends Activity {
 
     }
 
+    public boolean searchFriendOnline(final String friend){
+        if(friend.equals(UserManager.getTrader().getUserName())){
+           return false;
+        }
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ServerManager.searchForUser(friend);
+                if(ServerManager.checkResult()){
+                    ServerManager.getFriendOnline(friend);
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+        if(ServerManager.checkResult()){
+            Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+        }
+        return true;
+    }
 
 
 
