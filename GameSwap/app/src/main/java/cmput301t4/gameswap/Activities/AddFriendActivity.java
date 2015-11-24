@@ -7,9 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class AddFriendActivity extends Activity {
@@ -25,12 +28,14 @@ public class AddFriendActivity extends Activity {
         setContentView(R.layout.activity_add_friend);
 
         addTrader = (Button) findViewById(R.id.addTraderButton);
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+        //Intent intent = getIntent();
+        //Bundle b = intent.getExtras();
 
-        if (b != null) {
-          traderName = (b.getString("name"));
-        }
+
+        traderName = (UserManager.getFriend().getUserName());
+        TextView username = (TextView) findViewById(R.id.userNameTextView);
+        username.setText(traderName);
+
 
     }
 
@@ -57,15 +62,17 @@ public class AddFriendActivity extends Activity {
     }
 
     public void addTraderClicked(View v){
+        System.out.println(UserManager.getTrader().getFriendList());
+        UserManager.getTrader().getFriendList().addFriend(traderName);
+        UserManager.saveUserLocally(this);
+        ServerManager.saveUserOnline(UserManager.getTrader());
         FriendManager.addFriend(traderName);
+
         Toast.makeText(getBaseContext(), "Added", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddFriendActivity.this,FriendProfileActivity.class);
         intent.putExtra("name", traderName);
         finish();
         startActivity(intent);
-
-
-
 
     }
 

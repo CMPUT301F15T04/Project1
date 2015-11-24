@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class FriendProfileActivity extends Activity {
@@ -23,15 +25,16 @@ public class FriendProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_profile);
         removeTraderButton = (Button)findViewById(R.id.removeTraderButton);
+
         traderNameTextView = (TextView) findViewById(R.id.traderNameTextView);
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+        //Intent intent = getIntent();
+        //Bundle b = intent.getExtras();
 
-        if (b != null) {
-            traderNameTextView.setText(b.getString("name"));
-        }
+
+        traderNameTextView.setText(UserManager.getFriend().getUserName());
         traderName = traderNameTextView.getText().toString();
+        System.out.println(UserManager.getFriend().getUserName() + " testing location 3");
 
     }
 
@@ -66,8 +69,11 @@ public class FriendProfileActivity extends Activity {
 
     public void removeTraderButtonClicked(View view){
         int index;
-        index = FriendManager.getFriendIndex(traderName);
-        FriendManager.delFriend(index);
+        //index = FriendManager.getFriendIndex(traderName);
+        index = UserManager.getTrader().getFriendList().getFriendIndex(traderName);
+        System.out.println(traderName + " testing location 2");
+        UserManager.getTrader().getFriendList().delFriend(index);
+        ServerManager.saveUserOnline(UserManager.getTrader());
         Intent intent = new Intent(FriendProfileActivity.this,AddFriendActivity.class);
         //intent.putExtra("")
         startActivity(intent);
