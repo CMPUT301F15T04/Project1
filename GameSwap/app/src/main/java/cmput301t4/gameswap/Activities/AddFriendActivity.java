@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import cmput301t4.gameswap.Managers.FriendManager;
@@ -27,12 +28,14 @@ public class AddFriendActivity extends Activity {
         setContentView(R.layout.activity_add_friend);
 
         addTrader = (Button) findViewById(R.id.addTraderButton);
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+        //Intent intent = getIntent();
+        //Bundle b = intent.getExtras();
 
-        if (b != null) {
-          traderName = (b.getString("name"));
-        }
+
+        traderName = (UserManager.getFriend().getUserName());
+        TextView username = (TextView) findViewById(R.id.userNameTextView);
+        username.setText(traderName);
+
 
     }
 
@@ -70,9 +73,6 @@ public class AddFriendActivity extends Activity {
         intent.putExtra("name", traderName);
         finish();
         startActivity(intent);
-
-
-
 
     }
 
