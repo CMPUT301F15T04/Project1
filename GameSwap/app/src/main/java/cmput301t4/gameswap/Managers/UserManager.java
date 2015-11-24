@@ -45,7 +45,7 @@ public class UserManager {
     static public User getFriend(){
 
         if(friend == null){
-            friend = new User("", "", "", "");
+            friend = new User("", "", "", "", null);
         }
         return friend;
     }

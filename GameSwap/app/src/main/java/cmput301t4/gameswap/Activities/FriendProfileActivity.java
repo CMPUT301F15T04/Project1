@@ -25,14 +25,15 @@ public class FriendProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_profile);
         removeTraderButton = (Button)findViewById(R.id.removeTraderButton);
+
         traderNameTextView = (TextView) findViewById(R.id.traderNameTextView);
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+        //Intent intent = getIntent();
+        //Bundle b = intent.getExtras();
 
-        if (b != null) {
-            traderNameTextView.setText(b.getString("name"));
-        }
+
+        traderNameTextView.setText(UserManager.getFriend().getUserName());
+
         traderName = traderNameTextView.getText().toString();
 
     }

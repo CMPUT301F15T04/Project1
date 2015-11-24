@@ -100,8 +100,9 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.viewFriendProfileMenuId:
+                                ServerManager.getFriendOnline(UserManager.getTrader().getFriendList().getFriend(friendListViewItemPosition));
                                 Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
-                                intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
+                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
                                 startActivity(intent);
 
                             case R.id.tradeFriendMenuId:

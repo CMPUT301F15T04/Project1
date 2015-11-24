@@ -44,7 +44,8 @@
         android:id="@+id/traderNameTextView"
         android:text="Name"
         android:layout_gravity="center_vertical"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.04"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="match_parent"
