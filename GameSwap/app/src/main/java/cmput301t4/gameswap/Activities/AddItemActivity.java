@@ -198,7 +198,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         Intent choosePicIntent=new Intent();
         choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-        Intent takePicIntent = new Intent;
+        Intent takePicIntent = new Intent();
         takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
     }
 
@@ -267,24 +267,35 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         this.finish();
     }
 
-    public void addImageOption(View view){
+    public void addImageOption(View view) {
+        Bundle bundle = getIntent().getExtras();
+        int filterVariable = bundle.getInt("filterVariable");
+        switch (filterVariable) {
+            case 1:
+                PopupMenu popupMenu = new PopupMenu(AddItemActivity.this, userImageButton);
+                popupMenu.getMenuInflater().inflate(R.menu.image_popup, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
-        PopupMenu popupMenu = new PopupMenu(AddItemActivity.this,userImageButton );
-        popupMenu.getMenuInflater().inflate(R.menu.image_popup,popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                //Intent choosePicIntent=new Intent();
-                //choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
-                Intent takePicIntent = new Intent;
-                takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                return true;
-            }
-        });
-        popupMenu.show();
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId) {
+                            case R.id.addImageCapture:
+                                Intent takePicIntent = new Intent();
+                                takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                                return true;
+                            case R.id.addImageGallery:
+                                Intent choosePicIntent = new Intent();
+                                choosePicIntent.setType("image/*");
+                                choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
+                                return true;
+                        }
+                    return false;
+                }
+            });
+            popupMenu.show();
 
 
-
+        }
     }
 
 
