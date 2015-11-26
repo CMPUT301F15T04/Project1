@@ -5,12 +5,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -29,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -119,7 +123,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
 
     private ArrayAdapter<Item> adapter;
-
+    /**
+     * the request to use the camera to take pictures
+     */
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
     @Override
@@ -193,14 +200,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     }
 
-    private void selectImage(){
-
-        Intent choosePicIntent=new Intent();
-        choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
-
-        Intent takePicIntent = new Intent();
-        takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-    }
 
     /**
      * A necessary function that must be added to choose the item in the spinner
@@ -268,37 +267,16 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     }
 
     public void addImageOption(View view) {
-        Bundle bundle = getIntent().getExtras();
-        int filterVariable = bundle.getInt("filterVariable");
-        switch (filterVariable) {
-            case 1:
-                PopupMenu popupMenu = new PopupMenu(AddItemActivity.this, userImageButton);
-                popupMenu.getMenuInflater().inflate(R.menu.image_popup, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId) {
-                            case R.id.addImageCapture:
-                                Intent takePicIntent = new Intent();
-                                takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                                return true;
-                            case R.id.addImageGallery:
-                                Intent choosePicIntent = new Intent();
-                                choosePicIntent.setType("image/*");
-                                choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
-                                return true;
-                        }
-                    return false;
+        final ImageButton takePhoto = (ImageButton) findViewById(R.id.imageButton);
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
-            });
-            popupMenu.show();
-
-
-        }
+            }
+        });
     }
-
-
 
     public static boolean checkDate(String date) {
         try {
