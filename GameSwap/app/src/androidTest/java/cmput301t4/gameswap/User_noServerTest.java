@@ -8,6 +8,7 @@ import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
@@ -26,7 +27,7 @@ public class User_noServerTest extends TestCase {
      *  Test create a user
      */
     public void testCreateUser(){
-        User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         assertTrue(user.getUserName().equals("Enter Desired Username"));
         assertTrue(user.getUserEmail().equals("Enter Email"));
         assertTrue(user.getUserCity().equals("Enter City"));
@@ -41,7 +42,7 @@ public class User_noServerTest extends TestCase {
      * Test edit attribute of user
      */
     public void testEditUserInfo(){
-        User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User user = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         assertTrue(user.getUserName().equals("Enter Desired Username"));
         assertTrue(user.getUserEmail().equals("Enter Email"));
         assertTrue(user.getUserCity().equals("Enter City"));
@@ -56,7 +57,7 @@ public class User_noServerTest extends TestCase {
      * est add a friend for user
      */
     public void testC_AddFriendForUser(){
-        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -71,7 +72,7 @@ public class User_noServerTest extends TestCase {
      * Test del a friend for user
      */
     public void testC_DelFriend(){
-        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -90,7 +91,7 @@ public class User_noServerTest extends TestCase {
      * Did not accoun for public and private
      */
     public void testC_FindFriendInventory(){
-        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -113,7 +114,7 @@ public class User_noServerTest extends TestCase {
      * Test if we can find pending trade of user
      */
     public void testC_FindPendingTrade(){
-        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         TradeManager TM = new TradeManager();
@@ -139,7 +140,7 @@ public class User_noServerTest extends TestCase {
      * Also see if move trade works as intended
      */
     public void testC_FindPastTrade(){
-        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         friend.setUserCity("Hawii");
         UserManager UM = new UserManager();
         TradeManager TM = new TradeManager();
@@ -206,7 +207,7 @@ public class User_noServerTest extends TestCase {
     public void testC_NotifyFriend(){
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
-        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Enter Desired Username", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         friend.pseduoConstructor();
         friend.clearNotificationAmount();
         System.out.println("Test 2");
@@ -226,7 +227,7 @@ public class User_noServerTest extends TestCase {
         System.out.println("Test 3");
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
-        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         friend.pseduoConstructor();
         FM.clearFriendlist();
         UM.setFriendlist(FM.getFriendlist());
@@ -244,7 +245,7 @@ public class User_noServerTest extends TestCase {
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
         TradeManager TM = new TradeManager();
-        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         TradeList friendPending = new TradeList();
         friend.setPendingTrades(friendPending);
         friend.pseduoConstructor();
@@ -273,7 +274,7 @@ public class User_noServerTest extends TestCase {
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
         TradeManager TM = new TradeManager();
-        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number");
+        User friend = new User("Bob", "Enter Email", "Enter City", "Enter Phone Number", new FriendList());
         TradeList friendPending = new TradeList();
         friend.setPendingTrades(friendPending);
         friend.pseduoConstructor();

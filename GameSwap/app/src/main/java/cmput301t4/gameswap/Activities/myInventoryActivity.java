@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -44,6 +46,8 @@ public class myInventoryActivity extends Activity{
     protected int myInventoryListViewPosition;
     private InventoryManager im;
 
+    private myInventoryActivity activity = this;
+
     private String Name;
     /** A description of the Item */
     private String Description;
@@ -58,6 +62,12 @@ public class myInventoryActivity extends Activity{
 
     private static final String FILENAME = "file.sav"; // model
 
+    //=====Varibles used in testcase=====//
+
+    private PopupMenu popupMenu;
+    private AlertDialog.Builder alert;
+    private AlertDialog alertDialog;
+    //=====End Varibles used in testcases=====//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +79,7 @@ public class myInventoryActivity extends Activity{
         myInventoryListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final PopupMenu popupMenu = new PopupMenu(myInventoryActivity.this, view);
+                popupMenu = new PopupMenu(myInventoryActivity.this, view);
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup, popupMenu.getMenu());
 
                 myInventoryListViewPosition = position;
@@ -90,13 +100,14 @@ public class myInventoryActivity extends Activity{
                                 intent.putExtra("description", Description);
                                 intent.putExtra("releaseDate", ReleaseDate.toString());
                                 intent.putExtra("index", myInventoryListViewPosition);
-
+                                activity.finish();
                                 startActivity(intent);
 
                                 return true;
                             case R.id.deleteItemMenuId:
 
-                                final AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
+                                //final AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
+                                alert = new AlertDialog.Builder(myInventoryActivity.this);
                                 alert.setMessage("Are you sure, you want to delete this item");
 
                                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
@@ -116,7 +127,7 @@ public class myInventoryActivity extends Activity{
                                     }
                                 });
 
-                                AlertDialog alertDialog = alert.create();
+                                alertDialog = alert.create();
                                 alertDialog.show();
 
                                 return true;
@@ -251,5 +262,28 @@ public class myInventoryActivity extends Activity{
         }
 
     }
+
+    //=====Function needed for Testcases=====//
+
+    public Button getAddItemButton(){
+        Button button  = (Button) findViewById(R.id.button9);
+        return button;
+    }//end getAdditem
+
+    public ListView getInventoryList(){
+        ListView list = (ListView) findViewById(R.id.myInventoryListView);
+        return list;
+    }//end getInventoryList
+
+    public Menu getPopupMenu(){
+        Menu menu = popupMenu.getMenu();
+        return menu;
+    }//end PopupMenu
+
+    public AlertDialog getAlertDialog(){
+        return alertDialog;
+    }//end getAlertDialog
+
+    //=====End Function needed for Testcases=====//
 
 }

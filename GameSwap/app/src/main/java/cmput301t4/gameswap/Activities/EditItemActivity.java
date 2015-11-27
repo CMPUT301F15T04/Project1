@@ -195,12 +195,16 @@ public class EditItemActivity extends Activity {
             IM.replaceItem(item, index);
             saveToFile();
             this.finish();
+            Intent intent = new Intent(EditItemActivity.this, myInventoryActivity.class);
+            startActivity(intent);
         }
 
     }
 
     public void cancelButtonClick(View view) {
         this.finish();
+        Intent intent = new Intent(EditItemActivity.this, myInventoryActivity.class);
+        startActivity(intent);
     }
 
     public static boolean checkDate(String date) {
@@ -233,4 +237,38 @@ public class EditItemActivity extends Activity {
             throw new RuntimeException(e);
         }
     }
+
+    //=====Function needed for Test=====//
+
+    public EditText editUsernameText(){
+        return titleEditText;
+    }//end editUsernameText
+
+    public EditText editReleaseText(){
+        return releaseEditText;
+    }//end editReleaseText
+
+    public EditText editDescriptionText(){
+        return descEditText;
+    }//end editDescriptionText
+
+    public Spinner editPlatformSpinner(){
+        return consoleSpinner;
+    }//end editPlatform
+
+    public Spinner editQualitySpinner(){
+        return qualitySpinner;
+    }//end editQuality
+
+    public Spinner editSharedSpinner(){
+        return publicprivateSpinner;
+    }//end editSharedSpinner
+
+    public Button editSaveButton(){
+        Button button = (Button) findViewById(R.id.editItemSaveButton);
+        return button;
+    }//end editSaveButton
+
+    //=====End Function needed for Test=====//
+
 }

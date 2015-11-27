@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -81,4 +82,13 @@ public class selectTaskActivity extends Activity {
         Intent intent = new Intent(selectTaskActivity.this,TradesActivity.class);
         startActivity(intent);
     }
+
+    //=====Function needed for Testcases=====//
+
+    public Button getInventoryButton(){
+        Button button = (Button) findViewById(R.id.inventory);
+        return button;
+    }//end getInventoryButton
+
+    //=====End Function needed for Testcases
 }

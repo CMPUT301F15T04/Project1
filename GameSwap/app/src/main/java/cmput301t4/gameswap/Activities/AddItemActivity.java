@@ -260,7 +260,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     public void addImageOption(View view){
 
         PopupMenu popupMenu = new PopupMenu(AddItemActivity.this,userImageButton );
-        popupMenu.getMenuInflater().inflate(R.menu.image_popup,popupMenu.getMenu());
+        popupMenu.getMenuInflater().inflate(R.menu.image_popup, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -330,6 +330,45 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             throw new RuntimeException(e);
         }
     }
+
+    //=====Function needed for Testcases=====//
+
+    public Button addItemButton(){
+        Button button = (Button) findViewById(R.id.saveButton);
+        return button;
+    }//end addItemButton
+
+    public EditText gameTitleText(){
+        EditText text = (EditText) findViewById(R.id.gameTitle);
+        return text;
+    }//end gameTitleText
+
+    public EditText releaseDataText(){
+        EditText text = (EditText) findViewById(R.id.releaseDateEdit);
+        return text;
+    }//end releaseDataText
+
+    public EditText descriptionText(){
+        EditText text = (EditText) findViewById(R.id.descriptionBox);
+        return text;
+    }//end descriptionText
+
+    public Spinner platformSpinner(){
+        Spinner spinner = (Spinner) findViewById(R.id.consoleSpinner);
+        return spinner;
+    }//end platformSpinner
+
+    public Spinner quailitySpinner(){
+        Spinner spinner = (Spinner) findViewById(R.id.qualitySpinner);
+        return spinner;
+    }//end qialitySpinner
+
+    public Spinner eitherPublicOrPrivateSpinner(){
+        Spinner spinner = (Spinner) findViewById(R.id.privatepublicSpinner);
+        return spinner;
+    }//end eitherPublicOrPrivateSpinner
+
+    //=====End Function needed for Testcases=====//
 
 }
 

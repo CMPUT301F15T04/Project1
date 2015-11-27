@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -75,6 +76,25 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
         startActivity(intent);
     }
+
+    //=======Code to help run Test Cases======//
+
+    public Button getRegisterButton(){
+        Button button = (Button) findViewById(R.id.registerButton);
+        return button;
+    }//end getRegisterButton
+
+    public Button getLoginButton(){
+        Button button = (Button) findViewById(R.id.loginButton);
+        return button;
+    }//end getLoginButton
+
+    public EditText getUsernameField(){
+        EditText text = (EditText) findViewById(R.id.textView);
+        return text;
+    }//end getUsernameField
+
+    //=======End of code to run Test Cases =====//
 
     /*class SaveThread extends Thread {
         private User user;
