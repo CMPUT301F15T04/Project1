@@ -36,6 +36,10 @@ import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
+/**
+ * Edits user info on a certain Item
+ * created by Blake and Preyanshu 2015-11-05
+ */
 public class EditItemActivity extends Activity {
 
     /**
