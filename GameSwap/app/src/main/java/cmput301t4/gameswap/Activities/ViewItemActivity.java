@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 import cmput301t4.gameswap.R;
 
@@ -19,7 +22,11 @@ public class ViewItemActivity extends Activity {
     private TextView descrition;
     private TextView platform;
     private TextView date;
-    private TextView status;
+    private String status;
+    private ImageView imageView;
+    private ArrayList<String> platformList;
+    private String platformString;
+    private Integer platformIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,27 +36,59 @@ public class ViewItemActivity extends Activity {
         descrition  = (TextView) findViewById(R.id.viewItemName);
         quality = (TextView) findViewById(R.id.viewItemQuality);
         descrition = (TextView) findViewById(R.id.viewItemDesciption);
-        status = (TextView) findViewById(R.id.viewItemStatus);
         platform = (TextView) findViewById(R.id.viewItemPlatform);
         date = (TextView) findViewById(R.id.viewItemDate);
         name = (TextView) findViewById(R.id.viewItemName);
+
+       /** platformList.add("Playstation 4");
+        platformList.add("Xbox ONE");
+        platformList.add("PC");
+        platformList.add("Wii U");
+        platformList.add("Nintendo 3DS");
+        platformList.add("Playstation 3");
+        platformList.add("Playstation Vita");
+        platformList.add("Xbox 360");
+        platformList.add("Nintendo Wii");
+        platformList.add("Nintendo DS");
+        platformList.add("Playstation 2");
+        platformList.add("Xbox");
+        platformList.add("Nintendo Gamecube");
+        platformList.add("Game Boy Advanced");
+        platformList.add("Playstation Portable");
+        platformList.add("Playstation");
+        platformList.add("Nintendo 64");
+        platformList.add("Game Boy");
+        platformList.add("NES");*/
+
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
         if(b!=null){
-            descrition.setText(b.getString("description"));
-            name.setText(b.getString("name"));
-            date.setText(b.getString("releaseDate"));
-            quality.setText(b.getString("quality"));
-            platform.setText(b.getString("platform"));
-            status.setText(b.getString("releaseDate"));
+            descrition.setText("Description: "+b.getString("description"));
+            status = b.getString("private");
+            if (status.equals(true)){
+                status = "Private";
+            }
+            else {
+                status = "Public";
+            }
+           // platformIndex = b.getString("platform");
+
+
+
+
+            name.setText(b.getString("name").toUpperCase() + "\n" + status.toUpperCase());
+            date.setText("Release Date: " +b.getString("releaseDate"));
+            quality.setText("Quality: "+b.getString("quality"));
+            platform.setText("Platform: "+b.getString("platform"));
+            //status.setText("Platform: "+b.getString("platform"));
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_item, menu);
+        //getMenuInflater().inflate(R.menu.menu_view_item, menu);
         return true;
     }
 
@@ -67,4 +106,7 @@ public class ViewItemActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    //public void setValues(String status,)
 }

@@ -33,14 +33,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;
-    private ArrayAdapter<Item> adapter;
+    private ArrayAdapter<String> adapter;
     private ArrayList<Item> inventory;
+    private ArrayList<String> nameOfItemsList;
+   // private ArrayList<String> statusOfItemsList;
     protected int myInventoryListViewPosition;
     private InventoryManager im;
 
@@ -99,7 +102,7 @@ public class myInventoryActivity extends Activity{
                                 final AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
                                 alert.setMessage("Are you sure, you want to delete this item");
 
-                                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
 
@@ -108,7 +111,7 @@ public class myInventoryActivity extends Activity{
                                     }
 
                                 });
-                                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         // finish();
@@ -150,7 +153,6 @@ public class myInventoryActivity extends Activity{
                 intent.putExtra("quality",Quality);
                 intent.putExtra("private",IsPrivate);
                 intent.putExtra("platform",Platform);
-
                 startActivity(intent);
             }
         });
@@ -189,7 +191,9 @@ public class myInventoryActivity extends Activity{
         loadFromFile();
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
         inventory = InventoryManager.getInstance().getItems();
-        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
+        nameOfItemsList = InventoryManager.getInstance().getItemsNames();
+        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
+        //adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
 
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -206,7 +210,7 @@ public class myInventoryActivity extends Activity{
 
     private void resetAdapter(){
 
-        adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
+        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         myInventoryListView.setAdapter(adapter);
         saveToFile();
 

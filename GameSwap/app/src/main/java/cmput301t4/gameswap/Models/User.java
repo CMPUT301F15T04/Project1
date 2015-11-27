@@ -87,7 +87,7 @@ public class User {
         this.userEmail = email;
         this.userCity = city;
         this.userPhoneNumber = phoneNumber;
-        this.friendList = friendList;
+        this.friendList = new FriendList();
     }//end Trader constructor
 
 //=====Setters and Getters=====//

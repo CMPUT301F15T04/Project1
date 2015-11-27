@@ -198,7 +198,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         Intent choosePicIntent=new Intent();
         choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-        Intent takePicIntent = new Intent;
+        Intent takePicIntent = new Intent();
         takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
     }
 
@@ -276,7 +276,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             public boolean onMenuItemClick(MenuItem item) {
                 //Intent choosePicIntent=new Intent();
                 //choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
-                Intent takePicIntent = new Intent;
+                Intent takePicIntent = new Intent();
                 takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                 return true;
             }

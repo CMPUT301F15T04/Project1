@@ -8,36 +8,50 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:id="@+id/imageView3"
+            android:id="@+id/ItemImageView"
             android:layout_alignParentStart="true"
           />
         <TextView
             android:layout_width="100dp"
             android:layout_height="75dp"
             android:hint="Game"
+            android:textSize="20sp"
             android:id="@+id/viewItemName"
             android:layout_weight="0.27"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/imageView3" />
+            android:layout_toEndOf="@+id/ItemImageView" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Space
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint="Release Date"
-        android:id="@+id/viewItemDate"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14" />
+        android:layout_weight="0.08" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:hint="Description"
+        android:id="@+id/viewItemDesciption"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.20" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/viewItemPlatform"
@@ -45,17 +59,14 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.20" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Space
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint="IsPrivate"
-        android:id="@+id/viewItemStatus"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17" />
+        android:layout_weight="0.03" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:hint="Quality"
@@ -63,13 +74,19 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.21" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.03" />
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint="Description"
-        android:id="@+id/viewItemDesciption"
+        android:hint="Release Date"
+        android:id="@+id/viewItemDate"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.20" />
+        android:layout_weight="0.14" />
 
 </LinearLayout>

@@ -64,6 +64,14 @@ public class Inventory {
         return inventory;
     }
 
+    public ArrayList<String> getItemsNames() {
+        ArrayList<String> name = new ArrayList<String>();
+        for (int i=0;i<inventory.size();i++){
+            name.add(inventory.get(i).getName().toUpperCase());
+        }
+        return  name;
+    }
+
     /**
      * Check if the current user owns an Item
      *
