@@ -30,8 +30,9 @@
                 android:minHeight="85dp"
                 android:minWidth="105dp"
                 android:onClick="addImageOption"
-                android:layout_gravity="right|top"
-></ImageButton>
+                android:layout_gravity="right|top">
+            </ImageButton>
+
             <TextView
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
@@ -41,6 +42,12 @@
                 android:textColor="#990500">
             </TextView>
 
+            <ImageView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:id="@+id/gameImageView"
+                android:layout_gravity="center|top"
+                android:clickable="false" />
         </FrameLayout>
 
 
