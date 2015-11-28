@@ -2,12 +2,14 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
@@ -31,7 +33,7 @@ public class CreateProfileActivity extends Activity {
         setContentView(R.layout.activity_create_profile);
     }
     public void addImageOption(View view) {
-        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.profilePicture);
+        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.profilePic);
         takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -41,6 +43,16 @@ public class CreateProfileActivity extends Activity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ImageView gameImageView = (ImageView) findViewById(R.id.profPicView);
+            gameImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
     public void createProfileButton(View view) {
         usernameEditText = (EditText) findViewById(R.id.username);
         emailEditText = (EditText) findViewById(R.id.email_user);
