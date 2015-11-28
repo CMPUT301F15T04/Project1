@@ -64,7 +64,34 @@ public class ViewItemActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
+    //=====Function needed for Testcases=====//
+
+    public TextView getNameText() {
+        return name;
+    }
+
+    public TextView getQualityText() {
+        return quality;
+    }
+
+    public TextView getDescritionText() {
+        return descrition;
+    }
+
+    public TextView getPlatformText() {
+        return platform;
+    }
+
+    public TextView getDateText() {
+        return date;
+    }
+
+    public TextView getStatusText() {
+        return status;
+    }
+
+    //=====End function needed for Testcases=====//
 }
