@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -34,6 +36,10 @@ import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
+/**
+ * Edits user info on a certain Item
+ * created by Blake and Preyanshu 2015-11-05
+ */
 public class EditItemActivity extends Activity {
 
     /**
@@ -68,6 +74,7 @@ public class EditItemActivity extends Activity {
 
     private static final String FILENAME = "file.sav"; // model
 
+    static final int REQUEST_IMAGE_CAPTURE=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +208,18 @@ public class EditItemActivity extends Activity {
 
     public void cancelButtonClick(View view) {
         this.finish();
+    }
+
+    public void addImageOption(View view) {
+        final ImageButton takePhoto = (ImageButton) findViewById(R.id.imageButton);
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
     }
 
     public static boolean checkDate(String date) {
