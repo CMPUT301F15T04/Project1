@@ -21,8 +21,8 @@
             android:layout_toEndOf="@+id/newgametext">
 
             <ImageButton
-                android:layout_width="160dp"
-                android:layout_height="fill_parent"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
                 android:id="@+id/imageButton"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
@@ -42,12 +42,6 @@
             </TextView>
 
         </FrameLayout>
-        
-            android:onClick="addImageOption"
-            android:layout_marginEnd="31dp"
-            android:src="@drawable/camera"
-            android:minHeight="75dp"
-            android:minWidth="70dp" />
 
 
         <TextView

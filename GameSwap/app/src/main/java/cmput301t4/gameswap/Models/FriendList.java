@@ -91,9 +91,10 @@ public class FriendList {
 
     public int getFriendIndex(String friendName) {
        int i;
-        for (i=0;i< friendList.size();i++){
+        for (i=0;i < friendList.size();i++){
+            System.out.println(friendName + " " + i);
             if (friendList.get(i).toLowerCase().equals(friendName.toLowerCase())){
-               break;
+               return i;
             }
         }
         return i;

@@ -5,11 +5,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -28,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -118,7 +123,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
 
     private ArrayAdapter<Item> adapter;
-
+    /**
+     * the request to use the camera to take pictures
+     */
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
     @Override
@@ -192,6 +200,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     }
 
+
     /**
      * A necessary function that must be added to choose the item in the spinner
      */
@@ -257,24 +266,18 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         this.finish();
     }
 
-    public void addImageOption(View view){
+    public void addImageOption(View view) {
+        final ImageButton takePhoto = (ImageButton) findViewById(R.id.imageButton);
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
 
-        PopupMenu popupMenu = new PopupMenu(AddItemActivity.this,userImageButton );
-        popupMenu.getMenuInflater().inflate(R.menu.image_popup, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(getBaseContext(), "Yay", Toast.LENGTH_SHORT).show();
-                return true;
             }
         });
-        popupMenu.show();
-
-
-
     }
-
-
 
     public static boolean checkDate(String date) {
         try {
