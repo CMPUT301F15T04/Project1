@@ -145,7 +145,9 @@ public class ServerManager {
                     }
                     Gson gson = new Gson();
 
+
                     String json = null;
+
 
                     try {
                         json = getEntityContent(response);
@@ -400,7 +402,6 @@ public class ServerManager {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
 
             }
         };
