@@ -35,13 +35,23 @@
 
             <ImageButton
                 android:layout_width="178dp"
-                android:layout_height="224dp"
+                android:layout_height="100dp"
                 android:id="@+id/profilePic"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_toEndOf="@+id/textview3"
                 android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="178dp"
+                android:layout_height="100dp"
+                android:id="@+id/profPicView"
+                android:layout_gravity="center"
+                android:clickable="false">
+
+            </ImageView>
+
             <TextView
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
@@ -51,14 +61,6 @@
                 android:textColor="#990500">
             </TextView>
 
-            <ImageView
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
-                android:id="@+id/profPicView"
-                android:layout_gravity="center"
-                android:clickable="false">
-
-            </ImageView>
         </FrameLayout>
     </RelativeLayout>
 

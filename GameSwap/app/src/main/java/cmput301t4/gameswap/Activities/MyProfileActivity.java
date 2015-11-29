@@ -64,6 +64,13 @@ public class MyProfileActivity extends Activity {
         startActivity(intent);
         finish();
     }
+    //=====Function needed for Testcases=====//
 
+    public Button getEditButton(){
+        Button button = (Button) findViewById(R.id.editProfile);
+        return button;
+    }//end getEditButton
+
+    //=====End of function needed for Testcases=====//
 
 }

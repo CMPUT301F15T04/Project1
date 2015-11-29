@@ -39,17 +39,6 @@ public class CreateProfileActivity extends Activity {
         phoneNumberEditText = (EditText) findViewById(R.id.user_phone_num);
     }
 
-    public void addImageOption(View view) {
-        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.profilePic);
-        takeProfPic.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
-            }
-        });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -74,9 +63,23 @@ public class CreateProfileActivity extends Activity {
         this.finish();
     }
 
+
+
+    public void addImageOption(View view) {
+        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.profilePic);
+        takeProfPic.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+    }
+
     public User getUser() {
 
-        Log.w("myUser",myUser.getUserName());
+        Log.w("myUser", myUser.getUserName());
         return myUser;
     }
 

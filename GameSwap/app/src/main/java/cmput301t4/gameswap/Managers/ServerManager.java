@@ -25,6 +25,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.SocketTimeoutException;
 
+import cmput301t4.gameswap.Exceptions.ServerDownException;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 
@@ -40,7 +41,7 @@ public class ServerManager {
     */
 
     private static boolean foundResult = Boolean.FALSE;
-
+    private static boolean serverDown;
 
     /**
      * Get the user from with the username given
@@ -137,7 +138,8 @@ public class ServerManager {
                 try {
                     response = httpclient.execute(searchRequest);
                 } catch (IOException e) {
-                    throw new RuntimeException();
+                    serverIsDown();
+                    throw new ServerDownException();
                 }
                 Gson gson = new Gson();
 
@@ -152,16 +154,27 @@ public class ServerManager {
                 Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<User>>(){}.getType();
                 ElasticSearchSearchResponse<User> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
 
-                System.out.println(esResponse.getHits().size());
+                try {
+                    System.out.println(esResponse.getHits().size());
+                    if(esResponse.getHits().size() != 0) { ServerManager.resultFound(); } else {ServerManager.resultNotFound();}
+                }catch (RuntimeException e){
+                    serverIsDown();
+                }
 
-                if(esResponse.getHits().size() != 0) { ServerManager.resultFound(); } else {ServerManager.resultNotFound();}
             }
         });
 
-        serverThread.start();
+
         
         try {
-            serverThread.join();
+            if(serverDown == Boolean.TRUE){
+                serverNotDown();
+                throw new ServerDownException();
+            } else {
+                serverNotDown();
+                serverThread.start();
+                serverThread.join();
+            }
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
@@ -172,6 +185,12 @@ public class ServerManager {
     private static void resultNotFound() {foundResult = Boolean.FALSE;}
 
     public static boolean checkResult() {return foundResult;}
+
+    public static void serverNotDown(){serverDown = Boolean.FALSE;}
+
+    public static void serverIsDown(){serverDown = Boolean.TRUE;}
+
+    public static boolean checkServerStatus(){return serverDown;}
 
     /**
      * Loads user into server

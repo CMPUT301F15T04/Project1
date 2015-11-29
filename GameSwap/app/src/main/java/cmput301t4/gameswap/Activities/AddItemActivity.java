@@ -49,6 +49,7 @@ import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
@@ -102,11 +103,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     private Boolean isDateValid;
 
     /**
-     * The file were our information will be added
-     */
-    private static final String FILENAME = "file.sav"; // model
-
-    /**
      * The text if the user wants to edit the title of the item
      */
     private EditText titleEditText;
@@ -122,6 +118,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     private EditText releaseEditText;
 
     private ImageView userImageButton;
+
+    private AddItemActivity activity = this;
 
 
     private ArrayAdapter<Item> adapter;
@@ -144,9 +142,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         userImageButton= (ImageButton) findViewById(R.id.imageButton);
         prepareSpinnerdata();
 
-        ArrayList<Item> items = UserManager.getTrader().getInventory().getItems();
-
-//        loadFromFile();
     }
 
 
@@ -201,7 +196,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         publicprivateSpinner.setAdapter(public_private_adapter);
 
     }
-
+/*
     private void selectImage(){
 
         Intent choosePicIntent=new Intent();
@@ -210,7 +205,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         Intent takePicIntent = new Intent();
         takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
     }
-
+/*
     /**
      * A necessary function that must be added to choose the item in the spinner
      */
@@ -265,12 +260,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 
 
-            UserManager.getTrader().setInventory(InventoryManager.getInstance());
+            //UserManager.getTrader().setInventory(InventoryManager.getInstance());
+            UserManager.saveUserLocally(this);
+            ServerManager.saveUserOnline(UserManager.getTrader());
 
-            //saveToFile();
-            //this.finish();
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
+            this.finish();
         }
 
     }
@@ -281,16 +277,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     public void addImageOption(View view){
 
-        PopupMenu popupMenu = new PopupMenu(AddItemActivity.this,userImageButton );
-        popupMenu.getMenuInflater().inflate(R.menu.image_popup,popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                //Intent choosePicIntent=new Intent();
-                //choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
-                Intent takePicIntent = new Intent();
-                takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                return true;
+        final ImageButton takeItemPic = (ImageButton) findViewById(R.id.profilePic);
+        takeItemPic.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
             }
         });
     }
@@ -316,49 +309,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         }
     }
 
-    /**
-     * Saves our added item to a Gson file
-     */
-    private void saveToFile() {
 
-        try {
-            ArrayList<Item> items = InventoryManager.getInstance().getItems();
-            FileOutputStream fos = openFileOutput(FILENAME, 0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(items, out);
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
-        }
 
-    }
-    /**
-     * Loads our item from the Gson file if needed
-     */
-    private void loadFromFile(){
-
-        try {
-
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
-            Type arraylistType = new TypeToken<ArrayList<Item>>() {}.getType();
-            ArrayList<Item> items = gson.fromJson(in, arraylistType);
-            InventoryManager.getInstance().setItems(items);
-        } catch (FileNotFoundException e) {
-            ArrayList<Item> items = InventoryManager.getInstance().getItems();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     //=====Function needed for Testcases=====//
 
