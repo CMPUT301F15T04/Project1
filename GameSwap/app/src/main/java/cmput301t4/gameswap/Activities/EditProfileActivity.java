@@ -81,7 +81,7 @@ public class EditProfileActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void clickSaveButton(View view) {
+    public void editProfileButton (View view) {
         EditText nameEditText = (EditText) findViewById(R.id.changeName);
         EditText cityEditText = (EditText) findViewById(R.id.changeCity);
         EditText phoneEditText = (EditText) findViewById(R.id.changePhone);

@@ -157,7 +157,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="97dp">
+        android:layout_height="97dp"
+        android:onClick="clickCancelButton">
 
         <Button
             android:layout_width="wrap_content"
@@ -166,7 +167,7 @@
             android:id="@+id/cancelButton"
             android:layout_alignParentTop="true"
             android:layout_marginTop="35dp"
-            android:onClick="cancelButton"
+            android:onClick="clickCancelButton"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/textView24" />
 
@@ -178,7 +179,7 @@
             android:text="@string/save_profile"
             android:id="@+id/saveButton"
             android:layout_alignTop="@+id/cancelButton"
-            android:onClick="createProfileButton"
+            android:onClick="editProfileButton"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/textView24" />
 

@@ -3,13 +3,18 @@ package cmput301t4.gameswap.UI_TestCases;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
 import cmput301t4.gameswap.Activities.CreateProfileActivity;
 import cmput301t4.gameswap.Activities.MainActivity;
+import cmput301t4.gameswap.Activities.MyProfileActivity;
 import cmput301t4.gameswap.Activities.selectTaskActivity;
+import cmput301t4.gameswap.R;
 
 /**
  * Created by kynan on 11/21/15.
@@ -35,6 +40,11 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
     private Button MainActivityLogin;
     private EditText LoginText;
 
+    /**
+     * Variables for testEditProfile
+     */
+    private Button EditProfileButton;
+
 
     public BasicUserTest() {
         super(cmput301t4.gameswap.Activities.MainActivity.class);
@@ -46,7 +56,8 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
     public void testBasicUser(){
         MainActivity finishRegisterUser = registerUserTest();
         MainActivity finishNotAUser =loginUserDoesNotExistTest(finishRegisterUser);
-        loginSuccessfulTest(finishNotAUser);
+        selectTaskActivity finishSuccessLogin = loginSuccessfulTest(finishNotAUser);
+        editUserProfileTest(finishSuccessLogin);
     }//end testBasicUser
 
     /**
@@ -156,7 +167,7 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
      * @param activity
      * Runs the UI test for a user that does exist
      */
-    public void loginSuccessfulTest(MainActivity activity){
+    public selectTaskActivity loginSuccessfulTest(MainActivity activity){
         MainActivityLogin = activity.getLoginButton();
         LoginText = activity.getUsernameField();
 
@@ -191,7 +202,31 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
         receiverActivity.finish();
-
+        return receiverActivity;
     }//end testLoginSuccessful
+
+    public void editUserProfileTest(final selectTaskActivity activity){
+        Instrumentation.ActivityMonitor receiverActivityMonitor =
+                getInstrumentation().addMonitor(MyProfileActivity.class.getName(),
+                        null, false);
+
+
+        getInstrumentation().invokeMenuActionSync(activity, R.id.my_profile,0);
+        getInstrumentation().waitForIdleSync();
+
+        MyProfileActivity myProfile_Activity = (MyProfileActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", myProfile_Activity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                MyProfileActivity.class, myProfile_Activity.getClass());
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+
+
+    }//end editUserProfile
 
 }//end BasicUserTest
