@@ -1,7 +1,10 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,21 +15,29 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.zip.CheckedInputStream;
 
+import Adapter.ListViewAdapter;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
-public class MineInventoryActivity extends Activity implements AdapterView.OnItemClickListener {
+public class MineInventoryActivity extends Activity  {
 
     private ListView listView;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<Item> inventory;
-    private ArrayList<String> items;
-    protected int myInventoryListViewPosition;
-    private Button button;
+
+
+
+    //Adapter.ItemHolder.ListViewAdapter adapter;
+    //private ArrayList<Item> inventory;
+    ArrayList<Item> inventory;
+    LayoutInflater inflater;
+    ListViewAdapter adapter;
 
 
     @Override
@@ -34,34 +45,30 @@ public class MineInventoryActivity extends Activity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_inventory);
 
+        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         listView = (ListView) findViewById(R.id.mineInventoryListView);
-        items = new ArrayList<String>();
-        button = (Button) findViewById(R.id.checkbutton);
-        //http://www.androidinterview.com/android-custom-listview-with-checkbox-example/
-        listView.setChoiceMode(listView.CHOICE_MODE_MULTIPLE);
-        items.add("Call of Duty");
-        items.add("Halo");
-        //nameOfItemsList = InventoryManager.getInstance().getItemsNames();
-        //inventory = InventoryManager.getItems();
-        adapter = new ArrayAdapter<String>(this,R.layout.mineinventorylistviewtext, items);
+        inventory = InventoryManager.getInstance().getItems();
 
+        adapter = new ListViewAdapter(this,R.layout.mineinventorylistviewtext,inventory);
+       // final ListViewAdapter adapter = new ListViewAdapter(this,R.layout.mineinventorylistviewtext,inventory);
         listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
-        listView.setOnItemClickListener(this);
-        button.setOnClickListener(new View.OnClickListener(){
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-        public void onClick(View v){
-                Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Inventory inventory = (Inventory) parent.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(),
+                        "Clicked on Row: " + inventory.getItem(position).getName(),
+                        Toast.LENGTH_LONG).show();
             }
         });
 
 
-       // listView.
-
     }
+
+
+
 
 
     @Override
@@ -87,11 +94,5 @@ public class MineInventoryActivity extends Activity implements AdapterView.OnIte
     }
 
 
-    @Override
-    public void onItemClick(AdapterView arg0, View v, int position, long arg3){
-        CheckBox cb = (CheckBox) v.findViewById(R.id.myInventoryCheckbox);
-        cb.performClick();
-
-    }
 }
 
