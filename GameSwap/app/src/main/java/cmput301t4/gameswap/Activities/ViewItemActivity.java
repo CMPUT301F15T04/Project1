@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -66,7 +67,7 @@ public class ViewItemActivity extends Activity {
         Bundle b = intent.getExtras();
 
         if(b!=null){
-            descrition.setText("Description: "+b.getString("description"));
+            descrition.setText(b.getString("description"));
             status = b.getString("private");
             if (status.equals(true)){
                 status = "Private";
@@ -75,7 +76,7 @@ public class ViewItemActivity extends Activity {
                 status = "Public";
             }
 
-            name.setText(b.getString("name").toUpperCase());
+            name.setText(b.getString("name"));
             date.setText(b.getString("releaseDate"));
             quality.setText(b.getString("quality"));
             platform.setText(b.getString("platform"));
