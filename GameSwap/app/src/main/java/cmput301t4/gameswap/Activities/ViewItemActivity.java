@@ -33,7 +33,7 @@ public class ViewItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
 
-        descrition  = (TextView) findViewById(R.id.viewItemName);
+        name  = (TextView) findViewById(R.id.viewItemName);
         quality = (TextView) findViewById(R.id.viewItemQuality);
         descrition = (TextView) findViewById(R.id.viewItemDesciption);
         platform = (TextView) findViewById(R.id.viewItemPlatform);
