@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -34,7 +35,7 @@ public class ViewItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
 
-        descrition  = (TextView) findViewById(R.id.viewItemName);
+        name  = (TextView) findViewById(R.id.viewItemName);
         quality = (TextView) findViewById(R.id.viewItemQuality);
         descrition = (TextView) findViewById(R.id.viewItemDesciption);
         platform = (TextView) findViewById(R.id.viewItemPlatform);
@@ -66,7 +67,7 @@ public class ViewItemActivity extends Activity {
         Bundle b = intent.getExtras();
 
         if(b!=null){
-            descrition.setText("Description: "+b.getString("description"));
+            descrition.setText(b.getString("description"));
             status = b.getString("private");
             if (status.equals(true)){
                 status = "Private";
@@ -75,7 +76,7 @@ public class ViewItemActivity extends Activity {
                 status = "Public";
             }
 
-            name.setText(b.getString("name").toUpperCase());
+            name.setText(b.getString("name"));
             date.setText(b.getString("releaseDate"));
             quality.setText(b.getString("quality"));
             platform.setText(b.getString("platform"));

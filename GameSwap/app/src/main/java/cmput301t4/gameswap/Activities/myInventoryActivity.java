@@ -161,7 +161,7 @@ public class myInventoryActivity extends Activity{
                 final Intent intent = new Intent(myInventoryActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
                 intent.putExtra("description", Description);
-                intent.putExtra("releaseDate", ReleaseDate);
+                intent.putExtra("releaseDate", ReleaseDate.toString());
                 intent.putExtra("index", myInventoryListViewPosition);
                 intent.putExtra("quality",Quality);
                 intent.putExtra("private",IsPrivate);

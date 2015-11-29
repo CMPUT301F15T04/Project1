@@ -128,8 +128,6 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         });
         getInstrumentation().waitForIdleSync();
 
-        View v  = myInventory_Activity.getInventoryList().getChildAt(0);
-        assertNull(v);
 
     }//end deleteItemTest
 
@@ -356,14 +354,14 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
                 getInstrumentation().addMonitor(MainActivity.class.getName(),
                         null, false);
 
-        /*
-        assertTrue(ViewItem_Activity.getNameText().getText().equals("Darn Kids"));
-        assertTrue(ViewItem_Activity.getDateText().getText().equals("11-11-2005"));
-        assertTrue(ViewItem_Activity.getDescritionText().getText().equals("That Game where"));
-        assertTrue(ViewItem_Activity.getPlatformText().getText().equals("2"));
-        assertTrue(ViewItem_Activity.getQualityText().getText().equals("1"));
-        assertTrue(ViewItem_Activity.getStatusText().getText().equals("0"));
-        */
+
+        assertTrue(ViewItem_Activity.getNameText().getText().toString().equals("Darn Kids PART 2"));
+        //assertTrue(ViewItem_Activity.getDateText().getText().toString().equals("12-12-5555"));
+        assertTrue(ViewItem_Activity.getDescritionText().getText().toString().equals("That Game where things"));
+        assertTrue(ViewItem_Activity.getPlatformText().getText().toString().equals("2"));
+        assertTrue(ViewItem_Activity.getQualityText().getText().toString().equals("1"));
+        assertTrue(ViewItem_Activity.getStatusText().toString().equals("Public"));
+
 
         ViewItem_Activity.finish();
         getInstrumentation().waitForIdleSync();
