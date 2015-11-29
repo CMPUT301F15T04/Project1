@@ -130,7 +130,7 @@ public class ServerManager {
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
                 HttpClient httpclient = new DefaultHttpClient(httpParameters);
-                HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/_search?pretty=1&q=" + username);
+                HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/_search?pretty=1&q=" + username + "&_source=false");
                 searchRequest.setHeader("Accept", "application/json");
                 HttpResponse response = null;
 
@@ -370,7 +370,6 @@ public class ServerManager {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
 
             }
         };

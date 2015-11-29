@@ -52,7 +52,6 @@ public class MainActivity extends Activity {
         Thread loginThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //ServerManager.deleteUserOnline(user);
                 ServerManager.searchForUser(user);
             }
         });
