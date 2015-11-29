@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import org.apache.commons.logging.Log;
+
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserListManager;
@@ -71,15 +73,16 @@ public class SearchPeopleActivity extends Activity {
         });
     }
 
-    public void findTrader(String trader){
+    public void findTrader(final String trader){
         traderName = trader;
         Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
 
-        //traderName = search.getQuery().toString().toLowerCase();
+        traderName = search.getQuery().toString().toLowerCase();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 ServerManager.searchForUser(traderName);
+
             }
         });
         thread.start();
@@ -89,14 +92,27 @@ public class SearchPeopleActivity extends Activity {
             throw new RuntimeException();
         }
 
-        if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
+        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
+
+        //Boolean a = UserManager.getTrader().getFriendList().hasFriend(trader);
+        String user  = UserManager.getTrader().getUserName();
+        //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
+        int size = UserManager.getTrader().getFriendList().getFriendlistSize();
+        String sizeString  = Integer.toString(size);
+        android.util.Log.e("size",sizeString);
+
+        android.util.Log.e("name",user);
+        int i =0;
+        if(UserManager.getTrader().getFriendList().hasFriend(trader)){
+
+      // if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
             ServerManager.getFriendOnline(traderName);
             //intent.putExtra("name", traderName.toLowerCase());
             activity.finish();
             startActivity(intent);
 
-        } else if(ServerManager.checkResult()) {
+        } /**else if(ServerManager.checkResult()) {
                 Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
                 Thread thread2 = new Thread(new Runnable() {
                     @Override
@@ -119,7 +135,7 @@ public class SearchPeopleActivity extends Activity {
             Toast.makeText(getBaseContext(), "No user exist", Toast.LENGTH_SHORT).show();
         }
 
-
+*/
 
     }
 

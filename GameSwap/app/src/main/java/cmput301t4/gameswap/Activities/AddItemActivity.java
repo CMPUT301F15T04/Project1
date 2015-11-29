@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -144,7 +145,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         prepareSpinnerdata();
 
         loadFromFile();
-
     }
 
 
@@ -302,6 +302,15 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             }
         });
     }*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ImageView gameImageView = (ImageView) findViewById(R.id.gameImageView);
+            gameImageView.setImageBitmap(imageBitmap);
+        }
+    }
 
     public  boolean checkDate(String date) {
         try {

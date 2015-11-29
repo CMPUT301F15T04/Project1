@@ -31,8 +31,8 @@ public class CreateProfileActivity extends Activity {
         setContentView(R.layout.activity_create_profile);
     }
     public void addImageOption(View view) {
-        final ImageButton takePhoto = (ImageButton) findViewById(R.id.profilepicture);
-        takePhoto.setOnClickListener(new View.OnClickListener() {
+        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.profilePicture);
+        takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
