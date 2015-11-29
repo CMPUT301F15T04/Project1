@@ -119,6 +119,8 @@ public class myInventoryActivity extends Activity{
 
                                         inventory.remove(myInventoryListViewPosition);
                                         resetAdapter();
+
+
                                     }
 
                                 });
@@ -212,7 +214,6 @@ public class myInventoryActivity extends Activity{
     }
 
     public void addNewItem(View view){
-
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);
         this.finish();
@@ -220,9 +221,10 @@ public class myInventoryActivity extends Activity{
     }
 
     private void resetAdapter(){
-
+        nameOfItemsList = InventoryManager.getInstance().getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         myInventoryListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         saveToFile();
 
     }

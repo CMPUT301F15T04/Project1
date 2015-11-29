@@ -141,9 +141,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
         publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
         userImageButton= (ImageButton) findViewById(R.id.imageButton);
-
         prepareSpinnerdata();
-
         loadFromFile();
     }
 
@@ -261,6 +259,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             Toast.makeText(getBaseContext(), "At least one of the fields is empty!", Toast.LENGTH_SHORT).show();
         } else {
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
+
+
 
             saveToFile();
             this.finish();
