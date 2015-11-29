@@ -113,7 +113,7 @@ public class SearchPeopleActivity extends Activity {
             activity.finish();
             startActivity(intent);
 
-        } /**else if(ServerManager.checkResult()) {
+        } else if(ServerManager.checkResult()) {
                 Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
                 Thread thread2 = new Thread(new Runnable() {
                     @Override
@@ -136,7 +136,7 @@ public class SearchPeopleActivity extends Activity {
             Toast.makeText(getBaseContext(), "No user exist", Toast.LENGTH_SHORT).show();
         }
 
-*/
+
 
     }
 

@@ -268,7 +268,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             UserManager.getTrader().setInventory(InventoryManager.getInstance());
 
             //saveToFile();
-            this.finish();
+            //this.finish();
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
         }

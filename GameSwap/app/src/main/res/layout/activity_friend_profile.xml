@@ -82,6 +82,7 @@
         android:layout_height="wrap_content"
         android:text="Trade"
         android:id="@+id/friendTradeButton"
+        android:onClick="tradeButtonClicked"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.10" />
 
