@@ -49,6 +49,7 @@ import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
@@ -262,13 +263,12 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         else if (TextUtils.isEmpty(title) || TextUtils.isEmpty(releaseDate) || TextUtils.isEmpty(description)) {
             Toast.makeText(getBaseContext(), "At least one of the fields is empty!", Toast.LENGTH_SHORT).show();
         } else {
+            UserManager.getTrader().setInventory(InventoryManager.getInstance());
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 
-
-            UserManager.getTrader().setInventory(InventoryManager.getInstance());
-
+            ServerManager.saveUserOnline(UserManager.getTrader());
             //saveToFile();
-            //this.finish();
+            this.finish();
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
         }

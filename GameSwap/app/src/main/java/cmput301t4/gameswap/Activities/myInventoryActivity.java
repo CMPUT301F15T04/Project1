@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
@@ -118,6 +120,7 @@ public class myInventoryActivity extends Activity{
                                     public void onClick(DialogInterface arg0, int arg1) {
 
                                         inventory.remove(myInventoryListViewPosition);
+                                        ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
 
 
@@ -202,6 +205,7 @@ public class myInventoryActivity extends Activity{
 
         super.onStart();
         loadFromFile();
+        InventoryManager.setInventoryManager(UserManager.getTrader());
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
         inventory = InventoryManager.getInstance().getItems();
         nameOfItemsList = InventoryManager.getInstance().getItemsNames();

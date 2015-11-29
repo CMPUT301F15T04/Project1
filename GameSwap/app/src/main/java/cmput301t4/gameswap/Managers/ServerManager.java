@@ -116,68 +116,79 @@ public class ServerManager {
      * @return
      */
     public static void searchForUser(final String username) {
-        Thread serverThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                HttpParams httpParameters = new BasicHttpParams();
-                // Set the timeout in milliseconds until a connection is established.
-                // The default value is zero, that means the timeout is not used.
-                int timeoutConnection = 3000;
-                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-                // Set the default socket timeout (SO_TIMEOUT)
-                // in milliseconds which is the timeout for waiting for data.
-                int timeoutSocket = 5000;
-                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-
-                HttpClient httpclient = new DefaultHttpClient(httpParameters);
-                HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/_search?pretty=1&q=" + username);
-                searchRequest.setHeader("Accept", "application/json");
-                HttpResponse response = null;
-
-                try {
-                    response = httpclient.execute(searchRequest);
-                } catch (IOException e) {
-                    serverIsDown();
-                    throw new ServerDownException();
-                }
-                Gson gson = new Gson();
-
-                String json = null;
-
-                try {
-                    json = getEntityContent(response);
-                } catch (IOException e) {
-                    throw new RuntimeException();
-                }
-
-                Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<User>>(){}.getType();
-                ElasticSearchSearchResponse<User> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
-
-                try {
-                    System.out.println(esResponse.getHits().size());
-                    if(esResponse.getHits().size() != 0) { ServerManager.resultFound(); } else {ServerManager.resultNotFound();}
-                }catch (RuntimeException e){
-                    serverIsDown();
-                }
-
-            }
-        });
-
-
-        
         try {
-            if(serverDown == Boolean.TRUE){
-                serverNotDown();
-                throw new ServerDownException();
-            } else {
-                serverNotDown();
-                serverThread.start();
-                serverThread.join();
+            Thread serverThread = new Thread(new Runnable() {
+                @Override
+
+                public void run() {
+
+                    HttpParams httpParameters = new BasicHttpParams();
+                    // Set the timeout in milliseconds until a connection is established.
+                    // The default value is zero, that means the timeout is not used.
+                    int timeoutConnection = 3000;
+                    HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                    // Set the default socket timeout (SO_TIMEOUT)
+                    // in milliseconds which is the timeout for waiting for data.
+                    int timeoutSocket = 5000;
+                    HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+                    HttpClient httpclient = new DefaultHttpClient(httpParameters);
+                    HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/_search?pretty=1&q=" + username);
+                    searchRequest.setHeader("Accept", "application/json");
+                    HttpResponse response = null;
+
+                    try {
+                        response = httpclient.execute(searchRequest);
+                    } catch (IOException e) {
+                        serverIsDown();
+                        throw new ServerDownException();
+                    }
+                    Gson gson = new Gson();
+
+                    String json = null;
+
+                    try {
+                        json = getEntityContent(response);
+                    } catch (IOException e) {
+                        throw new RuntimeException();
+                    }
+
+                    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<User>>() {
+                    }.getType();
+                    ElasticSearchSearchResponse<User> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+
+                    try {
+                        System.out.println(esResponse.getHits().size());
+                        if (esResponse.getHits().size() != 0) {
+                            ServerManager.resultFound();
+                        } else {
+                            ServerManager.resultNotFound();
+                        }
+                    } catch (RuntimeException e) {
+                        serverIsDown();
+                    }
+
+                }
+
+            });
+            try {
+                if(serverDown == Boolean.TRUE){
+                    serverNotDown();
+                    throw new ServerDownException();
+                } else {
+                    serverNotDown();
+                    serverThread.start();
+                    serverThread.join();
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException();
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException();
+
+        } catch (ServerDownException e){
+            serverIsDown();
+            throw new ServerDownException();
         }
+
     }
 
     private static void resultFound() {foundResult = Boolean.TRUE;}

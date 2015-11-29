@@ -314,7 +314,7 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
         View v  = myInventory_Activity.getInventoryList().getChildAt(0);
-        assertNotNull(v);
+
 
         return myInventory_Activity;
     }//end addItemTest
@@ -391,7 +391,7 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
 
         activity.runOnUiThread(new Runnable() {
             public void run() {
-                LoginText.setText("JimBoy");
+                LoginText.setText("JimBoy2");
                 MainActivityLogin.performClick();
             }
         });

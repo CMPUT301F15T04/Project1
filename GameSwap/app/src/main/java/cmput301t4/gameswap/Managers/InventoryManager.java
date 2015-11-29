@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
+import cmput301t4.gameswap.Models.User;
 
 public class InventoryManager {
 
@@ -20,11 +21,15 @@ public class InventoryManager {
 
     //=====Basic Function=====//
 
+    static public void setInventoryManager(User user){
+        inventory = user.getInventory();
+    }
+
     static public void addItem(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description){
         getInstance().add(new Item(Name, ReleaseDate, isPrivate,Quaility,Platform,Description));
     }//end addItem
 
-    public void delItem(int position){
+    static public void delItem(int position){
         getInstance().del(position);
     }//end delItem
 
