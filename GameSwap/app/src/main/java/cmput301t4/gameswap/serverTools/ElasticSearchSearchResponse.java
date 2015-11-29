@@ -13,7 +13,11 @@ public class ElasticSearchSearchResponse<T> {
     Hits<T> hits;
     boolean exists;
     public Collection<ElasticSearchResponse<T>> getHits() {
-        return hits.getHits();
+        try {
+            return hits.getHits();
+        } catch(NullPointerException e){
+            throw new RuntimeException();
+        }
     }
     public Collection<T> getSources() {
         Collection<T> out = new ArrayList<T>();

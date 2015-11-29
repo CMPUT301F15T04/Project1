@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
@@ -27,7 +29,7 @@ public class EditProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        EditText nameEditText = (EditText) findViewById(R.id.changeName);
+        TextView nameEditText = (TextView) findViewById(R.id.changeName);
         EditText emailEditText = (EditText) findViewById(R.id.changeEmail);
         EditText cityEditText = (EditText) findViewById(R.id.changeCity);
         EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
@@ -82,7 +84,7 @@ public class EditProfileActivity extends Activity {
     }
 
     public void editProfileButton (View view) {
-        EditText nameEditText = (EditText) findViewById(R.id.changeName);
+        TextView nameEditText = (TextView) findViewById(R.id.changeName);
         EditText cityEditText = (EditText) findViewById(R.id.changeCity);
         EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
 

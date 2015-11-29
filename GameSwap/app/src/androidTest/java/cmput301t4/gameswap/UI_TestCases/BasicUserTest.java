@@ -180,7 +180,7 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
 
         activity.runOnUiThread(new Runnable() {
             public void run() {
-                LoginText.setText("JimBoy");
+                LoginText.setText("JimBoy2");
                 MainActivityLogin.performClick();
             }
         });
