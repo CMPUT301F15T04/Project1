@@ -21,33 +21,33 @@
             android:layout_toEndOf="@+id/editGameText">
 
             <ImageButton
-                android:layout_width="178dp"
-                android:layout_height="100dp"
-                android:id="@+id/newImageButton"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:id="@+id/newItemPicture"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="31dp"
                 android:minHeight="85dp"
                 android:minWidth="105dp"
                 android:onClick="addImageOption"
-                android:layout_gravity="center|right">
+                android:layout_gravity="right|top">
             </ImageButton>
 
             <ImageView
-                android:layout_width="178dp"
-                android:layout_height="100dp"
-                android:id="@+id/gameImageView"
-                android:layout_gravity="center"
+                android:layout_width="190dp"
+                android:layout_height="110dp"
+                android:id="@+id/newItemPictureView"
+
+                android:layout_gravity="center|top"
                 android:clickable="false" />
 
             <TextView
-                android:layout_width="75dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="right|center_vertical"
                 android:clickable="false"
-                android:text="@string/new_image"
-                android:textColor="#990500"
-                android:id="@+id/editImagetext">
+                android:text="@string/image"
+                android:textColor="#990500">
             </TextView>
 
         </FrameLayout>

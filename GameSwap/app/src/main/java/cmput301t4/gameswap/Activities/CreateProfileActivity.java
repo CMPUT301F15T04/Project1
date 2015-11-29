@@ -40,17 +40,6 @@ public class CreateProfileActivity extends Activity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView gameImageView = (ImageView) findViewById(R.id.profPicView);
-            gameImageView.setImageBitmap(imageBitmap);
-        }
-    }
-
-
     public void createProfileButton(View view) {
 
         UserManager.createUser(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString(), this);
@@ -75,6 +64,15 @@ public class CreateProfileActivity extends Activity {
                 }
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ImageView gameImageView = (ImageView) findViewById(R.id.userProfileView);
+            gameImageView.setImageBitmap(imageBitmap);
+        }
     }
 
     public User getUser() {

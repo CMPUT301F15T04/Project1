@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="85dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.30">
+        android:layout_weight="0.07">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,32 +34,34 @@
             android:layout_toEndOf="@+id/textView3">
 
             <ImageButton
-                android:layout_width="178dp"
-                android:layout_height="100dp"
-                android:id="@+id/newProfilePicture"
-                android:layout_alignParentTop="true"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:id="@+id/newProfilePicButton"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/textview3"
-                android:layout_gravity="center" />
+                android:layout_marginEnd="31dp"
+                android:minHeight="85dp"
+                android:minWidth="105dp"
+                android:onClick="addImageOption"
+                android:layout_gravity="right|top">
+            </ImageButton>
+
+            <TextView
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:clickable="false"
+                android:text="@string/image"
+                android:textColor="#990500">
+            </TextView>
 
             <ImageView
                 android:layout_width="190dp"
-                android:layout_height="130dp"
-                android:id="@+id/newProfPicView"
-                android:layout_gravity="center"
-                android:clickable="false">
+                android:layout_height="110dp"
+                android:id="@+id/newProfilePicView"
 
-            </ImageView>
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="false"
-                android:text="@string/new_image"
-                android:textColor="#990500">
-            </TextView>
+                android:layout_gravity="center|top"
+                android:clickable="false" />
         </FrameLayout>
 
     </RelativeLayout>
@@ -68,7 +70,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.43">
+        android:layout_weight="0.43"
+        android:gravity="center_vertical">
 
         <TableRow
             android:layout_width="match_parent"
