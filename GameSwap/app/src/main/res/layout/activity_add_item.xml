@@ -21,8 +21,8 @@
             android:layout_toEndOf="@+id/newgametext">
 
             <ImageButton
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
+                android:layout_width="170dp"
+                android:layout_height="100dp"
                 android:id="@+id/imageButton"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
@@ -33,6 +33,14 @@
                 android:layout_gravity="right|top">
             </ImageButton>
 
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="110dp"
+                android:id="@+id/gameImageView"
+
+                android:layout_gravity="center|top"
+                android:clickable="false" />
+
             <TextView
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
@@ -42,12 +50,6 @@
                 android:textColor="#990500">
             </TextView>
 
-            <ImageView
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
-                android:id="@+id/gameImageView"
-                android:layout_gravity="center|top"
-                android:clickable="false" />
         </FrameLayout>
 
 

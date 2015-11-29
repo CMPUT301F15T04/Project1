@@ -201,7 +201,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         publicprivateSpinner.setAdapter(public_private_adapter);
 
     }
-
+/*
     private void selectImage(){
 
         Intent choosePicIntent=new Intent();
@@ -210,7 +210,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         Intent takePicIntent = new Intent();
         takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
     }
-
+/*
     /**
      * A necessary function that must be added to choose the item in the spinner
      */
@@ -281,16 +281,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     public void addImageOption(View view){
 
-        PopupMenu popupMenu = new PopupMenu(AddItemActivity.this,userImageButton );
-        popupMenu.getMenuInflater().inflate(R.menu.image_popup,popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                //Intent choosePicIntent=new Intent();
-                //choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
-                Intent takePicIntent = new Intent();
-                takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                return true;
+        final ImageButton takeItemPic = (ImageButton) findViewById(R.id.profilePic);
+        takeItemPic.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
             }
         });
     }

@@ -9,16 +9,21 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.SocketTimeoutException;
 
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
@@ -27,7 +32,7 @@ import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
  * Created by dren on 11/2/15.
  */
 
-
+//MIGHT WANT TO SET TIMEOUT PARAMETERS FOR HTTP OPERATIONS
 public class ServerManager {
     /*
     Servers will not be able to run on the main UI thread. Trying to call these functions from any views will
@@ -35,6 +40,7 @@ public class ServerManager {
     */
 
     private static boolean foundResult = Boolean.FALSE;
+
 
     /**
      * Get the user from with the username given
@@ -46,9 +52,20 @@ public class ServerManager {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
                 String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username + "/_source";
                 System.out.println(url);
-                HttpClient httpClient = new DefaultHttpClient();
+                HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpGet httpGet = new HttpGet(url);
                 HttpResponse response = null;
 
@@ -101,7 +118,18 @@ public class ServerManager {
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+                HttpClient httpclient = new DefaultHttpClient(httpParameters);
                 HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/_search?pretty=1&q=" + username);
                 searchRequest.setHeader("Accept", "application/json");
                 HttpResponse response = null;
@@ -153,8 +181,19 @@ public class ServerManager {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
                 String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + user.getUserName();
-                HttpClient httpclient = new DefaultHttpClient();
+                HttpClient httpclient = new DefaultHttpClient(httpParameters);
                 Gson gson = new Gson();
                 HttpPost httpPost = new HttpPost(url);
 
@@ -229,9 +268,19 @@ public class ServerManager {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
                 String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username + "/_source";
                 System.out.println(url);
-                HttpClient httpClient = new DefaultHttpClient();
+                HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpGet httpGet = new HttpGet(url);
                 HttpResponse response = null;
 
@@ -273,5 +322,66 @@ public class ServerManager {
         }
 
     }//end getUserOnline
+
+    public static void deleteUserOnline(final String username){
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username;
+                System.out.println(url);
+                HttpClient httpClient = new DefaultHttpClient(httpParameters);
+                HttpDelete httpDel = new HttpDelete(url);
+                HttpResponse response = null;
+
+                try {                           //run URL
+                    response = httpClient.execute(httpDel);
+                } catch (ClientProtocolException e1) {
+                    throw new RuntimeException(e1);
+                } catch (IOException e1) {
+                    throw new RuntimeException();
+                }
+
+                String status = response.getStatusLine().toString();
+                System.out.println(status);
+                HttpEntity entity = response.getEntity();
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output;
+                    System.err.println("Output from Server -> ");
+                    while ((output = br.readLine()) != null) {
+                        System.err.println(output);
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+            }
+        };
+        Thread serverThread = new Thread(runnable);
+        serverThread.start();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+
+    }//end Delete User online
 
 }//end Server Manager
