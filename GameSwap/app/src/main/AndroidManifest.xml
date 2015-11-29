@@ -6,8 +6,9 @@
     <!-- - http://www.c-sharpcorner.com/UploadFile/e14021/capture-image-from-camera-and-selecting-image-from-gallery-o/ -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera"
-        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -96,6 +97,18 @@
         <activity
             android:name=".Activities.AddFriendActivity"
             android:label="@string/title_activity_add_friend" >
+        </activity>
+        <activity
+            android:name=".Activities.OfferTradeActivity"
+            android:label="@string/title_activity_offer_trade" >
+        </activity>
+        <activity
+            android:name=".Activities.FriendInventoryActivity"
+            android:label="@string/title_activity_friend_inventory" >
+        </activity>
+        <activity
+            android:name=".Activities.MineInventoryActivity"
+            android:label="@string/title_activity_mine_inventory" >
         </activity>
     </application>
 

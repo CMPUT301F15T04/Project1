@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
@@ -78,6 +79,17 @@ public class FriendProfileActivity extends Activity {
         //intent.putExtra("")
         startActivity(intent);
         finish();
+
+    }
+
+
+    public void tradeButtonClicked(View v){
+        Toast.makeText(getBaseContext(), "Trade", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(FriendProfileActivity.this,TradesActivity.class);
+        startActivity(intent);
+        finish();
+
+
 
     }
 }

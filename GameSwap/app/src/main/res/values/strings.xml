@@ -96,5 +96,8 @@
     <string name="title_activity_top_trades">TopTradesActivity</string>
     <string name="title_activity_view_item">ViewItemActivity</string>
     <string name="title_activity_add_friend">AddFriendActivity</string>
+    <string name="title_activity_offer_trade">OfferTradeActivity</string>
+    <string name="title_activity_friend_inventory">FriendInventoryActivity</string>
+    <string name="title_activity_mine_inventory">MineInventoryActivity</string>
 
 </resources>

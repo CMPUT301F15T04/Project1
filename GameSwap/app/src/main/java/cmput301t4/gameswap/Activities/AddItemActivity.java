@@ -49,6 +49,7 @@ import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
@@ -142,7 +143,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         publicprivateSpinner = (Spinner) findViewById(R.id.privatepublicSpinner);
         userImageButton= (ImageButton) findViewById(R.id.imageButton);
         prepareSpinnerdata();
-        loadFromFile();
+
+        ArrayList<Item> items = UserManager.getTrader().getInventory().getItems();
+
+//        loadFromFile();
     }
 
 
@@ -261,9 +265,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 
 
+            UserManager.getTrader().setInventory(InventoryManager.getInstance());
 
-            saveToFile();
-            this.finish();
+            //saveToFile();
+            //this.finish();
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
         }
@@ -290,18 +295,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         });
     }
 
-   /* public void addImageOption(View view) {
-        final ImageButton takePhoto = (ImageButton) findViewById(R.id.imageButton);
-        takePhoto.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
-
-            }
-        });
-    }*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
