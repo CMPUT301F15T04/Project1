@@ -36,6 +36,7 @@ import cmput301t4.gameswap.R;
 
 public class selectTaskActivity extends Activity {
 
+    private MenuItem Actionmenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class selectTaskActivity extends Activity {
         Button button = (Button) findViewById(R.id.inventory);
         return button;
     }//end getInventoryButton
+
 
     //=====End Function needed for Testcases
 }
