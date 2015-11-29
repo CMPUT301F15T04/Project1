@@ -57,10 +57,6 @@ public class UserManager {
     }
     //=====In-Work Notifty=====//
 
-    public void pseduoConstructor(){
-        trader.pseduoConstructor();
-    }
-
     public void IncreaseNotifiyAmount(Integer type){
         trader.IncreaseNotifiyAmount(type);
     }
