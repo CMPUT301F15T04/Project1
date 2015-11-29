@@ -99,5 +99,6 @@
     <string name="title_activity_offer_trade">OfferTradeActivity</string>
     <string name="title_activity_friend_inventory">FriendInventoryActivity</string>
     <string name="title_activity_mine_inventory">MineInventoryActivity</string>
+    <string name="title_activity_custom_adapter">CustomAdapter</string>
 
 </resources>
