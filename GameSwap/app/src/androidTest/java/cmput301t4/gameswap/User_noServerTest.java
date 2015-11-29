@@ -191,7 +191,7 @@ public class User_noServerTest extends TestCase {
         assertTrue(UM.getInventory().isEmpty());
         assertFalse(UM.getInventory().hasItem(item_1));
     }//end testC_DelItemUserInventory
-
+/*
     //=====Test In Work Notify=====//
     public void testC_Notify(){
         UserManager UM = new UserManager();
@@ -200,10 +200,11 @@ public class User_noServerTest extends TestCase {
         UM.IncreaseNotifiyAmount(0);
         UM.DisplayNotify(0);
     }//testC_Notify
-
+*/
     /**
      * This is not actually how Notifying you friend going to work
      */
+    /*
     public void testC_NotifyFriend(){
         UserManager UM = new UserManager();
         FriendManager FM = new FriendManager();
@@ -219,10 +220,10 @@ public class User_noServerTest extends TestCase {
         FM.addFriend(friend.getUserName());
         //UM.getFriendlist().getFriend(0).IfNotify();
     }//end testC_NotifyFriend
-
+*/
     /**
      * Test finding friend via their name and sending them a notify
-     */
+     *//*
     public void testC_SendNewTradeNotifyToFriend(){
         System.out.println("Test 3");
         UserManager UM = new UserManager();
@@ -236,10 +237,11 @@ public class User_noServerTest extends TestCase {
         //assertTrue(friend.getNotificationAmount().get(0).equals(1));
         //friend.IfNotify();
     }//end testC_SendNotifyToFriend
-
+*/
     /**
      * Test finding a friend add trade + notify
      */
+    /*
     public void testC_Send_Add_Trade_NotifyToFriend(){
         System.out.println("Test 4");
         UserManager UM = new UserManager();
@@ -303,7 +305,7 @@ public class User_noServerTest extends TestCase {
         //assertTrue(UM.getPendingList().isEmpty());
         //assertTrue(UM.findBorrowerFriend("Bob").getPendingTrades().isEmpty());
     }//end testC_CancelTrade
-
+*/
     //=====End Test Notify Stuff=====//
 
     //=====Testing Singleton Stuff=====//

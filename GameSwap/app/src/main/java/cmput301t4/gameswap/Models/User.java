@@ -27,34 +27,45 @@ public class User {
     private FriendList friendList;
     private TradeList pendingTrades;
     private TradeList pastTrades;
-    private FriendManager FM = new FriendManager();
-    private InventoryManager IM = new InventoryManager();
-
+    private ArrayList<Integer> notificationAmount;
+    private ArrayList<String> notification;
 
     @Override
     public String toString() {
         return userName;
     }
 
-    //=====In-Work Notifty=====//
-    private ArrayList<String> notification = new ArrayList<String>();
-    // index 0: new Trade 1: Counter Trade 2: Trade Cancel
-    private ArrayList<Integer> notificationAmount = new ArrayList<Integer>(Collections.nCopies(3,0));
+    public User(String username, String email, String city, String phoneNumber) {
+        this.userName = username;
+        this.userEmail = email;
+        this.userCity = city;
+        this.userPhoneNumber = phoneNumber;
+        NotificationConstructor();
+        ManagerConstructor();
+    }//end Trader constructor
 
-    public ArrayList<Integer> getNotificationAmount() {
-        return notificationAmount;
-    }
+    //=====Notification Releated Code=====//
 
-    /*
-    The pseduo constructor will be added if we ddem that the notify code
-    works when we implement server
+    /**
+     * Notification Constructor
+     * NotficationAmount Index meaning:
+     *  0: new Trade
+     *  1: Counter Trade
+     *  2: Trade Cancel
+     *
+     *  Notification Index meaning:
+     *  1: new Trade
+     *  2: Counter Trade
+     *  3: Trade Cancel
      */
-    public void pseduoConstructor(){
+    public void NotificationConstructor(){
+        this.notification = new ArrayList<String>();
         this.notification.add("You have ");
         this.notification.add(" New Trade");
         this.notification.add(" New Counter Offer");
         this.notification.add(" Trade Cancellation");
-    }//end pseduoContructor
+        this.notificationAmount = new ArrayList<Integer>(Collections.nCopies(3,0));
+    }//end NotificationContructor
 
     public void IncreaseNotifiyAmount(Integer type){
         this.notificationAmount.set(type, notificationAmount.get(type) + 1);
@@ -84,20 +95,28 @@ public class User {
     //Just clear noitify (you seen the update)
     public void ClearNotify(Integer type){
         this.notificationAmount.set(type, 0);
+    }//end ClearNotify
+
+    public ArrayList<Integer> getNotificationAmount() {
+        return notificationAmount;
     }
 
-    //=====End of Test Notify related Code=====//
+    //=====End of Notification Code=====//
 
-    public User(String username, String email, String city, String phoneNumber) {
-        this.userName = username;
-        this.userEmail = email;
-        this.userCity = city;
-        this.userPhoneNumber = phoneNumber;
+    //=====Manager related code=====//
+
+    public void ManagerConstructor(){
+        FriendManager FM = new FriendManager();
+        InventoryManager IM = new InventoryManager();
+
         this.setFriendList(FM.getFriendlist());
         this.setInventory(IM.getInstance());
-    }//end Trader constructor
+    }//end ManagerConstructor
 
-//=====Setters and Getters=====//
+
+    //=====End Manager related code=====//
+
+    //=====Setters and Getters=====//
 
     public String getUserName() {
         return userName;
