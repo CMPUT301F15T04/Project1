@@ -85,7 +85,7 @@ public class FriendProfileActivity extends Activity {
 
     public void tradeButtonClicked(View v){
         Toast.makeText(getBaseContext(), "Trade", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(FriendProfileActivity.this,TradesActivity.class);
+        Intent intent = new Intent(FriendProfileActivity.this,OfferTradeActivity.class);
         startActivity(intent);
         finish();
 
