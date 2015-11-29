@@ -23,6 +23,7 @@ public class ViewItemActivity extends Activity {
     private TextView platform;
     private TextView date;
     private String status;
+    private TextView statusView;
     private ImageView imageView;
     private ArrayList<String> platformList;
     private String platformString;
@@ -39,6 +40,7 @@ public class ViewItemActivity extends Activity {
         platform = (TextView) findViewById(R.id.viewItemPlatform);
         date = (TextView) findViewById(R.id.viewItemDate);
         name = (TextView) findViewById(R.id.viewItemName);
+        statusView = (TextView) findViewById(R.id.viewStatus);
 
        /** platformList.add("Playstation 4");
         platformList.add("Xbox ONE");
@@ -72,16 +74,13 @@ public class ViewItemActivity extends Activity {
             else {
                 status = "Public";
             }
-           // platformIndex = b.getString("platform");
 
+            name.setText(b.getString("name").toUpperCase());
+            date.setText(b.getString("releaseDate"));
+            quality.setText(b.getString("quality"));
+            platform.setText(b.getString("platform"));
+            statusView.setText(status.toUpperCase());
 
-
-
-            name.setText(b.getString("name").toUpperCase() + "\n" + status.toUpperCase());
-            date.setText("Release Date: " +b.getString("releaseDate"));
-            quality.setText("Quality: "+b.getString("quality"));
-            platform.setText("Platform: "+b.getString("platform"));
-            //status.setText("Platform: "+b.getString("platform"));
         }
     }
 
