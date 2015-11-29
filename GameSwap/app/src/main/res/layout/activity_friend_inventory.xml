@@ -4,4 +4,19 @@
     android:orientation="vertical"
     tools:context="cmput301t4.gameswap.Activities.FriendInventoryActivity">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView5"
+        android:layout_gravity="center_horizontal" />
+
+
+    <Button
+        android:id="@+id/checkbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Check Selected"/>
+
 </LinearLayout>

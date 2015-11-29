@@ -45,7 +45,7 @@ public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;
     private ArrayAdapter<String> adapter;
-    private ArrayList<Item> inventory;
+    //private ArrayList<Item> inventory;
     private ArrayList<String> nameOfItemsList;
    // private ArrayList<String> statusOfItemsList;
     protected int myInventoryListViewPosition;
@@ -72,6 +72,8 @@ public class myInventoryActivity extends Activity{
     private PopupMenu popupMenu;
     private AlertDialog.Builder alert;
     private AlertDialog alertDialog;
+    private ArrayList<String> items;
+    private ArrayList<Item> inventory;
     //=====End Varibles used in testcases=====//
 
     @Override
@@ -89,7 +91,7 @@ public class myInventoryActivity extends Activity{
 
                 myInventoryListViewPosition = position;
 
-                inventory = InventoryManager.getInstance().getItems();
+                inventory = UserManager.getTrader().getInventory().getItems();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -204,11 +206,12 @@ public class myInventoryActivity extends Activity{
       protected void onStart(){
 
         super.onStart();
-        loadFromFile();
+
         InventoryManager.setInventoryManager(UserManager.getTrader());
+
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        inventory = InventoryManager.getInstance().getItems();
-        nameOfItemsList = InventoryManager.getInstance().getItemsNames();
+        inventory = UserManager.getTrader().getInventory().getItems();
+        nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         //adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
 
@@ -225,53 +228,14 @@ public class myInventoryActivity extends Activity{
     }
 
     private void resetAdapter(){
-        nameOfItemsList = InventoryManager.getInstance().getItemsNames();
+        nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        saveToFile();
+        //saveToFile();
 
     }
 
-    private void loadFromFile(){
-
-        try {
-
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            //code referenced from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
-            Type arraylistType = new TypeToken<ArrayList<Item>>() {}.getType();
-            ArrayList<Item> items = gson.fromJson(in, arraylistType);
-            InventoryManager.getInstance().setItems(items);
-        } catch (FileNotFoundException e) {
-            ArrayList<Item> items = InventoryManager.getInstance().getItems();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    private void saveToFile() {
-
-        try {
-            ArrayList<Item> items = InventoryManager.getInstance().getItems();
-            FileOutputStream fos = openFileOutput(FILENAME, 0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(items, out);
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
-        }
-
-    }
 
     //=====Function needed for Testcases=====//
 
