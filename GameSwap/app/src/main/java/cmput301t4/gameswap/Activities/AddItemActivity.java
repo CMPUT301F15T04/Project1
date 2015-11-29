@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -144,7 +145,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         prepareSpinnerdata();
 
         loadFromFile();
-
     }
 
 
@@ -200,6 +200,14 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     }
 
+    private void selectImage(){
+
+        Intent choosePicIntent=new Intent();
+        choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+        Intent takePicIntent = new Intent();
+        takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+    }
 
     /**
      * A necessary function that must be added to choose the item in the spinner
@@ -266,7 +274,23 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         this.finish();
     }
 
-    public void addImageOption(View view) {
+    public void addImageOption(View view){
+
+        PopupMenu popupMenu = new PopupMenu(AddItemActivity.this,userImageButton );
+        popupMenu.getMenuInflater().inflate(R.menu.image_popup,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                //Intent choosePicIntent=new Intent();
+                //choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
+                Intent takePicIntent = new Intent();
+                takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                return true;
+            }
+        });
+    }
+
+   /* public void addImageOption(View view) {
         final ImageButton takePhoto = (ImageButton) findViewById(R.id.imageButton);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -277,9 +301,18 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
             }
         });
+    }*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ImageView gameImageView = (ImageView) findViewById(R.id.gameImageView);
+            gameImageView.setImageBitmap(imageBitmap);
+        }
     }
 
-    public static boolean checkDate(String date) {
+    public  boolean checkDate(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
             df.setLenient(false);

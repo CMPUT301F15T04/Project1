@@ -36,7 +36,7 @@
             <ImageButton
                 android:layout_width="178dp"
                 android:layout_height="224dp"
-                android:id="@+id/profilepicture"
+                android:id="@+id/profilePic"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
@@ -50,6 +50,15 @@
                 android:text="@string/image"
                 android:textColor="#990500">
             </TextView>
+
+            <ImageView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:id="@+id/profPicView"
+                android:layout_gravity="center"
+                android:clickable="false">
+
+            </ImageView>
         </FrameLayout>
     </RelativeLayout>
 

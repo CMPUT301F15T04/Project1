@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
@@ -38,8 +40,8 @@ public class CreateProfileActivity extends Activity {
     }
 
     public void addImageOption(View view) {
-        final ImageButton takePhoto = (ImageButton) findViewById(R.id.profilepicture);
-        takePhoto.setOnClickListener(new View.OnClickListener() {
+        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.profilePic);
+        takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -48,6 +50,17 @@ public class CreateProfileActivity extends Activity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ImageView gameImageView = (ImageView) findViewById(R.id.profPicView);
+            gameImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
 
     public void createProfileButton(View view) {
 

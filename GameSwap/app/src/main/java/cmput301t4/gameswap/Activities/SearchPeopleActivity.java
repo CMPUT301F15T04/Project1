@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import org.apache.commons.logging.Log;
+
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserListManager;
@@ -36,7 +38,6 @@ public class SearchPeopleActivity extends Activity {
     private User user_3;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,29 +45,8 @@ public class SearchPeopleActivity extends Activity {
 
         friendList = UserManager.getTrader().getFriendList();
         /**
-         * including some more users in the app
-         */
-        /*user_1 = new User("kynan".toLowerCase(),"kynan@ualberta.ca","Edmonton","780-999-1234",null);
-        user_2 = new User("Blake".toLowerCase(),"blake@ualberta.ca","Edmonton","780-444-1234",null);
-        user_3 = new User("Daniel".toLowerCase(),"dren@ualberta.ca","Edmonton","780-444-1244",null);
-
-        int userListSize = UserListManager.getUserListSize();
-        if (userListSize == 0) {
-            UserListManager.addUser(user_1);
-            UserListManager.addUser(user_2);
-            UserListManager.addUser(user_3);
-        }
-
-        int size = UserListManager.getUserListSize();*/
-
-        //String sizeStr = String.valueOf(size);
-        //Toast.makeText(getBaseContext(),sizeStr , Toast.LENGTH_SHORT).show();
-
-
-        /**
          * Code from - http://sampleprogramz.com/android/searchview.php
          */
-
         search = (SearchView) findViewById(R.id.searchView);
         search.setQueryHint("Search Trader");
         search.setIconifiedByDefault(false);
@@ -80,8 +60,10 @@ public class SearchPeopleActivity extends Activity {
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(getBaseContext(), query, Toast.LENGTH_SHORT).show();
+
                 findTrader(query);
-                return true;
+                return false;
             }
 
             @Override
@@ -91,12 +73,16 @@ public class SearchPeopleActivity extends Activity {
         });
     }
 
-    public void findTrader(String trader){
+    public void findTrader(final String trader){
+        traderName = trader;
+        Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
+
         traderName = search.getQuery().toString().toLowerCase();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 ServerManager.searchForUser(traderName);
+
             }
         });
         thread.start();
@@ -106,14 +92,27 @@ public class SearchPeopleActivity extends Activity {
             throw new RuntimeException();
         }
 
-        if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
+        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
+
+        //Boolean a = UserManager.getTrader().getFriendList().hasFriend(trader);
+        String user  = UserManager.getTrader().getUserName();
+        //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
+        int size = UserManager.getTrader().getFriendList().getFriendlistSize();
+        String sizeString  = Integer.toString(size);
+        android.util.Log.e("size",sizeString);
+
+        android.util.Log.e("name",user);
+        int i =0;
+        if(UserManager.getTrader().getFriendList().hasFriend(trader)){
+
+      // if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
             ServerManager.getFriendOnline(traderName);
             //intent.putExtra("name", traderName.toLowerCase());
             activity.finish();
             startActivity(intent);
 
-        } else if(ServerManager.checkResult()) {
+        } /**else if(ServerManager.checkResult()) {
                 Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
                 Thread thread2 = new Thread(new Runnable() {
                     @Override
@@ -133,10 +132,10 @@ public class SearchPeopleActivity extends Activity {
                 startActivity(intent2);
 
         } else {
-            Toast.makeText(getBaseContext(), "NO user exist", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "No user exist", Toast.LENGTH_SHORT).show();
         }
 
-
+*/
 
     }
 

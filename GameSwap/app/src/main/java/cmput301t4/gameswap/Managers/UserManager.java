@@ -104,7 +104,7 @@ public class UserManager {
     static public void createUser(String username, String email, String city, String phoneNumber, Context context) {
         //TODO: Add call to server to see if username is available
         //null is just for an empty friendlist
-        trader = new User(username, email, city, phoneNumber,null);
+        trader = new User(username, email, city, phoneNumber,new FriendList());
         trader.setFriendList(new FriendList());
         saveUserLocally(context);
     }
