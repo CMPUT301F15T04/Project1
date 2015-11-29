@@ -20,7 +20,7 @@ public class FriendsNTradingActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_friends_ntrading, menu);
+        getMenuInflater().inflate(R.menu.menu_friends_ntrading, menu);
         return true;
     }
 

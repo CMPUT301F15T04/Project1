@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.InventoryManager;
 
 /**
  * Created by rupehra on 11/1/15.
@@ -27,6 +28,8 @@ public class User {
     private TradeList pendingTrades;
     private TradeList pastTrades;
     private FriendManager FM = new FriendManager();
+    private InventoryManager IM = new InventoryManager();
+
 
     @Override
     public String toString() {
@@ -91,6 +94,7 @@ public class User {
         this.userCity = city;
         this.userPhoneNumber = phoneNumber;
         this.setFriendList(FM.getFriendlist());
+        this.setInventory(IM.getInstance());
     }//end Trader constructor
 
 //=====Setters and Getters=====//

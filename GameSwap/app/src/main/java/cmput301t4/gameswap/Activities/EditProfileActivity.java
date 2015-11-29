@@ -32,8 +32,6 @@ public class EditProfileActivity extends Activity {
         EditText cityEditText = (EditText) findViewById(R.id.changeCity);
         EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
 
-
-
         nameEditText.setText(UserManager.getTrader().getUserName());
         emailEditText.setText(UserManager.getTrader().getUserEmail());
         cityEditText.setText(UserManager.getTrader().getUserCity());
@@ -43,7 +41,7 @@ public class EditProfileActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_edit_profile, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_profile, menu);
         return true;
     }
 
@@ -91,8 +89,6 @@ public class EditProfileActivity extends Activity {
         UserManager.editUserName(nameEditText.getText().toString());
         UserManager.editCity(cityEditText.getText().toString());
         UserManager.editPhoneNumber(phoneEditText.getText().toString());
-
-
 
         this.finish();
     }
