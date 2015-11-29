@@ -92,6 +92,11 @@
 
             </TableRow>
 
+            <Space
+                android:layout_width="20px"
+                android:layout_height="23dp"
+                />
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -113,6 +118,11 @@
                     android:id="@+id/viewItemDate"
                     android:layout_column="7" />
             </TableRow>
+            <Space
+                android:layout_width="20px"
+                android:layout_height="23dp"
+                />
+
 
             <TableRow
                 android:layout_width="match_parent"
@@ -134,8 +144,12 @@
                     android:id="@+id/viewItemPlatform"
                     android:entries="@array/Console"
                     android:layout_column="7" />
-
             </TableRow>
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="23dp"
+                />
 
             <TableRow
                 android:layout_width="match_parent"
@@ -159,6 +173,11 @@
                     android:layout_column="7" />
 
             </TableRow>
+            <Space
+                android:layout_width="20px"
+                android:layout_height="23dp"
+                />
+
 
             <TableRow
                 android:layout_width="match_parent"
@@ -181,6 +200,11 @@
                     />
 
             </TableRow>
+            <Space
+                android:layout_width="20px"
+                android:layout_height="23dp"
+                />
+
 
             <TableRow
                 android:layout_width="match_parent"
@@ -203,6 +227,11 @@
                     android:id="@+id/viewItemDesciption"
                     android:layout_column="7" />
             </TableRow>
+            <Space
+                android:layout_width="20px"
+                android:layout_height="23dp"
+                />
+
 
 
         </TableLayout>
