@@ -60,7 +60,7 @@ public class SearchPeopleActivity extends Activity {
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getBaseContext(), query, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), query, Toast.LENGTH_SHORT).show();
 
                 findTrader(query);
                 return false;
@@ -75,7 +75,7 @@ public class SearchPeopleActivity extends Activity {
 
     public void findTrader(final String trader){
         traderName = trader;
-        Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
+
 
         traderName = search.getQuery().toString().toLowerCase();
         Thread thread = new Thread(new Runnable() {
@@ -91,7 +91,8 @@ public class SearchPeopleActivity extends Activity {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-
+        search.setQuery("",false);
+        Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
         Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
 
         //Boolean a = UserManager.getTrader().getFriendList().hasFriend(trader);

@@ -4,6 +4,8 @@ package cmput301t4.gameswap.Models;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import cmput301t4.gameswap.Managers.FriendManager;
+
 /**
  * Created by rupehra on 11/1/15.
  *
@@ -24,6 +26,7 @@ public class User {
     private FriendList friendList;
     private TradeList pendingTrades;
     private TradeList pastTrades;
+    private FriendManager FM = new FriendManager();
 
     @Override
     public String toString() {
@@ -82,12 +85,12 @@ public class User {
 
     //=====End of Test Notify related Code=====//
 
-    public User(String username, String email, String city, String phoneNumber,FriendList friendList) {
+    public User(String username, String email, String city, String phoneNumber) {
         this.userName = username;
         this.userEmail = email;
         this.userCity = city;
         this.userPhoneNumber = phoneNumber;
-        this.friendList = new FriendList();
+        this.setFriendList(FM.getFriendlist());
     }//end Trader constructor
 
 //=====Setters and Getters=====//

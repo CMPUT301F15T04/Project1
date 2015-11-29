@@ -36,7 +36,7 @@ public class UserManager {
         //TODO: Add call to CacheManager to see if there is a previous login on the phone
 
         if(trader == null){
-            trader = new User("", "", "", "",null);
+            trader = new User("", "", "", "");
         }
 
         return trader;
@@ -45,7 +45,7 @@ public class UserManager {
     static public User getFriend(){
 
         if(friend == null){
-            friend = new User("", "", "", "", null);
+            friend = new User("", "", "", "");
         }
         return friend;
     }
@@ -104,7 +104,7 @@ public class UserManager {
     static public void createUser(String username, String email, String city, String phoneNumber, Context context) {
         //TODO: Add call to server to see if username is available
         //null is just for an empty friendlist
-        trader = new User(username, email, city, phoneNumber,new FriendList());
+        trader = new User(username, email, city, phoneNumber);
         trader.setFriendList(new FriendList());
         saveUserLocally(context);
     }

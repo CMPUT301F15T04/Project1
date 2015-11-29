@@ -62,7 +62,7 @@ public class UsersList {
     }
 
     public User getUser(String username) {
-        User user = new User("", "", "", "", null);
+        User user = new User("", "", "", "");
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUserName().toString().toLowerCase().equals(username.toLowerCase())) {
                 user = userList.get(i);
