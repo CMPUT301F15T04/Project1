@@ -217,7 +217,7 @@ public class EditItemActivity extends Activity {
     }
 
     public void addImageOption(View view) {
-        final ImageButton takePhoto = (ImageButton) findViewById(R.id.newImageButton);
+        final ImageButton takePhoto = (ImageButton) findViewById(R.id.newItemPicture);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -232,7 +232,7 @@ public class EditItemActivity extends Activity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView gameImageView = (ImageView) findViewById(R.id.gameImageView);
+            ImageView gameImageView = (ImageView) findViewById(R.id.newItemPictureView);
             gameImageView.setImageBitmap(imageBitmap);
         }
     }

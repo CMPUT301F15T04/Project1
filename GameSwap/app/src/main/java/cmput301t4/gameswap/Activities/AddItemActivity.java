@@ -275,7 +275,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     public void addImageOption(View view){
 
-        final ImageButton takeItemPic = (ImageButton) findViewById(R.id.profilePic);
+        ImageButton takeItemPic = (ImageButton) findViewById(R.id.imageButton);
         takeItemPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
