@@ -88,6 +88,7 @@ public class myInventoryActivity extends Activity{
                                 intent.putExtra("description", Description);
                                 intent.putExtra("releaseDate", ReleaseDate);
                                 intent.putExtra("index", myInventoryListViewPosition);
+                                System.out.println("Setting this number as item id for image" + itemID);
                                 intent.putExtra("itemId", itemID);
                                 activity.finish();
                                 startActivity(intent);
@@ -141,6 +142,7 @@ public class myInventoryActivity extends Activity{
                 Platform = inventory.get(position).getPlatform().toString();
                 IsPrivate = inventory.get(position).getIsPrivate().toString();
                 Quality = inventory.get(position).getQuality().toString();
+                itemID = inventory.get(position).getItemid();
 
                 final Intent intent = new Intent(myInventoryActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
@@ -150,6 +152,9 @@ public class myInventoryActivity extends Activity{
                 intent.putExtra("quality",Quality);
                 intent.putExtra("private",IsPrivate);
                 intent.putExtra("platform",Platform);
+                System.out.println("this is the name of the item at position" + Name);
+                System.out.println("Setting this number as item id for image" + itemID);
+                intent.putExtra("itemId", itemID);
                 startActivity(intent);
             }
         });

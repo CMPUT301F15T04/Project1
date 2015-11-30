@@ -127,6 +127,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     private ImageView userImageButton;
 
     private AddItemActivity activity = this;
+    private int saveImage = 0;
 
 
     private ArrayAdapter<Item> adapter;
@@ -248,6 +249,7 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             imageBitmap = (Bitmap) extras.get("data");
             ImageView gameImageView = (ImageView) findViewById(R.id.gameImageView);
             gameImageView.setImageBitmap(imageBitmap);
+            saveImage = 1;
 
             //ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), imageBitmap);
             //ServerManager.saveImage(image);
@@ -285,15 +287,16 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
             UserManager.getTrader().setInventory(InventoryManager.getInstance());
             //code taken from http://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
+            if(saveImage == 1){
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), byteArray);
+                ServerManager.saveImage(image);
+            }
             //String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), byteArray);
-            ServerManager.saveImage(image);
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
-
 
             ServerManager.saveUserOnline(UserManager.getTrader());
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
