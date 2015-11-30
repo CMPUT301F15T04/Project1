@@ -43,6 +43,7 @@ public class DecideTradeActivity extends Activity {
             friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
+
         Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);

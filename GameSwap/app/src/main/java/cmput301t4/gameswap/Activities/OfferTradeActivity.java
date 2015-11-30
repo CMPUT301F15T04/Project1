@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
@@ -85,6 +86,7 @@ public class OfferTradeActivity extends Activity {
         CTM.clearOwnerSide();
         Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
+        ServerManager.notifyTrade(0);
         startActivity(intent);
         finish();
 

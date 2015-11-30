@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -37,7 +38,8 @@ public class UserManager {
     private static User trader = null;
     private static User friend = null;
     private static ImageModel traderItemImage = null;
-    public static int imageRdy = 0;
+    private static byte[] imageByte = null;
+    public static int imageRdy = 0; //set to 1 if image pulled from server was not null
 
     /**
      * Used to get the app-wide singleton of <code>User</code>
@@ -271,12 +273,20 @@ public class UserManager {
         return trader.getPastTrades();
     }
 
-    public static void setImage(ImageModel image) {
-        traderItemImage = image;
+    public static void setImage(byte[] image) {
+        imageByte = image;
     }
 
-    public static ImageModel getImage() {
+    public static void setImageModel(ImageModel image){
+        traderItemImage = image;
+
+    }
+    public static ImageModel getImageModel(){
         return traderItemImage;
+    }
+
+    public static byte[] getImage() {
+        return imageByte;
     }
 
     public static void setDefaultLocation(Context context) {

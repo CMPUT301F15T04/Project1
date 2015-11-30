@@ -22,8 +22,6 @@ public class Item {
     private String Description;
     /** The date when the game was released for purchase */
     private Date ReleaseDate;
-    /** The image of the item*/
-    private Bitmap image;
     /**a unique item id that can be used to grab images*/
     private int itemid;
     /** A boolean that is true if the Item is only visible to the current user */

@@ -46,6 +46,11 @@ public class TradeManager {
         }
     }//end getTrade
 
+    public static Trade getMostRecentTrade(){
+        int lastPosition = getCurrent().getSize() - 1;
+        return getCurrent().getTrade(lastPosition);
+    }
+
 
     static public ArrayList<String> getBorrowerNames(){
         return getCurrent().getBorrowerNames();
