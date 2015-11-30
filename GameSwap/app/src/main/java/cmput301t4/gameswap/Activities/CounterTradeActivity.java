@@ -32,7 +32,7 @@ public class CounterTradeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_decide_trade);
+        setContentView(R.layout.activity_counter_trade);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
