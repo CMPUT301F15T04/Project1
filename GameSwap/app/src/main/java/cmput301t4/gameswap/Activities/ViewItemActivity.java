@@ -58,6 +58,7 @@ public class ViewItemActivity extends Activity {
 
         if(b!=null){
             descrition.setText(b.getString("description"));
+
             status = b.getBoolean("private");
             if (status == Boolean.TRUE){
                 statusDisplay = "Private";
@@ -71,6 +72,7 @@ public class ViewItemActivity extends Activity {
             quality.setText(b.getString("quality"));
             platform.setText(b.getString("platform"));
             statusView.setText(statusDisplay.toUpperCase());
+            location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
 
             ServerManager.loadImage(b.getInt("itemId"));
 
