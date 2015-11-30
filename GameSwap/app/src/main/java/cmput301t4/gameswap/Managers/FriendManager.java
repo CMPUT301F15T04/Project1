@@ -2,28 +2,16 @@ package cmput301t4.gameswap.Managers;
 
 //commented out getAllUsers
 import java.util.ArrayList;
-import java.util.Collection;
 
 import cmput301t4.gameswap.Models.FriendList;
-import cmput301t4.gameswap.Models.User;
 
 /**
  * Created by kynan on 11/2/15.
  */
 public class FriendManager {
-
-
-    private static FriendList friendList = null;
     //=====Singleton Code=====//
     static public FriendList getFriendlist(){
-        if (friendList == null){
-            friendList = new FriendList();
-        }
-        return friendList;
-    }//end getFriendList
-
-    static public void setFriendManager(User user){
-        friendList = user.getFriendList();
+        return UserManager.getFriendlist();
     }
 
     static public void addFriend(String friend){
@@ -34,10 +22,6 @@ public class FriendManager {
     //be changed later to take in position
     static public void delFriend(int position) {getFriendlist().delFriend(position);
     }//end del
-
-    static public void setFriendsToUser(){
-        UserManager.getTrader().setFriendList(friendList);
-    }
 
     /*
      */
