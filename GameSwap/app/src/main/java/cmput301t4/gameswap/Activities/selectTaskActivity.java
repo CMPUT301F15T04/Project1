@@ -36,8 +36,6 @@ import cmput301t4.gameswap.R;
 
 public class selectTaskActivity extends Activity {
 
-    private MenuItem Actionmenu;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

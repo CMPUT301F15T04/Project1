@@ -33,15 +33,14 @@ public class TradesActivity extends Activity {
         o_tradeitem.add(item_1);
         b_tradeitem.add(item_2);
 
-        Trade trade = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
-        tradeList.add(trade);
+        //Trade trade = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
+        //tradeList.add(trade);
 
-        trades = new ArrayList<String>();
-        trades.add(tradeList.getTrade(0).getOwnername().toString()+ "     "+tradeList.getTrade(0).getBorrowerName().toString());
-        pendingtradeListView = (ListView) findViewById(R.id.pendingtradeListView);
-        adapter = new ArrayAdapter<String>(this,R.layout.tradelistviewtext,trades);
-        pendingtradeListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //trades.add(tradeList.getTrade(0).getOwnername().toString()+ "     "+tradeList.getTrade(0).getBorrowerName().toString());
+       // pendingtradeListView = (ListView) findViewById(R.id.pendingtradeListView);
+        //adapter = new ArrayAdapter<String>(this,R.layout.tradelistviewtext,trades);
+        //pendingtradeListView.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
 
         /*
         pendingtradeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -127,7 +126,7 @@ public class TradesActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_trades, menu);
+        //getMenuInflater().inflate(R.menu.menu_trades, menu);
         return true;
     }
 

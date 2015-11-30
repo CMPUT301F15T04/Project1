@@ -70,7 +70,7 @@ public class FriendProfileActivity extends Activity {
         //Toast.makeText(getBaseContext(), "Trade", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(FriendProfileActivity.this,OfferTradeActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     public void friendInventoryButton(View v){
