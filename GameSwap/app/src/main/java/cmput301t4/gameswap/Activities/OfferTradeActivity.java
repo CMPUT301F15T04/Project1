@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class OfferTradeActivity extends Activity {
     private ArrayAdapter<String> friendAdapter;
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
+    private CreateTradeManager CTM;
 
 
     @Override
@@ -39,6 +41,7 @@ public class OfferTradeActivity extends Activity {
         friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
         myInventoryItemsListView.setAdapter(myadapter);
         friendInventoryItemsListView.setAdapter(friendAdapter);
+        CTM = new CreateTradeManager();
 
     }
 
@@ -51,7 +54,6 @@ public class OfferTradeActivity extends Activity {
         friendInventoryItemsListView.setAdapter(friendAdapter);
         myadapter.notifyDataSetChanged();
         friendAdapter.notifyDataSetChanged();
-        //saveToFile();
     }
 
     @Override
@@ -63,16 +65,21 @@ public class OfferTradeActivity extends Activity {
     public void friendInventoryButtonClicked(View v) {
         Intent intent = new Intent(OfferTradeActivity.this, SelectFromFriendInventoryActivity.class);
         startActivity(intent);
-        //finish();
     }
 
     public void myInventoryButtonClicked(View v) {
         Intent intent = new Intent(OfferTradeActivity.this, MineInventoryActivity.class);
         startActivity(intent);
-        //rfinish();
     }
 
     public void offerTradeClicked(View v){
+
+
+        CTM.setFriendSide();
+        CTM.setOwnerSide();
+        Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
+        finish();
+
 
     }
 
@@ -93,6 +100,5 @@ public class OfferTradeActivity extends Activity {
     @Override
     protected void onPause(){
         super.onPause();
-
     }
 }

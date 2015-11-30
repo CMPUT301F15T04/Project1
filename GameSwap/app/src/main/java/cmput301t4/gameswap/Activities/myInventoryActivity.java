@@ -72,7 +72,6 @@ public class myInventoryActivity extends Activity{
 
                 myInventoryListViewPosition = position;
                 inventory = InventoryManager.getInstance().getItems();
-                //inventory = UserManager.getTrader().getInventory().getItems();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -95,8 +94,6 @@ public class myInventoryActivity extends Activity{
 
                                 return true;
                             case R.id.deleteItemMenuId:
-
-                                //final AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
                                 alert = new AlertDialog.Builder(myInventoryActivity.this);
                                 alert.setMessage("Are you sure, you want to delete this item");
 
@@ -115,7 +112,6 @@ public class myInventoryActivity extends Activity{
                                 alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        // finish();
                                         dialog.dismiss();
                                     }
                                 });
@@ -194,8 +190,6 @@ public class myInventoryActivity extends Activity{
         inventory = UserManager.getTrader().getInventory().getItems();
         nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
-        //adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
-
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -213,7 +207,6 @@ public class myInventoryActivity extends Activity{
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        //saveToFile();
 
     }
 
