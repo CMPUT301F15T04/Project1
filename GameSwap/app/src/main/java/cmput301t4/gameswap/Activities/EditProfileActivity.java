@@ -48,7 +48,7 @@ public class EditProfileActivity extends Activity {
     }
 
     public void addImageOption(View view) {
-        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.newProfilePicture);
+        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.newProfilePicButton);
         takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -63,7 +63,7 @@ public class EditProfileActivity extends Activity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView gameImageView = (ImageView) findViewById(R.id.newProfPicView);
+            ImageView gameImageView = (ImageView) findViewById(R.id.newProfilePicView);
             gameImageView.setImageBitmap(imageBitmap);
         }
     }

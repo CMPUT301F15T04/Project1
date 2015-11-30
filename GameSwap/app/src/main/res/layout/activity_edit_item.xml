@@ -33,14 +33,6 @@
                 android:layout_gravity="right|top">
             </ImageButton>
 
-            <ImageView
-                android:layout_width="190dp"
-                android:layout_height="110dp"
-                android:id="@+id/newItemPictureView"
-
-                android:layout_gravity="center|top"
-                android:clickable="false" />
-
             <TextView
                 android:layout_width="135dp"
                 android:layout_height="wrap_content"
@@ -49,6 +41,14 @@
                 android:text="@string/image"
                 android:textColor="#990500">
             </TextView>
+
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="110dp"
+                android:id="@+id/newItemPictureView"
+
+                android:layout_gravity="center|top"
+                android:clickable="false" />
 
         </FrameLayout>
 
