@@ -112,6 +112,10 @@
             android:name=".Activities.SelectFromFriendInventoryActivity"
             android:label="@string/title_activity_select_from_friend_inventory" >
         </activity>
+        <activity
+            android:name=".Activities.DecideTradeActivity"
+            android:label="@string/title_activity_decide_trade" >
+        </activity>
     </application>
 
 </manifest>

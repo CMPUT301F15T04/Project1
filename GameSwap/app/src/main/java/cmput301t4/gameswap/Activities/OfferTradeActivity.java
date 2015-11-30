@@ -74,8 +74,8 @@ public class OfferTradeActivity extends Activity {
     }
 
     public void offerTradeClicked(View v){
-
         TradeManager.createTrade(UserManager.getTrader().getUserName(),UserManager.getFriend().getUserName(),CreateTradeManager.getOwnerSide(), CreateTradeManager.getFriendSide());
+
         CTM.setFriendSide();
         CTM.setOwnerSide();
         Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
