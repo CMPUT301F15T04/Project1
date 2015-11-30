@@ -86,12 +86,13 @@ public class ViewItemActivity extends Activity {
             quality.setText(b.getString("quality"));
             platform.setText(b.getString("platform"));
             statusView.setText(status.toUpperCase());
-
             ServerManager.loadImage(b.getInt("itemId"));
-            byte[] byteArray = UserManager.getImage().getImage();
-            Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-            imageView.setImageBitmap(image);
-            
+            if(UserManager.imageRdy == 1) {
+                byte[] byteArray = UserManager.getImage().getImage();
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                imageView.setImageBitmap(image);
+            }
+
         }
     }
 

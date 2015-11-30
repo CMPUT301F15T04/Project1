@@ -665,6 +665,7 @@ public class ServerManager {
                     }*/
                     image = gson.fromJson(rd, ImageModel.class);
                     System.out.println(image.getImageuserName() + " username for picture");
+                    UserManager.imageRdy = 1;
                 } catch (JsonIOException e) {
                     throw new RuntimeException(e);
                 } catch (JsonSyntaxException e) {
@@ -673,9 +674,12 @@ public class ServerManager {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
+                } catch(NullPointerException e){
+                    UserManager.imageRdy = 0;
                 }
+                if(UserManager.imageRdy == 1){
                 System.out.println("This is the name of the image taken" + UserManager.getTrader().getUserName() + item);
-                UserManager.setImage(image);
+                UserManager.setImage(image);}
             }
         };
 

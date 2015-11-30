@@ -51,6 +51,8 @@
     <string name="title_activity_add_item">AddItemActivity</string>
     <string name="title_activity_delete_item">DeleteItemActivity</string>
     <string name="dd_mm_yyyy">dd mm yyyy</string>
+    <string name="Location">Location</string>
+    <string name="LocationButton">Add Item Location</string>
 
     <string-array name="Console">
         <item>Playstation 4</item>

@@ -94,7 +94,8 @@
                     android:hint="@string/gameTitle"
                     android:ems="10"
                     android:id="@+id/editGameTitle"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -118,7 +119,8 @@
                     android:hint="dd-MM-yyyy"
                     android:ems="10"
                     android:id="@+id/editReleaseDate"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
             </TableRow>
 
             <TableRow
@@ -140,7 +142,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editconsoleSpinner"
                     android:entries="@array/Console"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -163,7 +166,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editqualitySpinner"
                     android:entries="@array/Quality"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -182,11 +186,12 @@
                     android:layout_gravity="center_vertical" />
 
                 <Spinner
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/editprivatepublicSpinner"
                     android:entries="@array/Public_or_Private"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -209,7 +214,35 @@
                     android:inputType="textMultiLine"
                     android:ems="10"
                     android:id="@+id/editdescriptionBox"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/Location"
+                    android:id="@+id/locationItem"
+                    android:layout_column="6"
+                    android:layout_gravity="center_vertical" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/locationItemButton"
+                    android:text="@string/LocationButton"
+                    android:layout_alignTop="@+id/editItemSaveButton"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="viewStart"
+                    android:layout_gravity="left"
+                    android:onClick="setToCurrentLocation" />
+
+
             </TableRow>
 
         </TableLayout>
@@ -218,8 +251,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.15">
+        android:layout_height="178dp">
 
         <Button
             android:layout_width="wrap_content"
@@ -240,6 +272,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="31dp"
             android:onClick="saveButtonClick" />
+
     </RelativeLayout>
 
 </LinearLayout>
