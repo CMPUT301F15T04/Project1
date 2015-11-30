@@ -8,9 +8,9 @@ import android.graphics.Bitmap;
 public class ImageModel {
     private int itemId;
     private String userName;
-    private String itemPicture;
+    private byte[] itemPicture;
 
-    public ImageModel(int itemId, String userName, String picReceived) {
+    public ImageModel(int itemId, String userName, byte[] picReceived) {
         this.itemId = itemId;
         this.userName = userName;
         this.itemPicture = picReceived;
@@ -20,5 +20,5 @@ public class ImageModel {
 
     public String getImageuserName(){return userName;}
 
-    public String getImage(){return itemPicture;}
+    public byte[] getImage(){return itemPicture;}
 }
