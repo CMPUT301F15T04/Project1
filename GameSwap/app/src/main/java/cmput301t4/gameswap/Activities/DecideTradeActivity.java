@@ -1,6 +1,7 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
+import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.R;
 
 public class DecideTradeActivity extends Activity {
@@ -21,12 +23,14 @@ public class DecideTradeActivity extends Activity {
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
     private CreateTradeManager CTM;
+    private Trade trade;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decide_trade);
+        trade = (Trade) getIntent().getSerializableExtra("Object");
         CTM = new CreateTradeManager();
         myItems = CTM.getOwnerSide().getItemsNames();
         friendItems = CTM.getFriendSide().getItemsNames();
