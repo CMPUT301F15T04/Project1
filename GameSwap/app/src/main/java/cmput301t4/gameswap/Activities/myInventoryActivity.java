@@ -101,10 +101,9 @@ public class myInventoryActivity extends Activity{
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
 
-                                        InventoryManager.delItem(myInventoryListViewPosition);
+                                        inventory.remove(myInventoryListViewPosition);
                                         ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
-
 
                                     }
 
@@ -196,7 +195,6 @@ public class myInventoryActivity extends Activity{
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
 
