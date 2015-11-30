@@ -307,9 +307,9 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
-            String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            //String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), encodedImage);
+            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), byteArray);
             ServerManager.saveImage(image);
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 

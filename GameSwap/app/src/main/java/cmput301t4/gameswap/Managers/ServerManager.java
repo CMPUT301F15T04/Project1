@@ -1,6 +1,8 @@
 package cmput301t4.gameswap.Managers;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -445,8 +447,9 @@ public class ServerManager {
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpPost httpPost = new HttpPost(url);
                 HttpResponse response = null;
-
-                Gson gson = new Gson();
+                GsonBuilder builder = new GsonBuilder();
+                builder.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE);
+                Gson gson = builder.create();
                 StringEntity stringentity = null;
 
                 try {
@@ -510,13 +513,15 @@ public class ServerManager {
                 int timeoutSocket = 5000;
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + UserManager.getTrader().getUserName() + item;
-                System.out.println(url);
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + UserManager.getTrader().getUserName() + item + "/_source";
+                GsonBuilder builder = new GsonBuilder();
+                builder.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE);
+
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpGet httpGet = new HttpGet(url);
                 HttpResponse response = null;
-
-                Gson gson = new Gson();
+                System.out.println(url);
+                Gson gson = builder.create();
 
                 try {                           //run URL
                     response = httpClient.execute(httpGet);
@@ -527,9 +532,14 @@ public class ServerManager {
                 }
                 BufferedReader rd = null;
                 ImageModel image = null;
+                //String jsonData = "";
 
                 try {
+                    //String line;
                     rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
+                    /*while((line = rd.readLine()) != null){
+                        jsonData += line;
+                    }*/
                     image = gson.fromJson(rd, ImageModel.class);
                     System.out.println(image.getImageuserName() + " username for picture");
                 } catch (JsonIOException e) {
