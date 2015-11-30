@@ -57,7 +57,7 @@ public class myInventoryActivity extends Activity{
     /** A description of the Item */
     private String Description;
     /** The date when the game was released for purchase */
-    private Date ReleaseDate;
+    private String ReleaseDate;
     /** Quality of the game*/
     private String Quality;
     /*IsPRivate */
@@ -90,8 +90,8 @@ public class myInventoryActivity extends Activity{
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup, popupMenu.getMenu());
 
                 myInventoryListViewPosition = position;
-
-                inventory = UserManager.getTrader().getInventory().getItems();
+                inventory = InventoryManager.getInstance().getItems();
+                //inventory = UserManager.getTrader().getInventory().getItems();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -105,7 +105,7 @@ public class myInventoryActivity extends Activity{
                                 final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 intent.putExtra("name", Name);
                                 intent.putExtra("description", Description);
-                                intent.putExtra("releaseDate", ReleaseDate.toString());
+                                intent.putExtra("releaseDate", ReleaseDate);
                                 intent.putExtra("index", myInventoryListViewPosition);
                                 activity.finish();
                                 startActivity(intent);

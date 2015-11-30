@@ -119,9 +119,9 @@ public class ServerManager {
     public static void searchForUser(final String username) {
         try {
             Thread serverThread = new Thread(new Runnable() {
-                @Override
 
-                public void run() {
+                    @Override
+                    public void run () {
 
                     HttpParams httpParameters = new BasicHttpParams();
                     // Set the timeout in milliseconds until a connection is established.
@@ -171,9 +171,12 @@ public class ServerManager {
                         serverIsDown();
                     }
 
-                }
+                }//end run
 
-            });
+            }//end thread
+
+
+            );
             try {
                 if(serverDown == Boolean.TRUE){
                     serverNotDown();

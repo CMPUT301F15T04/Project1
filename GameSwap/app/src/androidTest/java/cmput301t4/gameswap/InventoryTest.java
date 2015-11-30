@@ -124,7 +124,7 @@ public class InventoryTest extends TestCase {
         String name = "Doom-a-genton";
         Integer quality = 46;
         //==Attribute No Change==//
-        String date = inventory.dateToString(inventory.getItem(0).getReleaseDate());
+        String date = inventory.getItem(0).getReleaseDate();
         boolean isPrivate = inventory.getItem(0).getIsPrivate();
         Integer platform = inventory.getItem(0).getPlatform();
         String description = inventory.getItem(0).getDescription();
@@ -259,7 +259,7 @@ public class InventoryTest extends TestCase {
         String name = "Doom-a-genton";
         Integer quality = 46;
         //==Attribute No Change==//
-        String date = IM.getInstance().dateToString(IM.getItem(0).getReleaseDate());
+        String date = IM.getInstance().getItem(0).getReleaseDate();
         boolean isPrivate = IM.getItem(0).getIsPrivate();
         Integer platform = IM.getItem(0).getPlatform();
         String description = IM.getItem(0).getDescription();
