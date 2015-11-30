@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 import cmput301t4.gameswap.Activities.CreateProfileActivity;
+import cmput301t4.gameswap.Activities.EditProfileActivity;
 import cmput301t4.gameswap.Activities.MainActivity;
 import cmput301t4.gameswap.Activities.MyProfileActivity;
 import cmput301t4.gameswap.Activities.selectTaskActivity;
@@ -41,9 +43,19 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
     private EditText LoginText;
 
     /**
-     * Variables for testEditProfile
+     * Variables for testEditProfile (from my_profile activity)
      */
-    private Button EditProfileButton;
+    private Button MyProfileEditButton;
+    private TextView ProfileName;
+    private TextView ProfileCity;
+    private TextView ProfilePhone;
+    private TextView ProfileEmail;
+    /**
+     * Variables for testEditProfile (from edit_profile activity)
+     */
+    private Button   EditProfileSaveButton;
+    private EditText EditCityText;
+    private EditText EditPhoneText;
 
 
     public BasicUserTest() {
@@ -211,7 +223,7 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
                         null, false);
 
 
-        getInstrumentation().invokeMenuActionSync(activity, R.id.my_profile,0);
+        getInstrumentation().invokeMenuActionSync(activity, R.id.my_profile, 0);
         getInstrumentation().waitForIdleSync();
 
         MyProfileActivity myProfile_Activity = (MyProfileActivity)
@@ -225,7 +237,68 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
+        receiverActivityMonitor =
+                getInstrumentation().addMonitor(EditProfileActivity.class.getName(),
+                        null, false);
 
+        MyProfileEditButton = myProfile_Activity.getEditButton();
+
+        myProfile_Activity.runOnUiThread(new Runnable() {
+            public void run() {
+                MyProfileEditButton.performClick();
+            }
+        });
+        //Tell program to wait for Sync
+        getInstrumentation().waitForIdleSync();
+
+        EditProfileActivity editProfile_Activity = (EditProfileActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", editProfile_Activity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                EditProfileActivity.class, editProfile_Activity.getClass());
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+        receiverActivityMonitor =
+                getInstrumentation().addMonitor(MyProfileActivity.class.getName(),
+                        null, false);
+
+        EditProfileSaveButton = editProfile_Activity.getSaveButton();
+        EditCityText = editProfile_Activity.getCityText();
+        EditPhoneText = editProfile_Activity.getPhoneEditText();
+
+
+        editProfile_Activity.runOnUiThread(new Runnable() {
+            public void run() {
+                EditCityText.setText("Edmonton");
+                EditPhoneText.setText("7802544987");
+                EditProfileSaveButton.performClick();
+            }
+        });
+        //Tell program to wait for Sync
+        getInstrumentation().waitForIdleSync();
+
+        myProfile_Activity = (MyProfileActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", myProfile_Activity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                MyProfileActivity.class, myProfile_Activity.getClass());
+
+        ProfileName = myProfile_Activity.getNameText();
+        ProfileCity = myProfile_Activity.getCityText();
+        ProfilePhone = myProfile_Activity.getContactText();
+        ProfileEmail = myProfile_Activity.getEmailText();
+
+        assertTrue(ProfileName.getText().toString().equals("JimBoy2"));
+        assertTrue(ProfileCity.getText().toString().equals("Edmonton"));
+        assertTrue(ProfilePhone.getText().toString().equals("7802544987"));
+        assertTrue(ProfileEmail.getText().toString().equals("ThatJimBoy@Darnkids.com"));
+        getInstrumentation().callActivityOnResume(myProfile_Activity);
 
     }//end editUserProfile
 

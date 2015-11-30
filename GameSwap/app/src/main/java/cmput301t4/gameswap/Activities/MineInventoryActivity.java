@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -21,8 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.zip.CheckedInputStream;
 
-import Adapter.ListViewAdapter;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
@@ -35,41 +36,36 @@ public class MineInventoryActivity extends Activity  {
 
     //Adapter.ItemHolder.ListViewAdapter adapter;
     //private ArrayList<Item> inventory;
-    ArrayList<Item> inventory;
-    LayoutInflater inflater;
-    ListViewAdapter adapter;
+    private ArrayList<Item> inventory;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> nameOfItemsList;
+    private ArrayList<String> itemsSelected;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_inventory);
-
-        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        itemsSelected = new ArrayList<String>();
         listView = (ListView) findViewById(R.id.mineInventoryListView);
-        inventory = InventoryManager.getInstance().getItems();
-
-        adapter = new ListViewAdapter(this,R.layout.mineinventorylistviewtext,inventory);
-       // final ListViewAdapter adapter = new ListViewAdapter(this,R.layout.mineinventorylistviewtext,inventory);
+        inventory = UserManager.getTrader().getInventory().getItems();
+        nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
+        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,nameOfItemsList);
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Inventory inventory = (Inventory) parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(),
-                        "Clicked on Row: " + inventory.getItem(position).getName(),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "added", Toast.LENGTH_SHORT).show();
+                itemsSelected.add(nameOfItemsList.get(position));
             }
         });
 
-
     }
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +87,14 @@ public class MineInventoryActivity extends Activity  {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void doneButtonClicked(View v){
+        Intent intent  = new Intent(MineInventoryActivity.this,OfferTradeActivity.class);
+        intent.putStringArrayListExtra("myitems",(ArrayList<String>)itemsSelected);
+        startActivity(intent);
+        finish();
     }
 
 
