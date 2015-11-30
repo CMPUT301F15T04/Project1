@@ -89,10 +89,10 @@ public class ViewItemActivity extends Activity {
 
             ServerManager.loadImage(b.getInt("itemId"));
             System.out.println("reached load image");
-            byte[] decodeImage = Base64.decode(UserManager.getImage().getImage(), Base64.DEFAULT);
+            //byte[] decodeImage = Base64.decode(UserManager.getImage().getImage(), Base64.DEFAULT);
             //byte[] byteArray = UserManager.getImage().getImage();
-            Bitmap image = BitmapFactory.decodeByteArray(decodeImage, 0, decodeImage.length);
-            imageView.setImageBitmap(image);
+           // Bitmap image = BitmapFactory.decodeByteArray(decodeImage, 0, decodeImage.length);
+            //imageView.setImageBitmap(image);
 
         }
     }

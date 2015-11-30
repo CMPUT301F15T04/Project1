@@ -34,15 +34,16 @@ public class OfferTradeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_trade);
-        myItems = CreateTradeManager.getOwnerSide().getItemsNames();
-        friendItems = CreateTradeManager.getFriendSide().getItemsNames();
+        CTM = new CreateTradeManager();
+        myItems = CTM.getOwnerSide().getItemsNames();
+        friendItems = CTM.getFriendSide().getItemsNames();
         myInventoryItemsListView = (ListView) findViewById(R.id.itemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.itemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
         friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
         myInventoryItemsListView.setAdapter(myadapter);
         friendInventoryItemsListView.setAdapter(friendAdapter);
-        CTM = new CreateTradeManager();
+
 
     }
 
@@ -74,11 +75,13 @@ public class OfferTradeActivity extends Activity {
     }
 
     public void offerTradeClicked(View v){
-        TradeManager.createTrade(UserManager.getTrader().getUserName(),UserManager.getFriend().getUserName(),CreateTradeManager.getOwnerSide(), CreateTradeManager.getFriendSide());
+        TradeManager.createTrade(UserManager.getTrader().getUserName(), UserManager.getFriend().getUserName(), CreateTradeManager.getOwnerSide(), CreateTradeManager.getFriendSide());
 
         CTM.setFriendSide();
         CTM.setOwnerSide();
         Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
+        startActivity(intent);
         finish();
         
     }
