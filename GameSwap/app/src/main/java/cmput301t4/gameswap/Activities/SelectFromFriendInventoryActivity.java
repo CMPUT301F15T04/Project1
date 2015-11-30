@@ -1,60 +1,39 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.zip.CheckedInputStream;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.UserManager;
-import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
-public class MineInventoryActivity extends Activity  {
+public class SelectFromFriendInventoryActivity extends Activity {
 
-    private ListView listView;
-
-
-
-    //Adapter.ItemHolder.ListViewAdapter adapter;
-    //private ArrayList<Item> inventory;
+    private ArrayList<String> itemNamesList;
     private ArrayList<Item> inventory;
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> nameOfItemsList;
-    private ArrayList<String> itemsSelected;
-    private int size;
+    private ListView listView;
     private CreateTradeManager CTM = new CreateTradeManager();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mine_inventory);
-        itemsSelected = new ArrayList<String>();
-        listView = (ListView) findViewById(R.id.mineInventoryListView);
-        nameOfItemsList = InventoryManager.getItemsNames();
-        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,nameOfItemsList);
+        setContentView(R.layout.activity_select_from_friend_inventory);
+        inventory = UserManager.getFriend().getInventory().getItems();
+        itemNamesList = UserManager.getFriend().getInventory().getItemsNames();
+        listView = (ListView) findViewById(R.id.friendInventoryListView);
+        adapter = new ArrayAdapter<String>(this,R.layout.friendinventorylistviewtext,itemNamesList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -64,7 +43,7 @@ public class MineInventoryActivity extends Activity  {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(), "Item Added", Toast.LENGTH_SHORT).show();
                 //itemsSelected.add(nameOfItemsList.get(position));
-                CTM.addOwnerSide(InventoryManager.getItem(position));
+                CTM.addFriendSide(UserManager.getFriend().getInventory().getItem(position));
 
             }
         });
@@ -73,10 +52,8 @@ public class MineInventoryActivity extends Activity  {
 
 
 
-    public void doneButtonClicked(View v){
+    public void frienddoneButtonClicked(View v){
         finish();
     }
 
-
 }
-

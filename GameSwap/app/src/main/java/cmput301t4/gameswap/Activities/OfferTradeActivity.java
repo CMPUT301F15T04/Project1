@@ -61,7 +61,7 @@ public class OfferTradeActivity extends Activity {
     }
 
     public void friendInventoryButtonClicked(View v) {
-        Intent intent = new Intent(OfferTradeActivity.this, FriendInventoryActivity.class);
+        Intent intent = new Intent(OfferTradeActivity.this, SelectFromFriendInventoryActivity.class);
         startActivity(intent);
         //finish();
     }
