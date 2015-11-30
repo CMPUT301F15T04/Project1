@@ -48,14 +48,15 @@ public class CounterTradeActivity extends Activity {
 
             Intent intent1 = new Intent(CounterTradeActivity.this,OfferTradeActivity.class);
             startActivity(intent1);
-            //myItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
+            myItems = CTM.getOwnerSide().getItemsNames();
+            friendItems = CTM.getFriendSide().getItemsNames();
             //friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
-        myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
-        friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
-        myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);
-        friendAdapter = new ArrayAdapter<String>(this, R.layout.decidefrienditemlisttextview, friendItems);
+        myInventoryItemsListView = (ListView) findViewById(R.id.counteritemsMyInventory);
+        friendInventoryItemsListView = (ListView) findViewById(R.id.counteritemsFromFriendInventory);
+        myadapter = new ArrayAdapter<String>(this, R.layout.countermylist, myItems);
+        friendAdapter = new ArrayAdapter<String>(this, R.layout.counterfriendlist, friendItems);
         myInventoryItemsListView.setAdapter(myadapter);
         friendInventoryItemsListView.setAdapter(friendAdapter);
 
