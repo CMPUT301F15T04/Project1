@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class DecideTradeActivity extends Activity {
     private ArrayAdapter<String> friendAdapter;
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
-    private CreateTradeManager CTM;
+    //private CreateTradeManager CTM;
     private Trade trade;
 
 
@@ -30,10 +31,15 @@ public class DecideTradeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decide_trade);
-        trade = (Trade) getIntent().getSerializableExtra("Object");
-        CTM = new CreateTradeManager();
-        myItems = CTM.getOwnerSide().getItemsNames();
-        friendItems = CTM.getFriendSide().getItemsNames();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+
+        if(b!=null) {
+            myItems = b.getStringArrayList("oitems");
+            friendItems = b.getStringArrayList("bitems");
+
+        }
+        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);

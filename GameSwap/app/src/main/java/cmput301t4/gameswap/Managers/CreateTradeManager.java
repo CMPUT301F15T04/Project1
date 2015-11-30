@@ -28,12 +28,12 @@ public class CreateTradeManager {
         return FriendSide;
     }//end getFriendSide
 
-    static public Inventory setOwnerSide(){
+    static public Inventory clearOwnerSide(){
         OwnerSide = new Inventory();
         return OwnerSide;
     }
 
-    static public Inventory setFriendSide(){
+    static public Inventory clearFriendSide(){
         FriendSide = new Inventory();
         return FriendSide;
     }

@@ -521,10 +521,11 @@ public class ServerManager {
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
+                byte[] bytes = stream.toByteArray();
 
                 try {
-                    stringentity = new StringEntity(gson.toJson(byteArray));
+                    stringentity = new StringEntity(gson.toJson(bytes));
+
                 } catch (UnsupportedEncodingException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
