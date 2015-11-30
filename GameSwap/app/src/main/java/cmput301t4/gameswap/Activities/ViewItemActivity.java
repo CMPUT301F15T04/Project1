@@ -70,7 +70,88 @@ public class ViewItemActivity extends Activity {
             name.setText(b.getString("name"));
             date.setText(b.getString("releaseDate"));
             quality.setText(b.getString("quality"));
+            if (quality.getText().equals(0));{
+                quality.setText("Perfect Condition/Unopened/Download Code");
+            }
+            if (quality.getText().equals(1));{
+                quality.setText("Opened No Scratches/Damage");
+            }
+            if (quality.getText().equals(2));{
+                quality.setText("Light Scratches/Damage");
+            }
+            if (quality.getText().equals(3));{
+                quality.setText("Decent Scratches/Damage");
+            }
+            if (quality.getText().equals(4));{
+                quality.setText("Heavy Scratches/Damage");
+            }
+            /**do the same for all the different possibilities for platforms*/
+
             platform.setText(b.getString("platform"));
+            if (platform.getText().equals(0));{
+                platform.setText("Playstation 4");
+            }
+            if (platform.getText().equals(1));{
+                platform.setText("Xbox ONE");
+            }
+            if (platform.getText().equals(2));{
+                platform.setText("PC");
+            }
+            if (platform.getText().equals(3));{
+                platform.setText("Wii U");
+            }
+            if (platform.getText().equals(4));{
+                platform.setText("Nintendo 3DS");
+            }
+            if (platform.getText().equals(5));{
+                platform.setText("Playstation 3");
+            }
+            if (platform.getText().equals(6));{
+                platform.setText("Playstation Vita<");
+            }
+            if (platform.getText().equals(7));{
+                platform.setText("Xbox 360");
+            }
+            if (platform.getText().equals(8));{
+                platform.setText("Nintendo Wii");
+            }
+            if (platform.getText().equals(9));{
+                platform.setText("Nintendo DS");
+            }
+            if (platform.getText().equals(10));{
+                platform.setText("PlayStation 2");
+            }
+            if (platform.getText().equals(11));{
+                platform.setText("Xbox");
+            }
+            if (platform.getText().equals(12));{
+                platform.setText("Nintendo Gamecube");
+            }
+
+            if (platform.getText().equals(13));{
+                platform.setText("Game Boy Advanced");
+            }
+
+            if (platform.getText().equals(14));{
+                platform.setText("Playstation Portable");
+            }
+            if (platform.getText().equals(15));{
+                platform.setText("PlayStation");
+            }
+            if (platform.getText().equals(16));{
+                platform.setText("Nintendo 64");
+            }
+            if (platform.getText().equals(17));{
+                platform.setText("Game Boy");
+            }
+            if (platform.getText().equals(18));{
+                platform.setText("SNES");
+            }
+            if (platform.getText().equals(19));{
+                platform.setText("NES");
+            }
+
+
             statusView.setText(statusDisplay.toUpperCase());
             location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
 
