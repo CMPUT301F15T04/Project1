@@ -40,11 +40,11 @@ public class myInventoryActivity extends Activity{
     /** The date when the game was released for purchase */
     private String ReleaseDate;
     /** Quality of the game*/
-    private String Quality;
+    private int Quality;
     /*IsPRivate */
     private Boolean IsPrivate;
     /*Platform of the game*/
-    private String Platform;
+    private int Platform;
     private double latitude;
     private double longitude;
 
@@ -142,9 +142,9 @@ public class myInventoryActivity extends Activity{
                 Name = InventoryManager.getItem(position).getName();
                 Description = InventoryManager.getItem(position).getDescription();
                 ReleaseDate = InventoryManager.getItem(position).getReleaseDate();
-                Platform = InventoryManager.getItem(position).getPlatform().toString();
+                Platform = InventoryManager.getItem(position).getPlatform();
                 IsPrivate = InventoryManager.getItem(position).getIsPrivate();
-                Quality = InventoryManager.getItem(position).getQuality().toString();
+                Quality = InventoryManager.getItem(position).getQuality();
                 itemID = inventory.get(position).getItemid();
 
 
@@ -177,6 +177,7 @@ public class myInventoryActivity extends Activity{
     @Override
     public void onResume(){
         super.onResume();
+        resetAdapter();
     }
 
 
