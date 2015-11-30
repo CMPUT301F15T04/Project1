@@ -175,9 +175,6 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         EditSharedSpin = EditItem_Activity.editSharedSpinner();
         EditSaveButton = EditItem_Activity.editSaveButton();
 
-        receiverActivityMonitor =
-                getInstrumentation().addMonitor(myInventoryActivity.class.getName(),
-                        null, false);
 
         EditItem_Activity.runOnUiThread(new Runnable() {
             public void run() {
@@ -195,19 +192,9 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         });
         getInstrumentation().waitForIdleSync();
 
-        myInventory_Activity = (myInventoryActivity)
-                receiverActivityMonitor.waitForActivityWithTimeout(1000);
-        assertNotNull("ReceiverActivity is null", myInventory_Activity);
-        assertEquals("Monitor for ReceiverActivity has not been called",
-                1, receiverActivityMonitor.getHits());
-        assertEquals("Activity is of wrong type",
-                myInventoryActivity.class, myInventory_Activity.getClass());
 
-        // Remove the ActivityMonitor
-        getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-        View v  = myInventory_Activity.getInventoryList().getChildAt(0);
-        assertNotNull(v);
+        getInstrumentation().callActivityOnResume(myInventory_Activity);
 
         return myInventory_Activity;
     }//end editItemTest

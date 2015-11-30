@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.Managers.TradeManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.R;
@@ -42,12 +43,11 @@ public class CancelCreateTradeActivity extends Activity {
         TM = new TradeManager();
 
         if(b!=null) {
-            myItems = b.getStringArrayList("oitems");
-            friendItems = b.getStringArrayList("bitems");
             index = b.getInt("index");
-
-
+            myItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
+            friendItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
         }
+
         Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
         myInventoryItemsListView = (ListView) findViewById(R.id.cancelitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.cancelitemsFromFriendInventory);
