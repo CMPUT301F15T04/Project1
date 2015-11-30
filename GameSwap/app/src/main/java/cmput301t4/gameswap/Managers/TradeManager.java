@@ -11,6 +11,7 @@ import cmput301t4.gameswap.Models.TradeList;
  * Created by kynan on 11/1/15.
  */
 public class TradeManager {
+
     //Singleton Code for currentList
     static public TradeList getCurrent(){
         return UserManager.getPendingList();

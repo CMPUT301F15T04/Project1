@@ -50,7 +50,7 @@ public class ViewItemActivity extends Activity {
         statusView = (TextView) findViewById(R.id.viewStatus);
         location =(TextView) findViewById(R.id.locationDescription);
         imageView = (ImageView) findViewById(R.id.gameImageView);
-        
+
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
