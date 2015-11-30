@@ -93,7 +93,8 @@
                     android:hint="@string/gameTitle"
                     android:ems="10"
                     android:id="@+id/gameTitle"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -117,7 +118,8 @@
                     android:hint="dd-MM-yyyy"
                     android:ems="10"
                     android:id="@+id/releaseDateEdit"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
             </TableRow>
 
             <TableRow
@@ -139,7 +141,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/consoleSpinner"
                     android:entries="@array/Console"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -162,7 +165,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/qualitySpinner"
                     android:entries="@array/Quality"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -185,7 +189,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/privatepublicSpinner"
                     android:entries="@array/Public_or_Private"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
 
             </TableRow>
 
@@ -208,7 +213,8 @@
                     android:inputType="textMultiLine"
                     android:ems="10"
                     android:id="@+id/descriptionBox"
-                    android:layout_column="7" />
+                    android:layout_column="7"
+                    android:layout_gravity="left" />
             </TableRow>
 
 
