@@ -60,4 +60,6 @@ public class CreateTradeManager {
 
     static public int FriendSize() {return FriendSide.size();}
 
+    //static public void clearFriendSide(){getFriendSide().se}
+
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -31,6 +32,10 @@ public class FriendInventoryActivity extends Activity {
         adapter = new ArrayAdapter<String>(this,R.layout.friendinventorylistviewtext,itemNamesList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    public void frienddoneButtonClicked(View v){
+        finish();
     }
 
 }//end FriendInventoryActivity
