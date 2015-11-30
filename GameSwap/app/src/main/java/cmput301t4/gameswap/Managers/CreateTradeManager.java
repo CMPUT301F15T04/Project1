@@ -28,6 +28,15 @@ public class CreateTradeManager {
         return FriendSide;
     }//end getFriendSide
 
+    static public Boolean OwnerSideContian(Item item){
+        for(int i = 0; i < OwnerSide.size(); i++){
+            if(item.getItemid() == (OwnerSide.getItem(i).getItemid())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     static public void addOwnerSide(Item item){
         getOwnerSide().add(item);
     }//end addOwnerSide

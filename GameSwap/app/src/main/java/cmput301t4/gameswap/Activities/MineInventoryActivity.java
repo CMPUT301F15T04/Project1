@@ -46,12 +46,10 @@ public class MineInventoryActivity extends Activity  {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_inventory);
-        itemsSelected = new ArrayList<String>();
         listView = (ListView) findViewById(R.id.mineInventoryListView);
         nameOfItemsList = InventoryManager.getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,nameOfItemsList);
@@ -62,22 +60,20 @@ public class MineInventoryActivity extends Activity  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Item Added", Toast.LENGTH_SHORT).show();
-                //itemsSelected.add(nameOfItemsList.get(position));
-                CTM.addOwnerSide(InventoryManager.getItem(position));
-
+                if(CTM.OwnerSideContian(InventoryManager.getItem(position)) == Boolean.FALSE){
+                    Toast.makeText(getBaseContext(), InventoryManager.getItem(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
+                    CTM.addOwnerSide(InventoryManager.getItem(position));
+                } else  {
+                    Toast.makeText(getBaseContext(), "Already Added to list", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
-
-
 
     public void doneButtonClicked(View v){
         size  = CreateTradeManager.OwnerSize();
         String strsize = Integer.toString(size);
         Toast.makeText(getBaseContext(), strsize, Toast.LENGTH_SHORT).show();
-
         finish();
     }
 
