@@ -114,11 +114,6 @@ public class SearchFriendActivity extends Activity {
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException();
                                 }
-                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
-                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
-                                startActivity(intent);
-                                return true;
-
 
                             case R.id.tradeFriendMenuId:
                                 ServerManager.getFriendOnline(FriendManager.getUser(position));

@@ -42,8 +42,8 @@ public class SelectFromFriendInventoryActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(CTM.FriendSideContain(InventoryManager.getItem(position)) == Boolean.FALSE){
-                    Toast.makeText(getBaseContext(), InventoryManager.getItem(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
-                    CTM.addFriendSide(InventoryManager.getItem(position));
+                    Toast.makeText(getBaseContext(),inventory.get(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
+                    CTM.addFriendSide(inventory.get(position));
                 } else  {
                     Toast.makeText(getBaseContext(), "Already Added to list", Toast.LENGTH_SHORT).show();
                 }
