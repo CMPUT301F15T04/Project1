@@ -92,8 +92,8 @@ public class SearchPeopleActivity extends Activity {
             throw new RuntimeException();
         }
         search.setQuery("",false);
-        Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
 
         //Boolean a = UserManager.getTrader().getFriendList().hasFriend(trader);
         String user  = UserManager.getTrader().getUserName();

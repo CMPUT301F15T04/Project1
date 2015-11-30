@@ -97,9 +97,6 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.viewFriendProfileMenuId:
-                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
-                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
-                                startActivity(intent);
 
                                 Thread thread = new Thread(new Runnable() {
                                     @Override
@@ -113,6 +110,10 @@ public class SearchFriendActivity extends Activity {
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException();
                                 }
+                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
+                                startActivity(intent);
+                                return true;
 
 
 

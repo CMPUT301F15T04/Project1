@@ -72,12 +72,15 @@ public class OfferTradeActivity extends Activity {
         //rfinish();
     }
 
+    public void offerTradeClicked(View v){
+
+    }
+
 
     public void addItemsToMyList(ArrayList<String> myItems) {
 
         myInventoryItemsListView.setAdapter(myadapter);
         myadapter.notifyDataSetChanged();
-
     }
 
     public void addItemsToFriendList(ArrayList<String> friendItems) {
@@ -85,6 +88,11 @@ public class OfferTradeActivity extends Activity {
         friendInventoryItemsListView.setAdapter(friendAdapter);
         friendAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
 
     }
 }
