@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.TradeManager;
 
 /**
  * Since we might not have an account we might need to shift Account Manager's
@@ -115,7 +116,10 @@ public class User {
     public void ManagerConstructor(){
         FriendManager FM = new FriendManager();
         InventoryManager IM = new InventoryManager();
+        TradeManager TM = new TradeManager();
 
+        this.setPastTrades(TM.getPast());
+        this.setPendingTrades(TM.getCurrent());
         this.setFriendList(FM.getFriendlist());
         this.setInventory(IM.getInstance());
     }//end ManagerConstructor

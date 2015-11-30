@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Managers;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
@@ -23,7 +24,7 @@ public class TradeManager {
     //=====Basic Function=====//
 
     //Create a new trade
-    public void createTrade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
+    public static void createTrade(String OwnerName, String BorrowerName, Inventory OwnerItems, Inventory BorrowerItems){
         //String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems
         //Trade trade = new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems);
         getCurrent().add(new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems));

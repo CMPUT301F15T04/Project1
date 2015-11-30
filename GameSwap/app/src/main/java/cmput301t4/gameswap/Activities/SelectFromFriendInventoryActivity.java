@@ -53,8 +53,6 @@ public class SelectFromFriendInventoryActivity extends Activity {
 
     }
 
-
-
     public void frienddoneButtonClicked(View v){
         finish();
     }
