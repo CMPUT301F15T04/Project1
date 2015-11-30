@@ -37,6 +37,15 @@ public class CreateTradeManager {
         return false;
     }
 
+    static public Boolean FriendSideContain(Item item){
+        for(int i = 0; i < FriendSide.size(); i++){
+            if(item.getItemid() == (FriendSide.getItem(i).getItemid())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     static public void addOwnerSide(Item item){
         getOwnerSide().add(item);
     }//end addOwnerSide
