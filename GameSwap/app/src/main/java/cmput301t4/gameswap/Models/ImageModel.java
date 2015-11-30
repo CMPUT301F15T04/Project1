@@ -19,4 +19,6 @@ public class ImageModel {
     public int getImageItemId(){return itemId;}
 
     public String getImageuserName(){return userName;}
+
+    public Bitmap getImage(){return itemPicture;}
 }

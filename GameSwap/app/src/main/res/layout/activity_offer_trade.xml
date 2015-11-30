@@ -8,7 +8,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="248dp"
-        android:id="@+id/listView"
+        android:id="@+id/itemsFromMyInventory"
         android:layout_gravity="center_horizontal" />
 
     <Space
@@ -19,7 +19,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="210dp"
-        android:id="@+id/listView3"
+        android:id="@+id/itemsFromFriendInventory"
         android:layout_gravity="center_horizontal" />
 
     <Space

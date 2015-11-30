@@ -54,7 +54,7 @@ public class ServerManager {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-
+                //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
                 HttpParams httpParameters = new BasicHttpParams();
                 // Set the timeout in milliseconds until a connection is established.
                 // The default value is zero, that means the timeout is not used.
@@ -123,6 +123,7 @@ public class ServerManager {
 
                 public void run() {
 
+                    //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
                     HttpParams httpParameters = new BasicHttpParams();
                     // Set the timeout in milliseconds until a connection is established.
                     // The default value is zero, that means the timeout is not used.
@@ -214,7 +215,7 @@ public class ServerManager {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-
+                //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
                 HttpParams httpParameters = new BasicHttpParams();
                 // Set the timeout in milliseconds until a connection is established.
                 // The default value is zero, that means the timeout is not used.
@@ -301,6 +302,7 @@ public class ServerManager {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
                 HttpParams httpParameters = new BasicHttpParams();
                 // Set the timeout in milliseconds until a connection is established.
                 // The default value is zero, that means the timeout is not used.
@@ -420,6 +422,7 @@ public class ServerManager {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
                 HttpParams httpParameters = new BasicHttpParams();
                 // Set the timeout in milliseconds until a connection is established.
                 // The default value is zero, that means the timeout is not used.
@@ -484,5 +487,66 @@ public class ServerManager {
             throw new RuntimeException();
         }
     }//end save image
+
+    public static void loadImage(final int item){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + UserManager.getTrader().getUserName() + item;
+                System.out.println(url);
+                HttpClient httpClient = new DefaultHttpClient(httpParameters);
+                HttpGet httpGet = new HttpGet(url);
+                HttpResponse response = null;
+
+                Gson gson = new Gson();
+
+                try {                           //run URL
+                    response = httpClient.execute(httpGet);
+                } catch (ClientProtocolException e1) {
+                    throw new RuntimeException(e1);
+                } catch (IOException e1) {
+                    throw new RuntimeException(e1);
+                }
+                BufferedReader rd = null;
+                ImageModel image = null;
+
+                try {
+                    rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
+                    //String line = rd.readLine();
+                    //System.out.println(line);
+                    image = gson.fromJson(rd, ImageModel.class);
+                    System.out.println(image.getImageuserName() + " username for picture");
+                } catch (JsonIOException e) {
+                    throw new RuntimeException(e);
+                } catch (JsonSyntaxException e) {
+                    throw new RuntimeException(e);
+                } catch (IllegalStateException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                UserManager.setImage(image);
+            }
+        };
+
+        Thread serverThread = new Thread(runnable);
+        serverThread.start();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+    }//end load image
 
 }//end Server Manager

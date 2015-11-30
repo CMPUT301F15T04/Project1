@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 import cmput301t4.gameswap.Models.FriendList;
+import cmput301t4.gameswap.Models.ImageModel;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.Models.User;
@@ -26,6 +27,7 @@ public class UserManager {
 
     private static User trader = null;
     private static User friend = null;
+    private static ImageModel traderItemImage = null;
 
     /**
      * Used to get the app-wide singleton of <code>User</code>
@@ -257,5 +259,7 @@ public class UserManager {
     public TradeList getPastList(){
         return trader.getPastTrades();
     }
+
+    public static void setImage(ImageModel image){traderItemImage = image;}
 
 }
