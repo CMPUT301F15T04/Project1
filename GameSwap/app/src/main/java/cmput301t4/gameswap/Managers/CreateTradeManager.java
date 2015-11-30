@@ -28,9 +28,28 @@ public class CreateTradeManager {
         return FriendSide;
     }//end getFriendSide
 
+    static public Inventory setOwnerSide(){
+        OwnerSide = new Inventory();
+        return OwnerSide;
+    }
+
+    static public Inventory setFriendSide(){
+        FriendSide = new Inventory();
+        return FriendSide;
+    }
+
     static public Boolean OwnerSideContian(Item item){
         for(int i = 0; i < OwnerSide.size(); i++){
-            if(item.getItemid() == (OwnerSide.getItem(i).getItemid())){
+            if(item.getItemid() == (OwnerSide.getItem(i).getItemid())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static public Boolean FriendSideContain(Item item){
+        for(int i = 0; i < FriendSide.size(); i++){
+            if(item.getItemid() == (FriendSide.getItem(i).getItemid())){
                 return true;
             }
         }

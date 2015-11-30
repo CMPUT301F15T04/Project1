@@ -103,5 +103,6 @@
     <string name="title_activity_select_from_friend">SelectFromFriendActivity</string>
     <string name="title_activity_select_from_friend_inventory">SelectFromFriendInventoryActivity
     </string>
+    <string name="title_activity_decide_trade">DecideTradeActivity</string>
 
 </resources>

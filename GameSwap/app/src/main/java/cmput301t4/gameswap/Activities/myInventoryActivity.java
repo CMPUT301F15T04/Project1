@@ -1,43 +1,24 @@
 package cmput301t4.gameswap.Activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
-import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
@@ -91,7 +72,6 @@ public class myInventoryActivity extends Activity{
 
                 myInventoryListViewPosition = position;
                 inventory = InventoryManager.getInstance().getItems();
-                //inventory = UserManager.getTrader().getInventory().getItems();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -114,8 +94,6 @@ public class myInventoryActivity extends Activity{
 
                                 return true;
                             case R.id.deleteItemMenuId:
-
-                                //final AlertDialog.Builder alert = new AlertDialog.Builder(myInventoryActivity.this);
                                 alert = new AlertDialog.Builder(myInventoryActivity.this);
                                 alert.setMessage("Are you sure, you want to delete this item");
 
@@ -134,7 +112,6 @@ public class myInventoryActivity extends Activity{
                                 alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        // finish();
                                         dialog.dismiss();
                                     }
                                 });
@@ -209,14 +186,10 @@ public class myInventoryActivity extends Activity{
 
         super.onStart();
 
-        InventoryManager.setInventoryManager(UserManager.getTrader());
-
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
         inventory = UserManager.getTrader().getInventory().getItems();
         nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
-        //adapter = new ArrayAdapter<Item>(this,R.layout.myinventorylistviewtext, inventory);
-
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -234,7 +207,6 @@ public class myInventoryActivity extends Activity{
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        //saveToFile();
 
     }
 

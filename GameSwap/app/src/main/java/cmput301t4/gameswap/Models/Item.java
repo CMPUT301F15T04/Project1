@@ -1,11 +1,11 @@
 package cmput301t4.gameswap.Models;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
+import android.location.Location;
 
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Exceptions.NameTooLongException;
@@ -32,6 +32,7 @@ public class Item {
     private Integer Quality;
     /** The intended platform of the game mapped to a number */
     private Integer Platform;
+    private Location location;
 
     @Override
     public String toString() {
@@ -56,7 +57,8 @@ public class Item {
         this.Quality = Quaility;
         this.Platform = Platform;
         this.Description = Description;
-        this.itemid= UserManager.getTrader().getCounter();
+        this.location = UserManager.getDefaultLocation();
+        this.itemid = UserManager.getTrader().getCounter();
         UserManager.getTrader().incrementCounter();
     }
 
@@ -82,7 +84,7 @@ public class Item {
         } catch (ParseException e) {
             throw new DateFormatException();
         }
-    }//End checkDate
+    }
 
     //Method to ensure String is within desired length
     //Not sure how we want to do date.
@@ -93,15 +95,15 @@ public class Item {
         } else {
             throw new NameTooLongException();
         }
-    }//End setNameText
+    }
 
     //=====Setting public and private function=====//
     public void setPublic() {
-        this.isPrivate = true;
+        this.isPrivate = false;
     }//end setPublic
 
     public void setPrivate() {
-        this.isPrivate = false;
+        this.isPrivate = true;
     }//end setPrivate
 
     //=====Getters and Setters=====//
@@ -174,4 +176,11 @@ public class Item {
         return false;
     }//end item equals override
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 }//end Item Class

@@ -1,22 +1,21 @@
 package cmput301t4.gameswap.Models;
 
 
+import android.location.Location;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.TradeManager;
 
 /**
- * Created by rupehra on 11/1/15.
- *
  * Since we might not have an account we might need to shift Account Manager's
  * functionality to User Manager
  *
  * friendList is just a list of other traders
-
  */
-
 public class User {
     //=====Attribute=====//
     private String userName;
@@ -24,6 +23,7 @@ public class User {
     private String userCity;
     private String userPhoneNumber;
     private Inventory inventory;
+    private Location defaultLocation;
     private int itemCounter;
     private FriendList friendList;
     private TradeList pendingTrades;
@@ -114,11 +114,12 @@ public class User {
     //=====Manager related code=====//
 
     public void ManagerConstructor(){
-        FriendManager FM = new FriendManager();
-        InventoryManager IM = new InventoryManager();
 
-        this.setFriendList(FM.getFriendlist());
-        this.setInventory(IM.getInstance());
+
+        this.setPastTrades(getPastTrades());
+        this.setPendingTrades(getPendingTrades());
+        this.setFriendList(getFriendList());
+        this.setInventory(getInventory());
     }//end ManagerConstructor
 
 
@@ -175,24 +176,45 @@ public class User {
     }
 
     public Inventory getInventory() {
+        if(inventory == null) {
+            inventory = new Inventory();
+        }
+
         return inventory;
     }
 
     public FriendList getFriendList() {
+        if(friendList == null) {
+            friendList = new FriendList();
+        }
+
         return friendList;
     }
 
     public TradeList getPendingTrades() {
+        if(pendingTrades == null) {
+            pendingTrades = new TradeList();
+        }
+
         return pendingTrades;
     }
 
     public TradeList getPastTrades() {
+        if(pastTrades == null) {
+            pastTrades = new TradeList();
+        }
+
         return pastTrades;
     }
 
 
+    public void setDefaultLocation(Location location) {
+        defaultLocation = location;
+    }
 
-
+    public Location getDefaultLocation() {
+        return defaultLocation;
+    }
 }//end Trader
 
 

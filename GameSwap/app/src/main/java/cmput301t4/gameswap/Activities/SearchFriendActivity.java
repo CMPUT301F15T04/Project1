@@ -82,7 +82,7 @@ public class SearchFriendActivity extends Activity {
         //code referenced from http://stackoverflow.com/questions/4554435/how-to-get-the-index-and-string-of-the-selected-item-in-listview-in-android
         friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View childView, final int position, long id) {
 
                 PopupMenu popupMenu = new PopupMenu(SearchFriendActivity.this, childView);
                 popupMenu.getMenuInflater().inflate(R.menu.friend_popup, popupMenu.getMenu());
@@ -97,9 +97,6 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.viewFriendProfileMenuId:
-                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
-                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
-                                startActivity(intent);
 
                                 Thread thread = new Thread(new Runnable() {
                                     @Override
@@ -110,13 +107,16 @@ public class SearchFriendActivity extends Activity {
                                 thread.start();
                                 try {
                                     thread.join();
+                                    Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                    //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
+                                    startActivity(intent);
+                                    return true;
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException();
                                 }
 
-
-
                             case R.id.tradeFriendMenuId:
+                                ServerManager.getFriendOnline(FriendManager.getUser(position));
                                 Intent intent1 = new Intent(SearchFriendActivity.this,OfferTradeActivity.class);
                                 startActivity(intent1);
                                 return true;
@@ -175,6 +175,7 @@ public class SearchFriendActivity extends Activity {
                 //Toast.makeText(getBaseContext(), query,
                 //Toast.LENGTH_SHORT).show();
                 searchFriend(query);
+
                 return false;
             }
 
@@ -185,29 +186,6 @@ public class SearchFriendActivity extends Activity {
         });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_friend, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void resetAdapter(){
         adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, friendList.getAllFriends());

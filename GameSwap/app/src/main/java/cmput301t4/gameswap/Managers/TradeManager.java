@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Managers;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
@@ -10,31 +11,20 @@ import cmput301t4.gameswap.Models.TradeList;
  * Created by kynan on 11/1/15.
  */
 public class TradeManager {
-
-    private static TradeList currentList = null;
-    private static TradeList pastList =null;
-
     //Singleton Code for currentList
     static public TradeList getCurrent(){
-        if (currentList == null){
-            currentList = new TradeList();
-        }
-        //TODO: pull cache trades and add them to this list
-        return currentList;
-    }//end getInstance
+        return UserManager.getPendingList();
+    }
 
     //Singleton Code for pastList
     static public TradeList getPast(){
-        if (pastList == null){
-            pastList = new TradeList();
-        }
-        return pastList;
-    }//end getInstance
+        return UserManager.getPastList();
+    }
 
     //=====Basic Function=====//
 
     //Create a new trade
-    public void createTrade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
+    public static void createTrade(String OwnerName, String BorrowerName, Inventory OwnerItems, Inventory BorrowerItems){
         //String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems
         //Trade trade = new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems);
         getCurrent().add(new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems));
@@ -55,6 +45,10 @@ public class TradeManager {
         }
     }//end getTrade
 
+
+    static public ArrayList<String> getBorrowerNames(){
+        return getCurrent().getBorrowerNames();
+    }
     //Move trade from current to past
     public void moveTrade(int position){
         getPast().add(getCurrent().getTrade(position));

@@ -19,9 +19,9 @@ public class Trade {
     /** The name of the person receiving the trade */
     private String BorrowerName;
     /** The items that the initiating trader is offering */
-    private ArrayList<Item> OwnerItems;
+    private Inventory OwnerItems;
     /** The items that the initiator wants from the other trader*/
-    private ArrayList<Item> BorrowerItems;
+    private Inventory BorrowerItems;
     /** The date of the trade */
     private Date DateTransaction;
 
@@ -35,7 +35,7 @@ public class Trade {
      * @param BorrowerItems The Receivers items that the Initiator wants
      * @throws DateFormatException This occurs when an improper date is given and can't be parsed
      */
-    public Trade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
+    public Trade(String OwnerName, String BorrowerName, Inventory OwnerItems, Inventory BorrowerItems){
         this.Ownername = OwnerName;
         this.BorrowerName = BorrowerName;
         this.OwnerItems = OwnerItems;
@@ -76,19 +76,19 @@ public class Trade {
         BorrowerName = borrowerName;
     }
 
-    public ArrayList<Item> getOwnerItems() {
+    public Inventory getOwnerItems() {
         return OwnerItems;
     }
 
-    public void setOwnerItems(ArrayList<Item> ownerItems) {
+    public void setOwnerItems(Inventory ownerItems) {
         OwnerItems = ownerItems;
     }
 
-    public ArrayList<Item> getBorrowerItems() {
+    public Inventory getBorrowerItems() {
         return BorrowerItems;
     }
 
-    public void setBorrowerItems(ArrayList<Item> borrowerItems) {
+    public void setBorrowerItems(Inventory borrowerItems) {
         BorrowerItems = borrowerItems;
     }
 

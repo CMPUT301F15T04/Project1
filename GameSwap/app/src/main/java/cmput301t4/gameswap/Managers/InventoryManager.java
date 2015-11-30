@@ -1,33 +1,24 @@
 package cmput301t4.gameswap.Managers;
 
+import android.location.Location;
+
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
-import cmput301t4.gameswap.Models.User;
 
 public class InventoryManager {
 
-    private static Inventory inventory = null;
-
     //Singleton Code
     static public Inventory getInstance(){
-        if (inventory == null){
-            inventory = new Inventory();
-        }
-        //TODO: pull the cached items and add them to this list
-        return inventory;
-    }//end getInstance
+        return UserManager.getInventory();
+    }
 
     //=====Basic Function=====//
 
-    static public void setInventoryManager(User user){
-        inventory = user.getInventory();
-    }
-
     static public void addItem(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description){
         getInstance().add(new Item(Name, ReleaseDate, isPrivate,Quaility,Platform,Description));
-    }//end addItem
+    }
 
     static public void delItem(int position){
         getInstance().del(position);
@@ -70,8 +61,16 @@ public class InventoryManager {
 
 
     public void editItem(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description, int index){
-        getInstance().editItem(Name,ReleaseDate,isPrivate, Quaility, Platform, Description, index);
+        getInstance().editItem(Name, ReleaseDate, isPrivate, Quaility, Platform, Description, index);
     }//end editItem
+
+    public static void setItemLocation(int position, Location location) {
+        getItem(position).setLocation(location);
+    }
+
+    public static Location getItemLocation(int position) {
+        return getItem(position).getLocation();
+    }
 
     //edit Item with the addition of an Image (Not yet implmeneted)
     /*

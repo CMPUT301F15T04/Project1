@@ -11,6 +11,7 @@ import cmput301t4.gameswap.Models.Trade;
 public class TradeList {
     /** The trade list of all current and past trades of the user */
     private ArrayList<Trade> tradelist = new ArrayList<Trade>();
+    private ArrayList<String> currentBorrowerNames;
 
     //======Basic Function=====//
     /**
@@ -64,5 +65,14 @@ public class TradeList {
     public int getIndex(Trade trade){
         return tradelist.indexOf(trade);
     }//end getIndex
+
+
+    public ArrayList<String> getBorrowerNames() {
+        ArrayList<String> name = new ArrayList<String>();
+        for (int i=0;i<tradelist.size();i++){
+            name.add(tradelist.get(i).getBorrowerName().toUpperCase());
+        }
+        return  name;
+    }
 
 }//end TradeList

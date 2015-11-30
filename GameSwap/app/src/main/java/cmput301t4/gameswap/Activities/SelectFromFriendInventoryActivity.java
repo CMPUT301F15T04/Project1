@@ -13,15 +13,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
+import cmput301t4.gameswap.Managers.InvSearchManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class SelectFromFriendInventoryActivity extends Activity {
 
     private ArrayList<String> itemNamesList;
-    private ArrayList<Item> inventory;
+    private Inventory inventory;
     private ArrayAdapter<String> adapter;
     private ListView listView;
     private CreateTradeManager CTM = new CreateTradeManager();
@@ -30,8 +32,8 @@ public class SelectFromFriendInventoryActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_from_friend_inventory);
-        inventory = UserManager.getFriend().getInventory().getItems();
-        itemNamesList = UserManager.getFriend().getInventory().getItemsNames();
+        inventory = InvSearchManager.showFriendInventory(UserManager.getFriend().getInventory());
+        itemNamesList = inventory.getItemsNames();
         listView = (ListView) findViewById(R.id.friendInventoryListView);
         adapter = new ArrayAdapter<String>(this,R.layout.friendinventorylistviewtext,itemNamesList);
         listView.setAdapter(adapter);
@@ -41,16 +43,17 @@ public class SelectFromFriendInventoryActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Item Added", Toast.LENGTH_SHORT).show();
-                //itemsSelected.add(nameOfItemsList.get(position));
-                CTM.addFriendSide(UserManager.getFriend().getInventory().getItem(position));
+                if(CTM.FriendSideContain(inventory.getItem(position)) == Boolean.FALSE){
+                    Toast.makeText(getBaseContext(),inventory.getItem(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
+                    CTM.addFriendSide(inventory.getItem(position));
+                } else  {
+                    Toast.makeText(getBaseContext(), "Already Added to list", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
 
     }
-
-
 
     public void frienddoneButtonClicked(View v){
         finish();
