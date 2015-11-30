@@ -291,7 +291,6 @@ public class UserManager {
             context.startActivity(intent);
         }
 
-
         if (context.checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && context.checkCallingOrSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "Location Permission Denied", Toast.LENGTH_SHORT).show();
 
@@ -319,6 +318,10 @@ public class UserManager {
 
             }
         }, null);
+    }
+
+    public static Location getDefaultLocation() {
+        return getTrader().getDefaultLocation();
     }
 
 }
