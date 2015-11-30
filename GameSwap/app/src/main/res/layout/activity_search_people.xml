@@ -7,14 +7,12 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.96" />
+        android:layout_height="433dp"
+        android:layout_gravity="center_horizontal" />
 
     <SearchView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchView"
-        android:layout_weight="0.10" />
+        android:layout_height="match_parent"
+        android:id="@+id/searchView" />
 
 </LinearLayout>
