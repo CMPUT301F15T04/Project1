@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Models;
 
 
 import android.location.Location;
+import android.location.LocationManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -213,6 +214,13 @@ public class User {
     }
 
     public Location getDefaultLocation() {
+
+       if (defaultLocation == null){
+           defaultLocation = new Location(LocationManager.GPS_PROVIDER);
+           defaultLocation.setLatitude(10);
+           defaultLocation.setLongitude(10);
+       }
+
         return defaultLocation;
     }
 }//end Trader
