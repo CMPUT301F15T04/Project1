@@ -99,11 +99,11 @@ public class Item {
 
     //=====Setting public and private function=====//
     public void setPublic() {
-        this.isPrivate = true;
+        this.isPrivate = false;
     }//end setPublic
 
     public void setPrivate() {
-        this.isPrivate = false;
+        this.isPrivate = true;
     }//end setPrivate
 
     //=====Getters and Setters=====//
