@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.R;
@@ -37,8 +38,14 @@ public class CounterTradeActivity extends Activity {
 
         if(b!=null) {
             int index = b.getInt("index");
-            myItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
-            friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
+            String borrower;
+            trade = UserManager.getPendingList().getTrade(index);
+            TradeManager.delTrade(index);
+            Intent intent1 = new Intent(CounterTradeActivity.this,OfferTradeActivity.class);
+            startActivity(intent1);
+
+            //myItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
+            //friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
