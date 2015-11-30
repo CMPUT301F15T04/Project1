@@ -10,26 +10,15 @@ import cmput301t4.gameswap.Models.TradeList;
  * Created by kynan on 11/1/15.
  */
 public class TradeManager {
-
-    private static TradeList currentList = null;
-    private static TradeList pastList =null;
-
     //Singleton Code for currentList
     static public TradeList getCurrent(){
-        if (currentList == null){
-            currentList = new TradeList();
-        }
-        //TODO: pull cache trades and add them to this list
-        return currentList;
-    }//end getInstance
+        return UserManager.getPendingList();
+    }
 
     //Singleton Code for pastList
     static public TradeList getPast(){
-        if (pastList == null){
-            pastList = new TradeList();
-        }
-        return pastList;
-    }//end getInstance
+        return UserManager.getPastList();
+    }
 
     //=====Basic Function=====//
 
