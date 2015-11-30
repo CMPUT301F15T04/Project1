@@ -239,7 +239,8 @@
                     android:layout_alignTop="@+id/editItemSaveButton"
                     android:layout_alignParentEnd="true"
                     android:textAlignment="viewStart"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:onClick="setToCurrentLocation" />
 
 
             </TableRow>
