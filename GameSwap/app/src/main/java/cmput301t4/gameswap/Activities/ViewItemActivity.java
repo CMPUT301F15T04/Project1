@@ -31,6 +31,7 @@ public class ViewItemActivity extends Activity {
     private String status;
     private TextView statusView;
     private ImageView imageView;
+    private TextView location;
     private ArrayList<String> platformList;
     private String platformString;
     private Integer platformIndex;
@@ -47,7 +48,9 @@ public class ViewItemActivity extends Activity {
         date = (TextView) findViewById(R.id.viewItemDate);
         name = (TextView) findViewById(R.id.viewItemName);
         statusView = (TextView) findViewById(R.id.viewStatus);
+        location =(TextView) findViewById(R.id.locationDescription);
         imageView = (ImageView) findViewById(R.id.gameImageView);
+
        /** platformList.add("Playstation 4");
         platformList.add("Xbox ONE");
         platformList.add("PC");
@@ -86,6 +89,7 @@ public class ViewItemActivity extends Activity {
             quality.setText(b.getString("quality"));
             platform.setText(b.getString("platform"));
             statusView.setText(status.toUpperCase());
+
             ServerManager.loadImage(b.getInt("itemId"));
             if(UserManager.imageRdy == 1) {
                 byte[] byteArray = UserManager.getImage().getImage();
