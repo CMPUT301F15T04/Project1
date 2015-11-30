@@ -100,5 +100,8 @@
     <string name="title_activity_friend_inventory">FriendInventoryActivity</string>
     <string name="title_activity_mine_inventory">MineInventoryActivity</string>
     <string name="title_activity_custom_adapter">CustomAdapter</string>
+    <string name="title_activity_select_from_friend">SelectFromFriendActivity</string>
+    <string name="title_activity_select_from_friend_inventory">SelectFromFriendInventoryActivity
+    </string>
 
 </resources>

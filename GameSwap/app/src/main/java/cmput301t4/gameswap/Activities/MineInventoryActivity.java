@@ -71,9 +71,6 @@ public class MineInventoryActivity extends Activity  {
     }
 
     public void doneButtonClicked(View v){
-        size  = CreateTradeManager.OwnerSize();
-        String strsize = Integer.toString(size);
-        Toast.makeText(getBaseContext(), strsize, Toast.LENGTH_SHORT).show();
         finish();
     }
 
