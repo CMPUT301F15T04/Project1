@@ -7,8 +7,11 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.TradeManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
@@ -20,15 +23,33 @@ public class TradesActivity extends Activity {
     private ListView pendingtradeListView;
     private ArrayList<String> trades;
     private TradeList tradeList;
+    private ArrayList<String> currentTradeBorrowers;
+    private ArrayList<String> pastTradeBorrowers;
+    TradeList currentTrades;
+    TradeList pastTrades;
+    private TradeManager TM;
+    private ListView currentListView;
+    private ListView pastListView;
+    private ArrayAdapter<String> currentAdapter;
+    private ArrayAdapter<String> pastAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trades);
-
+        TM = new TradeManager();
         tradeList = new TradeList();
-        ArrayList<Item> currentTrades = new ArrayList<Item>();
-        ArrayList<Item> pastTrades = new ArrayList<Item>();
-        
+        currentTrades = TM.getCurrent();
+        pastTrades = TM.getPast();
+        currentTradeBorrowers = TM.getBorrowerNames();
+        pastTradeBorrowers = pastTrades.getBorrowerNames();
+        currentListView = (ListView) findViewById(R.id.pendingtradeListView);
+        pastListView = (ListView) findViewById(R.id.pasttradeListView);
+        currentAdapter = new ArrayAdapter<String>(this, R.layout.currentofferalisttextview,currentTradeBorrowers);
+        pastAdapter = new ArrayAdapter<String>(this,R.layout.pastofferlisttextview,pastTradeBorrowers );
+        currentListView.setAdapter(currentAdapter);
+        pastListView.setAdapter(pastAdapter);
+
 
         //trades.add(tradeList.getTrade(0).getOwnername().toString()+ "     "+tradeList.getTrade(0).getBorrowerName().toString());
        // pendingtradeListView = (ListView) findViewById(R.id.pendingtradeListView);

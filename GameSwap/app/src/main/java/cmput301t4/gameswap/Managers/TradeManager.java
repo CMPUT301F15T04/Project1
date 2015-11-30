@@ -45,6 +45,10 @@ public class TradeManager {
         }
     }//end getTrade
 
+
+    static public ArrayList<String> getBorrowerNames(){
+        return getCurrent().getBorrowerNames();
+    }
     //Move trade from current to past
     public void moveTrade(int position){
         getPast().add(getCurrent().getTrade(position));
