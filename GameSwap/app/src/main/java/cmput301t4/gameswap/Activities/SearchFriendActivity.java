@@ -101,7 +101,7 @@ public class SearchFriendActivity extends Activity {
                                 Thread thread = new Thread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        ServerManager.getFriendOnline(UserManager.getTrader().getFriendList().getFriend(friendListViewItemPosition));
+                                        ServerManager.getFriendOnline(FriendManager.getFriendlist().getFriend(friendListViewItemPosition));
                                     }
                                 });
                                 thread.start();

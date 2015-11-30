@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Managers;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 
 /**
@@ -9,34 +10,36 @@ import cmput301t4.gameswap.Models.Item;
  */
 public class CreateTradeManager {
 
-    private static ArrayList<Item> OwnerSide = null;
-    private static ArrayList<Item> FriendSide = new ArrayList<Item>();
+    private static Inventory OwnerSide = null;
+    private static Inventory FriendSide = null;
 
     //=====Singleton Code=====//
-    static public ArrayList<Item> getOwnerSide(){
+    static public Inventory getOwnerSide(){
         if (OwnerSide == null){
-            OwnerSide = new ArrayList<Item>();
+            OwnerSide = new Inventory();
         }
         return OwnerSide;
     }//end getOwnerSide
 
-    static public ArrayList<Item> getFriendSide(){
+    static public Inventory getFriendSide(){
         if (FriendSide == null){
-            FriendSide = new ArrayList<Item>();
+            FriendSide = new Inventory();
         }
         return FriendSide;
     }//end getFriendSide
 
-    public void addOwnerSide(Item item){
-        OwnerSide.add(item);
+    static public void addOwnerSide(Item item){
+        getOwnerSide().add(item);
     }//end addOwnerSide
 
-    public void addFriendSide(Item item){
-        FriendSide.add(item);
+    static public void addFriendSide(Item item){
+        getFriendSide().add(item);
     }//end addFriendSide
 
-    public int size(){
-        return FriendSide.size();
+    static public int OwnerSize(){
+        return OwnerSide.size();
     }
+
+    static public int FriendSize() {return FriendSide.size();}
 
 }

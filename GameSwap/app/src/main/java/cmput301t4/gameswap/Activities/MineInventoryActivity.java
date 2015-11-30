@@ -41,8 +41,8 @@ public class MineInventoryActivity extends Activity  {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> nameOfItemsList;
     private ArrayList<String> itemsSelected;
-    private CreateTradeManager CTM;
     private int size;
+    private CreateTradeManager CTM = new CreateTradeManager();
 
 
 
@@ -53,8 +53,7 @@ public class MineInventoryActivity extends Activity  {
         setContentView(R.layout.activity_mine_inventory);
         itemsSelected = new ArrayList<String>();
         listView = (ListView) findViewById(R.id.mineInventoryListView);
-        inventory = UserManager.getTrader().getInventory().getItems();
-        nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
+        nameOfItemsList = InventoryManager.getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,nameOfItemsList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -63,39 +62,19 @@ public class MineInventoryActivity extends Activity  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Item Added", Toast.LENGTH_SHORT).show();
                 //itemsSelected.add(nameOfItemsList.get(position));
-                CTM.addFriendSide(inventory.get(position));
+                CTM.addOwnerSide(InventoryManager.getItem(position));
+
             }
         });
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_mine_inventory, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     public void doneButtonClicked(View v){
-        size  = CTM.size();
+        size  = CreateTradeManager.OwnerSize();
         String strsize = Integer.toString(size);
         Toast.makeText(getBaseContext(), strsize, Toast.LENGTH_SHORT).show();
 

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cmput301t4.gameswap.Managers.CreateTradeManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class OfferTradeActivity extends Activity {
@@ -29,44 +31,33 @@ public class OfferTradeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_trade);
-        myItems = new ArrayList<String>();
-        friendItems = new ArrayList<String>();
+        myItems = CreateTradeManager.getOwnerSide().getItemsNames();
+        friendItems = CreateTradeManager.getFriendSide().getItemsNames();
         myInventoryItemsListView = (ListView) findViewById(R.id.itemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.itemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
         friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
-        Intent intent = getIntent();
-
-        myItems = intent.getStringArrayListExtra("myitems");
-        Toast.makeText(getBaseContext(), "here", Toast.LENGTH_SHORT).show();
-
-        friendItems = intent.getStringArrayListExtra("frienditems");
-        if(myItems != null) {addItemsToMyList(myItems);}
-        if(friendItems != null){addItemsToFriendList(friendItems);}
-
+        myInventoryItemsListView.setAdapter(myadapter);
+        friendInventoryItemsListView.setAdapter(friendAdapter);
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_offer_trade, menu);
-        return true;
+    private void resetAdapter(){
+        myItems = CreateTradeManager.getOwnerSide().getItemsNames();
+        friendItems = CreateTradeManager.getFriendSide().getItemsNames();
+        myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
+        friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
+        myInventoryItemsListView.setAdapter(myadapter);
+        friendInventoryItemsListView.setAdapter(friendAdapter);
+        myadapter.notifyDataSetChanged();
+        friendAdapter.notifyDataSetChanged();
+        //saveToFile();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onResume(){
+        super.onResume();
+        resetAdapter();
     }
 
     public void friendInventoryButtonClicked(View v) {
