@@ -114,14 +114,12 @@ public class User {
     //=====Manager related code=====//
 
     public void ManagerConstructor(){
-        FriendManager FM = new FriendManager();
-        InventoryManager IM = new InventoryManager();
-        TradeManager TM = new TradeManager();
 
-        this.setPastTrades(TM.getPast());
-        this.setPendingTrades(TM.getCurrent());
-        this.setFriendList(FM.getFriendlist());
-        this.setInventory(IM.getInstance());
+
+        this.setPastTrades(getPastTrades());
+        this.setPendingTrades(getPendingTrades());
+        this.setFriendList(getFriendList());
+        this.setInventory(getInventory());
     }//end ManagerConstructor
 
 

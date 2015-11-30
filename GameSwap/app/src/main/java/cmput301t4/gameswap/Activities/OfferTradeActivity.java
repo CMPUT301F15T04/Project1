@@ -80,7 +80,7 @@ public class OfferTradeActivity extends Activity {
         CTM.setOwnerSide();
         Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
         finish();
-        
+
     }
 
 
