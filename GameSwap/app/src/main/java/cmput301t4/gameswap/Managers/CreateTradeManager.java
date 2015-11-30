@@ -30,7 +30,7 @@ public class CreateTradeManager {
 
     static public Boolean OwnerSideContian(Item item){
         for(int i = 0; i < OwnerSide.size(); i++){
-            if(item.getItemid() == (OwnerSide.getItem(i).getItemid())){
+            if(item.getName() == (OwnerSide.getItem(i).getName())) {
                 return true;
             }
         }
@@ -39,7 +39,7 @@ public class CreateTradeManager {
 
     static public Boolean FriendSideContain(Item item){
         for(int i = 0; i < FriendSide.size(); i++){
-            if(item.getItemid() == (FriendSide.getItem(i).getItemid())){
+            if(item.getName() == (FriendSide.getItem(i).getName())){
                 return true;
             }
         }
