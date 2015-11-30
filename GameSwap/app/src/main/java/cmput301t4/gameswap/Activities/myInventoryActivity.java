@@ -106,7 +106,6 @@ public class myInventoryActivity extends Activity{
                                         ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
 
-
                                     }
 
                                 });

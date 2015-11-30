@@ -39,7 +39,6 @@ public class DecideTradeActivity extends Activity {
             friendItems = b.getStringArrayList("bitems");
 
         }
-        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);
