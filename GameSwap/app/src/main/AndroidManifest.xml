@@ -110,10 +110,7 @@
             android:name=".Activities.MineInventoryActivity"
             android:label="@string/title_activity_mine_inventory" >
         </activity>
-       <!--- <activity
-            android:name=".Activities.ListViewAdapter"
-            android:label="@string/title_activity_custom_adapter" >
-        </activity>-->
+
     </application>
 
 </manifest>
