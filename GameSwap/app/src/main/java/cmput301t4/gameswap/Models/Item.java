@@ -125,8 +125,9 @@ public class Item {
         Description = description;
     }
 
-    public Date getReleaseDate() {
-        return ReleaseDate;
+    public String getReleaseDate() {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        return format1.format(ReleaseDate);
     }
 
     public void setReleaseDate(Date releaseDate) {

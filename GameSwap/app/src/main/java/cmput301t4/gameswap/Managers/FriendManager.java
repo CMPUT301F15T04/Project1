@@ -22,6 +22,10 @@ public class FriendManager {
         return friendList;
     }//end getFriendList
 
+    static public void setFriendManager(User user){
+        friendList = user.getFriendList();
+    }
+
     static public void addFriend(String friend){
         getFriendlist().addFriend(friend);
     }//end addFriend

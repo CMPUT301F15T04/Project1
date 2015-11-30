@@ -103,7 +103,6 @@ public class UserManager {
         //TODO: Add call to server to see if username is available
         //null is just for an empty friendlist
         trader = new User(username, email, city, phoneNumber);
-        trader.setFriendList(new FriendList());
         saveUserLocally(context);
     }
 

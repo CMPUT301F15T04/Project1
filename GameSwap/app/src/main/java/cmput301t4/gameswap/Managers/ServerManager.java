@@ -119,9 +119,9 @@ public class ServerManager {
     public static void searchForUser(final String username) {
         try {
             Thread serverThread = new Thread(new Runnable() {
-                @Override
 
-                public void run() {
+                    @Override
+                    public void run () {
 
                     //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
                     HttpParams httpParameters = new BasicHttpParams();
@@ -172,9 +172,12 @@ public class ServerManager {
                         serverIsDown();
                     }
 
-                }
+                }//end run
 
-            });
+            }//end thread
+
+
+            );
             try {
                 if(serverDown == Boolean.TRUE){
                     serverNotDown();
@@ -212,70 +215,74 @@ public class ServerManager {
      * @param user
      */
     public static void saveUserOnline(final User user){//code obtained from elastic search and ESDemo
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
-                HttpParams httpParameters = new BasicHttpParams();
-                // Set the timeout in milliseconds until a connection is established.
-                // The default value is zero, that means the timeout is not used.
-                int timeoutConnection = 3000;
-                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-                // Set the default socket timeout (SO_TIMEOUT)
-                // in milliseconds which is the timeout for waiting for data.
-                int timeoutSocket = 5000;
-                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + user.getUserName();
-                HttpClient httpclient = new DefaultHttpClient(httpParameters);
-                Gson gson = new Gson();
-                HttpPost httpPost = new HttpPost(url);
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    //taken from http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
+                    HttpParams httpParameters = new BasicHttpParams();
+                    // Set the timeout in milliseconds until a connection is established.
+                    // The default value is zero, that means the timeout is not used.
+                    int timeoutConnection = 3000;
+                    HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                    // Set the default socket timeout (SO_TIMEOUT)
+                    // in milliseconds which is the timeout for waiting for data.
+                    int timeoutSocket = 5000;
+                    HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                StringEntity stringentity = null;
+                    String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + user.getUserName();
+                    HttpClient httpclient = new DefaultHttpClient(httpParameters);
+                    Gson gson = new Gson();
+                    HttpPost httpPost = new HttpPost(url);
 
-                try {
-                    stringentity = new StringEntity(gson.toJson(user));
-                    System.out.println(gson.toJson(user));
-                } catch (UnsupportedEncodingException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                httpPost.setHeader("Accept","application/json");
+                    StringEntity stringentity = null;
 
-                httpPost.setEntity(stringentity);
-                HttpResponse response = null;
-                try {
-                    response = httpclient.execute(httpPost);
-                } catch (ClientProtocolException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-                String status = response.getStatusLine().toString();
-                System.out.println(status);
-                HttpEntity entity = response.getEntity();
-                try {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String output;
-                    System.err.println("Output from Server -> ");
-                    while ((output = br.readLine()) != null) {
-                        System.err.println(output);
+                    try {
+                        stringentity = new StringEntity(gson.toJson(user));
+                        System.out.println(gson.toJson(user));
+                    } catch (UnsupportedEncodingException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
-                } catch (ClientProtocolException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        };
+                    httpPost.setHeader("Accept", "application/json");
 
-        Thread serverThread = new Thread(runnable);
-        serverThread.start();
+                    httpPost.setEntity(stringentity);
+                    HttpResponse response = null;
+                    try {
+                        response = httpclient.execute(httpPost);
+                    } catch (ClientProtocolException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    try {
+                        String status = response.getStatusLine().toString();
+                        System.out.println(status);
+                    } catch (NullPointerException e) {
+                        throw new RuntimeException();
+                    }
+                    HttpEntity entity = response.getEntity();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                        String output;
+                        System.err.println("Output from Server -> ");
+                        while ((output = br.readLine()) != null) {
+                            System.err.println(output);
+                        }
+                    } catch (ClientProtocolException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            Thread serverThread = new Thread(runnable);
+            serverThread.start();
 
     }//end saveUserOnline
 

@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import cmput301t4.gameswap.Exceptions.ServerDownException;
 import cmput301t4.gameswap.Managers.FriendManager;
+import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class MainActivity extends Activity {
@@ -86,8 +88,11 @@ public class MainActivity extends Activity {
                 } catch (InterruptedException e) {
                     throw new RuntimeException();
                 }
+                FriendManager.setFriendManager(UserManager.getTrader());
+                InventoryManager.setInventoryManager(UserManager.getTrader());
                 //ServerManager.getUserOnline(username.getText().toString());
                 Intent intent = new Intent(this, selectTaskActivity.class);
+
                 startActivity(intent);
             } else {
                 if (ServerManager.checkServerStatus() == Boolean.TRUE){
