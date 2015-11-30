@@ -465,7 +465,7 @@ public class ServerManager {
 
                 try {
                     BufferedReader rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
-                    Byte[] bytes = gson.fromJson(rd, Byte[].class);
+                    byte[] bytes = gson.fromJson(rd, byte[].class);
                     image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 } catch (JsonIOException e) {
                     throw new RuntimeException(e);
@@ -506,7 +506,7 @@ public class ServerManager {
                 int timeoutSocket = 5000;
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + image.getImageuserName() + itemid;
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + UserManager.getTrader().getUserName() + itemid;
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpPost httpPost = new HttpPost(url);
                 HttpResponse response = null;
@@ -516,10 +516,10 @@ public class ServerManager {
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
+                byte[] bytes = stream.toByteArray();
 
                 try {
-                    stringentity = new StringEntity(gson.toJson(bytes);
+                    stringentity = new StringEntity(gson.toJson(bytes));
                 } catch (UnsupportedEncodingException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
