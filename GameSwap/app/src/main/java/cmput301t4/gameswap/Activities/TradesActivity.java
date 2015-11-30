@@ -26,15 +26,9 @@ public class TradesActivity extends Activity {
         setContentView(R.layout.activity_trades);
 
         tradeList = new TradeList();
-        ArrayList<Item> o_tradeitem = new ArrayList<Item>();
-        ArrayList<Item> b_tradeitem = new ArrayList<Item>();
-        Item item_1 = new Item("Call of Duty", "01-01-2000", false, 5, 5, "It's Okay");
-        Item item_2 = new Item("Call of Doom", "02-02-1000", true, 2, 5, "It's better than Okay");
-        o_tradeitem.add(item_1);
-        b_tradeitem.add(item_2);
-
-        //Trade trade = new Trade("Owner", "Borrower", o_tradeitem, b_tradeitem);
-        //tradeList.add(trade);
+        ArrayList<Item> currentTrades = new ArrayList<Item>();
+        ArrayList<Item> pastTrades = new ArrayList<Item>();
+        
 
         //trades.add(tradeList.getTrade(0).getOwnername().toString()+ "     "+tradeList.getTrade(0).getBorrowerName().toString());
        // pendingtradeListView = (ListView) findViewById(R.id.pendingtradeListView);
