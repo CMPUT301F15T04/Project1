@@ -48,7 +48,7 @@ public class EditProfileActivity extends Activity {
     }
 
     public void addImageOption(View view) {
-        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.newProfilePicView);
+        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.newProfilePicButton);
         takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
