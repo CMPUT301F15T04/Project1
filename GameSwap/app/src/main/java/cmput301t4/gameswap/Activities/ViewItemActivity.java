@@ -25,7 +25,7 @@ public class ViewItemActivity extends Activity {
     /*Declaring all the listViews here*/
     private TextView name;
     private TextView quality;
-    private TextView descrition;
+    private TextView description;
     private TextView platform;
     private TextView date;
     private Boolean status;
@@ -44,7 +44,7 @@ public class ViewItemActivity extends Activity {
 
         name  = (TextView) findViewById(R.id.viewItemName);
         quality = (TextView) findViewById(R.id.viewItemQuality);
-        descrition = (TextView) findViewById(R.id.viewItemDesciption);
+        description = (TextView) findViewById(R.id.viewItemDesciption);
         platform = (TextView) findViewById(R.id.viewItemPlatform);
         date = (TextView) findViewById(R.id.viewItemDate);
         name = (TextView) findViewById(R.id.viewItemName);
@@ -57,7 +57,7 @@ public class ViewItemActivity extends Activity {
         Bundle b = intent.getExtras();
 
         if(b!=null){
-            descrition.setText(b.getString("description"));
+            description.setText(b.getString("description"));
 
             status = b.getBoolean("private");
             if (status == Boolean.TRUE){
@@ -123,7 +123,7 @@ public class ViewItemActivity extends Activity {
     }
 
     public TextView getDescritionText() {
-        return descrition;
+        return description;
     }
 
     public TextView getPlatformText() {
