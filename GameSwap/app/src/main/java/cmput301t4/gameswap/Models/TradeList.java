@@ -42,6 +42,12 @@ public class TradeList {
     }//End getTrade
 
     /**
+     * return size of tradelist
+     * @return size of trade list
+     */
+    public int getSize(){return tradelist.size();}
+
+    /**
      * Checks if there is a trade in trade list
      * @param trade The trade that was done
      */

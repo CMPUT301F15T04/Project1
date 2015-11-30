@@ -28,7 +28,8 @@ public class ViewItemActivity extends Activity {
     private TextView descrition;
     private TextView platform;
     private TextView date;
-    private String status;
+    private Boolean status;
+    private String statusDisplay;
     private TextView statusView;
     private ImageView imageView;
     private TextView location;
@@ -50,28 +51,33 @@ public class ViewItemActivity extends Activity {
         statusView = (TextView) findViewById(R.id.viewStatus);
         location =(TextView) findViewById(R.id.locationDescription);
         imageView = (ImageView) findViewById(R.id.gameImageView);
-        
+
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
         if(b!=null){
             descrition.setText(b.getString("description"));
-            status = b.getString("private");
-            if (status.equals(true)){
-                status = "Private";
+
+            status = b.getBoolean("private");
+            if (status == Boolean.TRUE){
+                statusDisplay = "Private";
             }
             else {
-                status = "Public";
+                statusDisplay = "Public";
             }
 
             name.setText(b.getString("name"));
             date.setText(b.getString("releaseDate"));
             quality.setText(b.getString("quality"));
             platform.setText(b.getString("platform"));
-            statusView.setText(status.toUpperCase());
+
+            //statusView.setText(status);
             //ServerManager.blakeLoadItemdImage(b.getInt("itemId"));
             ServerManager.loadImage(b.getInt("itemId"));
+
+            statusView.setText(statusDisplay.toUpperCase());
+            location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
 
             if(UserManager.imageRdy == 1) {
                 byte[] byteArray = UserManager.getImageModel().getImage();
@@ -79,6 +85,7 @@ public class ViewItemActivity extends Activity {
                 //imageView.setImageBitmap(UserManager.getImage());
                 imageView.setImageBitmap(image);
             }
+
 
         }
     }
@@ -128,7 +135,7 @@ public class ViewItemActivity extends Activity {
     }
 
     public String getStatusText() {
-        return status;
+        return statusDisplay;
     }
 
     //=====End function needed for Testcases=====//

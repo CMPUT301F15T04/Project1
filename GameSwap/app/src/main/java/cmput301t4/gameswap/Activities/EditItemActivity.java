@@ -37,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
@@ -70,8 +72,9 @@ public class EditItemActivity extends Activity {
     private EditText releaseEditText;
     private EditText descEditText;
     private Integer index;
-    private InventoryManager IM = new InventoryManager();
     private ArrayList<Item> inventory;
+
+
 
     private Button saveEditItemButton;
 
@@ -85,6 +88,8 @@ public class EditItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         //sets it to the activity
         setContentView(R.layout.activity_edit_item);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         //setting spinners
         consoleSpinner = (Spinner) findViewById(R.id.editconsoleSpinner);
         qualitySpinner = (Spinner) findViewById(R.id.editqualitySpinner);
@@ -94,8 +99,6 @@ public class EditItemActivity extends Activity {
         releaseEditText = (EditText) findViewById(R.id.editReleaseDate);
         descEditText = (EditText) findViewById(R.id.editdescriptionBox);
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
         System.out.println("at edit item activity");
 
 
@@ -163,10 +166,14 @@ public class EditItemActivity extends Activity {
 
     public void saveButtonClick(View view) {
         //Toast.makeText(getBaseContext(), "Saving", Toast.LENGTH_SHORT).show();
-
+        Boolean isPrivate;
         int console = consoleSpinner.getSelectedItemPosition();
         int qual = qualitySpinner.getSelectedItemPosition();
-        boolean isPrivate = (publicprivateSpinner.getSelectedItemPosition() == 1);
+        if (publicprivateSpinner.getSelectedItemPosition() == 1){
+            isPrivate = Boolean.TRUE;
+        } else {
+            isPrivate = Boolean.FALSE;
+        }
 
         title = titleEditText.getText().toString();
         releaseDate = releaseEditText.getText().toString();
@@ -179,10 +186,14 @@ public class EditItemActivity extends Activity {
         else if (TextUtils.isEmpty(title) || TextUtils.isEmpty(releaseDate) || TextUtils.isEmpty(description)) {
             Toast.makeText(getBaseContext(), "At least one of the fields is empty!", Toast.LENGTH_SHORT).show();
         } else {
+            Intent intent = getIntent();
+            Bundle b = intent.getExtras();
             Item item = new Item(title, releaseDate, isPrivate, qual, console, description);
+
+            //int index = UserManager.getInventory().findItemByIndx(b.getInt("itemID"));
+            UserManager.getInventory().replace(item, b.getInt("index"));
             //inventory = InventoryManager.getItems();
-            IM.replaceItem(item, index);
-            saveToFile();
+            ServerManager.saveUserOnline(UserManager.getTrader());
             this.finish();
         }
 

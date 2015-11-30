@@ -115,6 +115,6 @@
         android:id="@+id/button5"
 
         android:layout_weight="0.06"
-         />
+        android:onClick="checkNotifications" />
 
 </LinearLayout>

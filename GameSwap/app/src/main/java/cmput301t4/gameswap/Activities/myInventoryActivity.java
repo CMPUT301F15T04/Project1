@@ -42,9 +42,11 @@ public class myInventoryActivity extends Activity{
     /** Quality of the game*/
     private String Quality;
     /*IsPRivate */
-    private String IsPrivate;
+    private Boolean IsPrivate;
     /*Platform of the game*/
     private String Platform;
+    private double latitude;
+    private double longitude;
 
     private static final String FILENAME = "file.sav"; // model
 
@@ -66,31 +68,34 @@ public class myInventoryActivity extends Activity{
 
         myInventoryListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                myInventoryListViewPosition = position;
                 popupMenu = new PopupMenu(myInventoryActivity.this, view);
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup, popupMenu.getMenu());
 
-                myInventoryListViewPosition = position;
-                inventory = InventoryManager.getInstance().getItems();
+
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.editItemMenuId:
                                 //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
 
-                                Name = inventory.get(myInventoryListViewPosition).getName().toString();
-                                Description = inventory.get(myInventoryListViewPosition).getDescription().toString();
-                                ReleaseDate = inventory.get(myInventoryListViewPosition).getReleaseDate();
-                                itemID = inventory.get(myInventoryListViewPosition).getItemid();
+                                Name = InventoryManager.getItem(myInventoryListViewPosition).getName();
+                                Description = InventoryManager.getItem(myInventoryListViewPosition).getDescription();
+                                ReleaseDate = InventoryManager.getItem(myInventoryListViewPosition).getReleaseDate();
+                                itemID = InventoryManager.getItem(myInventoryListViewPosition).getItemid();
+                                latitude = inventory.get(myInventoryListViewPosition).getLocation().getLatitude();
+                                longitude = inventory.get(myInventoryListViewPosition).getLocation().getLongitude();
 
                                 final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 intent.putExtra("name", Name);
                                 intent.putExtra("description", Description);
                                 intent.putExtra("releaseDate", ReleaseDate);
                                 intent.putExtra("index", myInventoryListViewPosition);
+                                intent.putExtra("Latitude", latitude);
+                                intent.putExtra("Longitude", longitude);
                                 System.out.println("Setting this number as item id for image" + itemID);
                                 intent.putExtra("itemId", itemID);
-                                activity.finish();
                                 startActivity(intent);
 
                                 return true;
@@ -102,10 +107,9 @@ public class myInventoryActivity extends Activity{
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
 
-                                        inventory.remove(myInventoryListViewPosition);
+                                        InventoryManager.delItem(myInventoryListViewPosition);
                                         ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
-
 
                                     }
 
@@ -123,7 +127,7 @@ public class myInventoryActivity extends Activity{
                                 return true;
 
                             default:
-                                ;
+
                         }
                         return false;
                     }
@@ -136,18 +140,20 @@ public class myInventoryActivity extends Activity{
         myInventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Name = inventory.get(position).getName().toString();
-                Description = inventory.get(position).getDescription().toString();
-                ReleaseDate = inventory.get(position).getReleaseDate();
-                Platform = inventory.get(position).getPlatform().toString();
-                IsPrivate = inventory.get(position).getIsPrivate().toString();
-                Quality = inventory.get(position).getQuality().toString();
+
+                Name = InventoryManager.getItem(position).getName();
+                Description = InventoryManager.getItem(position).getDescription();
+                ReleaseDate = InventoryManager.getItem(position).getReleaseDate();
+                Platform = InventoryManager.getItem(position).getPlatform().toString();
+                IsPrivate = InventoryManager.getItem(position).getIsPrivate();
+                Quality = InventoryManager.getItem(position).getQuality().toString();
                 itemID = inventory.get(position).getItemid();
+
 
                 final Intent intent = new Intent(myInventoryActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
                 intent.putExtra("description", Description);
-                intent.putExtra("releaseDate", ReleaseDate.toString());
+                intent.putExtra("releaseDate", ReleaseDate);
                 intent.putExtra("index", myInventoryListViewPosition);
                 intent.putExtra("quality",Quality);
                 intent.putExtra("private",IsPrivate);
@@ -162,29 +168,12 @@ public class myInventoryActivity extends Activity{
     }
 
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_inventory, menu);
-        return super.onCreateOptionsMenu(menu);
-        // return true;
+    public void onResume(){
+        super.onResume();
+        resetAdapter();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
       protected void onStart(){
@@ -192,8 +181,8 @@ public class myInventoryActivity extends Activity{
         super.onStart();
 
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        inventory = UserManager.getTrader().getInventory().getItems();
-        nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
+        inventory = InventoryManager.getItems();
+        nameOfItemsList = InventoryManager.getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
         myInventoryListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

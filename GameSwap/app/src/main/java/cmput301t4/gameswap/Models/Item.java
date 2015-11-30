@@ -60,17 +60,6 @@ public class Item {
         UserManager.getTrader().incrementCounter();
     }
 
-    //Contructor for Item with Image (Not Yet Implemented)
-    /*
-    public Item(String Name, String ReleaseDate, boolean isPrivate, Integer Quaility, Integer Platform, String Description) throws NameTooLongException {
-        this.setNameText(Name);
-        this.checkDate(ReleaseDate);
-        this.isPrivate = isPrivate;
-        this.Quality = Quaility;
-        this.Platform = Platform;
-        this.Description = Description;
-    }//End Item without image constructor
-    */
 
     //Method to ensure Date is in the correct format
     //Not sure how we want to do date.
@@ -126,7 +115,7 @@ public class Item {
     }
 
     public String getReleaseDate() {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         return format1.format(ReleaseDate);
     }
 

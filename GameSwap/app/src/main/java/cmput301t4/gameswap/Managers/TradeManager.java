@@ -11,6 +11,7 @@ import cmput301t4.gameswap.Models.TradeList;
  * Created by kynan on 11/1/15.
  */
 public class TradeManager {
+
     //Singleton Code for currentList
     static public TradeList getCurrent(){
         return UserManager.getPendingList();
@@ -44,6 +45,11 @@ public class TradeManager {
             return getPast().getTrade(position);
         }
     }//end getTrade
+
+    public static Trade getMostRecentTrade(){
+        int lastPosition = getCurrent().getSize() - 1;
+        return getCurrent().getTrade(lastPosition);
+    }
 
 
     static public ArrayList<String> getBorrowerNames(){

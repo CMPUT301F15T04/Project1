@@ -714,4 +714,11 @@ public class ServerManager {
         }
     }
 
+    public static void notifyTrade(final int type) {
+        getFriendOnline(UserManager.getFriend().getUserName());
+        UserManager.getFriend().IncreaseNotifiyAmount(type);
+        UserManager.getFriend().getPendingTrades().add(TradeManager.getMostRecentTrade());
+        saveUserOnline(UserManager.getFriend());
+    }
+
 }//end Server Manager
