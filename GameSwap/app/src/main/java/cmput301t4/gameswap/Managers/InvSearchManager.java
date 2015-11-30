@@ -67,4 +67,14 @@ public class InvSearchManager {
         return matching;//returns an inventory
     }//end searchItemByPrivate
 
+    public static Inventory showFriendInventory (Inventory friendInv){
+        Inventory invPublic = new Inventory();
+        for(int i = 0; i<friendInv.size(); i++){
+            if (friendInv.getItem(i).getIsPrivate()==Boolean.FALSE){
+                invPublic.add(friendInv.getItem(i));
+            }
+        }
+        return invPublic;
+    }
+
 }//end InvSearchManager

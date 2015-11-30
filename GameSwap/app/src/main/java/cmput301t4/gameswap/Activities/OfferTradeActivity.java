@@ -83,7 +83,7 @@ public class OfferTradeActivity extends Activity {
         Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
         startActivity(intent);
         finish();
-        
+
     }
 
 
