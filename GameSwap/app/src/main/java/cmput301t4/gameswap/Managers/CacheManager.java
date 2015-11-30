@@ -20,9 +20,10 @@ import java.util.Collection;
 import cmput301t4.gameswap.Models.Cache;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
+import cmput301t4.gameswap.Models.User;
 
 /**
- * CThe MVC controller used for all accesses to <code>Cache</code>
+ * The MVC controller used for all accesses to <code>Cache</code>
  */
 public class CacheManager {
 
@@ -176,5 +177,13 @@ public class CacheManager {
      */
     static public ArrayList<Trade> pullTradeCache() {
         return getInstance().getPendingTrades();
+    }
+
+    static public void storeProfile(User self) {
+        getInstance().storeProfile(self);
+    }
+
+    static public void storeLastFriend(User friend) {
+        getInstance().storeFriend(friend);
     }
 }
