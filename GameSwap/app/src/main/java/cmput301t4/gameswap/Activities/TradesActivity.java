@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
@@ -49,7 +50,7 @@ public class TradesActivity extends Activity {
         tradeList = new TradeList();
         currentTrades = TM.getCurrent();
         pastTrades = TM.getPast();
-        currentTradeBorrowers = TM.getBorrowerNames();
+        currentTradeBorrowers = currentTrades.getBorrowerNames();
         pastTradeBorrowers = pastTrades.getBorrowerNames();
         currentListView = (ListView) findViewById(R.id.pendingtradeListView);
         pastListView = (ListView) findViewById(R.id.pasttradeListView);
@@ -61,6 +62,7 @@ public class TradesActivity extends Activity {
         currentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 trade = currentTrades.getTrade(position);;
                 if(UserManager.getTrader().getUserName().equals(trade.getOwnername())){
                     Intent intent = new Intent(TradesActivity.this, CancelCreateTradeActivity.class);
@@ -76,6 +78,7 @@ public class TradesActivity extends Activity {
                     intent1.putStringArrayListExtra("bitems", trade.getBorrowerItems().getItemsNames());
                     intent1.putExtra("index",position);
                     startActivity(intent1);}
+
             }
         });
 

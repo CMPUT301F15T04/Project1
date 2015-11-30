@@ -38,6 +38,16 @@ public class CreateTradeManager {
         return FriendSide;
     }
 
+    static public Inventory setOwnerSide(Inventory inventory){
+        OwnerSide = inventory;
+        return inventory;
+    }
+
+    static public Inventory setFriendSide(Inventory inventory){
+        FriendSide = inventory;
+        return inventory;
+    }
+
     static public Boolean OwnerSideContian(Item item){
         for(int i = 0; i < OwnerSide.size(); i++){
             if(item.getItemid() == (OwnerSide.getItem(i).getItemid())) {

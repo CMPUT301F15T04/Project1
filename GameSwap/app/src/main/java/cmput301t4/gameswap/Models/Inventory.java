@@ -75,7 +75,6 @@ public class Inventory {
     /**
      * Check if the current user owns an Item
      *
-     * @param trader The Item to be checked
      * @return A boolean that is true if the current user has that Item
      */
     public boolean hasItem(Item item) {
@@ -134,7 +133,7 @@ public class Inventory {
      * @param Name The name of the Item
      * @param ReleaseDate The date it was released in the form "dd-MM-yyyy"
      * @param isPrivate A boolean for if the Item will be shown to everyone
-     * @param Quaility The quality of the Item from 1-5
+     * @param Quality The quality of the Item from 1-5
      * @param Platform The platform the Item is intended for
      * @param Description A description of the Item
      * @param index The position of the Item to be replaced by the new Item
@@ -168,6 +167,14 @@ public class Inventory {
         ItemArrayPosition = itemArrayPosition;
     }
 
+    public int findItemByIndx(int id){
 
+        for (int i = 0; i<inventory.size(); i++){
+            if(inventory.get(i).getItemid() == id){
+                return i;
+            }
+        }
+        return -1;
+    }
 
 }

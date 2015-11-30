@@ -34,7 +34,7 @@ public class InventoryManager {
         return getInstance().getItemsNames();
     }
 
-    public void replaceItem(Item item, int position){
+    static public void replaceItem(Item item, int position){
         getInstance().replace(item, position);
     }//end replaceItem
 
