@@ -106,12 +106,13 @@ public class myInventoryActivity extends Activity{
                                 alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
+                                       // InventoryManager.delItem(myInventoryListViewPosition);
 
-                                        InventoryManager.delItem(myInventoryListViewPosition);
+
+                                        inventory.remove(myInventoryListViewPosition);
+
                                         ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
-
-
                                     }
 
                                 });
@@ -121,14 +122,10 @@ public class myInventoryActivity extends Activity{
                                         dialog.dismiss();
                                     }
                                 });
-
                                 alertDialog = alert.create();
                                 alertDialog.show();
-
                                 return true;
-
                             default:
-
                         }
                         return false;
                     }
@@ -168,11 +165,19 @@ public class myInventoryActivity extends Activity{
 
     }
 
+    public void resetAdapter(){
+        myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
+        inventory = InventoryManager.getItems();
+        nameOfItemsList = InventoryManager.getItemsNames();
+        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
+        myInventoryListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onResume(){
         super.onResume();
-        resetAdapter();
     }
 
 
@@ -194,17 +199,7 @@ public class myInventoryActivity extends Activity{
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);
         this.finish();
-
     }
-
-    private void resetAdapter(){
-        nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
-        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
-        myInventoryListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-    }
-
 
     //=====Function needed for Testcases=====//
 

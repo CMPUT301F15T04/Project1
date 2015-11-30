@@ -107,5 +107,6 @@
     </string>
     <string name="title_activity_decide_trade">DecideTradeActivity</string>
     <string name="title_activity_cancel_create_trade">CancelCreateTradeActivity</string>
+    <string name="title_activity_counter_trade">CounterTradeActivity</string>
 
 </resources>

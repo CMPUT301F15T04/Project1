@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -40,8 +41,8 @@ public class DecideTradeActivity extends Activity {
             friendItems = b.getStringArrayList("bitems");
 
         }
-        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
 
+        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);
@@ -49,7 +50,11 @@ public class DecideTradeActivity extends Activity {
         myInventoryItemsListView.setAdapter(myadapter);
         friendInventoryItemsListView.setAdapter(friendAdapter);
 
+    }
 
+    public void counterTradeButton(View v){
+        Intent intent = new Intent(DecideTradeActivity.this,CounterTradeActivity.class);
+        startActivity(intent);
     }
 
 
