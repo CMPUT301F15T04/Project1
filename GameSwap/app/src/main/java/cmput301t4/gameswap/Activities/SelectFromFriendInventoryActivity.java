@@ -41,7 +41,7 @@ public class SelectFromFriendInventoryActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(CTM.FriendSideContain(InventoryManager.getItem(position)) == Boolean.FALSE){
+                if(CTM.FriendSideContain(inventory.get(position)) == Boolean.FALSE){
                     Toast.makeText(getBaseContext(),inventory.get(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
                     CTM.addFriendSide(inventory.get(position));
                 } else  {
