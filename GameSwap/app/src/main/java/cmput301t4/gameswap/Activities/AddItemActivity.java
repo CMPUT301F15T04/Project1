@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -301,7 +303,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         } else {
 
             UserManager.getTrader().setInventory(InventoryManager.getInstance());
-            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), imageBitmap);
+            //code taken from http://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), encodedImage);
             ServerManager.saveImage(image);
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 

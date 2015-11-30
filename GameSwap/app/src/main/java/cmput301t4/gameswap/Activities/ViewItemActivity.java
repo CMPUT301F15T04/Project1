@@ -2,7 +2,10 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -86,9 +89,10 @@ public class ViewItemActivity extends Activity {
 
             ServerManager.loadImage(b.getInt("itemId"));
             System.out.println("reached load image");
-            imageView.setImageBitmap(UserManager.getImage().getImage());
-
-
+            byte[] decodeImage = Base64.decode(UserManager.getImage().getImage(), Base64.DEFAULT);
+            //byte[] byteArray = UserManager.getImage().getImage();
+            Bitmap image = BitmapFactory.decodeByteArray(decodeImage, 0, decodeImage.length);
+            imageView.setImageBitmap(image);
 
         }
     }
