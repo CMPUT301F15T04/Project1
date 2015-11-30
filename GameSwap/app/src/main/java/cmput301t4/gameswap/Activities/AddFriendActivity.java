@@ -24,35 +24,24 @@ public class AddFriendActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Toast.makeText(getBaseContext(), "I am here", Toast.LENGTH_SHORT).show();
         setContentView(R.layout.activity_add_friend);
 
         addTrader = (Button) findViewById(R.id.addTraderButton);
-        //Intent intent = getIntent();
-        //Bundle b = intent.getExtras();
-
-
         traderName = (UserManager.getFriend().getUserName());
         TextView username = (TextView) findViewById(R.id.userNameTextView);
         username.setText(traderName);
-
-
     }
-
 
     public void addTraderClicked(View v){
         System.out.println(UserManager.getTrader().getFriendList());
         FriendManager.addFriend(traderName);
         UserManager.saveUserLocally(this);
         ServerManager.saveUserOnline(UserManager.getTrader());
-
         Toast.makeText(getBaseContext(), "Added", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddFriendActivity.this,FriendProfileActivity.class);
         intent.putExtra("name", traderName);
-        finish();
+        //finish();
         startActivity(intent);
-
     }
-
 
 }

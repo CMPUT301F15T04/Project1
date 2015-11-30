@@ -120,6 +120,10 @@
             android:name=".Activities.CancelCreateTradeActivity"
             android:label="@string/title_activity_cancel_create_trade" >
         </activity>
+        <activity
+            android:name=".Activities.CounterTradeActivity"
+            android:label="@string/title_activity_counter_trade" >
+        </activity>
     </application>
 
 </manifest>
