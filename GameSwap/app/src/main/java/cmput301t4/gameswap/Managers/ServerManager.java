@@ -551,7 +551,7 @@ public class ServerManager {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
-                } catch(NullPointerException e){
+                } catch(NullPointerException e){//sets image not ready to display
                     UserManager.imageRdy = 0;
                 }
                 if(UserManager.imageRdy == 1){

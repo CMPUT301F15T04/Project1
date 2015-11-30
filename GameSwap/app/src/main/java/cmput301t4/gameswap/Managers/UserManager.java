@@ -37,7 +37,7 @@ public class UserManager {
     private static User trader = null;
     private static User friend = null;
     private static ImageModel traderItemImage = null;
-    public static int imageRdy = 0;
+    public static int imageRdy = 0; //set to 1 if image pulled from server was not null
 
     /**
      * Used to get the app-wide singleton of <code>User</code>
