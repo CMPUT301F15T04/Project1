@@ -49,15 +49,15 @@ public class myInventoryActivity extends Activity{
     private ArrayList<String> nameOfItemsList;
    // private ArrayList<String> statusOfItemsList;
     protected int myInventoryListViewPosition;
-    private InventoryManager im;
 
     private myInventoryActivity activity = this;
 
+    private int itemID;
     private String Name;
     /** A description of the Item */
     private String Description;
     /** The date when the game was released for purchase */
-    private Date ReleaseDate;
+    private String ReleaseDate;
     /** Quality of the game*/
     private String Quality;
     /*IsPRivate */
@@ -90,8 +90,8 @@ public class myInventoryActivity extends Activity{
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup, popupMenu.getMenu());
 
                 myInventoryListViewPosition = position;
-
-                inventory = UserManager.getTrader().getInventory().getItems();
+                inventory = InventoryManager.getInstance().getItems();
+                //inventory = UserManager.getTrader().getInventory().getItems();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -101,12 +101,14 @@ public class myInventoryActivity extends Activity{
                                 Name = inventory.get(myInventoryListViewPosition).getName().toString();
                                 Description = inventory.get(myInventoryListViewPosition).getDescription().toString();
                                 ReleaseDate = inventory.get(myInventoryListViewPosition).getReleaseDate();
+                                itemID = inventory.get(myInventoryListViewPosition).getItemid();
 
                                 final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 intent.putExtra("name", Name);
                                 intent.putExtra("description", Description);
-                                intent.putExtra("releaseDate", ReleaseDate.toString());
+                                intent.putExtra("releaseDate", ReleaseDate);
                                 intent.putExtra("index", myInventoryListViewPosition);
+                                intent.putExtra("itemId", itemID);
                                 activity.finish();
                                 startActivity(intent);
 

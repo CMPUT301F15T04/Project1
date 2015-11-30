@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
@@ -63,7 +65,6 @@ public class EditItemActivity extends Activity {
     private String title;
     private String releaseDate;
     private String description;
-    private Date date;
     private Boolean isDateValid;
     private EditText titleEditText;
     private EditText releaseEditText;
@@ -95,6 +96,11 @@ public class EditItemActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        System.out.println("at edit item activity");
+        ServerManager.loadImage(b.getInt("itemId"));
+        ImageView gameImageView = (ImageView) findViewById(R.id.newItemPictureView);
+        gameImageView.setImageBitmap(UserManager.getImage().getImage());
+
 
         if (b != null) {
             titleEditText.setText(b.getString("name"));
@@ -105,29 +111,6 @@ public class EditItemActivity extends Activity {
 
         prepareSpinnerdata();
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_item, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void prepareSpinnerdata() {
