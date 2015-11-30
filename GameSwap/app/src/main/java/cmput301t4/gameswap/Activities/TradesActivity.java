@@ -118,9 +118,6 @@ public class TradesActivity extends Activity {
         });
         */
 
-
-
-
     }
 
     @Override

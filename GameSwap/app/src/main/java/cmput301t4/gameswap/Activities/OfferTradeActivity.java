@@ -74,7 +74,7 @@ public class OfferTradeActivity extends Activity {
 
     public void offerTradeClicked(View v){
 
-
+        
         CTM.setFriendSide();
         CTM.setOwnerSide();
         Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
