@@ -97,9 +97,6 @@ public class EditItemActivity extends Activity {
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         System.out.println("at edit item activity");
-        ServerManager.loadImage(b.getInt("itemId"));
-        ImageView gameImageView = (ImageView) findViewById(R.id.newItemPictureView);
-        gameImageView.setImageBitmap(UserManager.getImage().getImage());
 
 
         if (b != null) {

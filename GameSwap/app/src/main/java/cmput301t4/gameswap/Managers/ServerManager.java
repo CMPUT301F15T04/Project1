@@ -461,7 +461,7 @@ public class ServerManager {
                 httpPost.setEntity(stringentity);
 
                 try {                           //run URL
-                    response = httpClient.execute(httpPost);
+                    response = httpClient.execute(httpPost);//BAD HTTP REQUEST HERE
                 } catch (ClientProtocolException e1) {
                     throw new RuntimeException(e1);
                 } catch (IOException e1) {
@@ -530,8 +530,6 @@ public class ServerManager {
 
                 try {
                     rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
-                    //String line = rd.readLine();
-                    //System.out.println(line);
                     image = gson.fromJson(rd, ImageModel.class);
                     System.out.println(image.getImageuserName() + " username for picture");
                 } catch (JsonIOException e) {
