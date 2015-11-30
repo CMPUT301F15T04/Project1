@@ -28,14 +28,24 @@ public class CreateTradeManager {
         return FriendSide;
     }//end getFriendSide
 
-    static public Inventory setOwnerSide(){
+    static public Inventory clearOwnerSide(){
         OwnerSide = new Inventory();
         return OwnerSide;
     }
 
-    static public Inventory setFriendSide(){
+    static public Inventory clearFriendSide(){
         FriendSide = new Inventory();
         return FriendSide;
+    }
+
+    static public Inventory setOwnerSide(Inventory inventory){
+        OwnerSide = inventory;
+        return inventory;
+    }
+
+    static public Inventory setFriendSide(Inventory inventory){
+        FriendSide = inventory;
+        return inventory;
     }
 
     static public Boolean OwnerSideContian(Item item){

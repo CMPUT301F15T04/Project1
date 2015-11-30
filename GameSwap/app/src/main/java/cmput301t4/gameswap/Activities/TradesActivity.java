@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
@@ -44,7 +45,7 @@ public class TradesActivity extends Activity {
         tradeList = new TradeList();
         currentTrades = TM.getCurrent();
         pastTrades = TM.getPast();
-        currentTradeBorrowers = TM.getBorrowerNames();
+        currentTradeBorrowers = currentTrades.getBorrowerNames();
         pastTradeBorrowers = pastTrades.getBorrowerNames();
         currentListView = (ListView) findViewById(R.id.pendingtradeListView);
         pastListView = (ListView) findViewById(R.id.pasttradeListView);
@@ -56,8 +57,12 @@ public class TradesActivity extends Activity {
         currentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(TradesActivity.this, DecideTradeActivity.class);
+
+                int itemPosition = position;
+                final Intent intent = new Intent(TradesActivity.this, DecideTradeActivity.class);
+                intent.putExtra("Position", position);
                 startActivity(intent);
+
             }
         });
 
