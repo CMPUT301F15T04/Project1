@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cmput301t4.gameswap.Managers.UserManager;
@@ -18,6 +19,8 @@ public class MyProfileActivity extends Activity {
     private TextView locationTextView;
     private TextView contactTextView;
     private TextView emailTextView;
+    private ImageView profilePicture;
+
 
 
     @Override
@@ -35,7 +38,11 @@ public class MyProfileActivity extends Activity {
         locationTextView.setText(UserManager.getTrader().getUserCity().toString());
         contactTextView.setText(UserManager.getTrader().getUserPhoneNumber());
         emailTextView.setText(UserManager.getTrader().getUserEmail());
+
+        profilePicture = (ImageView) findViewById(R.id.profilePic);
+        //profilePicture.setImageBitmap(profileImageView);
     }
+
 
     public void editProfileButtonClicked(View view){
         Intent intent = new Intent(MyProfileActivity.this,EditProfileActivity.class);

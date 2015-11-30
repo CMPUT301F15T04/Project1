@@ -24,6 +24,7 @@ public class User {
     private String userCity;
     private String userPhoneNumber;
     private Inventory inventory;
+    private int itemCounter;
     private FriendList friendList;
     private TradeList pendingTrades;
     private TradeList pastTrades;
@@ -40,6 +41,7 @@ public class User {
         this.userEmail = email;
         this.userCity = city;
         this.userPhoneNumber = phoneNumber;
+        this.itemCounter=0;
         NotificationConstructor();
         ManagerConstructor();
     }//end Trader constructor
@@ -71,6 +73,12 @@ public class User {
         this.notificationAmount.set(type, notificationAmount.get(type) + 1);
     }//end IncreaseNotifiyAmount
 
+    public void incrementCounter(){
+        itemCounter+=1;
+    }
+    public int getCounter(){
+        return itemCounter;
+    }
     // index 0: new Trade 1: Counter Trade 2: Trade Cancel
     public void clearNotificationAmount(){
         this.notificationAmount.set(0,0);

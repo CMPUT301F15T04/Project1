@@ -1,11 +1,15 @@
 package cmput301t4.gameswap.Models;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Exceptions.NameTooLongException;
+import cmput301t4.gameswap.Managers.UserManager;
 
 /**
  * Stores the information about a given game
@@ -18,7 +22,10 @@ public class Item {
     private String Description;
     /** The date when the game was released for purchase */
     private Date ReleaseDate;
-    //Private Image
+    /** The image of the item*/
+    private Bitmap image;
+    /**a unique item id that can be used to grab images*/
+    private int itemid;
     /** A boolean that is true if the Item is only visible to the current user */
     private Boolean isPrivate;
     /** A numeric representation of the quality of the Item */
@@ -49,6 +56,8 @@ public class Item {
         this.Quality = Quaility;
         this.Platform = Platform;
         this.Description = Description;
+        this.itemid= UserManager.getTrader().getCounter();
+        UserManager.getTrader().incrementCounter();
     }
 
     //Contructor for Item with Image (Not Yet Implemented)
