@@ -106,11 +106,13 @@ public class myInventoryActivity extends Activity{
                                 alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
+                                       // InventoryManager.delItem(myInventoryListViewPosition);
+
 
                                         inventory.remove(myInventoryListViewPosition);
+
                                         ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
-
                                     }
 
                                 });
@@ -120,14 +122,10 @@ public class myInventoryActivity extends Activity{
                                         dialog.dismiss();
                                     }
                                 });
-
                                 alertDialog = alert.create();
                                 alertDialog.show();
-
                                 return true;
-
                             default:
-
                         }
                         return false;
                     }

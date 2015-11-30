@@ -7,7 +7,7 @@
         android:orderInCategory="1"
         android:showAsAction="never" />
 
-    <item android:id="@+id/cancelTrade"
+    <item android:id="@+id/rejectTradeButton"
         android:title="Reject Trade"
         android:orderInCategory="1"
         android:showAsAction="never" />
