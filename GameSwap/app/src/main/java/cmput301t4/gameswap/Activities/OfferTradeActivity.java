@@ -84,7 +84,8 @@ public class OfferTradeActivity extends Activity {
 
         CTM.clearFriendSide();
         CTM.clearOwnerSide();
-        Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
+        ServerManager.saveUserOnline(UserManager.getTrader());
         Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
         ServerManager.notifyTrade(0);
         startActivity(intent);
