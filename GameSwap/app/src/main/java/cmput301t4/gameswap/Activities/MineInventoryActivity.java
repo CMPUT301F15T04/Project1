@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.zip.CheckedInputStream;
 
+import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
@@ -40,6 +41,8 @@ public class MineInventoryActivity extends Activity  {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> nameOfItemsList;
     private ArrayList<String> itemsSelected;
+    private CreateTradeManager CTM;
+    private int size;
 
 
 
@@ -61,7 +64,8 @@ public class MineInventoryActivity extends Activity  {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(), "added", Toast.LENGTH_SHORT).show();
-                itemsSelected.add(nameOfItemsList.get(position));
+                //itemsSelected.add(nameOfItemsList.get(position));
+                CTM.addFriendSide(inventory.get(position));
             }
         });
 
@@ -91,9 +95,10 @@ public class MineInventoryActivity extends Activity  {
 
 
     public void doneButtonClicked(View v){
-        Intent intent  = new Intent(MineInventoryActivity.this,OfferTradeActivity.class);
-        intent.putStringArrayListExtra("myitems",(ArrayList<String>)itemsSelected);
-        startActivity(intent);
+        size  = CTM.size();
+        String strsize = Integer.toString(size);
+        Toast.makeText(getBaseContext(), strsize, Toast.LENGTH_SHORT).show();
+
         finish();
     }
 

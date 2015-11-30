@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,10 @@ public class OfferTradeActivity extends Activity {
         myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
         friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
         Intent intent = getIntent();
+
         myItems = intent.getStringArrayListExtra("myitems");
+        Toast.makeText(getBaseContext(), "here", Toast.LENGTH_SHORT).show();
+
         friendItems = intent.getStringArrayListExtra("frienditems");
         if(myItems != null) {addItemsToMyList(myItems);}
         if(friendItems != null){addItemsToFriendList(friendItems);}
@@ -68,13 +72,13 @@ public class OfferTradeActivity extends Activity {
     public void friendInventoryButtonClicked(View v) {
         Intent intent = new Intent(OfferTradeActivity.this, FriendInventoryActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     public void myInventoryButtonClicked(View v) {
         Intent intent = new Intent(OfferTradeActivity.this, MineInventoryActivity.class);
         startActivity(intent);
-        finish();
+        //rfinish();
     }
 
 

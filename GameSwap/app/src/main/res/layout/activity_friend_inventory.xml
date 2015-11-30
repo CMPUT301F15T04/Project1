@@ -2,21 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cmput301t4.gameswap.Activities.FriendInventoryActivity">
+    tools:context="cmput301t4.gameswap.Activities.FriendInventoryActivity"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select items you want from them"
+        android:id="@+id/selectFriendInventoryItem"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1.03" />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView5"
+        android:layout_height="413dp"
+        android:id="@+id/friendInventoryListView"
         android:layout_gravity="center_horizontal" />
 
-
     <Button
-        android:id="@+id/checkbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Check Selected"/>
+        android:text="Done"
+        android:id="@+id/friendInventoryDone"
+        android:layout_gravity="center_horizontal" />
+
 
 </LinearLayout>

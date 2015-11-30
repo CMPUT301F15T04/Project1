@@ -5,20 +5,31 @@
     tools:context="cmput301t4.gameswap.Activities.OfferTradeActivity">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:text="My Inventory"
+        android:gravity="center"
+        android:id="@+id/myinventorytradeview"
+        android:layout_gravity="center_horizontal" />
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="248dp"
+        android:layout_height="220dp"
         android:id="@+id/itemsFromMyInventory"
         android:layout_gravity="center_horizontal" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:text="Friend Inventory"
+        android:gravity="center"
+        android:id="@+id/friendofferinventory"
         android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="187dp"
         android:id="@+id/itemsFromFriendInventory"
         android:layout_gravity="center_horizontal" />
 
@@ -44,11 +55,19 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  My Inventory  "
+            android:text="My Inventory"
             android:id="@+id/myInventoryButton"
             android:layout_alignBottom="@+id/friendInventoryButton"
             android:onClick="myInventoryButtonClicked"
             android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer trade"
+            android:id="@+id/offerTrade"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/myInventoryButton" />
     </RelativeLayout>
 
 </LinearLayout>

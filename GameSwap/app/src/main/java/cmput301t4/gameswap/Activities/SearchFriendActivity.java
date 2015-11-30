@@ -116,7 +116,8 @@ public class SearchFriendActivity extends Activity {
                                 startActivity(intent);
 
                             case R.id.tradeFriendMenuId:
-                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent(SearchFriendActivity.this,OfferTradeActivity.class);
+                                startActivity(intent1);
                                 return true;
                             case R.id.removeFriendMenuId:
                                // Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
