@@ -33,7 +33,7 @@ public class TradeManager {
     }//end createTrade
 
     //Del trade from current Trade (most likely only used offline)
-    public void delTrade(int position){
+    public static void delTrade(int position){
         getCurrent().del(position);
     }//end deltrade
 
@@ -45,6 +45,11 @@ public class TradeManager {
             return getPast().getTrade(position);
         }
     }//end getTrade
+
+    public static Trade getMostRecentTrade(){
+        int lastPosition = getCurrent().getSize() - 1;
+        return getCurrent().getTrade(lastPosition);
+    }
 
 
     static public ArrayList<String> getBorrowerNames(){

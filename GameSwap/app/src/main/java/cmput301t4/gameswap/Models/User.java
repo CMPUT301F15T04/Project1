@@ -87,18 +87,22 @@ public class User {
         this.notificationAmount.set(2,0);
     }//end clearNotification
 
-    public void IfNotify(){
-        for(int i = 0; i < notificationAmount.size(); i++){
-            if (notificationAmount.get(i) != 0){
-                DisplayNotify(i);
-            }//end If
-        }//end For loop
+    public String IfNotify(int i){
+
+        if (notificationAmount.get(i) != 0){
+            String message = DisplayNotify(i);
+            return message;
+        }else {
+            return "You have no " + notification.get(i + 1);
+        }
     }//end IfNotify
 
     //Display the notification for one category
-    public void DisplayNotify(Integer type){
-        System.out.println(notification.get(0) + notificationAmount.get(type) + notification.get(type+1));
+    public String DisplayNotify(Integer type){
+        System.out.println(notification.get(0) + notificationAmount.get(type) + notification.get(type + 1));
+        String message = notification.get(0) + notificationAmount.get(type) + notification.get(type+1);
         ClearNotify(type);
+        return message;
     }//end DisplayNotify
 
     //Just clear noitify (you seen the update)
@@ -223,6 +227,7 @@ public class User {
 
         return defaultLocation;
     }
+
 }//end Trader
 
 

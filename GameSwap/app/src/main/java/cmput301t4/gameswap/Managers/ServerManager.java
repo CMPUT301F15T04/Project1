@@ -431,7 +431,7 @@ public class ServerManager {
 
     }//end Delete User online
 
-    public static void blakeLoaItemdImage(final int itemid) {
+    /*public static void blakeLoadItemdImage(final int itemid) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -467,6 +467,7 @@ public class ServerManager {
                     BufferedReader rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
                     byte[] bytes = gson.fromJson(rd, byte[].class);
                     image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    UserManager.imageRdy = 1;
                 } catch (JsonIOException e) {
                     throw new RuntimeException(e);
                 } catch (JsonSyntaxException e) {
@@ -475,8 +476,12 @@ public class ServerManager {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
+                }catch(NullPointerException e){//sets image not ready to display
+                    UserManager.imageRdy = 0;
                 }
-
+                if(UserManager.imageRdy == 1) {
+                    UserManager.setImage(image);
+                }
                 //TODO: Store image in the item
             }
         };
@@ -489,9 +494,9 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }
+    }*/
 
-    public static void blakeSaveItemImage(final int itemid, final Bitmap image) {
+    /*public static void blakeSaveItemImage(final int itemid, final Bitmap image) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -520,6 +525,7 @@ public class ServerManager {
 
                 try {
                     stringentity = new StringEntity(gson.toJson(bytes));
+
                 } catch (UnsupportedEncodingException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -535,6 +541,25 @@ public class ServerManager {
                 } catch (IOException e1) {
                     throw new RuntimeException(e1);
                 }
+
+                String status = response.getStatusLine().toString();
+                System.out.println(status);
+
+                HttpEntity entity = response.getEntity();
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output;
+                    System.err.println("Output from Server -> ");
+                    while ((output = br.readLine()) != null) {
+                        System.err.println(output);
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         };
 
@@ -546,7 +571,7 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }
+    }*/
 
     public static void saveImage(final ImageModel image){
         Runnable runnable = new Runnable() {
@@ -660,9 +685,6 @@ public class ServerManager {
                 try {
                     //String line;
                     rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
-                    /*while((line = rd.readLine()) != null){
-                        jsonData += line;
-                    }*/
                     image = gson.fromJson(rd, ImageModel.class);
                     System.out.println(image.getImageuserName() + " username for picture");
                     UserManager.imageRdy = 1;
@@ -674,12 +696,12 @@ public class ServerManager {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
-                } catch(NullPointerException e){
+                } catch(NullPointerException e){//sets image not ready to display
                     UserManager.imageRdy = 0;
                 }
                 if(UserManager.imageRdy == 1){
                 System.out.println("This is the name of the image taken" + UserManager.getTrader().getUserName() + item);
-                UserManager.setImage(image);}
+                UserManager.setImageModel(image);}
             }
         };
 
@@ -690,6 +712,13 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }//end load image
+    }
+
+    public static void notifyTrade(final int type) {
+        getFriendOnline(UserManager.getFriend().getUserName());
+        UserManager.getFriend().IncreaseNotifiyAmount(type);
+        UserManager.getFriend().getPendingTrades().add(TradeManager.getMostRecentTrade());
+        saveUserOnline(UserManager.getFriend());
+    }
 
 }//end Server Manager

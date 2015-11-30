@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
+import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 
@@ -43,6 +44,7 @@ public class DecideTradeActivity extends Activity {
             friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
+
         Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
@@ -58,6 +60,14 @@ public class DecideTradeActivity extends Activity {
         intent.putExtra("index", index);
         startActivity(intent);
 
+    }
+
+    public void rejectTradeButtonClicked(View v){
+        TradeManager.getCurrent().del(index);
+    }
+    public void acceptTradeButtonClicked(View v){
+        TradeManager.getPast().add(TradeManager.getCurrent().getTrade(index));
+        TradeManager.getCurrent().del(index);
     }
 
 

@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.CreateTradeManager;
+import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.R;
@@ -26,19 +28,28 @@ public class CounterTradeActivity extends Activity {
     private ArrayList<String> friendItems;
     //private CreateTradeManager CTM;
     private Trade trade;
+    private CreateTradeManager CTM;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_decide_trade);
+        setContentView(R.layout.activity_counter_trade);
+        CTM = new CreateTradeManager();
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
         if(b!=null) {
             int index = b.getInt("index");
-            myItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
-            friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
+            //String borrower;
+            trade = UserManager.getPendingList().getTrade(index);
+            CTM.setFriendSide(trade.getBorrowerItems());
+            CTM.setOwnerSide(trade.getOwnerItems());
+
+            Intent intent1 = new Intent(CounterTradeActivity.this,OfferTradeActivity.class);
+            startActivity(intent1);
+            //myItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
+            //friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);

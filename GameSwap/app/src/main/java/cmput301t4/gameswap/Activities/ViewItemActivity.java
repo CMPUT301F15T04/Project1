@@ -70,21 +70,25 @@ public class ViewItemActivity extends Activity {
             name.setText(b.getString("name"));
             date.setText(b.getString("releaseDate"));
 
+
             quality.setText(getQuality());
             platform.setText(getPlatform());
 
             statusView.setText(statusDisplay.toUpperCase());
             location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
 
+
+            //statusView.setText(status);
+            //ServerManager.blakeLoadItemdImage(b.getInt("itemId"));
             ServerManager.loadImage(b.getInt("itemId"));
 
-            //ServerManager.loadImage(8);
-            System.out.println("reached load image");
-            //byte[] decodeImage = Base64.decode(UserManager.getImage().getImage(), Base64.DEFAULT);
+            statusView.setText(statusDisplay.toUpperCase());
+            location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
 
             if(UserManager.imageRdy == 1) {
-                byte[] byteArray = UserManager.getImage().getImage();
+                byte[] byteArray = UserManager.getImageModel().getImage();
                 Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                //imageView.setImageBitmap(UserManager.getImage());
                 imageView.setImageBitmap(image);
             }
 
