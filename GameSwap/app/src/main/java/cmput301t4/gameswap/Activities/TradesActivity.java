@@ -68,6 +68,7 @@ public class TradesActivity extends Activity {
                     Intent intent = new Intent(TradesActivity.this, CancelCreateTradeActivity.class);
                     intent.putStringArrayListExtra("oitems",trade.getOwnerItems().getItemsNames());
                     intent.putStringArrayListExtra("bitems", trade.getBorrowerItems().getItemsNames());
+                    intent.putExtra("index",position);
                     startActivity(intent);
 
                 }
@@ -75,6 +76,7 @@ public class TradesActivity extends Activity {
                     Intent intent1 = new Intent(TradesActivity.this, DecideTradeActivity.class);
                     intent1.putStringArrayListExtra("oitems",trade.getOwnerItems().getItemsNames());
                     intent1.putStringArrayListExtra("bitems", trade.getBorrowerItems().getItemsNames());
+                    intent1.putExtra("index",position);
                     startActivity(intent1);}
 
             }
@@ -88,24 +90,27 @@ public class TradesActivity extends Activity {
         });
 
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_trades, menu);
-        return true;
+    public void resetAdapter(){
+        TM = new TradeManager();
+        tradeList = new TradeList();
+        currentTrades = TM.getCurrent();
+        pastTrades = TM.getPast();
+        currentTradeBorrowers = TM.getBorrowerNames();
+        pastTradeBorrowers = pastTrades.getBorrowerNames();
+        currentListView = (ListView) findViewById(R.id.pendingtradeListView);
+        pastListView = (ListView) findViewById(R.id.pasttradeListView);
+        currentAdapter = new ArrayAdapter<String>(this, R.layout.currentofferalisttextview, currentTradeBorrowers);
+        pastAdapter = new ArrayAdapter<String>(this, R.layout.pastofferlisttextview, pastTradeBorrowers);
+        currentListView.setAdapter(currentAdapter);
+        pastListView.setAdapter(pastAdapter);
+        currentAdapter.notifyDataSetChanged();
+        pastAdapter.notifyDataSetChanged();
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
+    public void onResume(){
+        super.onResume();
+        resetAdapter();
     }
 }
