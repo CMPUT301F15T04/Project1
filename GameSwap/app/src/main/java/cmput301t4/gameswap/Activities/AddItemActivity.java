@@ -288,11 +288,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             UserManager.getTrader().setInventory(InventoryManager.getInstance());
             //code taken from http://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
             if(saveImage == 1){
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), byteArray);
-                ServerManager.saveImage(image);
+                //ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                //imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                //byte[] byteArray = stream.toByteArray();
+                //ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), byteArray);
+                //ServerManager.saveImage(image);
+
+                ServerManager.blakeSaveItemImage(UserManager.getTrader().getCounter(), imageBitmap);
             }
             //String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
 

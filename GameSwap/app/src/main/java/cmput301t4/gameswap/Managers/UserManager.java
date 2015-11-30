@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -37,6 +38,7 @@ public class UserManager {
     private static User trader = null;
     private static User friend = null;
     private static ImageModel traderItemImage = null;
+    private static Bitmap imageBit = null;
     public static int imageRdy = 0; //set to 1 if image pulled from server was not null
 
     /**
@@ -271,12 +273,12 @@ public class UserManager {
         return trader.getPastTrades();
     }
 
-    public static void setImage(ImageModel image) {
-        traderItemImage = image;
+    public static void setImage(Bitmap image) {
+        imageBit = image;
     }
 
-    public static ImageModel getImage() {
-        return traderItemImage;
+    public static Bitmap getImage() {
+        return imageBit;
     }
 
     public static void setDefaultLocation(Context context) {

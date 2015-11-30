@@ -431,7 +431,7 @@ public class ServerManager {
 
     }//end Delete User online
 
-    public static void blakeLoaItemdImage(final int itemid) {
+    public static void blakeLoadItemdImage(final int itemid) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -465,8 +465,9 @@ public class ServerManager {
 
                 try {
                     BufferedReader rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
-                    Byte[] bytes = gson.fromJson(rd, Byte[].class);
+                    byte[] bytes = gson.fromJson(rd, byte[].class);
                     image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    UserManager.imageRdy = 1;
                 } catch (JsonIOException e) {
                     throw new RuntimeException(e);
                 } catch (JsonSyntaxException e) {
@@ -475,8 +476,12 @@ public class ServerManager {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
+                }catch(NullPointerException e){//sets image not ready to display
+                    UserManager.imageRdy = 0;
                 }
-
+                if(UserManager.imageRdy == 1) {
+                    UserManager.setImage(image);
+                }
                 //TODO: Store image in the item
             }
         };
@@ -506,7 +511,7 @@ public class ServerManager {
                 int timeoutSocket = 5000;
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + image.getImageuserName() + itemid;
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + UserManager.getTrader().getUserName() + itemid;
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpPost httpPost = new HttpPost(url);
                 HttpResponse response = null;
@@ -519,7 +524,7 @@ public class ServerManager {
                 byte[] byteArray = stream.toByteArray();
 
                 try {
-                    stringentity = new StringEntity(gson.toJson(bytes);
+                    stringentity = new StringEntity(gson.toJson(byteArray));
                 } catch (UnsupportedEncodingException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -534,6 +539,25 @@ public class ServerManager {
                     throw new RuntimeException(e1);
                 } catch (IOException e1) {
                     throw new RuntimeException(e1);
+                }
+
+                String status = response.getStatusLine().toString();
+                System.out.println(status);
+
+                HttpEntity entity = response.getEntity();
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output;
+                    System.err.println("Output from Server -> ");
+                    while ((output = br.readLine()) != null) {
+                        System.err.println(output);
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
             }
         };
@@ -621,7 +645,7 @@ public class ServerManager {
         }
     }//end save image
 
-    public static void loadImage(final int item){
+    /*public static void loadImage(final int item){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -660,9 +684,6 @@ public class ServerManager {
                 try {
                     //String line;
                     rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
-                    /*while((line = rd.readLine()) != null){
-                        jsonData += line;
-                    }*/
                     image = gson.fromJson(rd, ImageModel.class);
                     System.out.println(image.getImageuserName() + " username for picture");
                     UserManager.imageRdy = 1;
@@ -690,6 +711,6 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }//end load image
+    }*/
 
 }//end Server Manager
