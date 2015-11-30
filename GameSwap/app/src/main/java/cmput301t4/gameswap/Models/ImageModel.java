@@ -15,4 +15,8 @@ public class ImageModel {
         this.userName = userName;
         this.itemPicture = itemPicture;
     }
+
+    public int getImageItemId(){return itemId;}
+
+    public String getImageuserName(){return userName;}
 }
