@@ -43,6 +43,8 @@ public class CreateProfileActivity extends Activity {
     public void createProfileButton(View view) {
 
         UserManager.createUser(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString(), this);
+        UserManager.setDefaultLocation(this);
+        System.out.println(UserManager.getTrader().getDefaultLocation().toString());
         ServerManager.saveUserOnline(UserManager.getTrader());
 
         this.finish();
