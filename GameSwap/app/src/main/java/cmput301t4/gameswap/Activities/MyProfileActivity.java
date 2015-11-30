@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cmput301t4.gameswap.Managers.UserManager;
@@ -14,10 +15,12 @@ import cmput301t4.gameswap.R;
 
 public class MyProfileActivity extends Activity {
 
-    private Button editProfileButton;
     private TextView nameTextView;
     private TextView locationTextView;
     private TextView contactTextView;
+    private TextView emailTextView;
+    private ImageView profilePicture;
+
 
 
     @Override
@@ -25,44 +28,27 @@ public class MyProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
-        editProfileButton = (Button) findViewById(R.id.editProfile);
+
         nameTextView = (TextView) findViewById(R.id.nameTextView);
         locationTextView = (TextView) findViewById(R.id.locationTextView);
         contactTextView = (TextView) findViewById(R.id.contactTextView);
+        emailTextView = (TextView) findViewById(R.id.email);
 
-        nameTextView.setText(" " +UserManager.getTrader().getUserName().toString().toUpperCase());
-        locationTextView.setText(" "+ UserManager.getTrader().getUserCity().toString().toUpperCase());
-        contactTextView.setText(UserManager.getTrader().getUserEmail()+ "  "+UserManager
-                .getTrader().getUserPhoneNumber());
-    }
+        nameTextView.setText(UserManager.getTrader().getUserName().toString());
+        locationTextView.setText(UserManager.getTrader().getUserCity().toString());
+        contactTextView.setText(UserManager.getTrader().getUserPhoneNumber());
+        emailTextView.setText(UserManager.getTrader().getUserEmail());
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        profilePicture = (ImageView) findViewById(R.id.profilePic);
+        //profilePicture.setImageBitmap(profileImageView);
     }
 
 
     public void editProfileButtonClicked(View view){
         Intent intent = new Intent(MyProfileActivity.this,EditProfileActivity.class);
-        startActivity(intent);
         finish();
+        startActivity(intent);
+
     }
     //=====Function needed for Testcases=====//
 
@@ -70,6 +56,22 @@ public class MyProfileActivity extends Activity {
         Button button = (Button) findViewById(R.id.editProfile);
         return button;
     }//end getEditButton
+
+    public TextView getNameText(){
+        return nameTextView;
+    }//end getNameText
+
+    public TextView getContactText(){
+        return contactTextView;
+    }//end getContactText
+
+    public TextView getEmailText(){
+        return emailTextView;
+    }//end getEmailText
+
+    public TextView getCityText(){
+        return locationTextView;
+    }
 
     //=====End of function needed for Testcases=====//
 

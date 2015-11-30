@@ -70,8 +70,8 @@ public class CreateProfileActivity extends Activity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView gameImageView = (ImageView) findViewById(R.id.userProfileView);
-            gameImageView.setImageBitmap(imageBitmap);
+            ImageView profileImageView = (ImageView) findViewById(R.id.userProfileView);
+            profileImageView.setImageBitmap(imageBitmap);
         }
     }
 

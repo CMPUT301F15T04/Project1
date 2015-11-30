@@ -19,6 +19,9 @@ public class FriendProfileActivity extends Activity {
 
     private Button removeTraderButton;
     private TextView traderNameTextView;
+    private TextView traderCityTextView;
+    private TextView traderPhoneTextView;
+    private TextView traderEmailTextView;
     private String traderName;
 
     @Override
@@ -28,12 +31,18 @@ public class FriendProfileActivity extends Activity {
         removeTraderButton = (Button)findViewById(R.id.removeTraderButton);
 
         traderNameTextView = (TextView) findViewById(R.id.traderNameTextView);
+        traderCityTextView = (TextView) findViewById(R.id.traderCityTextView);
+        traderPhoneTextView = (TextView) findViewById(R.id.traderPhoneTextView);
+        traderEmailTextView = (TextView) findViewById(R.id.traderEmailTextView);
 
         //Intent intent = getIntent();
         //Bundle b = intent.getExtras();
 
 
         traderNameTextView.setText(UserManager.getFriend().getUserName());
+        traderCityTextView.setText(UserManager.getFriend().getUserCity());
+        traderPhoneTextView.setText(UserManager.getFriend().getUserPhoneNumber());
+        traderEmailTextView.setText(UserManager.getFriend().getUserEmail());
         traderName = traderNameTextView.getText().toString();
         System.out.println(UserManager.getFriend().getUserName() + " testing location 3");
 
@@ -91,5 +100,11 @@ public class FriendProfileActivity extends Activity {
 
 
 
+    }
+
+    public void friendInventoryButton(View v){
+        Intent intent = new Intent(FriendProfileActivity.this,FriendInventoryActivity.class );
+        startActivity(intent);
+        //finish();
     }
 }
