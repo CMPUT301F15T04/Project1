@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cmput301t4.gameswap.Activities.OfferTradeActivity">
+    tools:context="cmput301t4.gameswap.Activities.OfferTradeActivity"
+    android:id="@+id/countertextmyinventory">
 
 
     <TextView
@@ -10,13 +11,13 @@
         android:layout_height="27dp"
         android:text="My Inventory"
         android:gravity="center"
-        android:id="@+id/myinventorydecideview"
+        android:id="@+id/myinventorycounterview"
         android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:id="@+id/decideitemsFromMyInventory"
+        android:id="@+id/counteritemsMyInventory"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -24,13 +25,13 @@
         android:layout_height="27dp"
         android:text="Friend Inventory"
         android:gravity="center"
-        android:id="@+id/decidefriendofferinventory"
+        android:id="@+id/counterfriendofferinventory"
         android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="184dp"
-        android:id="@+id/decideitemsFromFriendInventory"
+        android:id="@+id/counteritemsFromFriendInventory"
         android:layout_gravity="center_horizontal" />
 
     <Space
