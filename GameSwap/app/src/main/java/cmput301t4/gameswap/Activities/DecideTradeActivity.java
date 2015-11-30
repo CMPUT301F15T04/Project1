@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
+import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 
@@ -62,12 +63,11 @@ public class DecideTradeActivity extends Activity {
     }
 
     public void rejectTradeButtonClicked(View v){
-        //UserManager.getPendingList().
-
+        TradeManager.getCurrent().del(index);
     }
-
     public void acceptTradeButtonClicked(View v){
-
+        TradeManager.getPast().add(TradeManager.getCurrent().getTrade(index));
+        TradeManager.getCurrent().del(index);
     }
 
 
