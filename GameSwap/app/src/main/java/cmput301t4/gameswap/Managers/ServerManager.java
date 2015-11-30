@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.net.SocketTimeoutException;
 
 import cmput301t4.gameswap.Exceptions.ServerDownException;
+import cmput301t4.gameswap.Models.ImageModel;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 
@@ -415,7 +416,7 @@ public class ServerManager {
 
     }//end Delete User online
 
-    public static void saveImage(){
+    public static void saveImage(final ImageModel image){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -429,39 +430,50 @@ public class ServerManager {
                 int timeoutSocket = 5000;
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/";
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + image.getImageuserName() + image.getImageItemId();
                 System.out.println(url);
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
-                HttpGet httpGet = new HttpGet(url);
+                HttpPost httpPost = new HttpPost(url);
                 HttpResponse response = null;
 
+                Gson gson = new Gson();
+                StringEntity stringentity = null;
+
+                try {
+                    stringentity = new StringEntity(gson.toJson(image));
+                    System.out.println(gson.toJson(image));
+                } catch (UnsupportedEncodingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                httpPost.setHeader("Accept","application/json");
+
+                httpPost.setEntity(stringentity);
+
                 try {                           //run URL
-                    response = httpClient.execute(httpGet);
+                    response = httpClient.execute(httpPost);
                 } catch (ClientProtocolException e1) {
                     throw new RuntimeException(e1);
                 } catch (IOException e1) {
                     throw new RuntimeException(e1);
                 }
-                BufferedReader rd = null;
-                User sr = null;
-                Gson gson = new Gson();
-
+                String status = response.getStatusLine().toString();
+                System.out.println(status);
+                HttpEntity entity = response.getEntity();
                 try {
-                    rd = new BufferedReader((new InputStreamReader((response.getEntity().getContent()))));
-                    //String line = rd.readLine();
-                    //System.out.println(line);
-                    sr = gson.fromJson(rd, User.class);
-                    System.out.println(sr.getUserName() + " username from servermanager");
-                } catch (JsonIOException e) {
-                    throw new RuntimeException(e);
-                } catch (JsonSyntaxException e) {
-                    throw new RuntimeException(e);
-                } catch (IllegalStateException e) {
-                    throw new RuntimeException(e);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output;
+                    System.err.println("Output from Server -> ");
+                    while ((output = br.readLine()) != null) {
+                        System.err.println(output);
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-                UserManager.setFriend(sr);
             }
         };
         Thread serverThread = new Thread(runnable);
@@ -471,6 +483,6 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }
+    }//end save image
 
 }//end Server Manager
