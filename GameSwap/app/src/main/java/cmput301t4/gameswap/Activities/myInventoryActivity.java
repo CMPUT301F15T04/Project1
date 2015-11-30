@@ -45,6 +45,8 @@ public class myInventoryActivity extends Activity{
     private String IsPrivate;
     /*Platform of the game*/
     private String Platform;
+    private double latitude;
+    private double longitude;
 
     private static final String FILENAME = "file.sav"; // model
 
@@ -82,12 +84,16 @@ public class myInventoryActivity extends Activity{
                                 Description = inventory.get(myInventoryListViewPosition).getDescription().toString();
                                 ReleaseDate = inventory.get(myInventoryListViewPosition).getReleaseDate();
                                 itemID = inventory.get(myInventoryListViewPosition).getItemid();
+                                latitude = inventory.get(myInventoryListViewPosition).getLocation().getLatitude();
+                                longitude = inventory.get(myInventoryListViewPosition).getLocation().getLongitude();
 
                                 final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 intent.putExtra("name", Name);
                                 intent.putExtra("description", Description);
                                 intent.putExtra("releaseDate", ReleaseDate);
                                 intent.putExtra("index", myInventoryListViewPosition);
+                                intent.putExtra("Latitude", latitude);
+                                intent.putExtra("Longitude", longitude);
                                 System.out.println("Setting this number as item id for image" + itemID);
                                 intent.putExtra("itemId", itemID);
                                 activity.finish();
