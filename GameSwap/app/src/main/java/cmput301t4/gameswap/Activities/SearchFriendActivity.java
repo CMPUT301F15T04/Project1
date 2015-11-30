@@ -97,11 +97,14 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.viewFriendProfileMenuId:
+                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
+                                startActivity(intent);
 
                                 Thread thread = new Thread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        ServerManager.getFriendOnline(UserManager.getTrader().getFriendList().getFriend(friendListViewItemPosition));
+                                        ServerManager.getFriendOnline(FriendManager.getFriendlist().getFriend(friendListViewItemPosition));
                                     }
                                 });
                                 thread.start();
@@ -111,12 +114,11 @@ public class SearchFriendActivity extends Activity {
                                     throw new RuntimeException();
                                 }
 
-                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
-                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
-                                startActivity(intent);
+
 
                             case R.id.tradeFriendMenuId:
-                                //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent(SearchFriendActivity.this,OfferTradeActivity.class);
+                                startActivity(intent1);
                                 return true;
                             case R.id.removeFriendMenuId:
                                // Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.zip.CheckedInputStream;
 
+import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
@@ -40,7 +41,8 @@ public class MineInventoryActivity extends Activity  {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> nameOfItemsList;
     private ArrayList<String> itemsSelected;
-
+    private int size;
+    private CreateTradeManager CTM = new CreateTradeManager();
 
 
 
@@ -48,10 +50,8 @@ public class MineInventoryActivity extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_inventory);
-        itemsSelected = new ArrayList<String>();
         listView = (ListView) findViewById(R.id.mineInventoryListView);
-        inventory = UserManager.getTrader().getInventory().getItems();
-        nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();
+        nameOfItemsList = InventoryManager.getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,nameOfItemsList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -60,40 +60,17 @@ public class MineInventoryActivity extends Activity  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "added", Toast.LENGTH_SHORT).show();
-                itemsSelected.add(nameOfItemsList.get(position));
+                if(CTM.OwnerSideContian(InventoryManager.getItem(position)) == Boolean.FALSE){
+                    Toast.makeText(getBaseContext(), InventoryManager.getItem(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
+                    CTM.addOwnerSide(InventoryManager.getItem(position));
+                } else  {
+                    Toast.makeText(getBaseContext(), "Already Added to list", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_mine_inventory, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     public void doneButtonClicked(View v){
-        Intent intent  = new Intent(MineInventoryActivity.this,OfferTradeActivity.class);
-        intent.putStringArrayListExtra("myitems",(ArrayList<String>)itemsSelected);
-        startActivity(intent);
         finish();
     }
 

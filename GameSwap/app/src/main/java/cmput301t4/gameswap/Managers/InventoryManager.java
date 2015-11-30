@@ -33,7 +33,7 @@ public class InventoryManager {
         getInstance().del(position);
     }//end delItem
 
-    public Item getItem(int position){
+    static public Item getItem(int position){
         return getInstance().getItem(position);
     }//end getItem
 

@@ -1,22 +1,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="cmput301t4.gameswap.Activities.FriendInventoryActivity"
-    android:weightSum="1">
+   android:orientation="vertical"
+    tools:context="cmput301t4.gameswap.Activities.SelectFromFriendInventoryActivity">
+
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select items you want from them"
-        android:id="@+id/selectFriendInventoryItem"
+        android:layout_height="61dp"
+        android:textSize="20sp"
         android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1.03" />
+        android:text="Select Items From Friend&apos;s Inventory"
+        android:id="@+id/selectfriendItemtoTrade" />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="413dp"
+        android:layout_height="402dp"
         android:id="@+id/friendInventoryListView"
         android:layout_gravity="center_horizontal" />
 
@@ -24,8 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Done"
-        android:id="@+id/friendInventoryDone"
+        android:onClick="frienddoneButtonClicked"
+        android:id="@+id/frienddone"
         android:layout_gravity="center_horizontal" />
-
-
 </LinearLayout>
