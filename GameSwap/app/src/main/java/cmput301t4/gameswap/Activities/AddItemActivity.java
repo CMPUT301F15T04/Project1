@@ -107,6 +107,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
      * The text if the user wants to edit the title of the item
      */
     private EditText titleEditText;
+    /**
+     * This is storing the image taken by the camera
+     */
+    private  Bitmap imageBitmap;
 
     /**
      * The text if the user wants to edit the description of the item
@@ -262,11 +266,12 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = (Bitmap) extras.get("data");
             ImageView gameImageView = (ImageView) findViewById(R.id.gameImageView);
             gameImageView.setImageBitmap(imageBitmap);
 
-            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), imageBitmap);
+            //ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), imageBitmap);
+            //ServerManager.saveImage(image);
 
         }
     }
@@ -296,7 +301,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         } else {
 
             UserManager.getTrader().setInventory(InventoryManager.getInstance());
+            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), imageBitmap);
+            ServerManager.saveImage(image);
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
+
 
             ServerManager.saveUserOnline(UserManager.getTrader());
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
