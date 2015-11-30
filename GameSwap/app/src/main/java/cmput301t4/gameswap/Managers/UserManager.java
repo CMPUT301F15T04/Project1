@@ -38,7 +38,7 @@ public class UserManager {
     private static User trader = null;
     private static User friend = null;
     private static ImageModel traderItemImage = null;
-    private static Bitmap imageBit = null;
+    private static byte[] imageByte = null;
     public static int imageRdy = 0; //set to 1 if image pulled from server was not null
 
     /**
@@ -273,12 +273,20 @@ public class UserManager {
         return trader.getPastTrades();
     }
 
-    public static void setImage(Bitmap image) {
-        imageBit = image;
+    public static void setImage(byte[] image) {
+        imageByte = image;
     }
 
-    public static Bitmap getImage() {
-        return imageBit;
+    public static void setImageModel(ImageModel image){
+        traderItemImage = image;
+
+    }
+    public static ImageModel getImageModel(){
+        return traderItemImage;
+    }
+
+    public static byte[] getImage() {
+        return imageByte;
     }
 
     public static void setDefaultLocation(Context context) {

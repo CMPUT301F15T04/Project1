@@ -431,7 +431,7 @@ public class ServerManager {
 
     }//end Delete User online
 
-    public static void blakeLoadItemdImage(final int itemid) {
+    /*public static void blakeLoadItemdImage(final int itemid) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -494,9 +494,9 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }
+    }*/
 
-    public static void blakeSaveItemImage(final int itemid, final Bitmap image) {
+    /*public static void blakeSaveItemImage(final int itemid, final Bitmap image) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -571,7 +571,7 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }
+    }*/
 
     public static void saveImage(final ImageModel image){
         Runnable runnable = new Runnable() {
@@ -646,7 +646,7 @@ public class ServerManager {
         }
     }//end save image
 
-    /*public static void loadImage(final int item){
+    public static void loadImage(final int item){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -701,7 +701,7 @@ public class ServerManager {
                 }
                 if(UserManager.imageRdy == 1){
                 System.out.println("This is the name of the image taken" + UserManager.getTrader().getUserName() + item);
-                UserManager.setImage(image);}
+                UserManager.setImageModel(image);}
             }
         };
 
@@ -712,6 +712,6 @@ public class ServerManager {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-    }*/
+    }
 
 }//end Server Manager
