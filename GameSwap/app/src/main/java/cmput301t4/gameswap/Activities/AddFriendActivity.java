@@ -63,10 +63,9 @@ public class AddFriendActivity extends Activity {
 
     public void addTraderClicked(View v){
         System.out.println(UserManager.getTrader().getFriendList());
-        UserManager.getTrader().getFriendList().addFriend(traderName);
+        FriendManager.addFriend(traderName);
         UserManager.saveUserLocally(this);
         ServerManager.saveUserOnline(UserManager.getTrader());
-        FriendManager.addFriend(traderName);
 
         Toast.makeText(getBaseContext(), "Added", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddFriendActivity.this,FriendProfileActivity.class);

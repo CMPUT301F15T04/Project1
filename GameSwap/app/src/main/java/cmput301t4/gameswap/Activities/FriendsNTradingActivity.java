@@ -17,6 +17,11 @@ public class FriendsNTradingActivity extends Activity {
         setContentView(R.layout.activity_friends_ntrading);
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        this.finish();
+    }
 
     public void searchPeopleButton(View view){
         Intent intent = new Intent(FriendsNTradingActivity.this,SearchPeopleActivity.class);
@@ -26,10 +31,5 @@ public class FriendsNTradingActivity extends Activity {
         Intent intent = new Intent(FriendsNTradingActivity.this,SearchFriendActivity.class);
         startActivity(intent);
     }
-    public void viewFriendInventoryButton(View view){
-        Intent intent = new Intent(FriendsNTradingActivity.this,ViewFriendInventoryActivity.class);
-        startActivity(intent);
-    }
-
 
 }

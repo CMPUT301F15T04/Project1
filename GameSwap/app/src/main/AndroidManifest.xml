@@ -64,10 +64,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ViewFriendInventoryActivity"
-            android:parentActivityName=".Activities.FriendsNTradingActivity" >
-        </activity>
-        <activity
             android:name=".Activities.FriendProfileActivity"
             android:label="@string/app_name" >
         </activity>
