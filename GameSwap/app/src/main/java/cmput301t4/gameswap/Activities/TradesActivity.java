@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.R;
 
-public class TradesActivity extends Activity {
+public class TradesActivity extends Activity implements Serializable {
 
     private ArrayAdapter<String> adapter;
     private ListView pendingtradeListView;
@@ -28,13 +29,14 @@ public class TradesActivity extends Activity {
     private TradeList tradeList;
     private ArrayList<String> currentTradeBorrowers;
     private ArrayList<String> pastTradeBorrowers;
-    TradeList currentTrades;
-    TradeList pastTrades;
+    private TradeList currentTrades;
+    private TradeList pastTrades;
     private TradeManager TM;
     private ListView currentListView;
     private ListView pastListView;
     private ArrayAdapter<String> currentAdapter;
     private ArrayAdapter<String> pastAdapter;
+    private Trade trade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,9 @@ public class TradesActivity extends Activity {
         currentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                trade = currentTrades.getTrade(position);
                 Intent intent = new Intent(TradesActivity.this, DecideTradeActivity.class);
+                intent.putExtra("Object", (Serializable) trade);
                 startActivity(intent);
             }
         });
@@ -64,6 +68,7 @@ public class TradesActivity extends Activity {
         pastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                trade = pastTrades.getTrade(position);
                 //Intent intent = new Intent()
             }
         });
