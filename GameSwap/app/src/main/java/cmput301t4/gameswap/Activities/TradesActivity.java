@@ -63,9 +63,19 @@ public class TradesActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(TradesActivity.this, DecideTradeActivity.class);
+                trade = currentTrades.getTrade(position);;
+                if(UserManager.getTrader().getUserName().equals(trade.getOwnername())){
+                    Intent intent = new Intent(TradesActivity.this, CancelCreateTradeActivity.class);
+                    intent.putStringArrayListExtra("oitems",trade.getOwnerItems().getItemsNames());
+                    intent.putStringArrayListExtra("bitems", trade.getBorrowerItems().getItemsNames());
+                    startActivity(intent);
 
-                startActivity(intent);
+                }
+                else {
+                    Intent intent1 = new Intent(TradesActivity.this, DecideTradeActivity.class);
+                    intent1.putStringArrayListExtra("oitems",trade.getOwnerItems().getItemsNames());
+                    intent1.putStringArrayListExtra("bitems", trade.getBorrowerItems().getItemsNames());
+                    startActivity(intent1);}
 
             }
         });
@@ -74,36 +84,6 @@ public class TradesActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 trade = pastTrades.getTrade(position);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
         });
 
