@@ -536,6 +536,7 @@ public class ServerManager {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                System.out.println("This is the name of the image taken" + UserManager.getTrader().getUserName() + item);
                 UserManager.setImage(image);
             }
         };

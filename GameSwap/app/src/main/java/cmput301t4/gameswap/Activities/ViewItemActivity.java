@@ -13,6 +13,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class ViewItemActivity extends Activity {
@@ -42,7 +44,7 @@ public class ViewItemActivity extends Activity {
         date = (TextView) findViewById(R.id.viewItemDate);
         name = (TextView) findViewById(R.id.viewItemName);
         statusView = (TextView) findViewById(R.id.viewStatus);
-
+        imageView = (ImageView) findViewById(R.id.gameImageView);
        /** platformList.add("Playstation 4");
         platformList.add("Xbox ONE");
         platformList.add("PC");
@@ -81,6 +83,12 @@ public class ViewItemActivity extends Activity {
             quality.setText(b.getString("quality"));
             platform.setText(b.getString("platform"));
             statusView.setText(status.toUpperCase());
+
+            ServerManager.loadImage(b.getInt("itemId"));
+            System.out.println("reached load image");
+            imageView.setImageBitmap(UserManager.getImage().getImage());
+
+
 
         }
     }

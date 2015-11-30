@@ -115,6 +115,8 @@ public class Item {
         Name = name;
     }
 
+    public int getItemid(){return itemid;}
+
     public String getDescription() {
         return Description;
     }

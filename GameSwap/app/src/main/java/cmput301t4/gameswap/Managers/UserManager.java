@@ -262,4 +262,6 @@ public class UserManager {
 
     public static void setImage(ImageModel image){traderItemImage = image;}
 
+    public static ImageModel getImage(){return traderItemImage;}
+
 }

@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
@@ -95,6 +97,11 @@ public class EditItemActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        System.out.println("at edit item activity");
+        ServerManager.loadImage(b.getInt("itemId"));
+        ImageView gameImageView = (ImageView) findViewById(R.id.newItemPictureView);
+        gameImageView.setImageBitmap(UserManager.getImage().getImage());
+
 
         if (b != null) {
             titleEditText.setText(b.getString("name"));

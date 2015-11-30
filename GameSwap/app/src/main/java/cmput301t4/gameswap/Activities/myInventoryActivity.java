@@ -53,6 +53,7 @@ public class myInventoryActivity extends Activity{
 
     private myInventoryActivity activity = this;
 
+    private int itemID;
     private String Name;
     /** A description of the Item */
     private String Description;
@@ -101,12 +102,14 @@ public class myInventoryActivity extends Activity{
                                 Name = inventory.get(myInventoryListViewPosition).getName().toString();
                                 Description = inventory.get(myInventoryListViewPosition).getDescription().toString();
                                 ReleaseDate = inventory.get(myInventoryListViewPosition).getReleaseDate();
+                                itemID = inventory.get(myInventoryListViewPosition).getItemid();
 
                                 final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
                                 intent.putExtra("name", Name);
                                 intent.putExtra("description", Description);
                                 intent.putExtra("releaseDate", ReleaseDate.toString());
                                 intent.putExtra("index", myInventoryListViewPosition);
+                                intent.putExtra("itemId", itemID);
                                 activity.finish();
                                 startActivity(intent);
 
