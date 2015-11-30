@@ -49,7 +49,6 @@ public class myInventoryActivity extends Activity{
     private ArrayList<String> nameOfItemsList;
    // private ArrayList<String> statusOfItemsList;
     protected int myInventoryListViewPosition;
-    private InventoryManager im;
 
     private myInventoryActivity activity = this;
 
