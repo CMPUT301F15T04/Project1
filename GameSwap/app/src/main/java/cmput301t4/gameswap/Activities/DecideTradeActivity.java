@@ -60,5 +60,14 @@ public class DecideTradeActivity extends Activity {
 
     }
 
+    public void rejectTradeButtonClicked(View v){
+        //UserManager.getPendingList().
+
+    }
+
+    public void acceptTradeButtonClicked(View v){
+
+    }
+
 
 }

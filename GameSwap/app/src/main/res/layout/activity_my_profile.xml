@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Trading Requests"
-        android:id="@+id/button5"
+        android:id="@+id/"
 
         android:layout_weight="0.06"
          />

@@ -11,7 +11,6 @@ import cmput301t4.gameswap.Models.Trade;
 public class TradeList {
     /** The trade list of all current and past trades of the user */
     private ArrayList<Trade> tradelist = new ArrayList<Trade>();
-    private ArrayList<String> currentBorrowerNames;
 
     //======Basic Function=====//
     /**
