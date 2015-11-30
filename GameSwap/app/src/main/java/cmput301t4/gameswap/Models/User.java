@@ -93,7 +93,7 @@ public class User {
             String message = DisplayNotify(i);
             return message;
         }else {
-            return "You have no " + notification.get(i);
+            return "You have no " + notification.get(i + 1);
         }
     }//end IfNotify
 
