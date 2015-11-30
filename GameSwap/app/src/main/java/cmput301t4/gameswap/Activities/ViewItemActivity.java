@@ -69,89 +69,10 @@ public class ViewItemActivity extends Activity {
 
             name.setText(b.getString("name"));
             date.setText(b.getString("releaseDate"));
-            quality.setText(b.getString("quality"));
-            if (quality.getText().equals(0));{
-                quality.setText("Perfect Condition/Unopened/Download Code");
-            }
-            if (quality.getText().equals(1));{
-                quality.setText("Opened No Scratches/Damage");
-            }
-            if (quality.getText().equals(2));{
-                quality.setText("Light Scratches/Damage");
-            }
-            if (quality.getText().equals(3));{
-                quality.setText("Decent Scratches/Damage");
-            }
-            if (quality.getText().equals(4));{
-                quality.setText("Heavy Scratches/Damage");
-            }
-            /**do the same for all the different possibilities for platforms*/
 
-            platform.setText(b.getString("platform"));
 
-            if (platform.getText().equals(0));{
-                platform.setText("Playstation 4");
-            }
-            if (platform.getText().equals(1));{
-                platform.setText("Xbox ONE");
-            }
-            if (platform.getText().equals(2));{
-                platform.setText("PC");
-            }
-            if (platform.getText().equals(3));{
-                platform.setText("Wii U");
-            }
-            if (platform.getText().equals(4));{
-                platform.setText("Nintendo 3DS");
-            }
-            if (platform.getText().equals(5));{
-                platform.setText("Playstation 3");
-            }
-            if (platform.getText().equals(6));{
-                platform.setText("Playstation Vita<");
-            }
-            if (platform.getText().equals(7));{
-                platform.setText("Xbox 360");
-            }
-            if (platform.getText().equals(8));{
-                platform.setText("Nintendo Wii");
-            }
-            if (platform.getText().equals(9));{
-                platform.setText("Nintendo DS");
-            }
-            if (platform.getText().equals(10));{
-                platform.setText("PlayStation 2");
-            }
-            if (platform.getText().equals(11));{
-                platform.setText("Xbox");
-            }
-            if (platform.getText().equals(12));{
-                platform.setText("Nintendo Gamecube");
-            }
-
-            if (platform.getText().equals(13));{
-                platform.setText("Game Boy Advanced");
-            }
-
-            if (platform.getText().equals(14));{
-                platform.setText("Playstation Portable");
-            }
-            if (platform.getText().equals(15));{
-                platform.setText("PlayStation");
-            }
-            if (platform.getText().equals(16));{
-                platform.setText("Nintendo 64");
-            }
-            if (platform.getText().equals(17));{
-                platform.setText("Game Boy");
-            }
-            if (platform.getText().equals(18));{
-                platform.setText("SNES");
-            }
-            if (platform.getText().equals(19));{
-                platform.setText("NES");
-            }
-
+            quality.setText(getQuality());
+            platform.setText(getPlatform());
 
             statusView.setText(statusDisplay.toUpperCase());
             location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
@@ -225,5 +146,55 @@ public class ViewItemActivity extends Activity {
 
     //=====End function needed for Testcases=====//
 
+    public String getPlatform(){
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        int index = b.getInt("platform");
+        ArrayList<String> convertPlatform = new ArrayList<String>();
+        convertPlatform.add("PlayStation 4");
+        convertPlatform.add("Xbox One");
+        convertPlatform.add("PC");
+        convertPlatform.add("Wii U");
+        convertPlatform.add("Nintendo 3DS");
+        convertPlatform.add("PlayStation 3");
+        convertPlatform.add("PlayStation Vita");
+        convertPlatform.add("Xbox 360");
+        convertPlatform.add("Nintendo Wii");
+        convertPlatform.add("Nintendo DS");
+        convertPlatform.add("PlayStation 2");
+        convertPlatform.add("Xbox");
+        convertPlatform.add("Nintendo GameCube");
+        convertPlatform.add("GameBoy Advance");
+        convertPlatform.add("PlayStation Portable");
+        convertPlatform.add("Nintendo 64");
+        convertPlatform.add("GameBoy Colour");
+        convertPlatform.add("SNES");
+        convertPlatform.add("NES");
+
+        for (int j= 0; j < 19; j++){
+            if (j == index){
+                return convertPlatform.get(j);
+            }
+        }
+        return "";
+    }
+
+    public String getQuality(){
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        int index = b.getInt("quality");
+        ArrayList<String> convertQuality = new ArrayList<String>();
+        convertQuality.add("5-Perfect Condition/Unopened/Download Code");
+        convertQuality.add("4-Opened No Scratches/Damage");
+        convertQuality.add("3-Light Scratches/Damage");
+        convertQuality.add("2-Decent Scratches/Damage");
+        convertQuality.add("1-Heavy Scratches/Damage");
+        for (int j= 0; j < 19; j++){
+            if (j == index){
+                return convertQuality.get(j);
+            }
+        }
+        return "";
+    }
 
 }
