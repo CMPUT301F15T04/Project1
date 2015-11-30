@@ -92,7 +92,9 @@
                 android:ems="10"
                 android:id="@+id/changeName"
                 android:layout_gravity="center_horizontal"
-                android:layout_column="7" />
+                android:layout_column="1"
+                android:layout_span="7"
+                android:textSize="18dp" />
         </TableRow>
 
         <TableRow

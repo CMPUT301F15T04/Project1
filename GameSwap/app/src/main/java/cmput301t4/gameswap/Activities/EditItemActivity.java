@@ -193,8 +193,10 @@ public class EditItemActivity extends Activity {
             //int index = UserManager.getInventory().findItemByIndx(b.getInt("itemID"));
             UserManager.getInventory().replace(item, b.getInt("index"));
             //inventory = InventoryManager.getItems();
-            ServerManager.saveUserOnline(UserManager.getTrader());
             this.finish();
+            ServerManager.saveUserOnline(UserManager.getTrader());
+            Intent intent2 = new Intent(EditItemActivity.this,myInventoryActivity.class);
+            startActivity(intent);
         }
 
     }
