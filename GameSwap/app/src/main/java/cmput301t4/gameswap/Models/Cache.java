@@ -11,7 +11,8 @@ public class Cache {
     ArrayList<Item> itemsToBePushed = new ArrayList<Item>();
     /** The Trades that were created offline that will be sent to the server */
     ArrayList<Trade> tradesToBePushed = new ArrayList<Trade>();
-    int accountID; //Not yet impkemented (Server stuff)
+    User offlineCopy;
+    User lastFriend;
 
 
     /**
@@ -66,7 +67,11 @@ public class Cache {
      */
 	public ArrayList<Trade> getPendingTrades() {
 		return tradesToBePushed;
-	}//modified from original Collection<? extends Trade> to ArrayList<Trade>
+	}
+
+    public void storeProfile(User self) {
+        offlineCopy = self;
+    }
 
     /**
      * Saves the data of the most recently viewed friend in the Cache
@@ -74,7 +79,6 @@ public class Cache {
      * @param friend The User that was most recently viewed by the user
      */
     public void storeFriend(User friend) {
-		//TODO: Pull friend from server
-		//TODO: Move this method to CacheManager
+		lastFriend = friend;
     }
 }

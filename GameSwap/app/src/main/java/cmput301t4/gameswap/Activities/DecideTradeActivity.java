@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 
 import cmput301t4.gameswap.R;
@@ -25,8 +26,8 @@ public class DecideTradeActivity extends Activity {
     private ArrayAdapter<String> friendAdapter;
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
+    int index;
     //private CreateTradeManager CTM;
-    private Trade trade;
 
 
     @Override
@@ -37,9 +38,9 @@ public class DecideTradeActivity extends Activity {
         Bundle b = intent.getExtras();
 
         if(b!=null) {
-            myItems = b.getStringArrayList("oitems");
-            friendItems = b.getStringArrayList("bitems");
-
+            index = b.getInt("index");
+            myItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
+            friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
         Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
@@ -54,7 +55,9 @@ public class DecideTradeActivity extends Activity {
 
     public void counterTradeButton(View v){
         Intent intent = new Intent(DecideTradeActivity.this,CounterTradeActivity.class);
+        intent.putExtra("index", index);
         startActivity(intent);
+
     }
 
 

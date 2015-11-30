@@ -1,39 +1,57 @@
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+
+import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.R;
 
 public class CounterTradeActivity extends Activity {
 
+    private ListView myInventoryItemsListView;
+    private ListView friendInventoryItemsListView;
+    private ArrayAdapter<String> myadapter;
+    private ArrayAdapter<String> friendAdapter;
+    private ArrayList<String> myItems;
+    private ArrayList<String> friendItems;
+    //private CreateTradeManager CTM;
+    private Trade trade;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_counter_trade);
-    }
+        setContentView(R.layout.activity_decide_trade);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_counter_trade, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(b!=null) {
+            int index = b.getInt("index");
+            myItems = UserManager.getPendingList().getTrade(index).getBorrowerItems().getItemsNames();
+            friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
-        return super.onOptionsItemSelected(item);
+        myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
+        friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
+        myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);
+        friendAdapter = new ArrayAdapter<String>(this, R.layout.decidefrienditemlisttextview, friendItems);
+        myInventoryItemsListView.setAdapter(myadapter);
+        friendInventoryItemsListView.setAdapter(friendAdapter);
+
     }
+
+
+
+
+
 }

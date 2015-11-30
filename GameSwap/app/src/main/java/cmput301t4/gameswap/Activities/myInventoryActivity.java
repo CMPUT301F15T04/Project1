@@ -174,7 +174,6 @@ public class myInventoryActivity extends Activity{
         adapter.notifyDataSetChanged();
     }
 
-
     @Override
     public void onResume(){
         super.onResume();
