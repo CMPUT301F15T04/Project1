@@ -51,6 +51,7 @@ import cmput301t4.gameswap.Exceptions.DateFormatException;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.ImageModel;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
@@ -233,6 +234,42 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
      */
     public void onNothingSelected(AdapterView<?> parent) {
     }
+
+    /**
+     * opens camera to take photo
+     * @param view
+     */
+    public void addImageOption(View view){
+
+        ImageButton takeItemPic = (ImageButton) findViewById(R.id.imageButton);
+        takeItemPic.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+    }
+
+    /**
+     * after taking a photo, displays the resulting image taken
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ImageView gameImageView = (ImageView) findViewById(R.id.gameImageView);
+            gameImageView.setImageBitmap(imageBitmap);
+
+            ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), imageBitmap);
+
+        }
+    }
     /**
      * Saves the data from the inputs we enter
      */
@@ -275,28 +312,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         this.finish();
     }
 
-    public void addImageOption(View view){
-
-        ImageButton takeItemPic = (ImageButton) findViewById(R.id.imageButton);
-        takeItemPic.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView gameImageView = (ImageView) findViewById(R.id.gameImageView);
-            gameImageView.setImageBitmap(imageBitmap);
-        }
-    }
 
     public  boolean checkDate(String date) {
         try {
