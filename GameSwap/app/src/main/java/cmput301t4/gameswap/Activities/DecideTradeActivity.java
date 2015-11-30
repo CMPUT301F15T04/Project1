@@ -32,8 +32,10 @@ public class DecideTradeActivity extends Activity {
         setContentView(R.layout.activity_decide_trade);
         trade = (Trade) getIntent().getSerializableExtra("Object");
         CTM = new CreateTradeManager();
-        myItems = CTM.getOwnerSide().getItemsNames();
-        friendItems = CTM.getFriendSide().getItemsNames();
+        myItems = trade.getOwnerItems().getItemsNames();
+        friendItems = trade.getBorrowerItems().getItemsNames();
+        //myItems = CTM.getOwnerSide().getItemsNames();
+        //friendItems = CTM.getFriendSide().getItemsNames();
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);
