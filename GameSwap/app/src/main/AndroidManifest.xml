@@ -116,6 +116,10 @@
             android:name=".Activities.DecideTradeActivity"
             android:label="@string/title_activity_decide_trade" >
         </activity>
+        <activity
+            android:name=".Activities.CancelCreateTradeActivity"
+            android:label="@string/title_activity_cancel_create_trade" >
+        </activity>
     </application>
 
 </manifest>

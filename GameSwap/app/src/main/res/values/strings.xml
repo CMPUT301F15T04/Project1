@@ -104,5 +104,6 @@
     <string name="title_activity_select_from_friend_inventory">SelectFromFriendInventoryActivity
     </string>
     <string name="title_activity_decide_trade">DecideTradeActivity</string>
+    <string name="title_activity_cancel_create_trade">CancelCreateTradeActivity</string>
 
 </resources>

@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Friend Inventory"
-            android:id="@+id/rejectTrade"
+            android:id="@+id/cancelTrade"
             android:layout_alignParentStart="true"
             android:onClick="friendInventoryButtonClicked"
             android:layout_toStartOf="@+id/offerTrade"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="My Inventory"
             android:id="@+id/myInventoryButton"
-            android:layout_alignBottom="@+id/rejectTrade"
+            android:layout_alignBottom="@+id/cancelTrade"
             android:onClick="myInventoryButtonClicked"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true" />
@@ -71,7 +71,7 @@
             android:id="@+id/offerTrade"
             android:layout_toStartOf="@+id/myInventoryButton"
             android:layout_alignParentTop="true"
-            android:layout_alignBottom="@+id/rejectTrade" />
+            android:layout_alignBottom="@+id/cancelTrade" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.R;
 
-public class DecideTradeActivity extends Activity {
+public class CancelCreateTradeActivity extends Activity {
 
     private ListView myInventoryItemsListView;
     private ListView friendInventoryItemsListView;
@@ -61,5 +62,12 @@ public class DecideTradeActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void cancelTradeClicked(View v){
+        CTM.setFriendSide();
+        CTM.setOwnerSide();
+
+
     }
 }
