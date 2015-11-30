@@ -122,6 +122,7 @@ public class myInventoryActivity extends Activity{
                                     public void onClick(DialogInterface arg0, int arg1) {
 
                                         inventory.remove(myInventoryListViewPosition);
+                                        ServerManager.saveUserOnline(UserManager.getTrader());
                                         resetAdapter();
 
 
@@ -205,7 +206,9 @@ public class myInventoryActivity extends Activity{
       protected void onStart(){
 
         super.onStart();
-        //loadFromFile();
+
+        InventoryManager.setInventoryManager(UserManager.getTrader());
+
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
         inventory = UserManager.getTrader().getInventory().getItems();
         nameOfItemsList = UserManager.getTrader().getInventory().getItemsNames();

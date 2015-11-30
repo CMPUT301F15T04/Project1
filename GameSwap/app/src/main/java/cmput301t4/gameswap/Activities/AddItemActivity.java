@@ -294,13 +294,11 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         else if (TextUtils.isEmpty(title) || TextUtils.isEmpty(releaseDate) || TextUtils.isEmpty(description)) {
             Toast.makeText(getBaseContext(), "At least one of the fields is empty!", Toast.LENGTH_SHORT).show();
         } else {
+
+            UserManager.getTrader().setInventory(InventoryManager.getInstance());
             InventoryManager.addItem(title, releaseDate, isPrivate, qual, console, description);
 
-
-            //UserManager.getTrader().setInventory(InventoryManager.getInstance());
-            UserManager.saveUserLocally(this);
             ServerManager.saveUserOnline(UserManager.getTrader());
-
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
             this.finish();
