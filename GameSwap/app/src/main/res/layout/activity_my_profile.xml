@@ -40,7 +40,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:hint="Name"
         android:textSize="25sp"
-        android:textAllCaps="true"
         android:id="@+id/nameTextView"
         android:layout_weight="0.13" />
 
@@ -69,7 +68,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:hint="Location"
             android:textSize="25sp"
-            android:textAllCaps="true"
             android:id="@+id/locationTextView"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
@@ -91,7 +89,6 @@
         android:hint="Contact Information"
         android:id="@+id/contactTextView"
         android:textSize="25sp"
-        android:textAllCaps="true"
         android:layout_weight="0.13" />
 
     <Space
@@ -107,7 +104,6 @@
         android:id="@+id/email"
         android:hint="email"
         android:textSize="25sp"
-        android:textAllCaps="true"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.13" />
 

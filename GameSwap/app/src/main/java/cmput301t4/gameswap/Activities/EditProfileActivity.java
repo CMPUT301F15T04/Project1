@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,12 +16,17 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
 
 public class EditProfileActivity extends Activity {
 
+    private TextView nameEditText;
+    private EditText emailEditText;
+    private EditText cityEditText;
+    private EditText phoneEditText;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -29,10 +35,10 @@ public class EditProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        TextView nameEditText = (TextView) findViewById(R.id.changeName);
-        EditText emailEditText = (EditText) findViewById(R.id.changeEmail);
-        EditText cityEditText = (EditText) findViewById(R.id.changeCity);
-        EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
+        nameEditText = (TextView) findViewById(R.id.changeName);
+        emailEditText = (EditText) findViewById(R.id.changeEmail);
+        cityEditText = (EditText) findViewById(R.id.changeCity);
+        phoneEditText = (EditText) findViewById(R.id.changePhone);
 
         nameEditText.setText(UserManager.getTrader().getUserName());
         emailEditText.setText(UserManager.getTrader().getUserEmail());
@@ -40,15 +46,8 @@ public class EditProfileActivity extends Activity {
         phoneEditText.setText(UserManager.getTrader().getUserPhoneNumber());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_profile, menu);
-        return true;
-    }
-
     public void addImageOption(View view) {
-        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.newProfilePicture);
+        final ImageButton takeProfPic = (ImageButton) findViewById(R.id.newProfilePicButton);
         takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -63,39 +62,52 @@ public class EditProfileActivity extends Activity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView gameImageView = (ImageView) findViewById(R.id.newProfPicView);
+            ImageView gameImageView = (ImageView) findViewById(R.id.newProfilePicView);
             gameImageView.setImageBitmap(imageBitmap);
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public void editProfileButton (View view) {
-        TextView nameEditText = (TextView) findViewById(R.id.changeName);
-        EditText cityEditText = (EditText) findViewById(R.id.changeCity);
-        EditText phoneEditText = (EditText) findViewById(R.id.changePhone);
 
-        UserManager.editUserName(nameEditText.getText().toString());
         UserManager.editCity(cityEditText.getText().toString());
         UserManager.editPhoneNumber(phoneEditText.getText().toString());
+        UserManager.editEmail(emailEditText.getText().toString());
 
+        ServerManager.saveUserOnline(UserManager.getTrader());
+        Intent intent = new Intent(EditProfileActivity.this,MyProfileActivity.class);
         this.finish();
+        startActivity(intent);
     }
 
     public void clickCancelButton(View view) {
         this.finish();
     }
+
+    //=====Function used for testcases=====//
+
+    public TextView getNameText(){
+        return nameEditText;
+    }//end getNameText
+
+    public EditText getCityText(){
+        return cityEditText;
+    }//end getCityText
+
+    public EditText getEmailEditText(){
+        return emailEditText;
+    }//end getEmailEditText
+
+    public EditText getPhoneEditText(){
+        return phoneEditText;
+    }//end getPhoneEditText
+
+    public Button getSaveButton(){
+        Button button = (Button) findViewById(R.id.saveButton);
+        return button;
+    }//end getSaveButton
+
+    //=====End function needed for testcases=====//
+
+
 }
