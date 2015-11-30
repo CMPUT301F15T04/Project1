@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
@@ -70,7 +71,6 @@ public class EditItemActivity extends Activity {
     private EditText releaseEditText;
     private EditText descEditText;
     private Integer index;
-    private InventoryManager IM = new InventoryManager();
     private ArrayList<Item> inventory;
 
     private Button saveEditItemButton;
@@ -163,10 +163,14 @@ public class EditItemActivity extends Activity {
 
     public void saveButtonClick(View view) {
         //Toast.makeText(getBaseContext(), "Saving", Toast.LENGTH_SHORT).show();
-
+        Boolean isPrivate;
         int console = consoleSpinner.getSelectedItemPosition();
         int qual = qualitySpinner.getSelectedItemPosition();
-        boolean isPrivate = (publicprivateSpinner.getSelectedItemPosition() == 1);
+        if (publicprivateSpinner.getSelectedItemPosition() == 1){
+            isPrivate = Boolean.TRUE;
+        } else {
+            isPrivate = Boolean.FALSE;
+        }
 
         title = titleEditText.getText().toString();
         releaseDate = releaseEditText.getText().toString();
@@ -181,7 +185,10 @@ public class EditItemActivity extends Activity {
         } else {
             Item item = new Item(title, releaseDate, isPrivate, qual, console, description);
             //inventory = InventoryManager.getItems();
-            IM.replaceItem(item, index);
+            UserManager.getTrader().setInventory(InventoryManager.getInstance());
+            Intent intent = getIntent();
+            Bundle b = intent.getExtras();
+            InventoryManager.getInstance().replace(item, b.getInt("Position"));
             saveToFile();
             this.finish();
         }

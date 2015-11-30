@@ -128,7 +128,7 @@ public class Item {
     }
 
     public String getReleaseDate() {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         return format1.format(ReleaseDate);
     }
 

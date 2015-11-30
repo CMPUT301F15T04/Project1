@@ -66,7 +66,7 @@ public class myInventoryActivity extends Activity{
 
         myInventoryListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 popupMenu = new PopupMenu(myInventoryActivity.this, view);
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup, popupMenu.getMenu());
 
@@ -89,6 +89,7 @@ public class myInventoryActivity extends Activity{
                                 intent.putExtra("releaseDate", ReleaseDate);
                                 intent.putExtra("index", myInventoryListViewPosition);
                                 intent.putExtra("itemId", itemID);
+                                intent.putExtra("position", myInventoryListViewPosition);
                                 activity.finish();
                                 startActivity(intent);
 

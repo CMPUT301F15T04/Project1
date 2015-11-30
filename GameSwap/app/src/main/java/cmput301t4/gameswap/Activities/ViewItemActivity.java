@@ -87,8 +87,8 @@ public class ViewItemActivity extends Activity {
             platform.setText(b.getString("platform"));
             statusView.setText(status.toUpperCase());
 
-            //ServerManager.loadImage(b.getInt("itemId"));
-            ServerManager.loadImage(8);
+            ServerManager.loadImage(b.getInt("itemId"));
+            //ServerManager.loadImage(8);
             System.out.println("reached load image");
             //byte[] decodeImage = Base64.decode(UserManager.getImage().getImage(), Base64.DEFAULT);
 
