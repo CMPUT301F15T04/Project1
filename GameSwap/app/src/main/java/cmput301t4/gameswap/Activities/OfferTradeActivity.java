@@ -48,6 +48,10 @@ public class OfferTradeActivity extends Activity {
     }
 
     private void resetAdapter(){
+
+        //myItems = CreateTradeManager.clearFriendSide().getItemsNames();
+        //friendItems = CreateTradeManager.clearOwnerSide().getItemsNames();
+
         myItems = CreateTradeManager.getOwnerSide().getItemsNames();
         friendItems = CreateTradeManager.getFriendSide().getItemsNames();
         myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
@@ -104,4 +108,5 @@ public class OfferTradeActivity extends Activity {
     protected void onPause(){
         super.onPause();
     }
+
 }

@@ -3,6 +3,8 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.SyncStateContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -29,13 +32,15 @@ public class TradesActivity extends Activity {
     private TradeList tradeList;
     private ArrayList<String> currentTradeBorrowers;
     private ArrayList<String> pastTradeBorrowers;
-    TradeList currentTrades;
-    TradeList pastTrades;
+    private TradeList currentTrades;
+    private TradeList pastTrades;
     private TradeManager TM;
     private ListView currentListView;
     private ListView pastListView;
     private ArrayAdapter<String> currentAdapter;
     private ArrayAdapter<String> pastAdapter;
+    private Trade trade;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +63,8 @@ public class TradesActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int itemPosition = position;
-                final Intent intent = new Intent(TradesActivity.this, DecideTradeActivity.class);
-                intent.putExtra("Position", position);
+                Intent intent = new Intent(TradesActivity.this, DecideTradeActivity.class);
+
                 startActivity(intent);
 
             }
@@ -69,7 +73,37 @@ public class TradesActivity extends Activity {
         pastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent intent = new Intent()
+                trade = pastTrades.getTrade(position);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
         });
 

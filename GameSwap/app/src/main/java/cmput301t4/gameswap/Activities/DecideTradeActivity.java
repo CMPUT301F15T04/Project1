@@ -7,11 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import cmput301t4.gameswap.Managers.CreateTradeManager;
-import cmput301t4.gameswap.Managers.TradeManager;
+
+import cmput301t4.gameswap.Models.Trade;
+
 import cmput301t4.gameswap.R;
 
 public class DecideTradeActivity extends Activity {
@@ -22,7 +24,8 @@ public class DecideTradeActivity extends Activity {
     private ArrayAdapter<String> friendAdapter;
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
-    private CreateTradeManager CTM;
+    //private CreateTradeManager CTM;
+    private Trade trade;
 
 
     @Override
@@ -31,11 +34,14 @@ public class DecideTradeActivity extends Activity {
         setContentView(R.layout.activity_decide_trade);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        CTM = new CreateTradeManager();
-        CTM.setOwnerSide(TradeManager.getCurrent().getTrade(b.getInt("Position")).getOwnerItems());
-        CTM.setFriendSide(TradeManager.getCurrent().getTrade(b.getInt("Position")).getBorrowerItems());
-        myItems = CTM.getOwnerSide().getItemsNames();
-        friendItems = CTM.getFriendSide().getItemsNames();
+
+        if(b!=null) {
+            myItems = b.getStringArrayList("oitems");
+            friendItems = b.getStringArrayList("bitems");
+
+        }
+        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
+
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);
