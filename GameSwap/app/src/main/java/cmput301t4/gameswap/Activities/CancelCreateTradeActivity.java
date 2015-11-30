@@ -65,8 +65,8 @@ public class CancelCreateTradeActivity extends Activity {
     }
 
     public void cancelTradeClicked(View v){
-        CTM.setFriendSide();
-        CTM.setOwnerSide();
+        CTM.clearFriendSide();
+        CTM.clearOwnerSide();
 
 
     }

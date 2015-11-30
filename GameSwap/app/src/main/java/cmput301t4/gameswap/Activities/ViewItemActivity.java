@@ -48,25 +48,7 @@ public class ViewItemActivity extends Activity {
         name = (TextView) findViewById(R.id.viewItemName);
         statusView = (TextView) findViewById(R.id.viewStatus);
         imageView = (ImageView) findViewById(R.id.gameImageView);
-       /** platformList.add("Playstation 4");
-        platformList.add("Xbox ONE");
-        platformList.add("PC");
-        platformList.add("Wii U");
-        platformList.add("Nintendo 3DS");
-        platformList.add("Playstation 3");
-        platformList.add("Playstation Vita");
-        platformList.add("Xbox 360");
-        platformList.add("Nintendo Wii");
-        platformList.add("Nintendo DS");
-        platformList.add("Playstation 2");
-        platformList.add("Xbox");
-        platformList.add("Nintendo Gamecube");
-        platformList.add("Game Boy Advanced");
-        platformList.add("Playstation Portable");
-        platformList.add("Playstation");
-        platformList.add("Nintendo 64");
-        platformList.add("Game Boy");
-        platformList.add("NES");*/
+
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();

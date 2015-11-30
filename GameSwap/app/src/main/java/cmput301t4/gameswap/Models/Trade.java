@@ -1,5 +1,7 @@
 package cmput301t4.gameswap.Models;
 
+import android.os.Parcelable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +12,7 @@ import cmput301t4.gameswap.Exceptions.DateFormatException;
 /**
  * Created by kynan on 11/1/15. Gives information and functionality of the trade
  */
-public class Trade {
+public class Trade  {
     //Ownername =  the one who initiated the trade
     //BorrowerName = the one who can accept the trade
     //Ownername/Borrower are String (TEMP not sure if we want to use ID,etc)

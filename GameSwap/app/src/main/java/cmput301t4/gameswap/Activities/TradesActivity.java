@@ -3,6 +3,8 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.SyncStateContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +23,7 @@ import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.R;
 
-public class TradesActivity extends Activity implements Serializable {
+public class TradesActivity extends Activity {
 
     private ArrayAdapter<String> adapter;
     private ListView pendingtradeListView;
@@ -37,6 +39,7 @@ public class TradesActivity extends Activity implements Serializable {
     private ArrayAdapter<String> currentAdapter;
     private ArrayAdapter<String> pastAdapter;
     private Trade trade;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,10 @@ public class TradesActivity extends Activity implements Serializable {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 trade = currentTrades.getTrade(position);
                 Intent intent = new Intent(TradesActivity.this, DecideTradeActivity.class);
-                intent.putExtra("Object", (Serializable) trade);
+               // intent.putExtra("bname", trade.getBorrowerName());
+               // intent.putExtra("oname",trade.getOwnername());
+                intent.putStringArrayListExtra("oitems",trade.getOwnerItems().getItemsNames());
+                intent.putStringArrayListExtra("bitems", trade.getBorrowerItems().getItemsNames());
                 startActivity(intent);
             }
         });
@@ -69,7 +75,36 @@ public class TradesActivity extends Activity implements Serializable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 trade = pastTrades.getTrade(position);
-                //Intent intent = new Intent()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
         });
 

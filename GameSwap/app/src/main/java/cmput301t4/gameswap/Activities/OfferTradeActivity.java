@@ -48,6 +48,10 @@ public class OfferTradeActivity extends Activity {
     }
 
     private void resetAdapter(){
+
+        //myItems = CreateTradeManager.clearFriendSide().getItemsNames();
+        //friendItems = CreateTradeManager.clearOwnerSide().getItemsNames();
+
         myItems = CreateTradeManager.getOwnerSide().getItemsNames();
         friendItems = CreateTradeManager.getFriendSide().getItemsNames();
         myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
@@ -77,8 +81,8 @@ public class OfferTradeActivity extends Activity {
     public void offerTradeClicked(View v){
         TradeManager.createTrade(UserManager.getTrader().getUserName(), UserManager.getFriend().getUserName(), CreateTradeManager.getOwnerSide(), CreateTradeManager.getFriendSide());
 
-        CTM.setFriendSide();
-        CTM.setOwnerSide();
+        CTM.clearFriendSide();
+        CTM.clearOwnerSide();
         Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
         startActivity(intent);
@@ -104,4 +108,5 @@ public class OfferTradeActivity extends Activity {
     protected void onPause(){
         super.onPause();
     }
+
 }
