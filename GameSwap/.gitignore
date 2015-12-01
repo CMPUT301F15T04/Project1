@@ -30,6 +30,9 @@ local.properties
 captures/
 
 # Other Android Studio Junk
+.idea/encodings.xml
+.idea/misc.xml
+.idea/vcs.xml
 .idea/workspace.xml
 .idea/libraries
 .DS_Store
