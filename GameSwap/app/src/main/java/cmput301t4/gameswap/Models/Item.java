@@ -104,6 +104,8 @@ public class Item {
         Name = name;
     }
 
+    public void setItemid(int num){itemid = num;}
+
     public int getItemid(){return itemid;}
 
     public String getDescription() {

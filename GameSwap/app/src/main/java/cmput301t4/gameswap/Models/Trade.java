@@ -115,12 +115,10 @@ public class Trade  {
         Trade trade1 = (Trade) trade;
         if(this.Ownername.equals(trade1.getOwnername())){
             if(this.BorrowerName.equals(trade1.getBorrowerName())){
-                if(this.OwnerItems.equals(trade1.getOwnerItems())){
-                    if(this.BorrowerItems.equals(trade1.getBorrowerItems())){
-                        //WE DID NOT ADD THE DATE CHECK YET
-                        return true;
-                    }//end check BorrowerItem
-                }//end check OwnerItem
+                if(this.DateTransaction.equals(trade1.getDateTransaction())){
+                    //TODO make this more accurate check item by item maybe/modify an override when doing inventory compares
+                    return true;
+                }
             }//end check BorrowerName
         }//end check OwnerNAme
         return false;

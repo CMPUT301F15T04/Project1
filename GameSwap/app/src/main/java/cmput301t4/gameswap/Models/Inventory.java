@@ -35,6 +35,36 @@ public class Inventory {
     }
 
     /**
+     * removes all owner items after trade finishes
+     * @param items
+     */
+    public void deleteItemAfterTrade(Inventory items){
+        for(int i = 0; i < items.size(); i++){
+            int itemId = items.getItem(i).getItemid();
+            for(int j = 0; j < inventory.size(); j++){
+                if(inventory.get(j).getItemid() == itemId){
+                    inventory.remove(j);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * adds exchanged item to inventory
+     * @param items item that was exchanged for
+     * @param user user items now belong to
+     */
+    public void addItemAfterTrade(Inventory items, User user){
+        for(int i = 0; i < items.size(); i++){
+            Item item = items.getItem(i);
+            item.setItemid(user.getCounter());
+            user.incrementCounter();
+            inventory.add(item);
+        }
+    }
+
+    /**
      * Changes an Item at a position to another Item
      *
      * @param item The new Item
@@ -176,5 +206,6 @@ public class Inventory {
         }
         return -1;
     }
+
 
 }

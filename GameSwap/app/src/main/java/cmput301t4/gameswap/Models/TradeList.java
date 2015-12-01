@@ -2,6 +2,7 @@ package cmput301t4.gameswap.Models;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 
 /**
@@ -20,6 +21,18 @@ public class TradeList {
     public void add(Trade trade) {
         tradelist.add(trade);
     }//end add to tradelist
+
+    /**
+     * removes inputted trade object from tradelist
+     * @param trade
+     */
+    public void delete(Trade trade){
+       for(int i = 0; i < UserManager.getFriend().getPendingTrades().getSize(); i++){
+           if(trade.equals(UserManager.getFriend().getPendingTrades().getTrade(i))){
+               UserManager.getFriend().getPendingTrades().del(i);
+           }
+       }
+    }
 
     /**
      * Deletes a trade from the trade list
