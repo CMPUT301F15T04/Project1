@@ -53,6 +53,7 @@
     <string name="dd_mm_yyyy">dd mm yyyy</string>
     <string name="Location">Location</string>
     <string name="LocationButton">Add Item Location</string>
+    <string name="ServerBaseURL">http://cmput301.softwareprocess.es:8080/cmput301f15t04/</string>
 
     <string-array name="Console">
         <item>Playstation 4</item>
