@@ -1,8 +1,5 @@
 package cmput301t4.gameswap.Managers;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,12 +21,10 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.SocketTimeoutException;
 
 import cmput301t4.gameswap.Exceptions.ServerDownException;
 import cmput301t4.gameswap.Models.ImageModel;
@@ -141,7 +136,7 @@ public class ServerManager {
                     HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
                     HttpClient httpclient = new DefaultHttpClient(httpParameters);
-                    HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/_search?pretty=1&q=" + username);
+                    HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/_search?pretty=1&q=" + username);
                     searchRequest.setHeader("Accept", "application/json");
                     HttpResponse response = null;
 
@@ -348,7 +343,6 @@ public class ServerManager {
                     //String line = rd.readLine();
                     //System.out.println(line);
                     sr = gson.fromJson(rd, User.class);
-                    System.out.println(sr.getUserName() + " username from servermanager");
                 } catch (JsonIOException e) {
                     throw new RuntimeException(e);
                 } catch (JsonSyntaxException e) {
