@@ -33,7 +33,7 @@ public class FriendProfileActivity extends Activity {
         setContentView(R.layout.activity_friend_profile);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        isFriend = b.getBoolean("isFriend");
+        isFriend = b.getBoolean("isfriend");
         traderNameTextView = (TextView) findViewById(R.id.traderNameTextView);
         traderCityTextView = (TextView) findViewById(R.id.traderCityTextView);
         traderPhoneTextView = (TextView) findViewById(R.id.traderPhoneTextView);
@@ -67,6 +67,7 @@ public class FriendProfileActivity extends Activity {
     public void removeTraderButtonClicked(View view){
         if (isFriend == Boolean.TRUE){
             int index;
+            UserManager.getTrader().getFriendList().hasFriend(UserManager.getFriend().getUserName());
             index = UserManager.getTrader().getFriendList().getFriendIndex(traderName);
             UserManager.getTrader().getFriendList().delFriend(index);
             ServerManager.saveUserOnline(UserManager.getTrader());

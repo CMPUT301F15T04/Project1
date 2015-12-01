@@ -74,12 +74,12 @@ public class SearchPeopleActivity extends Activity {
     }
 
     public void findTrader(final String trader){
-        traderName = trader;
-        traderName = search.getQuery().toString().toLowerCase();
+        //traderName = trader;
+        //traderName = search.getQuery().toString();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                ServerManager.searchForUser(traderName);
+                ServerManager.searchForUser(trader);
 
             }
         });
@@ -89,7 +89,7 @@ public class SearchPeopleActivity extends Activity {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-        search.setQuery("",false);
+        //search.setQuery("",false);
 
         String user  = UserManager.getTrader().getUserName();
         //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
@@ -100,10 +100,10 @@ public class SearchPeopleActivity extends Activity {
         android.util.Log.e("name",user);
         int i =0;
         //UserManager.getTrader().getFriendList().hasFriend(trader)
-        if(UserManager.getTrader().getFriendList().hasFriend(trader)){
+        if(UserManager.getTrader().getFriendList().hasFriend(trader)== Boolean.TRUE){
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
             intent.putExtra("isfriend", Boolean.TRUE);
-            ServerManager.getFriendOnline(traderName);
+            ServerManager.getFriendOnline(trader);
             //intent.putExtra("name", traderName.toLowerCase());
             activity.finish();
             startActivity(intent);
@@ -111,7 +111,7 @@ public class SearchPeopleActivity extends Activity {
         } else if(ServerManager.checkResult()) {
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
             intent.putExtra("isfriend", Boolean.FALSE);
-            ServerManager.getFriendOnline(traderName);
+            ServerManager.getFriendOnline(trader);
             //intent.putExtra("name", traderName.toLowerCase());
             activity.finish();
             startActivity(intent);
