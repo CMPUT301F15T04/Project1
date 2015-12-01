@@ -29,7 +29,6 @@ import java.lang.reflect.Type;
 import cmput301t4.gameswap.Exceptions.ServerDownException;
 import cmput301t4.gameswap.Models.ImageModel;
 import cmput301t4.gameswap.Models.User;
-import cmput301t4.gameswap.R;
 import cmput301t4.gameswap.serverTools.ElasticSearchResponse;
 import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 
@@ -38,8 +37,10 @@ public class ServerManager {
     private static boolean foundResult = Boolean.FALSE;
     private static boolean serverDown = Boolean.TRUE;
 
-    private static HttpClient httpclient = new DefaultHttpClient();
+    private static HttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
     private static Gson gson = new Gson();
+
+    private static final String baseURL = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/";
 
     /**
      * Get the user from with the username given
@@ -54,7 +55,7 @@ public class ServerManager {
                 public void run() {
                     try {
                         //Taken from https://github.com/rayzhangcl/ESDemo
-                        HttpGet getRequest = new HttpGet(R.string.ServerBaseURL + "users/" + username + "/_source");
+                        HttpGet getRequest = new HttpGet(baseURL + "users/" + username + "/_source");
                         getRequest.addHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(getRequest);
 
@@ -99,7 +100,7 @@ public class ServerManager {
                 @Override
                 public void run () {
                     try {
-                        HttpGet searchRequest = new HttpGet(R.string.ServerBaseURL + "users/_search?pretty=1&q=" + username);
+                        HttpGet searchRequest = new HttpGet(baseURL + "users/_search?pretty=1&q=" + username);
                         searchRequest.setHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(searchRequest);
 
@@ -143,21 +144,34 @@ public class ServerManager {
     public static void serverIsDown(){serverDown = Boolean.TRUE;}
 
     public static boolean checkServerStatus(){
-        HttpGet searchRequest = new HttpGet(R.string.ServerBaseURL + "_search?pretty=1");
-        searchRequest.setHeader("Accept", "application/json");
-        HttpResponse response = null;
+        Thread serverThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpGet searchRequest = new HttpGet(baseURL + "_search?pretty=1");
+                searchRequest.setHeader("Accept", "application/json");
+                HttpResponse response = null;
+
+                try {
+                    response = httpclient.execute(searchRequest);
+                } catch (IOException e) {
+                    serverIsDown();
+                    return;
+                }
+
+                if(response.getStatusLine().getStatusCode() < 203) {
+                    serverNotDown();
+                } else {
+                    serverIsDown();
+                }
+            }
+        });
+
+        serverThread.start();
 
         try {
-            response = httpclient.execute(searchRequest);
-        } catch (IOException e) {
-            serverIsDown();
-            return serverDown;
-        }
-
-        if(response.getStatusLine().getStatusCode() < 203) {
-            serverNotDown();
-        } else {
-            serverIsDown();
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException("serverThread.join failed");
         }
 
         return serverDown;
@@ -172,7 +186,7 @@ public class ServerManager {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    HttpPost httpPost = new HttpPost(R.string.ServerBaseURL + "users/" + user.getUserName());
+                    HttpPost httpPost = new HttpPost(baseURL + "users/" + user.getUserName());
                     StringEntity stringentity = null;
 
                     try {
@@ -219,8 +233,7 @@ public class ServerManager {
         return json;
     }
 
-    public static void getFriendOnline(final String username){     //Access Server function
-
+    public static void getFriendOnline(final String username){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
