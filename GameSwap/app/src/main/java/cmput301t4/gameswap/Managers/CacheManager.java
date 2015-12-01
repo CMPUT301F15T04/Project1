@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import cmput301t4.gameswap.Models.Cache;
 import cmput301t4.gameswap.Models.Item;
@@ -82,6 +81,7 @@ public class CacheManager {
         }
 
         //TODO: store saved friend to file
+        //TODO: Store offline user to file
     }
 
     /**
@@ -121,6 +121,7 @@ public class CacheManager {
         }
 
         //TODO: load friend from save file
+        //TODO: load offline user from file
     }
 
     /**
@@ -133,11 +134,11 @@ public class CacheManager {
     }
 
     /**
-     * Adds a generic list of <code>Items</code> to the <code>Cache</code>
+     * Adds an ArrayList of <code>Items</code> to the <code>Cache</code>
      *
-     * @param items A <code>Collection</code> of objects that can be up-cast to <code>Item</code>
+     * @param items A <code>ArrayList</code> of <code>Item</code>
      */
-    static public void cacheItems(Collection<? extends Item> items) {
+    static public void cacheItems(ArrayList<Item> items) {
         getInstance().addItemsToCache(items);
     }
 
@@ -161,11 +162,11 @@ public class CacheManager {
     }
 
     /**
-     * Adds a generic list of <code>Trades</code> to the <code>Cache</code>
+     * Adds an ArrayList of <code>Trades</code> to the <code>Cache</code>
      *
-     * @param trades A <code>Collection</code> of objects that can be up-cast to <code>Trade</code>
+     * @param trades A <code>ArrayList</code> of <code>Trade</code>
      */
-    static public void cacheTrades(Collection<? extends Trade> trades) {
+    static public void cacheTrades(ArrayList<Trade> trades) {
         getInstance().addTradesToCache(trades);
     }
 
@@ -179,10 +180,20 @@ public class CacheManager {
         return getInstance().getPendingTrades();
     }
 
+    /**
+     * Stores the offline <code>User</code> in the <code>Cache</code>
+     *
+     * @param self The <code>User</code> to be saved
+     */
     static public void storeProfile(User self) {
         getInstance().storeProfile(self);
     }
 
+    /**
+     * Stores the last viewed friend in the <code>Cache</code>
+     *
+     * @param friend The friend to be saved
+     */
     static public void storeLastFriend(User friend) {
         getInstance().storeFriend(friend);
     }
