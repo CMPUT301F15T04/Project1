@@ -22,6 +22,7 @@ public class TradeManager {
         return UserManager.getPastList();
     }
 
+
     //=====Basic Function=====//
 
     //Create a new trade
