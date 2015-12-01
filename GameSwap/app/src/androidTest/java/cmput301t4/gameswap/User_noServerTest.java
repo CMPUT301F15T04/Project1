@@ -8,10 +8,7 @@ import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
-import cmput301t4.gameswap.Models.FriendList;
-import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
-import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.Models.User;
 

@@ -1,6 +1,5 @@
 package cmput301t4.gameswap.Models;
 
-import android.graphics.Bitmap;
 import android.location.Location;
 
 import java.text.ParseException;

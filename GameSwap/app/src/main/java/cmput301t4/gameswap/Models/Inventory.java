@@ -1,9 +1,7 @@
 package cmput301t4.gameswap.Models;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;

@@ -7,10 +7,6 @@ import android.location.LocationManager;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import cmput301t4.gameswap.Managers.FriendManager;
-import cmput301t4.gameswap.Managers.InventoryManager;
-import cmput301t4.gameswap.Managers.TradeManager;
-
 /**
  * Since we might not have an account we might need to shift Account Manager's
  * functionality to User Manager

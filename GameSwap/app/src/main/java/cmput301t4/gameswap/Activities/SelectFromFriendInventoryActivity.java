@@ -2,8 +2,6 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,10 +12,8 @@ import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.Managers.InvSearchManager;
-import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
-import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class SelectFromFriendInventoryActivity extends Activity {

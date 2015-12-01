@@ -1,9 +1,6 @@
 package cmput301t4.gameswap.Models;
 
-import android.content.pm.FeatureInfo;
-
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Stores the list of Users that the current user has added as friends

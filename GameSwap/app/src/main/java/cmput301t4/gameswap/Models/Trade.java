@@ -1,11 +1,8 @@
 package cmput301t4.gameswap.Models;
 
-import android.os.Parcelable;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.ArrayList;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 

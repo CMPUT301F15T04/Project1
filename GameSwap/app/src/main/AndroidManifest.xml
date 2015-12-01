@@ -85,10 +85,6 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".Activities.TopTradesActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
             android:name=".Activities.ViewItemActivity"
             android:label="@string/app_name" >
         </activity>

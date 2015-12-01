@@ -3,23 +3,15 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.provider.SyncStateContract;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
-import cmput301t4.gameswap.Models.Inventory;
-import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.R;

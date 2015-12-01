@@ -3,7 +3,6 @@ package cmput301t4.gameswap.Models;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.UserManager;
-import cmput301t4.gameswap.Models.Trade;
 
 /**
  * Created by kynan on 11/1/15.

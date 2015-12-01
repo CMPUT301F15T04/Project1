@@ -2,19 +2,15 @@ package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cmput301t4.gameswap.Managers.InvSearchManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
-import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class FriendInventoryActivity extends Activity {

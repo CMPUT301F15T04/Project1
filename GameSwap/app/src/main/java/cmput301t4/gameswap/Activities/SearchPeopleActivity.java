@@ -3,23 +3,16 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import org.apache.commons.logging.Log;
-
-import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
-import cmput301t4.gameswap.Managers.UserListManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.Models.User;
-import cmput301t4.gameswap.Models.UsersList;
 import cmput301t4.gameswap.R;
 
 public class SearchPeopleActivity extends Activity {
@@ -44,9 +37,8 @@ public class SearchPeopleActivity extends Activity {
         setContentView(R.layout.activity_search_people);
 
         friendList = UserManager.getTrader().getFriendList();
-        /**
-         * Code from - http://sampleprogramz.com/android/searchview.php
-         */
+
+         //Code from - http://sampleprogramz.com/android/searchview.php
         search = (SearchView) findViewById(R.id.searchView);
         search.setQueryHint("Search Trader");
         search.setIconifiedByDefault(false);

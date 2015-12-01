@@ -7,8 +7,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -34,17 +31,10 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
+import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
-
-import cmput301t4.gameswap.Managers.InventoryManager;
-import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.FriendList;
-
-import cmput301t4.gameswap.Models.Item;
-import cmput301t4.gameswap.Models.User;
-import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {

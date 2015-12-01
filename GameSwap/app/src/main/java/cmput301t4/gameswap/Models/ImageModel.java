@@ -1,7 +1,5 @@
 package cmput301t4.gameswap.Models;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by preyansh on 11/29/15.
  */

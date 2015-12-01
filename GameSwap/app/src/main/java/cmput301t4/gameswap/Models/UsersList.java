@@ -1,7 +1,5 @@
 package cmput301t4.gameswap.Models;
 
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 
 /**
