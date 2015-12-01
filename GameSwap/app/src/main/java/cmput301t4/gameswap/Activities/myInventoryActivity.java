@@ -30,7 +30,6 @@ public class myInventoryActivity extends Activity{
     private ArrayList<String> nameOfItemsList;
    // private ArrayList<String> statusOfItemsList;
     protected int myInventoryListViewPosition;
-
     private myInventoryActivity activity = this;
 
     private int itemID;
@@ -63,12 +62,15 @@ public class myInventoryActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_inventory);
-
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
+        inventory = InventoryManager.getItems();
+        nameOfItemsList = InventoryManager.getItemsNames();
+        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
+        myInventoryListView.setAdapter(adapter);
 
         myInventoryListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
                 myInventoryListViewPosition = position;
                 popupMenu = new PopupMenu(myInventoryActivity.this, view);
                 popupMenu.getMenuInflater().inflate(R.menu.myinventoryitempopup, popupMenu.getMenu());
@@ -107,12 +109,10 @@ public class myInventoryActivity extends Activity{
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                        // InventoryManager.delItem(myInventoryListViewPosition);
-
-
                                         inventory.remove(myInventoryListViewPosition);
-
+                                        nameOfItemsList.remove(myInventoryListViewPosition);
                                         ServerManager.saveUserOnline(UserManager.getTrader());
-                                        resetAdapter();
+                                        adapter.notifyDataSetChanged();
                                     }
 
                                 });
@@ -129,6 +129,7 @@ public class myInventoryActivity extends Activity{
                         }
                         return false;
                     }
+
                 });
                 popupMenu.show();
                 return false;
@@ -153,9 +154,9 @@ public class myInventoryActivity extends Activity{
                 intent.putExtra("description", Description);
                 intent.putExtra("releaseDate", ReleaseDate);
                 intent.putExtra("index", myInventoryListViewPosition);
-                intent.putExtra("quality",Quality);
-                intent.putExtra("private",IsPrivate);
-                intent.putExtra("platform",Platform);
+                intent.putExtra("quality", Quality);
+                intent.putExtra("private", IsPrivate);
+                intent.putExtra("platform", Platform);
                 System.out.println("this is the name of the item at position" + Name);
                 System.out.println("Setting this number as item id for image" + itemID);
                 intent.putExtra("itemId", itemID);
@@ -164,22 +165,7 @@ public class myInventoryActivity extends Activity{
         });
 
     }
-
-    public void resetAdapter(){
-        myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
-        inventory = InventoryManager.getItems();
-        nameOfItemsList = InventoryManager.getItemsNames();
-        adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext, nameOfItemsList);
-        myInventoryListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        resetAdapter();
-    }
-
+    
 
     @Override
       protected void onStart(){

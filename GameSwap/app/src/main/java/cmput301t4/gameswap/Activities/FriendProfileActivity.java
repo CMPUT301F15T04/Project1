@@ -17,52 +17,67 @@ import cmput301t4.gameswap.R;
 
 public class FriendProfileActivity extends Activity {
 
-    private Button removeTraderButton;
+    private Button FriendStatusButton;
+    private Button friendInventory;
+    private Button friendTrade;
     private TextView traderNameTextView;
     private TextView traderCityTextView;
     private TextView traderPhoneTextView;
     private TextView traderEmailTextView;
     private String traderName;
+    private Boolean isFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_profile);
-        removeTraderButton = (Button)findViewById(R.id.removeTraderButton);
-
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        isFriend = b.getBoolean("isFriend");
         traderNameTextView = (TextView) findViewById(R.id.traderNameTextView);
         traderCityTextView = (TextView) findViewById(R.id.traderCityTextView);
         traderPhoneTextView = (TextView) findViewById(R.id.traderPhoneTextView);
         traderEmailTextView = (TextView) findViewById(R.id.traderEmailTextView);
+        FriendStatusButton = (Button)findViewById(R.id.removeTraderButton);
+        friendInventory = (Button) findViewById(R.id.friendInventoryButton);
+        friendTrade = (Button) findViewById(R.id.friendTradeButton);
 
-        traderNameTextView.setText(UserManager.getFriend().getUserName());
-        traderCityTextView.setText(UserManager.getFriend().getUserCity());
-        traderPhoneTextView.setText(UserManager.getFriend().getUserPhoneNumber());
-        traderEmailTextView.setText(UserManager.getFriend().getUserEmail());
-        traderName = traderNameTextView.getText().toString();
-        //System.out.println(UserManager.getFriend().getUserName() + " testing location 3");
+        if (isFriend==Boolean.FALSE){
+            FriendStatusButton.setText("Add Friend");
+            traderNameTextView.setText(UserManager.getFriend().getUserName());
+            traderCityTextView.setText("City Unavailable");
+            traderPhoneTextView.setText("Phonenumber Unavailable");
+            traderEmailTextView.setText("Email Unavailable");
+            friendInventory.setEnabled(false);
+            friendTrade.setEnabled(false);
+            traderName = traderNameTextView.getText().toString();
+        } else {
+            FriendStatusButton.setText("Remove Friend");
+            traderNameTextView.setText(UserManager.getFriend().getUserName());
+            traderCityTextView.setText(UserManager.getFriend().getUserCity());
+            traderPhoneTextView.setText(UserManager.getFriend().getUserPhoneNumber());
+            traderEmailTextView.setText(UserManager.getFriend().getUserEmail());
+            traderName = traderNameTextView.getText().toString();
+            friendInventory.setEnabled(true);
+            friendTrade.setEnabled(true);
+        }
 
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        this.finish();
     }
 
     public void removeTraderButtonClicked(View view){
-        int index;
-        //index = FriendManager.getFriendIndex(traderName);
-        index = UserManager.getTrader().getFriendList().getFriendIndex(traderName);
-        System.out.println(traderName + " testing location 2");
-        UserManager.getTrader().getFriendList().delFriend(index);
-        ServerManager.saveUserOnline(UserManager.getTrader());
-        Intent intent = new Intent(FriendProfileActivity.this,AddFriendActivity.class);
-        //intent.putExtra("")
-        startActivity(intent);
-        finish();
-
+        if (isFriend == Boolean.TRUE){
+            int index;
+            index = UserManager.getTrader().getFriendList().getFriendIndex(traderName);
+            UserManager.getTrader().getFriendList().delFriend(index);
+            ServerManager.saveUserOnline(UserManager.getTrader());
+            stateswtich(isFriend);
+        }
+        else {
+            FriendManager.addFriend(traderName);
+            UserManager.saveUserLocally(this);
+            ServerManager.saveUserOnline(UserManager.getTrader());
+            stateswtich(isFriend);
+        }
     }
 
 
@@ -77,4 +92,27 @@ public class FriendProfileActivity extends Activity {
         Intent intent = new Intent(FriendProfileActivity.this,FriendInventoryActivity.class );
         startActivity(intent);
     }
+
+    public void stateswtich(Boolean areFriend){
+        if(areFriend == Boolean.TRUE){
+            Toast.makeText(getBaseContext(), traderName + " Removed From FriendList", Toast.LENGTH_SHORT).show();
+            traderCityTextView.setText("City Unavailable");
+            traderPhoneTextView.setText("Phonenumber Unavailable");
+            traderEmailTextView.setText("Email Unavailable");
+            FriendStatusButton.setText("Add Friend  ");
+            friendInventory.setEnabled(false);
+            friendTrade.setEnabled(false);
+            isFriend = Boolean.FALSE;
+        } else {
+            Toast.makeText(getBaseContext(), traderName + " Added to FriendList", Toast.LENGTH_SHORT).show();
+            traderCityTextView.setText(UserManager.getFriend().getUserCity());
+            traderPhoneTextView.setText(UserManager.getFriend().getUserPhoneNumber());
+            traderEmailTextView.setText(UserManager.getFriend().getUserEmail());
+            FriendStatusButton.setText("Remove Friend");
+            friendInventory.setEnabled(true);
+            friendTrade.setEnabled(true);
+            isFriend = Boolean.TRUE;
+        }
+    }
+
 }

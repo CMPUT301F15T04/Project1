@@ -1,3 +1,9 @@
+/*
+
+
+//WE DO NOT NEED THIS ACTIVITY ANYMORE
+//BEEN REFACTORED TO JUST USE ONLY "FRIENDPROFILEACTIVITY"
+
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
@@ -40,8 +46,8 @@ public class AddFriendActivity extends Activity {
         Toast.makeText(getBaseContext(), "Added", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddFriendActivity.this,FriendProfileActivity.class);
         intent.putExtra("name", traderName);
-        //finish();
+        this.finish();
         startActivity(intent);
     }
 
-}
+}*/

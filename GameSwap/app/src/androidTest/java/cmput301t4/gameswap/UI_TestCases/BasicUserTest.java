@@ -213,7 +213,6 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-        receiverActivity.finish();
         return receiverActivity;
     }//end testLoginSuccessful
 

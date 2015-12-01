@@ -75,8 +75,6 @@ public class SearchPeopleActivity extends Activity {
 
     public void findTrader(final String trader){
         traderName = trader;
-
-
         traderName = search.getQuery().toString().toLowerCase();
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -92,10 +90,7 @@ public class SearchPeopleActivity extends Activity {
             throw new RuntimeException();
         }
         search.setQuery("",false);
-        //Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
 
-        //Boolean a = UserManager.getTrader().getFriendList().hasFriend(trader);
         String user  = UserManager.getTrader().getUserName();
         //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
         int size = UserManager.getTrader().getFriendList().getFriendlistSize();
@@ -104,33 +99,22 @@ public class SearchPeopleActivity extends Activity {
 
         android.util.Log.e("name",user);
         int i =0;
+        //UserManager.getTrader().getFriendList().hasFriend(trader)
         if(UserManager.getTrader().getFriendList().hasFriend(trader)){
-
-      // if (UserManager.getTrader().getFriendList().hasFriend(trader)) {
             Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
+            intent.putExtra("isfriend", Boolean.TRUE);
             ServerManager.getFriendOnline(traderName);
             //intent.putExtra("name", traderName.toLowerCase());
             activity.finish();
             startActivity(intent);
 
         } else if(ServerManager.checkResult()) {
-                Intent intent2 = new Intent(SearchPeopleActivity.this, AddFriendActivity.class);
-                Thread thread2 = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ServerManager.getFriendOnline(traderName);
-                    }
-                });
-                thread2.start();
-                try {
-                    thread2.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException();
-                }
-                //intent2.putExtra("name",traderName.toLowerCase());
-                search.clearChildFocus(search);
-                activity.finish();
-                startActivity(intent2);
+            Intent intent = new Intent(SearchPeopleActivity.this, FriendProfileActivity.class);
+            intent.putExtra("isfriend", Boolean.FALSE);
+            ServerManager.getFriendOnline(traderName);
+            //intent.putExtra("name", traderName.toLowerCase());
+            activity.finish();
+            startActivity(intent);
 
         } else {
             Toast.makeText(getBaseContext(), "No user exist", Toast.LENGTH_SHORT).show();

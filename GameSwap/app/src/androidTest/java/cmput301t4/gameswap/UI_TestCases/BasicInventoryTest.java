@@ -128,7 +128,7 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         });
         getInstrumentation().waitForIdleSync();
 
-
+        assertNull(myInventoryList.getChildAt(0));
     }//end deleteItemTest
 
     public myInventoryActivity editItemTest(myInventoryActivity myInventory_Activity){
@@ -345,8 +345,8 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         assertTrue(ViewItem_Activity.getNameText().getText().toString().equals("Darn Kids PART 2"));
         //assertTrue(ViewItem_Activity.getDateText().getText().toString().equals("12-12-5555"));
         assertTrue(ViewItem_Activity.getDescritionText().getText().toString().equals("That Game where things"));
-        assertTrue(ViewItem_Activity.getPlatformText().getText().toString().equals("2"));
-        assertTrue(ViewItem_Activity.getQualityText().getText().toString().equals("1"));
+        assertTrue(ViewItem_Activity.getPlatformText().getText().toString().equals("PC"));
+        assertTrue(ViewItem_Activity.getQualityText().getText().toString().equals("4-Opened No Scratches/Damage"));
         assertTrue(ViewItem_Activity.getStatusText().toString().equals("Public"));
 
 

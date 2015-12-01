@@ -50,15 +50,8 @@ public class OfferTradeActivity extends Activity {
 
     private void resetAdapter(){
 
-        //myItems = CreateTradeManager.clearFriendSide().getItemsNames();
-        //friendItems = CreateTradeManager.clearOwnerSide().getItemsNames();
-
         myItems = CreateTradeManager.getOwnerSide().getItemsNames();
         friendItems = CreateTradeManager.getFriendSide().getItemsNames();
-        myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
-        friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
-        myInventoryItemsListView.setAdapter(myadapter);
-        friendInventoryItemsListView.setAdapter(friendAdapter);
         myadapter.notifyDataSetChanged();
         friendAdapter.notifyDataSetChanged();
     }

@@ -16,13 +16,7 @@ public class FriendsNTradingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_ntrading);
     }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-        this.finish();
-    }
-
+    
     public void searchPeopleButton(View view){
         Intent intent = new Intent(FriendsNTradingActivity.this,SearchPeopleActivity.class);
         startActivity(intent);
