@@ -18,7 +18,7 @@ public class MyProfileActivity extends Activity {
     private TextView locationTextView;
     private TextView contactTextView;
     private TextView emailTextView;
-    private ImageView profilePicture;
+    //private ImageView profilePicture;
 
 
 
@@ -38,7 +38,7 @@ public class MyProfileActivity extends Activity {
         contactTextView.setText(UserManager.getTrader().getUserPhoneNumber());
         emailTextView.setText(UserManager.getTrader().getUserEmail());
 
-        profilePicture = (ImageView) findViewById(R.id.profilePic);
+        //profilePicture = (ImageView) findViewById(R.id.profilePic);
         //profilePicture.setImageBitmap(profileImageView);
     }
 

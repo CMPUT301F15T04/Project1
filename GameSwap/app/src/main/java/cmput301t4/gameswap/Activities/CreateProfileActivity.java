@@ -26,7 +26,7 @@ public class CreateProfileActivity extends Activity {
     private EditText emailEditText;
     private EditText cityEditText;
     private EditText phoneNumberEditText;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    //static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class CreateProfileActivity extends Activity {
 
 
 
-    public void addImageOption(View view) {
+   /* public void addImageOption(View view) {
         final ImageButton takeProfPic = (ImageButton) findViewById(R.id.profilePic);
         takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public class CreateProfileActivity extends Activity {
             ImageView profileImageView = (ImageView) findViewById(R.id.userProfileView);
             profileImageView.setImageBitmap(imageBitmap);
         }
-    }
+    }*/
 
     public User getUser() {
 

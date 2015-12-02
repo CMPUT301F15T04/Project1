@@ -58,7 +58,6 @@ public class ServerManager {
                         HttpGet getRequest = new HttpGet(baseURL + "users/" + username + "/_source");
                         getRequest.addHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(getRequest);
-                        System.out.println(baseURL);
 
                         String json = getEntityContent(response);
 
@@ -68,6 +67,7 @@ public class ServerManager {
                         // Now we expect to get a Recipe response
                         //ElasticSearchResponse<User> esResponse = gson.fromJson(json, elasticSearchResponseType);
 
+                        //specify to gson what type of data is being read
                         User user = gson.fromJson(json, User.class);
 
                         //UserManager.setTrader(esResponse.getSource());
@@ -104,6 +104,7 @@ public class ServerManager {
                 @Override
                 public void run () {
                     try {
+                        //this url request will ignore all the data of each id inside user
                         HttpGet searchRequest = new HttpGet(baseURL + "users/_search?pretty=1&q=" + username + "&_source=false");
                         searchRequest.setHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(searchRequest);

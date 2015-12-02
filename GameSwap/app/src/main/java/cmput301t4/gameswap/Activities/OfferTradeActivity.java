@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
+import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
@@ -24,6 +26,7 @@ public class OfferTradeActivity extends Activity {
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
     private CreateTradeManager CTM;
+    private TextView friendName;
 
 
     @Override
@@ -39,6 +42,10 @@ public class OfferTradeActivity extends Activity {
         friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
         myInventoryItemsListView.setAdapter(myadapter);
         friendInventoryItemsListView.setAdapter(friendAdapter);
+
+        //sets name of friends inventory to the actual name of friend
+        friendName = (TextView) findViewById(R.id.friendofferinventory);
+        friendName.setText(UserManager.getFriend().getUserName() + "'s Inventory");
 
 
     }

@@ -23,7 +23,7 @@ public class EditProfileActivity extends Activity {
     private EditText cityEditText;
     private EditText phoneEditText;
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    //static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class EditProfileActivity extends Activity {
         phoneEditText.setText(UserManager.getTrader().getUserPhoneNumber());
     }
 
-    public void addImageOption(View view) {
+    /*public void addImageOption(View view) {
         final ImageButton takeProfPic = (ImageButton) findViewById(R.id.newProfilePicButton);
         takeProfPic.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -60,7 +60,7 @@ public class EditProfileActivity extends Activity {
             ImageView gameImageView = (ImageView) findViewById(R.id.newProfilePicView);
             gameImageView.setImageBitmap(imageBitmap);
         }
-    }
+    }*/
 
 
     public void editProfileButton (View view) {
