@@ -43,20 +43,20 @@ public class MainActivity extends Activity {
 
         loginThread.start();
 
-            try {
-                loginThread.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException();
-            }
+        try {
+            loginThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
 
-            if(ServerManager.checkResult()) {
-                Thread LoadUser = new Thread(new Runnable() {
+        if(ServerManager.checkResult()) {
+            Thread LoadUser = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         ServerManager.getUserOnline(user);
                     }
                 });
-                LoadUser.start();
+                 LoadUser.start();
                 try {
                     LoadUser.join();
                 } catch (InterruptedException e) {
@@ -67,15 +67,15 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(this, selectTaskActivity.class);
 
                 startActivity(intent);
-            } else {
-                if (ServerManager.checkServerStatus() == Boolean.TRUE){
-                    Toast.makeText(getBaseContext(), "ServerDown", Toast.LENGTH_SHORT).show();
-                    ServerManager.serverIsDown();
+        } else {
+            if (ServerManager.checkServerStatus() == Boolean.TRUE){
+                Toast.makeText(getBaseContext(), "ServerDown", Toast.LENGTH_SHORT).show();
+                ServerManager.serverIsDown();
 
-                } else {
+            } else {
                 Toast.makeText(getBaseContext(), "User not found", Toast.LENGTH_SHORT).show();}
                 ServerManager.serverNotDown();
-            }
+        }
 
     }//end click Login
 

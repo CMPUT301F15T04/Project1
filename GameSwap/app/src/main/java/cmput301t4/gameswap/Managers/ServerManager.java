@@ -35,7 +35,7 @@ import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 public class ServerManager {
 
     private static boolean foundResult = Boolean.FALSE;
-    private static boolean serverDown = Boolean.TRUE;
+    private static boolean serverDown = Boolean.FALSE;
 
     private static HttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
     private static Gson gson = new Gson();
@@ -58,16 +58,20 @@ public class ServerManager {
                         HttpGet getRequest = new HttpGet(baseURL + "users/" + username + "/_source");
                         getRequest.addHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(getRequest);
+                        System.out.println(baseURL);
 
                         String json = getEntityContent(response);
 
                         // We have to tell GSON what type we expect
-                        Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<User>>() {
-                        }.getType();
+                        //Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<User>>() {
+                        //}.getType();
                         // Now we expect to get a Recipe response
-                        ElasticSearchResponse<User> esResponse = gson.fromJson(json, elasticSearchResponseType);
+                        //ElasticSearchResponse<User> esResponse = gson.fromJson(json, elasticSearchResponseType);
 
-                        UserManager.setTrader(esResponse.getSource());
+                        User user = gson.fromJson(json, User.class);
+
+                        //UserManager.setTrader(esResponse.getSource());
+                        UserManager.setTrader(user);
                     } catch (IOException e) {
                         throw new RuntimeException("ServerManager.getUserOnline failed");
                     }
@@ -100,7 +104,7 @@ public class ServerManager {
                 @Override
                 public void run () {
                     try {
-                        HttpGet searchRequest = new HttpGet(baseURL + "users/_search?pretty=1&q=" + username);
+                        HttpGet searchRequest = new HttpGet(baseURL + "users/_search?pretty=1&q=" + username + "&_source=false");
                         searchRequest.setHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(searchRequest);
 
