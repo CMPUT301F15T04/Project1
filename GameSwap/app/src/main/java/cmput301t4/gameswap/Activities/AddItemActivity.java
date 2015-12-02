@@ -42,6 +42,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -307,7 +308,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
-            String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            String encodedImage = Base64.encodeToString(byteArray, 0);
+            //String encodedImage = null;
 
             ImageModel image = new ImageModel(UserManager.getTrader().getCounter(), UserManager.getTrader().getUserName(), encodedImage);
             ServerManager.saveImage(image);
