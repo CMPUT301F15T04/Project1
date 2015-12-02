@@ -3,8 +3,6 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import cmput301t4.gameswap.R;
@@ -16,8 +14,7 @@ public class FriendsNTradingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_ntrading);
     }
-
-
+    
     public void searchPeopleButton(View view){
         Intent intent = new Intent(FriendsNTradingActivity.this,SearchPeopleActivity.class);
         startActivity(intent);
@@ -26,10 +23,5 @@ public class FriendsNTradingActivity extends Activity {
         Intent intent = new Intent(FriendsNTradingActivity.this,SearchFriendActivity.class);
         startActivity(intent);
     }
-    public void viewFriendInventoryButton(View view){
-        Intent intent = new Intent(FriendsNTradingActivity.this,ViewFriendInventoryActivity.class);
-        startActivity(intent);
-    }
-
 
 }

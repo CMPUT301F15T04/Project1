@@ -7,8 +7,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -34,17 +31,10 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
+import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
-
-import cmput301t4.gameswap.Managers.InventoryManager;
-import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.FriendList;
-
-import cmput301t4.gameswap.Models.Item;
-import cmput301t4.gameswap.Models.User;
-import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.R;
 
 public class SearchFriendActivity extends Activity {
@@ -82,7 +72,7 @@ public class SearchFriendActivity extends Activity {
         //code referenced from http://stackoverflow.com/questions/4554435/how-to-get-the-index-and-string-of-the-selected-item-in-listview-in-android
         friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View childView, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View childView, final int position, long id) {
 
                 PopupMenu popupMenu = new PopupMenu(SearchFriendActivity.this, childView);
                 popupMenu.getMenuInflater().inflate(R.menu.friend_popup, popupMenu.getMenu());
@@ -97,9 +87,6 @@ public class SearchFriendActivity extends Activity {
                         switch (item.getItemId()) {
 
                             case R.id.viewFriendProfileMenuId:
-                                Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
-                                //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
-                                startActivity(intent);
 
                                 Thread thread = new Thread(new Runnable() {
                                     @Override
@@ -110,13 +97,17 @@ public class SearchFriendActivity extends Activity {
                                 thread.start();
                                 try {
                                     thread.join();
+                                    Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                    intent.putExtra("isfriend", Boolean.TRUE);
+                                    //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
+                                    startActivity(intent);
+                                    return true;
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException();
                                 }
 
-
-
                             case R.id.tradeFriendMenuId:
+                                ServerManager.getFriendOnline(FriendManager.getUser(position));
                                 Intent intent1 = new Intent(SearchFriendActivity.this,OfferTradeActivity.class);
                                 startActivity(intent1);
                                 return true;
@@ -175,6 +166,7 @@ public class SearchFriendActivity extends Activity {
                 //Toast.makeText(getBaseContext(), query,
                 //Toast.LENGTH_SHORT).show();
                 searchFriend(query);
+
                 return false;
             }
 
@@ -185,29 +177,6 @@ public class SearchFriendActivity extends Activity {
         });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_friend, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void resetAdapter(){
         adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, friendList.getAllFriends());

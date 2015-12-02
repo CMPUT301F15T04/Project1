@@ -6,37 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
-import cmput301t4.gameswap.Managers.FriendManager;
-import cmput301t4.gameswap.Managers.InventoryManager;
-import cmput301t4.gameswap.Managers.UserListManager;
-import cmput301t4.gameswap.Models.FriendList;
-import cmput301t4.gameswap.Models.Item;
-import cmput301t4.gameswap.Models.User;
-import cmput301t4.gameswap.Models.UsersList;
 import cmput301t4.gameswap.R;
 
 public class selectTaskActivity extends Activity {
-
-    private MenuItem Actionmenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

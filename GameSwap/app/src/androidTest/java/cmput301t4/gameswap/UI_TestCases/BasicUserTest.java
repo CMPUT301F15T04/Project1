@@ -1,15 +1,10 @@
 package cmput301t4.gameswap.UI_TestCases;
 
-import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 
 import cmput301t4.gameswap.Activities.CreateProfileActivity;
 import cmput301t4.gameswap.Activities.EditProfileActivity;
@@ -213,7 +208,6 @@ public class BasicUserTest extends ActivityInstrumentationTestCase2{
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-        receiverActivity.finish();
         return receiverActivity;
     }//end testLoginSuccessful
 

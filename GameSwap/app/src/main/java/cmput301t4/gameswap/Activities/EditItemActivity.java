@@ -1,14 +1,19 @@
 package cmput301t4.gameswap.Activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,12 +35,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
-import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
@@ -70,8 +72,9 @@ public class EditItemActivity extends Activity {
     private EditText releaseEditText;
     private EditText descEditText;
     private Integer index;
-    private InventoryManager IM = new InventoryManager();
     private ArrayList<Item> inventory;
+
+
 
     private Button saveEditItemButton;
 
@@ -85,6 +88,8 @@ public class EditItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         //sets it to the activity
         setContentView(R.layout.activity_edit_item);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         //setting spinners
         consoleSpinner = (Spinner) findViewById(R.id.editconsoleSpinner);
         qualitySpinner = (Spinner) findViewById(R.id.editqualitySpinner);
@@ -94,8 +99,6 @@ public class EditItemActivity extends Activity {
         releaseEditText = (EditText) findViewById(R.id.editReleaseDate);
         descEditText = (EditText) findViewById(R.id.editdescriptionBox);
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
         System.out.println("at edit item activity");
 
 
@@ -163,10 +166,14 @@ public class EditItemActivity extends Activity {
 
     public void saveButtonClick(View view) {
         //Toast.makeText(getBaseContext(), "Saving", Toast.LENGTH_SHORT).show();
-
+        Boolean isPrivate;
         int console = consoleSpinner.getSelectedItemPosition();
         int qual = qualitySpinner.getSelectedItemPosition();
-        boolean isPrivate = (publicprivateSpinner.getSelectedItemPosition() == 1);
+        if (publicprivateSpinner.getSelectedItemPosition() == 1){
+            isPrivate = Boolean.TRUE;
+        } else {
+            isPrivate = Boolean.FALSE;
+        }
 
         title = titleEditText.getText().toString();
         releaseDate = releaseEditText.getText().toString();
@@ -179,21 +186,22 @@ public class EditItemActivity extends Activity {
         else if (TextUtils.isEmpty(title) || TextUtils.isEmpty(releaseDate) || TextUtils.isEmpty(description)) {
             Toast.makeText(getBaseContext(), "At least one of the fields is empty!", Toast.LENGTH_SHORT).show();
         } else {
+            Intent intent = getIntent();
+            Bundle b = intent.getExtras();
             Item item = new Item(title, releaseDate, isPrivate, qual, console, description);
+
+            //int index = UserManager.getInventory().findItemByIndx(b.getInt("itemID"));
+            UserManager.getInventory().replace(item, b.getInt("index"));
             //inventory = InventoryManager.getItems();
-            IM.replaceItem(item, index);
-            saveToFile();
+            ServerManager.saveUserOnline(UserManager.getTrader());
             this.finish();
-            Intent intent = new Intent(EditItemActivity.this, myInventoryActivity.class);
-            startActivity(intent);
+
         }
 
     }
 
     public void cancelButtonClick(View view) {
         this.finish();
-        Intent intent = new Intent(EditItemActivity.this, myInventoryActivity.class);
-        startActivity(intent);
     }
 
     public void addImageOption(View view) {
@@ -201,12 +209,14 @@ public class EditItemActivity extends Activity {
         takePhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -231,7 +241,7 @@ public class EditItemActivity extends Activity {
 
 
     private void saveToFile() {
-
+        //TODO: Remove this insanity. Use the CacheManager or the ServerManager.
         try {
             ArrayList<Item> items = InventoryManager.getInstance().getItems();
             FileOutputStream fos = openFileOutput(FILENAME, 0);
@@ -247,6 +257,50 @@ public class EditItemActivity extends Activity {
             // TODO Auto-generated catch block
             throw new RuntimeException(e);
         }
+    }
+
+    public void setToCurrentLocation(View view) {
+        //TODO: Hook up the UI to this
+        // Code acquired from http://www.vogella.com/tutorials/AndroidLocationAPI/article.html#locationapi on Nov 30, 2015
+        LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        // check if enabled and if not send user to the GSP settings
+        // Better solution would be to display a dialog and suggesting to
+        // go to the settings
+        if (!enabled) {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+
+        if (checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkCallingOrSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Location Permission Denied", Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+        service.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                //TODO: Figure out which item we are editing then call next line
+                //InventoryManager.setItemLocation(??, location);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        }, null);
     }
 
     //=====Function needed for Test=====//

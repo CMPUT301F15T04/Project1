@@ -2,7 +2,7 @@ package cmput301t4.gameswap.Models;
 
 import java.util.ArrayList;
 
-import cmput301t4.gameswap.Models.Trade;
+import cmput301t4.gameswap.Managers.UserManager;
 
 /**
  * Created by kynan on 11/1/15.
@@ -22,6 +22,18 @@ public class TradeList {
     }//end add to tradelist
 
     /**
+     * removes inputted trade object from tradelist
+     * @param trade
+     */
+    public void delete(Trade trade){
+       for(int i = 0; i < UserManager.getFriend().getPendingTrades().getSize(); i++){
+           if(trade.equals(UserManager.getFriend().getPendingTrades().getTrade(i))){
+               UserManager.getFriend().getPendingTrades().del(i);
+           }
+       }
+    }
+
+    /**
      * Deletes a trade from the trade list
      * @param position The position of hte trade the user wants to delete
      */
@@ -39,6 +51,12 @@ public class TradeList {
     public Trade getTrade(int index){
         return tradelist.get(index);
     }//End getTrade
+
+    /**
+     * return size of tradelist
+     * @return size of trade list
+     */
+    public int getSize(){return tradelist.size();}
 
     /**
      * Checks if there is a trade in trade list
@@ -64,5 +82,14 @@ public class TradeList {
     public int getIndex(Trade trade){
         return tradelist.indexOf(trade);
     }//end getIndex
+
+
+    public ArrayList<String> getBorrowerNames() {
+        ArrayList<String> name = new ArrayList<String>();
+        for (int i=0;i<tradelist.size();i++){
+            name.add(tradelist.get(i).getBorrowerName().toUpperCase());
+        }
+        return  name;
+    }
 
 }//end TradeList

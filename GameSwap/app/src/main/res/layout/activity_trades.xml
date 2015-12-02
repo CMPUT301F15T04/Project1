@@ -13,7 +13,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Current Trades"
         android:gravity="center"
-        android:id="@+id/textView25" />
+        android:id="@+id/currentTrades" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -26,22 +26,16 @@
         android:layout_height="38dp"
         android:textSize="@dimen/activity_horizontal_margin"
         android:text="Past Trades"
-        android:id="@+id/pasttradelistview"
+        android:id="@+id/pastTrades"
         android:gravity="center"
 
 
          />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView26"
-        android:layout_gravity="center_horizontal" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView2"
+        android:id="@+id/pasttradeListView"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

@@ -51,6 +51,8 @@
     <string name="title_activity_add_item">AddItemActivity</string>
     <string name="title_activity_delete_item">DeleteItemActivity</string>
     <string name="dd_mm_yyyy">dd mm yyyy</string>
+    <string name="Location">Location</string>
+    <string name="LocationButton">Add Item Location</string>
 
     <string-array name="Console">
         <item>Playstation 4</item>
@@ -103,5 +105,8 @@
     <string name="title_activity_select_from_friend">SelectFromFriendActivity</string>
     <string name="title_activity_select_from_friend_inventory">SelectFromFriendInventoryActivity
     </string>
+    <string name="title_activity_decide_trade">DecideTradeActivity</string>
+    <string name="title_activity_cancel_create_trade">CancelCreateTradeActivity</string>
+    <string name="title_activity_counter_trade">CounterTradeActivity</string>
 
 </resources>

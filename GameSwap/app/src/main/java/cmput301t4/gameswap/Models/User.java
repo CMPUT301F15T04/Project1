@@ -1,22 +1,18 @@
 package cmput301t4.gameswap.Models;
 
 
+import android.location.Location;
+import android.location.LocationManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-import cmput301t4.gameswap.Managers.FriendManager;
-import cmput301t4.gameswap.Managers.InventoryManager;
-
 /**
- * Created by rupehra on 11/1/15.
- *
  * Since we might not have an account we might need to shift Account Manager's
  * functionality to User Manager
  *
  * friendList is just a list of other traders
-
  */
-
 public class User {
     //=====Attribute=====//
     private String userName;
@@ -24,6 +20,7 @@ public class User {
     private String userCity;
     private String userPhoneNumber;
     private Inventory inventory;
+    private Location defaultLocation;
     private int itemCounter;
     private FriendList friendList;
     private TradeList pendingTrades;
@@ -86,18 +83,22 @@ public class User {
         this.notificationAmount.set(2,0);
     }//end clearNotification
 
-    public void IfNotify(){
-        for(int i = 0; i < notificationAmount.size(); i++){
-            if (notificationAmount.get(i) != 0){
-                DisplayNotify(i);
-            }//end If
-        }//end For loop
+    public String IfNotify(int i){
+
+        if (notificationAmount.get(i) != 0){
+            String message = DisplayNotify(i);
+            return message;
+        }else {
+            return "You have no " + notification.get(i + 1);
+        }
     }//end IfNotify
 
     //Display the notification for one category
-    public void DisplayNotify(Integer type){
-        System.out.println(notification.get(0) + notificationAmount.get(type) + notification.get(type+1));
+    public String DisplayNotify(Integer type){
+        System.out.println(notification.get(0) + notificationAmount.get(type) + notification.get(type + 1));
+        String message = notification.get(0) + notificationAmount.get(type) + notification.get(type+1);
         ClearNotify(type);
+        return message;
     }//end DisplayNotify
 
     //Just clear noitify (you seen the update)
@@ -114,11 +115,12 @@ public class User {
     //=====Manager related code=====//
 
     public void ManagerConstructor(){
-        FriendManager FM = new FriendManager();
-        InventoryManager IM = new InventoryManager();
 
-        this.setFriendList(FM.getFriendlist());
-        this.setInventory(IM.getInstance());
+
+        this.setPastTrades(getPastTrades());
+        this.setPendingTrades(getPendingTrades());
+        this.setFriendList(getFriendList());
+        this.setInventory(getInventory());
     }//end ManagerConstructor
 
 
@@ -175,23 +177,52 @@ public class User {
     }
 
     public Inventory getInventory() {
+        if(inventory == null) {
+            inventory = new Inventory();
+        }
+
         return inventory;
     }
 
     public FriendList getFriendList() {
+        if(friendList == null) {
+            friendList = new FriendList();
+        }
+
         return friendList;
     }
 
     public TradeList getPendingTrades() {
+        if(pendingTrades == null) {
+            pendingTrades = new TradeList();
+        }
+
         return pendingTrades;
     }
 
     public TradeList getPastTrades() {
+        if(pastTrades == null) {
+            pastTrades = new TradeList();
+        }
+
         return pastTrades;
     }
 
 
+    public void setDefaultLocation(Location location) {
+        defaultLocation = location;
+    }
 
+    public Location getDefaultLocation() {
+
+       if (defaultLocation == null){
+           defaultLocation = new Location(LocationManager.GPS_PROVIDER);
+           defaultLocation.setLatitude(10);
+           defaultLocation.setLongitude(10);
+       }
+
+        return defaultLocation;
+    }
 
 }//end Trader
 

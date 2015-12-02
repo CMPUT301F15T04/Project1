@@ -1,10 +1,8 @@
 package cmput301t4.gameswap.Managers;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Models.Inventory;
-import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 
@@ -66,5 +64,15 @@ public class InvSearchManager {
         }//end For loop
         return matching;//returns an inventory
     }//end searchItemByPrivate
+
+    public static Inventory showFriendInventory (Inventory friendInv){
+        Inventory invPublic = new Inventory();
+        for(int i = 0; i<friendInv.size(); i++){
+            if (friendInv.getItem(i).getIsPrivate()==Boolean.FALSE){
+                invPublic.add(friendInv.getItem(i));
+            }
+        }
+        return invPublic;
+    }
 
 }//end InvSearchManager

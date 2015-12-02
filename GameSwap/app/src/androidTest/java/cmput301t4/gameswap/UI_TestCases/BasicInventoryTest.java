@@ -1,6 +1,5 @@
 package cmput301t4.gameswap.UI_TestCases;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Instrumentation;
@@ -128,7 +127,7 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         });
         getInstrumentation().waitForIdleSync();
 
-
+        assertNull(myInventoryList.getChildAt(0));
     }//end deleteItemTest
 
     public myInventoryActivity editItemTest(myInventoryActivity myInventory_Activity){
@@ -175,9 +174,6 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         EditSharedSpin = EditItem_Activity.editSharedSpinner();
         EditSaveButton = EditItem_Activity.editSaveButton();
 
-        receiverActivityMonitor =
-                getInstrumentation().addMonitor(myInventoryActivity.class.getName(),
-                        null, false);
 
         EditItem_Activity.runOnUiThread(new Runnable() {
             public void run() {
@@ -195,19 +191,9 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         });
         getInstrumentation().waitForIdleSync();
 
-        myInventory_Activity = (myInventoryActivity)
-                receiverActivityMonitor.waitForActivityWithTimeout(1000);
-        assertNotNull("ReceiverActivity is null", myInventory_Activity);
-        assertEquals("Monitor for ReceiverActivity has not been called",
-                1, receiverActivityMonitor.getHits());
-        assertEquals("Activity is of wrong type",
-                myInventoryActivity.class, myInventory_Activity.getClass());
 
-        // Remove the ActivityMonitor
-        getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-        View v  = myInventory_Activity.getInventoryList().getChildAt(0);
-        assertNotNull(v);
+        getInstrumentation().callActivityOnResume(myInventory_Activity);
 
         return myInventory_Activity;
     }//end editItemTest
@@ -358,8 +344,8 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         assertTrue(ViewItem_Activity.getNameText().getText().toString().equals("Darn Kids PART 2"));
         //assertTrue(ViewItem_Activity.getDateText().getText().toString().equals("12-12-5555"));
         assertTrue(ViewItem_Activity.getDescritionText().getText().toString().equals("That Game where things"));
-        assertTrue(ViewItem_Activity.getPlatformText().getText().toString().equals("2"));
-        assertTrue(ViewItem_Activity.getQualityText().getText().toString().equals("1"));
+        assertTrue(ViewItem_Activity.getPlatformText().getText().toString().equals("PC"));
+        assertTrue(ViewItem_Activity.getQualityText().getText().toString().equals("4-Opened No Scratches/Damage"));
         assertTrue(ViewItem_Activity.getStatusText().toString().equals("Public"));
 
 

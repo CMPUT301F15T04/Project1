@@ -1,9 +1,7 @@
 package cmput301t4.gameswap.Models;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
@@ -32,6 +30,36 @@ public class Inventory {
      */
     public void del(int position) {
         inventory.remove(inventory.get(position));
+    }
+
+    /**
+     * removes all owner items after trade finishes
+     * @param items
+     */
+    public void deleteItemAfterTrade(Inventory items){
+        for(int i = 0; i < items.size(); i++){
+            int itemId = items.getItem(i).getItemid();
+            for(int j = 0; j < inventory.size(); j++){
+                if(inventory.get(j).getItemid() == itemId){
+                    inventory.remove(j);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * adds exchanged item to inventory
+     * @param items item that was exchanged for
+     * @param user user items now belong to
+     */
+    public void addItemAfterTrade(Inventory items, User user){
+        for(int i = 0; i < items.size(); i++){
+            Item item = items.getItem(i);
+            item.setItemid(user.getCounter());
+            user.incrementCounter();
+            inventory.add(item);
+        }
     }
 
     /**
@@ -75,7 +103,6 @@ public class Inventory {
     /**
      * Check if the current user owns an Item
      *
-     * @param trader The Item to be checked
      * @return A boolean that is true if the current user has that Item
      */
     public boolean hasItem(Item item) {
@@ -134,7 +161,7 @@ public class Inventory {
      * @param Name The name of the Item
      * @param ReleaseDate The date it was released in the form "dd-MM-yyyy"
      * @param isPrivate A boolean for if the Item will be shown to everyone
-     * @param Quaility The quality of the Item from 1-5
+     * @param Quality The quality of the Item from 1-5
      * @param Platform The platform the Item is intended for
      * @param Description A description of the Item
      * @param index The position of the Item to be replaced by the new Item
@@ -168,6 +195,15 @@ public class Inventory {
         ItemArrayPosition = itemArrayPosition;
     }
 
+    public int findItemByIndx(int id){
+
+        for (int i = 0; i<inventory.size(); i++){
+            if(inventory.get(i).getItemid() == id){
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 }

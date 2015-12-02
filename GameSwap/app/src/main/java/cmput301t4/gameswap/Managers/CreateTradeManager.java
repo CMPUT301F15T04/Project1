@@ -1,7 +1,5 @@
 package cmput301t4.gameswap.Managers;
 
-import java.util.ArrayList;
-
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 
@@ -28,9 +26,29 @@ public class CreateTradeManager {
         return FriendSide;
     }//end getFriendSide
 
+    static public Inventory clearOwnerSide(){
+        OwnerSide = new Inventory();
+        return OwnerSide;
+    }
+
+    static public Inventory clearFriendSide(){
+        FriendSide = new Inventory();
+        return FriendSide;
+    }
+
+    static public Inventory setOwnerSide(Inventory inventory){
+        OwnerSide = inventory;
+        return inventory;
+    }
+
+    static public Inventory setFriendSide(Inventory inventory){
+        FriendSide = inventory;
+        return inventory;
+    }
+
     static public Boolean OwnerSideContian(Item item){
         for(int i = 0; i < OwnerSide.size(); i++){
-            if(item.getName() == (OwnerSide.getItem(i).getName())) {
+            if(item.getItemid() == (OwnerSide.getItem(i).getItemid())) {
                 return true;
             }
         }
@@ -39,7 +57,7 @@ public class CreateTradeManager {
 
     static public Boolean FriendSideContain(Item item){
         for(int i = 0; i < FriendSide.size(); i++){
-            if(item.getName() == (FriendSide.getItem(i).getName())){
+            if(item.getItemid() == (FriendSide.getItem(i).getItemid())){
                 return true;
             }
         }
@@ -59,5 +77,7 @@ public class CreateTradeManager {
     }
 
     static public int FriendSize() {return FriendSide.size();}
+
+    static public void cancelTradeMade(){}
 
 }

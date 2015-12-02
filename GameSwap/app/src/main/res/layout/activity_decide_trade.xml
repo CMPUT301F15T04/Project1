@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cmput301t4.gameswap.Activities.OfferTradeActivity">
+    tools:context="cmput301t4.gameswap.Activities.DecideTradeActivity">
 
 
     <TextView
@@ -10,13 +10,13 @@
         android:layout_height="27dp"
         android:text="My Inventory"
         android:gravity="center"
-        android:id="@+id/myinventorytradeview"
+        android:id="@+id/myinventorydecideview"
         android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:id="@+id/itemsFromMyInventory"
+        android:id="@+id/decideitemsFromMyInventory"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -24,13 +24,13 @@
         android:layout_height="27dp"
         android:text="Friend Inventory"
         android:gravity="center"
-        android:id="@+id/friendofferinventory"
+        android:id="@+id/decidefriendofferinventory"
         android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="184dp"
-        android:id="@+id/itemsFromFriendInventory"
+        android:id="@+id/decideitemsFromFriendInventory"
         android:layout_gravity="center_horizontal" />
 
     <Space
@@ -46,32 +46,33 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Friend Inventory"
+            android:text="Reject"
             android:id="@+id/friendInventoryButton"
             android:layout_alignParentStart="true"
-            android:onClick="friendInventoryButtonClicked"
+            android:onClick="rejectTradeButtonClicked"
             android:layout_toStartOf="@+id/counterSaveButton"
             android:layout_alignParentTop="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Inventory"
+            android:text="      Accept      "
             android:id="@+id/counterMyInventoryButton"
             android:layout_alignBottom="@+id/friendInventoryButton"
-            android:onClick="myInventoryButtonClicked"
+            android:onClick="acceptTradeButtonClicked"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Offer trade"
-            android:onClick="offerTradeClicked"
+            android:text="       Counter       "
+            android:onClick="counterTradeButton"
             android:id="@+id/counterSaveButton"
             android:layout_toStartOf="@+id/counterMyInventoryButton"
             android:layout_alignParentTop="true"
             android:layout_alignBottom="@+id/friendInventoryButton" />
+
     </RelativeLayout>
 
 </LinearLayout>

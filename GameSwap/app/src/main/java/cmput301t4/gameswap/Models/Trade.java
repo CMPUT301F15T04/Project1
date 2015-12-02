@@ -3,14 +3,13 @@ package cmput301t4.gameswap.Models;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.ArrayList;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 
 /**
  * Created by kynan on 11/1/15. Gives information and functionality of the trade
  */
-public class Trade {
+public class Trade  {
     //Ownername =  the one who initiated the trade
     //BorrowerName = the one who can accept the trade
     //Ownername/Borrower are String (TEMP not sure if we want to use ID,etc)
@@ -19,9 +18,9 @@ public class Trade {
     /** The name of the person receiving the trade */
     private String BorrowerName;
     /** The items that the initiating trader is offering */
-    private ArrayList<Item> OwnerItems;
+    private Inventory OwnerItems;
     /** The items that the initiator wants from the other trader*/
-    private ArrayList<Item> BorrowerItems;
+    private Inventory BorrowerItems;
     /** The date of the trade */
     private Date DateTransaction;
 
@@ -35,7 +34,7 @@ public class Trade {
      * @param BorrowerItems The Receivers items that the Initiator wants
      * @throws DateFormatException This occurs when an improper date is given and can't be parsed
      */
-    public Trade(String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems){
+    public Trade(String OwnerName, String BorrowerName, Inventory OwnerItems, Inventory BorrowerItems){
         this.Ownername = OwnerName;
         this.BorrowerName = BorrowerName;
         this.OwnerItems = OwnerItems;
@@ -76,19 +75,19 @@ public class Trade {
         BorrowerName = borrowerName;
     }
 
-    public ArrayList<Item> getOwnerItems() {
+    public Inventory getOwnerItems() {
         return OwnerItems;
     }
 
-    public void setOwnerItems(ArrayList<Item> ownerItems) {
+    public void setOwnerItems(Inventory ownerItems) {
         OwnerItems = ownerItems;
     }
 
-    public ArrayList<Item> getBorrowerItems() {
+    public Inventory getBorrowerItems() {
         return BorrowerItems;
     }
 
-    public void setBorrowerItems(ArrayList<Item> borrowerItems) {
+    public void setBorrowerItems(Inventory borrowerItems) {
         BorrowerItems = borrowerItems;
     }
 
@@ -113,12 +112,10 @@ public class Trade {
         Trade trade1 = (Trade) trade;
         if(this.Ownername.equals(trade1.getOwnername())){
             if(this.BorrowerName.equals(trade1.getBorrowerName())){
-                if(this.OwnerItems.equals(trade1.getOwnerItems())){
-                    if(this.BorrowerItems.equals(trade1.getBorrowerItems())){
-                        //WE DID NOT ADD THE DATE CHECK YET
-                        return true;
-                    }//end check BorrowerItem
-                }//end check OwnerItem
+                if(this.DateTransaction.equals(trade1.getDateTransaction())){
+                    //TODO make this more accurate check item by item maybe/modify an override when doing inventory compares
+                    return true;
+                }
             }//end check BorrowerName
         }//end check OwnerNAme
         return false;

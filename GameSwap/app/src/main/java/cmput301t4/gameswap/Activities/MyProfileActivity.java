@@ -3,12 +3,11 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
@@ -74,5 +73,13 @@ public class MyProfileActivity extends Activity {
     }
 
     //=====End of function needed for Testcases=====//
+
+    public void checkNotifications(View v){
+        String message = "";
+        for(int i = 0; i < 3; i++){
+            message += UserManager.getTrader().IfNotify(i) + "\n";
+        }
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+    }
 
 }

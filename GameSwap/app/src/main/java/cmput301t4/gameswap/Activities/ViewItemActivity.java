@@ -5,14 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -25,12 +21,14 @@ public class ViewItemActivity extends Activity {
     /*Declaring all the listViews here*/
     private TextView name;
     private TextView quality;
-    private TextView descrition;
+    private TextView description;
     private TextView platform;
     private TextView date;
-    private String status;
+    private Boolean status;
+    private String statusDisplay;
     private TextView statusView;
     private ImageView imageView;
+    private TextView location;
     private ArrayList<String> platformList;
     private String platformString;
     private Integer platformIndex;
@@ -42,57 +40,54 @@ public class ViewItemActivity extends Activity {
 
         name  = (TextView) findViewById(R.id.viewItemName);
         quality = (TextView) findViewById(R.id.viewItemQuality);
-        descrition = (TextView) findViewById(R.id.viewItemDesciption);
+        description = (TextView) findViewById(R.id.viewItemDesciption);
         platform = (TextView) findViewById(R.id.viewItemPlatform);
         date = (TextView) findViewById(R.id.viewItemDate);
         name = (TextView) findViewById(R.id.viewItemName);
         statusView = (TextView) findViewById(R.id.viewStatus);
+        location =(TextView) findViewById(R.id.locationDescription);
         imageView = (ImageView) findViewById(R.id.gameImageView);
-       /** platformList.add("Playstation 4");
-        platformList.add("Xbox ONE");
-        platformList.add("PC");
-        platformList.add("Wii U");
-        platformList.add("Nintendo 3DS");
-        platformList.add("Playstation 3");
-        platformList.add("Playstation Vita");
-        platformList.add("Xbox 360");
-        platformList.add("Nintendo Wii");
-        platformList.add("Nintendo DS");
-        platformList.add("Playstation 2");
-        platformList.add("Xbox");
-        platformList.add("Nintendo Gamecube");
-        platformList.add("Game Boy Advanced");
-        platformList.add("Playstation Portable");
-        platformList.add("Playstation");
-        platformList.add("Nintendo 64");
-        platformList.add("Game Boy");
-        platformList.add("NES");*/
+
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
         if(b!=null){
-            descrition.setText(b.getString("description"));
-            status = b.getString("private");
-            if (status.equals(true)){
-                status = "Private";
+            description.setText(b.getString("description"));
+
+            status = b.getBoolean("private");
+            if (status == Boolean.TRUE){
+                statusDisplay = "Private";
             }
             else {
-                status = "Public";
+                statusDisplay = "Public";
             }
 
             name.setText(b.getString("name"));
             date.setText(b.getString("releaseDate"));
-            quality.setText(b.getString("quality"));
-            platform.setText(b.getString("platform"));
-            statusView.setText(status.toUpperCase());
 
+
+            quality.setText(getQuality());
+            platform.setText(getPlatform());
+
+            statusView.setText(statusDisplay.toUpperCase());
+            location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
+
+
+            //statusView.setText(status);
+            //ServerManager.blakeLoadItemdImage(b.getInt("itemId"));
             ServerManager.loadImage(b.getInt("itemId"));
-            System.out.println("reached load image");
-            byte[] decodeImage = Base64.decode(UserManager.getImage().getImage(), Base64.DEFAULT);
-            //byte[] byteArray = UserManager.getImage().getImage();
-            Bitmap image = BitmapFactory.decodeByteArray(decodeImage, 0, decodeImage.length);
-            imageView.setImageBitmap(image);
+
+            statusView.setText(statusDisplay.toUpperCase());
+            location.setText("Latitude: " + b.getDouble("Latitude") + ", Longitude: " + b.getDouble("Longitude"));
+
+            if(UserManager.imageRdy == 1) {
+                byte[] byteArray = UserManager.getImageModel().getImage();
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                //imageView.setImageBitmap(UserManager.getImage());
+                imageView.setImageBitmap(image);
+            }
+
 
         }
     }
@@ -130,7 +125,7 @@ public class ViewItemActivity extends Activity {
     }
 
     public TextView getDescritionText() {
-        return descrition;
+        return description;
     }
 
     public TextView getPlatformText() {
@@ -142,10 +137,60 @@ public class ViewItemActivity extends Activity {
     }
 
     public String getStatusText() {
-        return status;
+        return statusDisplay;
     }
 
     //=====End function needed for Testcases=====//
 
+    public String getPlatform(){
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        int index = b.getInt("platform");
+        ArrayList<String> convertPlatform = new ArrayList<String>();
+        convertPlatform.add("PlayStation 4");
+        convertPlatform.add("Xbox One");
+        convertPlatform.add("PC");
+        convertPlatform.add("Wii U");
+        convertPlatform.add("Nintendo 3DS");
+        convertPlatform.add("PlayStation 3");
+        convertPlatform.add("PlayStation Vita");
+        convertPlatform.add("Xbox 360");
+        convertPlatform.add("Nintendo Wii");
+        convertPlatform.add("Nintendo DS");
+        convertPlatform.add("PlayStation 2");
+        convertPlatform.add("Xbox");
+        convertPlatform.add("Nintendo GameCube");
+        convertPlatform.add("GameBoy Advance");
+        convertPlatform.add("PlayStation Portable");
+        convertPlatform.add("Nintendo 64");
+        convertPlatform.add("GameBoy Colour");
+        convertPlatform.add("SNES");
+        convertPlatform.add("NES");
+
+        for (int j= 0; j < 19; j++){
+            if (j == index){
+                return convertPlatform.get(j);
+            }
+        }
+        return "";
+    }
+
+    public String getQuality(){
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        int index = b.getInt("quality");
+        ArrayList<String> convertQuality = new ArrayList<String>();
+        convertQuality.add("5-Perfect Condition/Unopened/Download Code");
+        convertQuality.add("4-Opened No Scratches/Damage");
+        convertQuality.add("3-Light Scratches/Damage");
+        convertQuality.add("2-Decent Scratches/Damage");
+        convertQuality.add("1-Heavy Scratches/Damage");
+        for (int j= 0; j < 19; j++){
+            if (j == index){
+                return convertQuality.get(j);
+            }
+        }
+        return "";
+    }
 
 }
