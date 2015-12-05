@@ -37,7 +37,7 @@ public class ServerManager {
     private static boolean foundResult = Boolean.FALSE;
     private static boolean serverDown = Boolean.FALSE;
 
-    private static HttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
+    private static HttpClient httpclient;
     private static Gson gson = new Gson();
 
     private static final String baseURL = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/";
@@ -55,6 +55,7 @@ public class ServerManager {
                 public void run() {
                     try {
                         //Taken from https://github.com/rayzhangcl/ESDemo
+                        httpclient = new DefaultHttpClient(new BasicHttpParams());
                         HttpGet getRequest = new HttpGet(baseURL + "users/" + username + "/_source");
                         getRequest.addHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(getRequest);
@@ -105,6 +106,7 @@ public class ServerManager {
                 public void run () {
                     try {
                         //this url request will ignore all the data of each id inside user
+                        httpclient = new DefaultHttpClient(new BasicHttpParams());
                         HttpGet searchRequest = new HttpGet(baseURL + "users/_search?pretty=1&q=" + username + "&_source=false");
                         searchRequest.setHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(searchRequest);
@@ -152,6 +154,7 @@ public class ServerManager {
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                httpclient = new DefaultHttpClient(new BasicHttpParams());
                 HttpGet searchRequest = new HttpGet(baseURL + "_search?pretty=1");
                 searchRequest.setHeader("Accept", "application/json");
                 HttpResponse response = null;
@@ -191,6 +194,8 @@ public class ServerManager {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
+
+                    httpclient = new DefaultHttpClient(new BasicHttpParams());
                     HttpPost httpPost = new HttpPost(baseURL + "users/" + user.getUserName());
                     StringEntity stringentity = null;
 

@@ -59,8 +59,9 @@ public class DecideTradeActivity extends Activity {
     }
 
     public void rejectTradeButtonClicked(View v){
+        ServerManager.getFriendOnline(TradeManager.getCurrent().getTrade(index).getOwnername());
+        UserManager.getFriend().getPendingTrades().delete(TradeManager.getCurrent().getTrade(index));
         TradeManager.getCurrent().del(index);
-        UserManager.getFriend().getPendingTrades().del(index);
         ServerManager.saveUserOnline(UserManager.getTrader());
         ServerManager.saveUserOnline(UserManager.getFriend());
         finish();
