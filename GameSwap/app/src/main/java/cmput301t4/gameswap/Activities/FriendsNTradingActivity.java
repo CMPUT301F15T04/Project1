@@ -1,3 +1,10 @@
+
+/*
+
+    WE DON'T NEED THIS ANYMORE, REFACTORED ACTIVITES SUCH THAT WE DON'T NEED THIS
+
+
+
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
@@ -25,3 +32,4 @@ public class FriendsNTradingActivity extends Activity {
     }
 
 }
+*/
