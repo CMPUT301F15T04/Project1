@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class DecideTradeActivity extends Activity {
     private ArrayAdapter<String> friendAdapter;
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
+    private TextView friendInventoryTitle;
     int index;
     //private CreateTradeManager CTM;
 
@@ -48,6 +50,8 @@ public class DecideTradeActivity extends Activity {
         friendAdapter = new ArrayAdapter<String>(this, R.layout.decidefrienditemlisttextview, friendItems);
         myInventoryItemsListView.setAdapter(myadapter);
         friendInventoryItemsListView.setAdapter(friendAdapter);
+        friendInventoryTitle = (TextView) findViewById(R.id.decidefriendofferinventory);
+        friendInventoryTitle.setText(UserManager.getPendingList().getTrade(index).getOwnername() + "'s Inventory");
 
     }
 
