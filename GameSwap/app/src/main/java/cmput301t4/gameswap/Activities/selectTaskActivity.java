@@ -50,7 +50,7 @@ public class selectTaskActivity extends Activity {
         startActivity(intent);
     }
     public void openFriendsButton(View view){
-        Intent intent = new Intent(selectTaskActivity.this,FriendsNTradingActivity.class);
+        Intent intent = new Intent(selectTaskActivity.this,SearchFriendActivity.class);
         startActivity(intent);
     }
     public void tradeOffersButton(View view){

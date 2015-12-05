@@ -1,3 +1,11 @@
+/*
+
+
+    REFACTORED ACTIVITY SUCH THAT WE DON'T NEED THIS ACTIVITY ANYMORE
+    ALL THINGS MOVED TO SEARCHFRIENDACTIVITY
+
+
+
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
@@ -55,6 +63,7 @@ public class SearchPeopleActivity extends Activity {
                 //Toast.makeText(getBaseContext(), query, Toast.LENGTH_SHORT).show();
 
                 findTrader(query);
+                search.clearFocus();
                 return false;
             }
 
@@ -120,3 +129,4 @@ public class SearchPeopleActivity extends Activity {
     }
 
 }
+*/
