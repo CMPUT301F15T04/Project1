@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 
 /**
  * Stores the Items that the current user owns
@@ -56,6 +58,20 @@ public class Inventory {
     public void addItemAfterTrade(Inventory items, User user){
         for(int i = 0; i < items.size(); i++){
             Item item = items.getItem(i);
+            if(item.gethasPicture() == 1){
+                ServerManager.loadImage(item.getItemid());
+                String oldUsername = UserManager.getImageModel().getImageuserName();
+                int oldItemid = UserManager.getImageModel().getImageItemId();
+                item.setItemid(user.getCounter());
+                user.incrementCounter();
+                inventory.add(item);
+                UserManager.getImageModel().setImageItemId(item.getItemid());
+                UserManager.getImageModel().setImageUser(user.getUserName());
+                ServerManager.saveImage(UserManager.getImageModel());
+                ServerManager.deleteImage(oldUsername, oldItemid);
+                continue;
+
+            }
             item.setItemid(user.getCounter());
             user.incrementCounter();
             inventory.add(item);

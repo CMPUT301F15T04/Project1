@@ -19,4 +19,8 @@ public class ImageModel {
     public String getImageuserName(){return userName;}
 
     public byte[] getImage(){return itemPicture;}
+
+    public void setImageItemId(int num){this.itemId = num;}
+
+    public void setImageUser(String user){this.userName = user;}
 }

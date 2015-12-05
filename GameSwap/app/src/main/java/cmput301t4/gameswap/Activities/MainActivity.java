@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
             public void run() {
 
                 try {
+                    //ServerManager.deleteUserOnline(user);
                     ServerManager.searchForUser(user);
                     ServerManager.serverNotDown();
                 }catch(ServerDownException e){

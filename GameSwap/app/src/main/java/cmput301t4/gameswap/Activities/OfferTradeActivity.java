@@ -52,8 +52,8 @@ public class OfferTradeActivity extends Activity {
 
     private void resetAdapter(){
 
-        myItems = CreateTradeManager.getOwnerSide().getItemsNames();
-        friendItems = CreateTradeManager.getFriendSide().getItemsNames();
+        myItems = CTM.getOwnerSide().getItemsNames();
+        friendItems = CTM.getFriendSide().getItemsNames();
         myadapter.notifyDataSetChanged();
         friendAdapter.notifyDataSetChanged();
     }
@@ -61,6 +61,7 @@ public class OfferTradeActivity extends Activity {
     @Override
     public void onResume(){
         super.onResume();
+        System.out.println("on resume has run");
         resetAdapter();
     }
 

@@ -314,6 +314,7 @@ public class ServerManager {
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
                 String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username;
+
                 System.out.println(url);
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpDelete httpDel = new HttpDelete(url);
@@ -639,6 +640,67 @@ public class ServerManager {
             throw new RuntimeException();
         }
     }
+
+    public static void deleteImage(final String user, final int itemId){
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + user + itemId;
+
+                System.out.println(url);
+                HttpClient httpClient = new DefaultHttpClient(httpParameters);
+                HttpDelete httpDel = new HttpDelete(url);
+                HttpResponse response = null;
+
+                try {                           //run URL
+                    response = httpClient.execute(httpDel);
+                } catch (ClientProtocolException e1) {
+                    throw new RuntimeException(e1);
+                } catch (IOException e1) {
+                    throw new RuntimeException();
+                }
+
+                String status = response.getStatusLine().toString();
+                System.out.println(status);
+                HttpEntity entity = response.getEntity();
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output;
+                    System.err.println("Output from Server -> ");
+                    while ((output = br.readLine()) != null) {
+                        System.err.println(output);
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        Thread serverThread = new Thread(runnable);
+        serverThread.start();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+    }
+
 
     public static void notifyTrade(final int type) {
         getFriendOnline(UserManager.getFriend().getUserName());

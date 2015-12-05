@@ -29,6 +29,8 @@ public class Item {
     private Integer Quality;
     /** The intended platform of the game mapped to a number */
     private Integer Platform;
+    /** Variable to specify if the item has an image associated with it*/
+    private Integer hasPicture;
     private Location location;
 
     @Override
@@ -57,6 +59,7 @@ public class Item {
         this.location = UserManager.getDefaultLocation();
         this.itemid = UserManager.getTrader().getCounter();
         UserManager.getTrader().incrementCounter();
+        this.hasPicture = 0;
     }
 
 
@@ -91,6 +94,13 @@ public class Item {
     public void setPrivate() {
         this.isPrivate = true;
     }//end setPrivate
+
+    //====Setting and Getting hasPicture function====//
+    public void setHasPicture(){this.hasPicture = 1;}
+
+    public void setNoPicture(){this.hasPicture = 0;}
+
+    public int gethasPicture(){return this.hasPicture;}
 
     //=====Getters and Setters=====//
     //Note: Setting IsPrivate true/false method is not in this section
