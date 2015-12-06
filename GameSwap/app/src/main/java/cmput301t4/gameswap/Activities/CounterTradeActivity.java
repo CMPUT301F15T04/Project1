@@ -39,13 +39,7 @@ public class CounterTradeActivity extends Activity {
             int index = b.getInt("index");
             //String borrower;
             trade = UserManager.getPendingList().getTrade(index);
-            CreateTradeManager.setFriendSide(trade.getBorrowerItems());
-            CreateTradeManager.setOwnerSide(trade.getOwnerItems());
 
-            Intent intent1 = new Intent(CounterTradeActivity.this,OfferTradeActivity.class);
-            startActivity(intent1);
-            myItems = CreateTradeManager.getOwnerSideName();
-            friendItems = CreateTradeManager.getFriendSideName();
             //friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 

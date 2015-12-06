@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
 public class selectTaskActivity extends Activity {
@@ -16,6 +18,7 @@ public class selectTaskActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_task);
+        checkTrades();
     }
 
     @Override
@@ -67,4 +70,12 @@ public class selectTaskActivity extends Activity {
 
 
     //=====End Function needed for Testcases
+
+    public void checkTrades(){
+        String message = "";
+        for(int i = 0; i < 3; i++){
+            message += UserManager.getTrader().IfNotify(i) + "\n";
+        }
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+    }
 }

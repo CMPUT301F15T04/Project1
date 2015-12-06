@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import cmput301t4.gameswap.Managers.CreateTradeManager;
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
@@ -65,7 +66,11 @@ public class CancelCreateTradeActivity extends Activity {
         CreateTradeManager.clearOwnerSide();
         CreateTradeManager.clearFriendSide();
         tradeList  = TM.getCurrent();
+        ServerManager.getFriendOnline(tradeList.getTrade(index).getBorrowerName());
+        UserManager.getFriend().getPendingTrades().delete(tradeList.getTrade(index));
         tradeList.del(index);
+        ServerManager.saveUserOnline(UserManager.getFriend());
+        ServerManager.saveUserOnline(UserManager.getTrader());
         finish();
     }
 }
