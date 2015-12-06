@@ -40,11 +40,12 @@ public class CounterTradeActivity extends Activity {
             trade = UserManager.getPendingList().getTrade(index);
             CTM.setFriendSide(trade.getBorrowerItems());
             CTM.setOwnerSide(trade.getOwnerItems());
-
+            System.out.println("this is before starting a new intent");
             Intent intent1 = new Intent(CounterTradeActivity.this,OfferTradeActivity.class);
             startActivity(intent1);
-            myItems = CTM.getOwnerSide().getItemsNames();
-            friendItems = CTM.getFriendSide().getItemsNames();
+            myItems = CreateTradeManager.getOwnerSide().getItemsNames();
+            System.out.println("Item names are" + myItems);
+            friendItems = CreateTradeManager.getFriendSide().getItemsNames();
             //friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
