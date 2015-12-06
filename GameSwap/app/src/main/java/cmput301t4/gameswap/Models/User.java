@@ -7,6 +7,9 @@ import android.location.LocationManager;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
+
 /**
  * Since we might not have an account we might need to shift Account Manager's
  * functionality to User Manager
@@ -104,6 +107,7 @@ public class User {
     //Just clear noitify (you seen the update)
     public void ClearNotify(Integer type){
         this.notificationAmount.set(type, 0);
+        ServerManager.saveUserOnline(UserManager.getTrader());
     }//end ClearNotify
 
     public ArrayList<Integer> getNotificationAmount() {
