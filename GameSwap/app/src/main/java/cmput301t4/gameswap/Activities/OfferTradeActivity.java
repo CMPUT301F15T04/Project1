@@ -25,7 +25,6 @@ public class OfferTradeActivity extends Activity {
     private ArrayAdapter<String> friendAdapter;
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
-    private CreateTradeManager CTM;
     private TextView friendName;
 
 
@@ -33,13 +32,10 @@ public class OfferTradeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_trade);
-        CTM = new CreateTradeManager();
-        myItems = CTM.getOwnerSide().getItemsNames();
-        friendItems = CTM.getFriendSide().getItemsNames();
         myInventoryItemsListView = (ListView) findViewById(R.id.itemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.itemsFromFriendInventory);
-        myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, myItems);
-        friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, friendItems);
+        myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, CreateTradeManager.getOwnerSideName());
+        friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, CreateTradeManager.getFriendSideName());
         myInventoryItemsListView.setAdapter(myadapter);
         friendInventoryItemsListView.setAdapter(friendAdapter);
 
@@ -51,11 +47,11 @@ public class OfferTradeActivity extends Activity {
     }
 
     private void resetAdapter(){
+        myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, CreateTradeManager.getOwnerSideName());
+        friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, CreateTradeManager.getFriendSideName());
+        myInventoryItemsListView.setAdapter(myadapter);
+        friendInventoryItemsListView.setAdapter(friendAdapter);
 
-        myItems = CTM.getOwnerSide().getItemsNames();
-        friendItems = CTM.getFriendSide().getItemsNames();
-        myadapter.notifyDataSetChanged();
-        friendAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -78,28 +74,14 @@ public class OfferTradeActivity extends Activity {
     public void offerTradeClicked(View v){
         TradeManager.createTrade(UserManager.getTrader().getUserName(), UserManager.getFriend().getUserName(), CreateTradeManager.getOwnerSide(), CreateTradeManager.getFriendSide());
 
-        CTM.clearFriendSide();
-        CTM.clearOwnerSide();
+        CreateTradeManager.clearFriendSide();
+        CreateTradeManager.clearOwnerSide();
         //Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
         ServerManager.saveUserOnline(UserManager.getTrader());
         Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
         ServerManager.notifyTrade(0);
         startActivity(intent);
         finish();
-
-    }
-
-
-    public void addItemsToMyList(ArrayList<String> myItems) {
-
-        myInventoryItemsListView.setAdapter(myadapter);
-        myadapter.notifyDataSetChanged();
-    }
-
-    public void addItemsToFriendList(ArrayList<String> friendItems) {
-
-        friendInventoryItemsListView.setAdapter(friendAdapter);
-        friendAdapter.notifyDataSetChanged();
 
     }
 

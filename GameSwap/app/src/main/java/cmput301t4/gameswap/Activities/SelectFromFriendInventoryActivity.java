@@ -22,7 +22,6 @@ public class SelectFromFriendInventoryActivity extends Activity {
     private Inventory inventory;
     private ArrayAdapter<String> adapter;
     private ListView listView;
-    private CreateTradeManager CTM = new CreateTradeManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +32,16 @@ public class SelectFromFriendInventoryActivity extends Activity {
         listView = (ListView) findViewById(R.id.friendInventoryListView);
         adapter = new ArrayAdapter<String>(this,R.layout.friendinventorylistviewtext,itemNamesList);
         listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(CTM.FriendSideContain(inventory.getItem(position)) == Boolean.FALSE){
+                if(CreateTradeManager.FriendSideContain(inventory.getItem(position)) == Boolean.FALSE){
                     Toast.makeText(getBaseContext(),inventory.getItem(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
-                    CTM.addFriendSide(inventory.getItem(position));
+                    CreateTradeManager.addFriendSide(inventory.getItem(position));
+                    CreateTradeManager.updateFriendSiderName();
                 } else  {
                     Toast.makeText(getBaseContext(), "Already Added to list", Toast.LENGTH_SHORT).show();
                 }

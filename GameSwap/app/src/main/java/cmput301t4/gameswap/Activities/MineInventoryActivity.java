@@ -28,7 +28,6 @@ public class MineInventoryActivity extends Activity  {
     private ArrayList<String> nameOfItemsList;
     private ArrayList<String> itemsSelected;
     private int size;
-    private CreateTradeManager CTM = new CreateTradeManager();
 
 
 
@@ -40,15 +39,14 @@ public class MineInventoryActivity extends Activity  {
         nameOfItemsList = InventoryManager.getItemsNames();
         adapter = new ArrayAdapter<String>(this,R.layout.myinventorylistviewtext,nameOfItemsList);
         listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(CTM.OwnerSideContian(InventoryManager.getItem(position)) == Boolean.FALSE){
+                if(CreateTradeManager.OwnerSideContian(InventoryManager.getItem(position)) == Boolean.FALSE){
                     Toast.makeText(getBaseContext(), InventoryManager.getItem(position).getName() + " Added to Trade", Toast.LENGTH_SHORT).show();
-                    CTM.addOwnerSide(InventoryManager.getItem(position));
+                    CreateTradeManager.addOwnerSide(InventoryManager.getItem(position));
+                    CreateTradeManager.updateOwnerSideName();
                 } else  {
                     Toast.makeText(getBaseContext(), "Already Added to list", Toast.LENGTH_SHORT).show();
                 }

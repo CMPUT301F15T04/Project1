@@ -1,5 +1,7 @@
 package cmput301t4.gameswap.Managers;
 
+import java.util.ArrayList;
+
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.Models.Item;
 
@@ -10,6 +12,8 @@ public class CreateTradeManager {
 
     private static Inventory OwnerSide = null;
     private static Inventory FriendSide = null;
+    private static ArrayList<String> ownerSideName;
+    private static ArrayList<String> friendSideName;
 
     //=====Singleton Code=====//
     static public Inventory getOwnerSide(){
@@ -26,15 +30,34 @@ public class CreateTradeManager {
         return FriendSide;
     }//end getFriendSide
 
+    static public ArrayList<String> getOwnerSideName(){
+        if (ownerSideName == null){
+            ownerSideName = new ArrayList<String>();
+        }
+        return ownerSideName;
+    }//end getOwnerSide
+
+    static public ArrayList<String> getFriendSideName(){
+        if (friendSideName == null){
+            friendSideName = new ArrayList<String>();
+        }
+        return friendSideName;
+    }//end getFriendSide
+
+    //=====End Singleton Code======//
+
     static public Inventory clearOwnerSide(){
         OwnerSide = new Inventory();
+        updateOwnerSideName();
         return OwnerSide;
     }
 
     static public Inventory clearFriendSide(){
         FriendSide = new Inventory();
+        updateFriendSiderName();
         return FriendSide;
     }
+
 
     static public Inventory setOwnerSide(Inventory inventory){
         OwnerSide = inventory;
@@ -47,8 +70,8 @@ public class CreateTradeManager {
     }
 
     static public Boolean OwnerSideContian(Item item){
-        for(int i = 0; i < OwnerSide.size(); i++){
-            if(item.getItemid() == (OwnerSide.getItem(i).getItemid())) {
+        for(int i = 0; i < getOwnerSide().size(); i++){
+            if(item.getItemid() == (getOwnerSide().getItem(i).getItemid())) {
                 return true;
             }
         }
@@ -56,8 +79,8 @@ public class CreateTradeManager {
     }
 
     static public Boolean FriendSideContain(Item item){
-        for(int i = 0; i < FriendSide.size(); i++){
-            if(item.getItemid() == (FriendSide.getItem(i).getItemid())){
+        for(int i = 0; i < getFriendSide().size(); i++){
+            if(item.getItemid() == ( getFriendSide().getItem(i).getItemid())){
                 return true;
             }
         }
@@ -72,12 +95,12 @@ public class CreateTradeManager {
         getFriendSide().add(item);
     }//end addFriendSide
 
-    static public int OwnerSize(){
-        return OwnerSide.size();
+    static public void updateOwnerSideName(){
+        ownerSideName = getOwnerSide().getItemsNames();
     }
 
-    static public int FriendSize() {return FriendSide.size();}
-
-    static public void cancelTradeMade(){}
+    static public void updateFriendSiderName(){
+        friendSideName = getFriendSide().getItemsNames();
+    }
 
 }
