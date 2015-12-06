@@ -1,3 +1,7 @@
+/*
+
+    WE DON'T NEED THIS ACTIVITY ANYMORE. REFACTORED OFFERTRADE ACTIVITY TO HANDLE THINGS PROPERLY
+
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
@@ -21,16 +25,13 @@ public class CounterTradeActivity extends Activity {
     private ArrayAdapter<String> friendAdapter;
     private ArrayList<String> myItems;
     private ArrayList<String> friendItems;
-    //private CreateTradeManager CTM;
     private Trade trade;
-    private CreateTradeManager CTM;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counter_trade);
-        CTM = new CreateTradeManager();
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
@@ -38,13 +39,13 @@ public class CounterTradeActivity extends Activity {
             int index = b.getInt("index");
             //String borrower;
             trade = UserManager.getPendingList().getTrade(index);
-            CTM.setFriendSide(trade.getBorrowerItems());
-            CTM.setOwnerSide(trade.getOwnerItems());
+            CreateTradeManager.setFriendSide(trade.getBorrowerItems());
+            CreateTradeManager.setOwnerSide(trade.getOwnerItems());
 
             Intent intent1 = new Intent(CounterTradeActivity.this,OfferTradeActivity.class);
             startActivity(intent1);
-            myItems = CTM.getOwnerSide().getItemsNames();
-            friendItems = CTM.getFriendSide().getItemsNames();
+            myItems = CreateTradeManager.getOwnerSideName();
+            friendItems = CreateTradeManager.getFriendSideName();
             //friendItems = UserManager.getPendingList().getTrade(index).getOwnerItems().getItemsNames();
         }
 
@@ -62,3 +63,4 @@ public class CounterTradeActivity extends Activity {
 
 
 }
+*/

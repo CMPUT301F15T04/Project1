@@ -72,6 +72,20 @@ public class OfferTradeActivity extends Activity {
     }
 
     public void offerTradeClicked(View v){
+        Intent intent2 = getIntent();
+        Bundle b = intent2.getExtras();
+        if (b!=null){
+            TradeManager.moveTrade(b.getInt("index"));
+            CreateTradeManager.clearFriendSide();
+            CreateTradeManager.clearOwnerSide();
+            //Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
+            ServerManager.saveUserOnline(UserManager.getTrader());
+            Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
+            ServerManager.notifyTrade(1);
+            startActivity(intent);
+            finish();
+
+        }else {
         TradeManager.createTrade(UserManager.getTrader().getUserName(), UserManager.getFriend().getUserName(), CreateTradeManager.getOwnerSide(), CreateTradeManager.getFriendSide());
 
         CreateTradeManager.clearFriendSide();
@@ -82,6 +96,7 @@ public class OfferTradeActivity extends Activity {
         ServerManager.notifyTrade(0);
         startActivity(intent);
         finish();
+        }
 
     }
 
