@@ -33,7 +33,7 @@ import cmput301t4.gameswap.serverTools.ElasticSearchResponse;
 import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 
 /**
- * Controller that connects houses all functions related
+ * Controller that houses all functions related
  * to the server
  */
 public class ServerManager {
@@ -154,6 +154,10 @@ public class ServerManager {
 
     public static void serverIsDown(){serverDown = Boolean.TRUE;}
 
+    /**
+     * checks the status of the server to see if it's up
+     * @return a boolean representing the state of the server
+     */
     public static boolean checkServerStatus(){
         Thread serverThread = new Thread(new Runnable() {
             @Override
@@ -190,8 +194,8 @@ public class ServerManager {
     }
 
     /**
-     * Loads user into server
-     * @param user
+     * Savesuser into server
+     * @param user User object that is beng saved
      */
     public static void saveUserOnline(final User user){
         if(!serverDown) {
@@ -254,6 +258,10 @@ public class ServerManager {
         return json;
     }
 
+    /**
+     * Locate and load the trader that the User is interacting with
+     * @param username the username of the trader that is currenty being interacted with
+     */
     public static void getFriendOnline(final String username){
         Runnable runnable = new Runnable() {
             @Override
@@ -516,6 +524,10 @@ public class ServerManager {
         }
     }*/
 
+    /**
+     * Saves the image of the item onto he server
+     * @param image the image that is being saved
+     */
     public static void saveImage(final ImageModel image){
         Runnable runnable = new Runnable() {
             @Override
@@ -589,6 +601,10 @@ public class ServerManager {
         }
     }//end save image
 
+    /**
+     * loads the image of the item
+     * @param item the item that the image belongs to
+     */
     public static void loadImage(final int item){
         Runnable runnable = new Runnable() {
             @Override
@@ -657,6 +673,11 @@ public class ServerManager {
         }
     }
 
+    /**
+     * Delete Image from the server using inputted item id and username
+     * @param user The username of the person that the image belongs to
+     * @param itemId The id of the item that the image belongs to
+     */
     public static void deleteImage(final String user, final int itemId){
 
         Runnable runnable = new Runnable() {
@@ -717,7 +738,10 @@ public class ServerManager {
         }
     }
 
-
+    /**
+     * Notify the other side of the trade what has happened
+     * @param type Integer representing what type of action has occured
+     */
     public static void notifyTrade(final int type) {
         getFriendOnline(UserManager.getFriend().getUserName());
         switch(type){
