@@ -66,7 +66,8 @@ public class User {
         this.notification.add(" New Trade");
         this.notification.add(" New Counter Offer");
         this.notification.add(" Trade Cancellation");
-        this.notificationAmount = new ArrayList<Integer>(Collections.nCopies(3,0));
+        this.notification.add(" Trade Accepted");
+        this.notificationAmount = new ArrayList<Integer>(Collections.nCopies(4,0));
     }//end NotificationContructor
 
     public void IncreaseNotifiyAmount(Integer type){
@@ -84,6 +85,7 @@ public class User {
         this.notificationAmount.set(0,0);
         this.notificationAmount.set(1,0);
         this.notificationAmount.set(2,0);
+        this.notificationAmount.set(3,0);
     }//end clearNotification
 
     public String IfNotify(int i){

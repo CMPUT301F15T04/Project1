@@ -103,6 +103,7 @@ public class DecideTradeActivity extends Activity {
         //updating info serverside
         ServerManager.saveUserOnline(UserManager.getTrader());
         ServerManager.saveUserOnline(UserManager.getFriend());
+        ServerManager.notifyTrade(3);
         this.finish();
     }
 

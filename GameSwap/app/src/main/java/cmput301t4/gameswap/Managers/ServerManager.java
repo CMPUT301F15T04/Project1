@@ -337,7 +337,8 @@ public class ServerManager {
                 int timeoutSocket = 5000;
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username;
+                //String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username;
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images";
 
                 System.out.println(url);
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
@@ -755,6 +756,8 @@ public class ServerManager {
             case 2:
                 UserManager.getFriend().IncreaseNotifiyAmount(type);
                 break;
+            case 3:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
         }
         saveUserOnline(UserManager.getFriend());
     }

@@ -76,8 +76,8 @@ public class MyProfileActivity extends Activity {
 
     public void checkNotifications(View v){
         String message = "";
-        for(int i = 0; i < 3; i++){
-            if(i == 2){
+        for(int i = 0; i < 4; i++){
+            if(i == 3){
                 message += UserManager.getTrader().IfNotify(i);
             }else{
                 message += UserManager.getTrader().IfNotify(i) + "\n";
