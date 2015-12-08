@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
@@ -32,6 +33,9 @@ public class TradesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trades);
+
+        //reload user before viewing tradelist
+        ServerManager.getUserOnline(UserManager.getTrader().getUserName());
 
         currentTradeBorrowers = TradeManager.getCurrentNames(true);
         pastTradeBorrowers = TradeManager.getCurrentNames(false);
