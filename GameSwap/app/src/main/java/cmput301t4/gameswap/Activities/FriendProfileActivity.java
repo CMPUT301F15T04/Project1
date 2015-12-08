@@ -98,7 +98,7 @@ public class FriendProfileActivity extends Activity {
             traderCityTextView.setText("City Unavailable");
             traderPhoneTextView.setText("Phonenumber Unavailable");
             traderEmailTextView.setText("Email Unavailable");
-            FriendStatusButton.setText("Add Friend  ");
+            FriendStatusButton.setText("Add Friend");
             friendInventory.setEnabled(false);
             friendTrade.setEnabled(false);
             isFriend = Boolean.FALSE;
@@ -113,5 +113,13 @@ public class FriendProfileActivity extends Activity {
             isFriend = Boolean.TRUE;
         }
     }
+
+    //=================Functions needed for Testcases==================//
+
+    public Button getAddFriendButton(){
+        return (Button) findViewById(R.id.removeTraderButton);
+    }
+
+    //=================End Function needed for Testcases===============//
 
 }

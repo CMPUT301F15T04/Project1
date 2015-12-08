@@ -3,6 +3,7 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,6 +69,11 @@ public class selectTaskActivity extends Activity {
         return button;
     }//end getInventoryButton
 
+    public Button getTraderButton(){
+        Button button = (Button) findViewById(R.id.friends);
+        return button;
+    }//end getTraderButton
+
 
     //=====End Function needed for Testcases
 
@@ -80,6 +86,8 @@ public class selectTaskActivity extends Activity {
                 message += UserManager.getTrader().IfNotify(i) + "\n";
             }
         }
-        Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
     }
 }

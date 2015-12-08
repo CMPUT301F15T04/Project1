@@ -201,6 +201,11 @@ public class SearchFriendActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        resetAdapter();
+    }
 
     private void resetAdapter(){
         adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, friendList.getAllFriends());
@@ -211,7 +216,7 @@ public class SearchFriendActivity extends Activity {
 
     private void switchSearch(Boolean swap){
         if (swap == Boolean.TRUE){
-            search.setQueryHint("Search Friend");
+            search.setQueryHint("Search in Friendlist");
             search.setIconifiedByDefault(false);
             search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -220,7 +225,7 @@ public class SearchFriendActivity extends Activity {
                 }
             });
         } else {
-            search.setQueryHint("Search User");
+            search.setQueryHint("Search for other Users");
             search.setIconifiedByDefault(false);
             search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -251,17 +256,22 @@ public class SearchFriendActivity extends Activity {
 
     public void searchFriend(String friend){
         friendList = UserManager.getTrader().getFriendList();
+        Boolean isempty = Boolean.TRUE;
         for(int i=0; i< friendList.getFriendlistSize();i++){
 
             if (friend.toLowerCase().equals(friendList.getFriend(i).toString().toLowerCase()) ){
-                Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
+                search.setQuery("", false);
                 Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+                intent.putExtra("isfriend", Boolean.TRUE);
+                ServerManager.getFriendOnline(friend);
+                isempty = Boolean.FALSE;
                 startActivity(intent);
             }
         }
+        if (isempty == Boolean.TRUE){
         Toast toast = Toast.makeText(getBaseContext(), "User not on Friendlist", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast.show();
+        toast.show();}
     }//end Search Friend
 
     //================End Function used in "show Friendlist" option============//
@@ -316,9 +326,21 @@ public class SearchFriendActivity extends Activity {
     }
     //================end Function used in "Show User" option======================//
 
+    //================Function needed for Testcases================================//
+
+    public SearchView getSearchView(){
+        SearchView search = (SearchView) findViewById(R.id.searchViewFriend);
+        return search;
+    }//end getSearchView
+
+    public ListView getListView(){
+        ListView list = (ListView) findViewById(R.id.friendlistView);
+        return list;
+    }//end getListView
+
+    //================End function needed for Testcases============================//
+
     //================Fucntion that are unused================//
-
-
 
     private void loadFromFile(){
 
