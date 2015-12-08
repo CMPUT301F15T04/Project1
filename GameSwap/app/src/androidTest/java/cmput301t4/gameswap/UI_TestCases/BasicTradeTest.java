@@ -192,7 +192,7 @@ public class BasicTradeTest extends ActivityInstrumentationTestCase2 {
 
         activity.runOnUiThread(new Runnable() {
             public void run() {
-                LoginText.setText("GoneBoy2");
+                LoginText.setText("dantest2");
                 MainActivityLogin.performClick();
             }
         });
@@ -354,7 +354,7 @@ public class BasicTradeTest extends ActivityInstrumentationTestCase2 {
 
         receiverActivity.runOnUiThread(new Runnable() {
             public void run() {
-                EditusernameText.setText("GoneBoy2");
+                EditusernameText.setText("dantest2");
                 EditemailText.setText("ThatGoneBoy@Darnkids.com");
                 EditcityText.setText("YoungWhippersnapperTown");
                 EditphonenumberText.setText("123456789");
