@@ -116,6 +116,7 @@ public class Trade  {
                     //TODO make this more accurate check item by item maybe/modify an override when doing inventory compares
                     return true;
                 }
+                return true;
             }//end check BorrowerName
         }//end check OwnerNAme
         return false;

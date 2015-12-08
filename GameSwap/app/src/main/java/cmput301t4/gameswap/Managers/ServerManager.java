@@ -32,6 +32,10 @@ import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.serverTools.ElasticSearchResponse;
 import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 
+/**
+ * Controller that connects houses all functions related
+ * to the server
+ */
 public class ServerManager {
 
     private static boolean foundResult = Boolean.FALSE;
@@ -219,9 +223,16 @@ public class ServerManager {
 
             Thread serverThread = new Thread(runnable);
             serverThread.start();
+
+            try {
+                serverThread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException();
+            }
         } else {
             throw new ServerDownException();
         }
+
 
     }
 
@@ -709,8 +720,18 @@ public class ServerManager {
 
     public static void notifyTrade(final int type) {
         getFriendOnline(UserManager.getFriend().getUserName());
-        UserManager.getFriend().IncreaseNotifiyAmount(type);
-        UserManager.getFriend().getPendingTrades().add(TradeManager.getMostRecentTrade());
+        switch(type){
+            case 0:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
+                UserManager.getFriend().getPendingTrades().add(TradeManager.getMostRecentTrade());
+                break;
+            case 1:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
+                break;
+            case 2:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
+                break;
+        }
         saveUserOnline(UserManager.getFriend());
     }
 
