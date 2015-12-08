@@ -79,8 +79,8 @@ public class selectTaskActivity extends Activity {
 
     public void checkTrades(){
         String message = "";
-        for(int i = 0; i < 3; i++){
-            if(i == 2){
+        for(int i = 0; i < 4; i++){
+            if(i == 3){
                 message += UserManager.getTrader().IfNotify(i);
             }else{
                 message += UserManager.getTrader().IfNotify(i) + "\n";

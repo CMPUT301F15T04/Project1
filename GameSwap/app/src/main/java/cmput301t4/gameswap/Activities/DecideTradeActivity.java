@@ -1,3 +1,4 @@
+
 package cmput301t4.gameswap.Activities;
 
 import android.app.Activity;
@@ -15,8 +16,14 @@ import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
+import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
 
+/**
+ * This activity allows the user to decide what they want to do
+ * with a offered trade. They have three options to choose from
+ * Reject, Counter Offer, Accept
+ */
 public class DecideTradeActivity extends Activity {
 
     private ListView myInventoryItemsListView;
@@ -74,6 +81,7 @@ public class DecideTradeActivity extends Activity {
         TradeManager.getCurrent().del(index);
         ServerManager.saveUserOnline(UserManager.getTrader());
         ServerManager.saveUserOnline(UserManager.getFriend());
+        ServerManager.notifyTrade(2);
         finish();
     }
 
@@ -95,6 +103,7 @@ public class DecideTradeActivity extends Activity {
         //updating info serverside
         ServerManager.saveUserOnline(UserManager.getTrader());
         ServerManager.saveUserOnline(UserManager.getFriend());
+        ServerManager.notifyTrade(3);
         this.finish();
     }
 
