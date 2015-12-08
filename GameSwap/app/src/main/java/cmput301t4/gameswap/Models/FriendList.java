@@ -23,7 +23,7 @@ public class FriendList {
      * @param trader The User that the user has added as a friend
      */
     public void addFriend(String trader) {
-        friendList.add(trader.toLowerCase());
+        friendList.add(trader);
     }
 
     /**

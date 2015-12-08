@@ -102,7 +102,7 @@ public class SearchFriendActivity extends Activity {
                                     thread.join();
                                     Intent intent = new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
                                     intent.putExtra("isfriend", Boolean.TRUE);
-                                    ServerManager.getFriendOnline(FriendManager.getUser(position));
+                                    ServerManager.getFriendOnline(UserManager.getFriendlist().getFriend(position));
                                     //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
                                     startActivity(intent);
                                     return true;
