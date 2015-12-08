@@ -58,6 +58,13 @@ public class CreateTradeManager {
         return FriendSide;
     }
 
+    static public void setOwnerName(ArrayList<String> previous){
+        ownerSideName = previous;
+    }
+
+    static public void setBorrowerName(ArrayList<String> previous){
+        friendSideName = previous;
+    }
 
     static public Inventory setOwnerSide(Inventory inventory){
         OwnerSide = inventory;

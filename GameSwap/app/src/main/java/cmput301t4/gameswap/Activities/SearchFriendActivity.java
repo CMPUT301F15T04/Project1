@@ -253,7 +253,6 @@ public class SearchFriendActivity extends Activity {
                 Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
                 Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
                 startActivity(intent);
-
             }
         }
         Toast toast = Toast.makeText(getBaseContext(), "User not on Friendlist", Toast.LENGTH_SHORT);

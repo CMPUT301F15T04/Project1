@@ -52,11 +52,17 @@ public class TradeManager {
     }
 
 
-    static public ArrayList<String> getBorrowerNames(){
-        return getCurrent().getBorrowerNames();
+    static public ArrayList<String> getCurrentNames(Boolean trade){
+        if (trade == Boolean.TRUE){
+            return getCurrent().getNames();
+        } else {
+            return getPast().getNames();
+        }
     }
+
+
     //Move trade from current to past
-    public void moveTrade(int position){
+    static public void moveTrade(int position){
         getPast().add(getCurrent().getTrade(position));
         getCurrent().del(position);
     }//end moveTrade

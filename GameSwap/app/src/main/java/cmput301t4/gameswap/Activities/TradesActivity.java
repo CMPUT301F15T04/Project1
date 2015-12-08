@@ -18,15 +18,9 @@ import cmput301t4.gameswap.R;
 
 public class TradesActivity extends Activity {
 
-    private ArrayAdapter<String> adapter;
-    private ListView pendingtradeListView;
-    private ArrayList<String> trades;
-    private TradeList tradeList;
+
     private ArrayList<String> currentTradeBorrowers;
     private ArrayList<String> pastTradeBorrowers;
-    private TradeList currentTrades;
-    private TradeList pastTrades;
-    private TradeManager TM;
     private ListView currentListView;
     private ListView pastListView;
     private ArrayAdapter<String> currentAdapter;
@@ -38,12 +32,9 @@ public class TradesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trades);
-        TM = new TradeManager();
-        tradeList = new TradeList();
-        currentTrades = TM.getCurrent();
-        pastTrades = TM.getPast();
-        currentTradeBorrowers = currentTrades.getBorrowerNames();
-        pastTradeBorrowers = pastTrades.getBorrowerNames();
+
+        currentTradeBorrowers = TradeManager.getCurrentNames(true);
+        pastTradeBorrowers = TradeManager.getCurrentNames(false);
         currentListView = (ListView) findViewById(R.id.pendingtradeListView);
         pastListView = (ListView) findViewById(R.id.pasttradeListView);
         currentAdapter = new ArrayAdapter<String>(this, R.layout.currentofferalisttextview, currentTradeBorrowers);
@@ -55,7 +46,7 @@ public class TradesActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                trade = currentTrades.getTrade(position);;
+                trade = TradeManager.getCurrent().getTrade(position);
                 if(UserManager.getTrader().getUserName().equals(trade.getOwnername())){
                     Intent intent = new Intent(TradesActivity.this, CancelCreateTradeActivity.class);
                     intent.putExtra("index",position);
@@ -73,26 +64,19 @@ public class TradesActivity extends Activity {
         pastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                trade = pastTrades.getTrade(position);
+                trade = TradeManager.getPast().getTrade(position);
             }
         });
 
     }
     public void resetAdapter(){
-        TM = new TradeManager();
-        tradeList = new TradeList();
-        currentTrades = TM.getCurrent();
-        pastTrades = TM.getPast();
-        currentTradeBorrowers = TM.getBorrowerNames();
-        pastTradeBorrowers = pastTrades.getBorrowerNames();
-        currentListView = (ListView) findViewById(R.id.pendingtradeListView);
-        pastListView = (ListView) findViewById(R.id.pasttradeListView);
+
+        currentTradeBorrowers = TradeManager.getCurrentNames(true);
+        pastTradeBorrowers = TradeManager.getCurrentNames(false);
         currentAdapter = new ArrayAdapter<String>(this, R.layout.currentofferalisttextview, currentTradeBorrowers);
         pastAdapter = new ArrayAdapter<String>(this, R.layout.pastofferlisttextview, pastTradeBorrowers);
         currentListView.setAdapter(currentAdapter);
         pastListView.setAdapter(pastAdapter);
-        currentAdapter.notifyDataSetChanged();
-        pastAdapter.notifyDataSetChanged();
     }
 
 

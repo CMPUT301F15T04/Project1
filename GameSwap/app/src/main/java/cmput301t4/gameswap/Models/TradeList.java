@@ -87,9 +87,24 @@ public class TradeList {
     public ArrayList<String> getBorrowerNames() {
         ArrayList<String> name = new ArrayList<String>();
         for (int i=0;i<tradelist.size();i++){
-            name.add(tradelist.get(i).getBorrowerName().toUpperCase());
+            name.add(tradelist.get(i).getBorrowerName());
         }
         return  name;
     }
+
+
+    public ArrayList<String> getNames(){
+        ArrayList<String> name  = new ArrayList<String>();
+        for (int i=0; i < tradelist.size(); i++){
+            if (tradelist.get(i).getBorrowerName().equals(UserManager.getTrader().getUserName())){
+                name.add("From: " + tradelist.get(i).getOwnername());
+            } else {
+                name.add("To: " + tradelist.get(i).getBorrowerName());
+            }
+        }
+        return name;
+    }
+
+
 
 }//end TradeList

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.CreateTradeManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
@@ -56,10 +57,15 @@ public class DecideTradeActivity extends Activity {
     }
 
     public void counterTradeButton(View v){
-        Intent intent = new Intent(DecideTradeActivity.this,CounterTradeActivity.class);
+        Intent intent = new Intent(DecideTradeActivity.this,OfferTradeActivity.class);
         intent.putExtra("index", index);
+        ServerManager.getFriendOnline(UserManager.getPendingList().getTrade(index).getOwnername());
+        CreateTradeManager.setOwnerSide(UserManager.getPendingList().getTrade(index).getBorrowerItems());
+        CreateTradeManager.setFriendSide(UserManager.getPendingList().getTrade(index).getOwnerItems());
+        CreateTradeManager.updateOwnerSideName();
+        CreateTradeManager.updateFriendSiderName();
         startActivity(intent);
-
+        finish();
     }
 
     public void rejectTradeButtonClicked(View v){

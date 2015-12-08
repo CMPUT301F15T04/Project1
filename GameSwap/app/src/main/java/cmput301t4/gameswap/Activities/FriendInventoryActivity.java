@@ -72,7 +72,6 @@ public class FriendInventoryActivity extends Activity {
                 startActivity(intent);
             }
         });
-
     }
 
     public void frienddoneButtonClicked(View v){
