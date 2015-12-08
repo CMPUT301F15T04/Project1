@@ -12,11 +12,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import cmput301t4.gameswap.Activities.AddItemActivity;
+import cmput301t4.gameswap.Activities.CancelCreateTradeActivity;
 import cmput301t4.gameswap.Activities.CreateProfileActivity;
+import cmput301t4.gameswap.Activities.DecideTradeActivity;
 import cmput301t4.gameswap.Activities.FriendInventoryActivity;
 import cmput301t4.gameswap.Activities.FriendProfileActivity;
 import cmput301t4.gameswap.Activities.MainActivity;
+import cmput301t4.gameswap.Activities.OfferTradeActivity;
 import cmput301t4.gameswap.Activities.SearchFriendActivity;
+import cmput301t4.gameswap.Activities.SelectFromFriendInventoryActivity;
+import cmput301t4.gameswap.Activities.TradesActivity;
 import cmput301t4.gameswap.Activities.ViewItemActivity;
 import cmput301t4.gameswap.Activities.myInventoryActivity;
 import cmput301t4.gameswap.Activities.selectTaskActivity;
@@ -59,11 +64,7 @@ public class BasicTradeTest extends ActivityInstrumentationTestCase2 {
      * Variables from FriendProfileActivity
      */
     private Button FriendProfileButton;
-    private TextView FriendNameTextView;
-    private TextView FriendCityTextView;
-    private TextView FriendPhoneTextView;
-    private TextView FriendEmailTextView;
-    private Button FriendInventoryButton;
+    private Button FriendTradeButton;
 
     /**
      * Variables used in AddItemActivity
@@ -94,25 +95,124 @@ public class BasicTradeTest extends ActivityInstrumentationTestCase2 {
     private ListView FriendInventory;
 
     /**
-     * Variables used in ViewItemActivity
+     * Variables used in OfferTradeActivity
      */
-    private TextView itemNameText;
-    private TextView itemDescriptionText;
-    private TextView itemDateText;
-    private String itemStatusText;
+    private Button OfferFriendButton;
+    private Button OfferFriendInventoryButton;
+
+    /**
+     * VAriables used in SelectfromFriendActivity
+     */
+    private ListView SelectFriendInventory;
+    private Button SelectFriendDoneButton;
+
+    /**
+     * Variables from OfferTradeActivity
+     *
+     */
+    private ListView Currentlistview;
+
+    /**
+     * Variables from Decidelist View
+     */
+    private Button cancelTradeButton;
+
 
     public BasicTradeTest() {
         super(cmput301t4.gameswap.Activities.MainActivity.class);
     }//end Constructor
 
+    public void testStartBasicTrade(){
+        setupSecondUser();
+        setupSecondUserInventory();
+        OfferTradeActivity finishSecondUserSetup = setupLogin();
+        testStartATrade(finishSecondUserSetup);
+    }
 
+
+    public void testStartATrade(OfferTradeActivity activity){
+
+        OfferFriendInventoryButton = activity.getFriendInventoryButton();
+        OfferFriendButton = activity.getOfferTradeButton();
+
+        // Set up an ActivityMonitor
+        Instrumentation.ActivityMonitor receiverActivityMonitor =
+                getInstrumentation().addMonitor(SelectFromFriendInventoryActivity.class.getName(),
+                        null, false);
+
+        activity.runOnUiThread(new Runnable() {
+            public void run() {
+                OfferFriendInventoryButton.performClick();
+            }
+        });
+        //Tell program to wait for Sync
+        getInstrumentation().waitForIdleSync();
+
+        //Code from:https://developer.android.com/training/activity-testing/activity-functional-testing.html
+        //Date: Nov 16 2015
+        // Validate that ReceiverActivity is started
+        final SelectFromFriendInventoryActivity SelectfromFriend_Activity = (SelectFromFriendInventoryActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", SelectfromFriend_Activity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                SelectFromFriendInventoryActivity.class, SelectfromFriend_Activity.getClass());
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+
+        SelectFriendInventory = SelectfromFriend_Activity.getListView();
+        SelectFriendDoneButton = SelectfromFriend_Activity.getDone();
+        activity.runOnUiThread(new Runnable() {
+            public void run() {
+                SelectFriendInventory.getChildAt(0).performClick();
+                SelectFriendDoneButton.performClick();
+            }
+        });
+        //Tell program to wait for Sync
+        getInstrumentation().waitForIdleSync();
+
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+        receiverActivityMonitor =
+                getInstrumentation().addMonitor(TradesActivity.class.getName(),
+                        null, false);
+
+
+        OfferFriendButton = activity.getOfferTradeButton();
+        activity.runOnUiThread(new Runnable() {
+            public void run() {
+                OfferFriendButton.performClick();
+            }
+        });
+
+        getInstrumentation().waitForIdleSync();
+
+        TradesActivity Trade_activity = (TradesActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", Trade_activity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                TradesActivity.class, Trade_activity.getClass());
+
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+
+    }
 
     /**
      *
      * @return
      * Runs the setup to Login into a dummy user made for testing
      */
-    public SearchFriendActivity setupLogin(){
+    public OfferTradeActivity setupLogin(){
         MainActivity activity = (MainActivity) getActivity();
 
         MainActivityLogin = activity.getLoginButton();
@@ -173,7 +273,62 @@ public class BasicTradeTest extends ActivityInstrumentationTestCase2 {
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-        return searchFriendActivity_Activity;
+        getInstrumentation().invokeMenuActionSync(searchFriendActivity_Activity, R.id.showPeople, 0);
+        getInstrumentation().waitForIdleSync();
+
+        receiverActivityMonitor =
+                getInstrumentation().addMonitor(FriendProfileActivity.class.getName(),
+                        null, false);
+
+        searchFriendView = searchFriendActivity_Activity.getSearchView();
+
+        searchFriendActivity_Activity.runOnUiThread(new Runnable() {
+            public void run() {
+                searchFriendView.setQuery("dantest2", true);
+            }
+        });
+
+        getInstrumentation().waitForIdleSync();
+
+        final FriendProfileActivity  friendProfile_activity = (FriendProfileActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", friendProfile_activity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                FriendProfileActivity.class, friendProfile_activity.getClass());
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+
+        FriendProfileButton = friendProfile_activity.getAddFriendButton();
+        FriendTradeButton = friendProfile_activity.getTradeButton();
+
+        receiverActivityMonitor =
+                getInstrumentation().addMonitor(OfferTradeActivity.class.getName(),
+                        null, false);
+
+        friendProfile_activity.runOnUiThread(new Runnable() {
+            public void run() {
+                FriendProfileButton.performClick();
+                FriendTradeButton.performClick();
+            }
+        });
+
+        OfferTradeActivity  offerTrade_activity = (OfferTradeActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", offerTrade_activity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                OfferTradeActivity.class,offerTrade_activity.getClass());
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+
+        return offerTrade_activity;
     }//end SetupLogin
 
     public void setupSecondUserInventory(){
@@ -306,7 +461,6 @@ public class BasicTradeTest extends ActivityInstrumentationTestCase2 {
 
         myInventory_Activity.finish();
         Select_Activity.finish();
-        LoginText.setText("");
     }
 
     public void setupSecondUser(){

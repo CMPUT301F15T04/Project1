@@ -106,9 +106,15 @@ public class OfferTradeActivity extends Activity {
 
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
+    //===========Function needed for TestCases=========//
+
+    public Button getFriendInventoryButton(){
+        return (Button) findViewById(R.id.friendInventoryButton);
     }
 
+    public Button getOfferTradeButton(){
+        return (Button) findViewById(R.id.counterSaveButton);
+    }
+
+    //===========End Function needed for TestCases=========//
 }

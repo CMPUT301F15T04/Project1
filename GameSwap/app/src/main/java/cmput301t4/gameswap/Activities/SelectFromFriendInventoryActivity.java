@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -54,5 +55,18 @@ public class SelectFromFriendInventoryActivity extends Activity {
     public void frienddoneButtonClicked(View v){
         finish();
     }
+
+    //=============Function needed for Testcases================//
+
+    public ListView getListView(){
+        return listView;
+    }
+
+    public Button getDone(){
+        return (Button) findViewById(R.id.frienddone);
+    }
+
+    //=============End Function needed for Testcases============//
+
 
 }

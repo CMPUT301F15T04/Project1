@@ -142,6 +142,10 @@ public class FriendProfileActivity extends Activity {
         return (Button) findViewById(R.id.friendInventoryButton);
     }
 
+    public Button getTradeButton(){
+        return (Button) findViewById(R.id.friendTradeButton);
+    }
+
     //=================End Function needed for Testcases===============//
 
 }

@@ -89,4 +89,12 @@ public class TradesActivity extends Activity {
         super.onResume();
         resetAdapter();
     }
+
+    //===================Function needed for TestCases===================//
+
+    public ListView getCurrentTrade(){
+        return currentListView;
+    }
+
+    //===================Function needed for TestCases===================//
 }
