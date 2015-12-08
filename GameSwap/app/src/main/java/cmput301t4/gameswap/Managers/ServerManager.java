@@ -337,8 +337,7 @@ public class ServerManager {
                 int timeoutSocket = 5000;
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                //String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username;
-                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images";
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username;
 
                 System.out.println(url);
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
