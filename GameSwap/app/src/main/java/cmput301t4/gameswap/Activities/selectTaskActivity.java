@@ -80,7 +80,11 @@ public class selectTaskActivity extends Activity {
     public void checkTrades(){
         String message = "";
         for(int i = 0; i < 3; i++){
-            message += UserManager.getTrader().IfNotify(i) + "\n";
+            if(i == 2){
+                message += UserManager.getTrader().IfNotify(i);
+            }else{
+                message += UserManager.getTrader().IfNotify(i) + "\n";
+            }
         }
         Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER,0,0);

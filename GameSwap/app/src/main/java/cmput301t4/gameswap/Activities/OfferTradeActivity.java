@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +32,9 @@ public class OfferTradeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //clears trade offers
+        CreateTradeManager.clearOwnerSide();
+        CreateTradeManager.clearFriendSide();
         setContentView(R.layout.activity_offer_trade);
         myInventoryItemsListView = (ListView) findViewById(R.id.itemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.itemsFromFriendInventory);
@@ -42,7 +46,6 @@ public class OfferTradeActivity extends Activity {
         //sets name of friends inventory to the actual name of friend
         friendName = (TextView) findViewById(R.id.friendofferinventory);
         friendName.setText(UserManager.getFriend().getUserName() + "'s Inventory");
-
 
     }
 

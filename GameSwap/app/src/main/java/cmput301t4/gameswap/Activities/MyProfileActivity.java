@@ -77,7 +77,11 @@ public class MyProfileActivity extends Activity {
     public void checkNotifications(View v){
         String message = "";
         for(int i = 0; i < 3; i++){
-            message += UserManager.getTrader().IfNotify(i) + "\n";
+            if(i == 2){
+                message += UserManager.getTrader().IfNotify(i);
+            }else{
+                message += UserManager.getTrader().IfNotify(i) + "\n";
+            }
         }
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
     }

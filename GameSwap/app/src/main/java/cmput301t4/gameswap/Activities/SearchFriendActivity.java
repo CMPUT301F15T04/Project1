@@ -238,10 +238,14 @@ public class SearchFriendActivity extends Activity {
     }//end switchSearch
 
     private void searchWhat(Boolean swap, String query){
-        if (swap == Boolean.TRUE){
-            searchFriend(query);
-        } else {
-            findTrader(query);
+        if(query.equals(UserManager.getTrader().getUserName())){
+            Toast.makeText(getBaseContext(), "This is your Username", Toast.LENGTH_SHORT).show();
+        }else {
+            if (swap == Boolean.TRUE) {
+                searchFriend(query);
+            } else {
+                findTrader(query);
+            }
         }
     }//end searchWhat
 

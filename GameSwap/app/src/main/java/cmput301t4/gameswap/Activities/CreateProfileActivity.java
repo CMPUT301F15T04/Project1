@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
@@ -42,12 +43,17 @@ public class CreateProfileActivity extends Activity {
 
     public void createProfileButton(View view) {
 
-        UserManager.createUser(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString(), this);
-        UserManager.setDefaultLocation(this);
-        System.out.println(UserManager.getTrader().getDefaultLocation().toString());
-        ServerManager.saveUserOnline(UserManager.getTrader());
+        ServerManager.searchForUser(usernameEditText.getText().toString());
+        if(ServerManager.checkResult() == Boolean.TRUE){
+            Toast.makeText(getBaseContext(), "This username is already in use", Toast.LENGTH_SHORT).show();
+        }else {
+            UserManager.createUser(usernameEditText.getText().toString(), emailEditText.getText().toString(), cityEditText.getText().toString(), phoneNumberEditText.getText().toString(), this);
+            UserManager.setDefaultLocation(this);
+            System.out.println(UserManager.getTrader().getDefaultLocation().toString());
+            ServerManager.saveUserOnline(UserManager.getTrader());
 
-        this.finish();
+            this.finish();
+        }
     }
 
     public void cancelButton(View view) {
