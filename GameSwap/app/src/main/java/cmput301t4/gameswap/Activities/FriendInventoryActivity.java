@@ -78,4 +78,12 @@ public class FriendInventoryActivity extends Activity {
         finish();
     }
 
+    //==========Function needed for TestCases===========//
+
+    public ListView getListView(){
+        return (ListView) findViewById(R.id.friendInventoryListView);
+    }
+
+    //==========End Function needed for TestCases=======//
+
 }//end FriendInventoryActivity

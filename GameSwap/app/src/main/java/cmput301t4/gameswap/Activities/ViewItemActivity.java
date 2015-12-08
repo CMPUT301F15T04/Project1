@@ -118,7 +118,22 @@ public class ViewItemActivity extends Activity {
         return statusDisplay;
     }
 
-    //=====End function needed for Testcases=====//
+    public TextView getName() {
+        return name;
+    }
+
+    public TextView getDescription() {
+        return description;
+    }
+
+    public TextView getDate() {
+        return date;
+    }
+
+    public TextView getStatusView() {
+        return statusView;
+    }
+//=====End function needed for Testcases=====//
 
     public String getPlatform(){
         Intent intent = getIntent();

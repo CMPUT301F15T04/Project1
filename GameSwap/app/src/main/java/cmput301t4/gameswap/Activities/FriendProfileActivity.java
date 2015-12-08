@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import cmput301t4.gameswap.Managers.FriendManager;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
@@ -118,6 +120,26 @@ public class FriendProfileActivity extends Activity {
 
     public Button getAddFriendButton(){
         return (Button) findViewById(R.id.removeTraderButton);
+    }
+
+    public TextView getNameView(){
+        return (TextView) findViewById(R.id.traderNameTextView);
+    }
+
+    public TextView getCityView(){
+        return (TextView) findViewById(R.id.traderCityTextView);
+    }
+
+    public TextView getPhoneView(){
+        return (TextView) findViewById(R.id.traderPhoneTextView);
+    }
+
+    public TextView getEmailView(){
+        return  (TextView) findViewById(R.id.traderEmailTextView);
+    }
+
+    public Button getInventoryButton(){
+        return (Button) findViewById(R.id.friendInventoryButton);
     }
 
     //=================End Function needed for Testcases===============//

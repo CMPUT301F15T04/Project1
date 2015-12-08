@@ -102,6 +102,7 @@ public class SearchFriendActivity extends Activity {
                                     thread.join();
                                     Intent intent = new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
                                     intent.putExtra("isfriend", Boolean.TRUE);
+                                    ServerManager.getFriendOnline(FriendManager.getUser(position));
                                     //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
                                     startActivity(intent);
                                     return true;
@@ -270,7 +271,7 @@ public class SearchFriendActivity extends Activity {
         }
         if (isempty == Boolean.TRUE){
         Toast toast = Toast.makeText(getBaseContext(), "User not on Friendlist", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER,0,0);
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();}
     }//end Search Friend
 
