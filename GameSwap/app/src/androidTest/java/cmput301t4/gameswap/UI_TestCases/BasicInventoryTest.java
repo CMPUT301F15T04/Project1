@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.util.List;
+
 import cmput301t4.gameswap.Activities.AddItemActivity;
 import cmput301t4.gameswap.Activities.EditItemActivity;
 import cmput301t4.gameswap.Activities.MainActivity;
@@ -299,9 +301,8 @@ public class BasicInventoryTest  extends ActivityInstrumentationTestCase2 {
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-        View v  = myInventory_Activity.getInventoryList().getChildAt(0);
-
-
+        myInventoryList = myInventory_Activity.getInventoryList();
+        assertNotNull(myInventoryList.getChildAt(0));
         return myInventory_Activity;
     }//end addItemTest
 
