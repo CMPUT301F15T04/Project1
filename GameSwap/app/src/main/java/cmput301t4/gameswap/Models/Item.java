@@ -12,6 +12,8 @@ import cmput301t4.gameswap.Managers.UserManager;
 
 /**
  * Stores the information about a given game
+ * @author Kynan Ly, Rupehra Chouhan , Daniel Ren, Blake Sakaluk, Preyanshu Kumar
+ * @version Part 4
  */
 public class Item {
 
@@ -63,9 +65,11 @@ public class Item {
     }
 
 
-    //Method to ensure Date is in the correct format
-    //Not sure how we want to do date.
-    //There this method is TEMP
+    /**
+     * Method to ensure Date is in the correct format
+     * @param Date date that the user entered for item
+     * @throws DateFormatException
+     */
     public void checkDate(String Date) throws DateFormatException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -75,9 +79,11 @@ public class Item {
         }
     }
 
-    //Method to ensure String is within desired length
-    //Not sure how we want to do date.
-    //There this method is TEMP
+    /**
+     * Method to ensure String is within desired length
+     * @param text name of the item
+     * @throws NameTooLongException: name of the item can be no longer than 140 characters
+     */
     public void setNameText(String text) throws NameTooLongException {
         if (text.length() <= 140) {
             this.Name = text;
@@ -86,75 +92,144 @@ public class Item {
         }
     }
 
-    //=====Setting public and private function=====//
+    /**
+     * Sets public status of the item
+     */
     public void setPublic() {
         this.isPrivate = false;
-    }//end setPublic
+    }
 
+    /**
+     * Sets private status of the item
+     */
     public void setPrivate() {
         this.isPrivate = true;
-    }//end setPrivate
+    }
 
-    //====Setting and Getting hasPicture function====//
+    /**
+     * Sets to 1 if the item has a picture
+     */
     public void setHasPicture(){this.hasPicture = 1;}
 
+    /**
+     * Sets to 0 if the items does not have a picture
+     */
     public void setNoPicture(){this.hasPicture = 0;}
 
+    /**
+     * Gets 1 0r 0 depending on if the item has a picture
+     * @return 1 or 0
+     */
     public int gethasPicture(){return this.hasPicture;}
 
-    //=====Getters and Setters=====//
     //Note: Setting IsPrivate true/false method is not in this section
 
+    /**
+     * Gets the item name
+     * @return name
+     */
     public String getName() {
         return Name;
     }
 
+    /**
+     * Sets the item name
+     * @param name name of the items
+     */
     public void setName(String name) {
         Name = name;
     }
 
+    /**
+     * Sets ID for the item
+     * @param num: unique ID of the item
+     */
     public void setItemid(int num){itemid = num;}
 
+    /**
+     * Gets item ID
+     * @return ID
+     */
     public int getItemid(){return itemid;}
 
+    /**
+     * Gets item description
+     * @return  item description
+     */
     public String getDescription() {
         return Description;
     }
 
+    /**
+     * Sets item description
+     * @param description item description
+     */
     public void setDescription(String description) {
         Description = description;
     }
 
+    /**
+     * Gets item release date
+     * @return  item release date
+     */
     public String getReleaseDate() {
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         return format1.format(ReleaseDate);
     }
 
+    /**
+     * Sets item item release date
+     * @param releaseDate
+     */
     public void setReleaseDate(Date releaseDate) {
         ReleaseDate = releaseDate;
     }
 
+    /**
+     * Gets private/public status
+     * @return true/false
+     */
     public Boolean getIsPrivate() {
         return isPrivate;
     }
 
+    /**
+     * Gets the item quality
+     * @return quality
+     */
     public Integer getQuality() {
         return Quality;
     }
 
+    /**
+     * Sets item quality
+     * @param quality
+     */
     public void setQuality(Integer quality) {
         Quality = quality;
     }
 
+    /**
+     * Gets platform that the item requires
+     * @return item platform
+     */
     public Integer getPlatform() {
         return Platform;
     }
 
+    /**
+     * Sets item platform
+     * @param platform
+     */
     public void setPlatform(Integer platform) {
         Platform = platform;
     }
 
-    //===== .equals Override=====//
+    /**
+     * .equals Override
+     * @param item
+     * @return
+     */
     @Override
     public boolean equals(Object item){
         Item item1 = (Item) item;
@@ -174,11 +249,19 @@ public class Item {
         return false;
     }//end item equals override
 
+    /**
+     * Gets item location
+     * @return location
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * Sets item location
+     * @param location
+     */
     public void setLocation(Location location) {
         this.location = location;
     }
-}//end Item Class
+}

@@ -23,11 +23,16 @@ import cmput301t4.gameswap.Models.User;
 
 /**
  * The MVC controller used for all accesses to <code>Cache</code>
+ * @author Blake Sakaluk, Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan
+ * @version Part 4
  */
 public class CacheManager {
 
+    /** File to save items */
     final static String ITEMS_SAVE_FILE = "gameswap_local_items.sav";
+    /** File to save trades*/
     final static String TRADES_SAVE_FILE = "gameswap_local_trades.sav";
+    /** Initializing cache to null */
     private static Cache cache = null;
 
     /**

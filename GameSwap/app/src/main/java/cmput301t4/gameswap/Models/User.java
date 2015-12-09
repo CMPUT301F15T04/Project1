@@ -14,9 +14,9 @@ import cmput301t4.gameswap.Managers.UserManager;
  * User model contains information about the trades, for example, their name, contact information,
  * their friends, trades made, current trades and their notifications
  *
- * friendList is just a list of other traders
+ * FriendList is just a list of other traders
  *
- * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @author Kynan Ly, Rupehra Chouhan , Daniel Ren, Blake Sakaluk, Preyanshu Kumar
  * @version Part 4
  */
 public class User {

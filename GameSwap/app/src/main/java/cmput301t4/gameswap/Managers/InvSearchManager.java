@@ -7,15 +7,29 @@ import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 
 /**
- * Created by dren on 11/4/15.
+ * InventoryManager handles all the searching through the inventory
+ * @author  Daniel Ren, Kynan Ly, Preyanshu Kumar, Rupehra Chouhan , Blake Sakaluk,
+ * @version Part 4
  */
 public class InvSearchManager {
 
-    public boolean searchFriendTrade(TradeList tradelistFriend, Trade trade){//returns true if trade exists in friend tradelist
+    /**
+     * Returns true if trade exists in friend tradelist
+     * @param tradelistFriend friend's trade list
+     * @param trade trade that was made
+     * @return true if trade exists in friend tradelist, and returns false otherwise
+     */
+    public boolean searchFriendTrade(TradeList tradelistFriend, Trade trade){//
         return tradelistFriend.hasTrade(trade);
-    }//end seachFriendTrade
+    }
 
-    public Inventory searchItembyName(Inventory inv, String name){//finds all items by name
+    /**
+     * Searches item from inventory by name
+     * @param inv inventory from which we are searching
+     * @param name name of the item we are looking for
+     * @return items searched by name
+     */
+    public Inventory searchItembyName(Inventory inv, String name){
         Inventory matching = new Inventory();
         for(int i = 0; i < inv.size(); i++){
             if(inv.getItem(i).getName().equals(name)){
@@ -23,9 +37,15 @@ public class InvSearchManager {
             }//end If
         }//end For loop
         return matching;//returns an inventory
-    }//end Inventoru
+    }
 
-    public Inventory searchItembyPlatform(Inventory inv, int platform){//finds all items by platform
+    /**
+     * finds all items by platform
+     * @param inv: inventotyr in which we are looking up the items
+     * @param platform platform that we are using to search up items
+     * @return all the items by platform
+     */
+    public Inventory searchItembyPlatform(Inventory inv, int platform){
         Inventory matching = new Inventory();
         for(int i = 0; i < inv.size(); i++){
             if(inv.getItem(i).getPlatform() == platform){
@@ -33,9 +53,15 @@ public class InvSearchManager {
             }//end If
         }//end For Loop
         return matching;//returns an inventory
-    }//end searchItemByPlatform
+    }
 
-    public Inventory searchItembyQuality(Inventory inv, int quality){//finds all items by quality
+    /**
+     * finds all items by quality
+     * @param inv inventory in which we are looking up the items
+     * @param quality quality by which we are searching the items
+     * @return all the items of the given quality
+     */
+    public Inventory searchItembyQuality(Inventory inv, int quality){
         Inventory matching = new Inventory();
         for(int i = 0; i < inv.size(); i++){
             if(inv.getItem(i).getQuality() == quality){
@@ -43,9 +69,15 @@ public class InvSearchManager {
             }//end If
         }//end For
         return matching;//returns an inventory
-    }//end searchItembyQuality
+    }
 
-    public Inventory searchItembyDate(Inventory inv, Date date){//finds all items by date
+    /**
+     * finds all items by date
+     * @param inv inventory in which we are looking up the items
+     * @param date date by which we are searching the items
+     * @return all the items by date
+     */
+    public Inventory searchItembyDate(Inventory inv, Date date){
         Inventory matching = new Inventory();
         for(int i = 0; i < inv.size(); i++){
             if(inv.getItem(i).getReleaseDate().equals(date) ){
@@ -53,9 +85,15 @@ public class InvSearchManager {
             }//end If
         }//end For
         return matching;//returns an inventory
-    }//end searchItemByData
+    }
 
-    public Inventory searchItembyPrivate(Inventory inv, boolean priv){//finds all items by privacy information
+    /**
+     * finds all items by privacy information
+     * @param inv inventory in which we are looking up the items
+     * @param priv status by which we are searching the items
+     * @return all the items by the given status
+     */
+    public Inventory searchItembyPrivate(Inventory inv, boolean priv){
         Inventory matching = new Inventory();
         for(int i = 0; i < inv.size(); i++){
             if(inv.getItem(i).getIsPrivate()== priv){
@@ -63,8 +101,13 @@ public class InvSearchManager {
             }//end If
         }//end For loop
         return matching;//returns an inventory
-    }//end searchItemByPrivate
+    }
 
+    /**
+     * Shows friend inventory
+     * @param friendInv friend inventory
+     * @return all the items in the friend inventory
+     */
     public static Inventory showFriendInventory (Inventory friendInv){
         Inventory invPublic = new Inventory();
         for(int i = 0; i<friendInv.size(); i++){
@@ -75,4 +118,4 @@ public class InvSearchManager {
         return invPublic;
     }
 
-}//end InvSearchManager
+}

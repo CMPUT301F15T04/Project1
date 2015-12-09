@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Stores the list of Users that the current user has added as friends
+ * @author Kynan Ly, Rupehra Chouhan , Daniel Ren, Blake Sakaluk, Preyanshu Kumar
+ * @version Part 4
  */
 public class FriendList {
     private ArrayList <String> friendList = new ArrayList<String>();
@@ -86,6 +88,11 @@ public class FriendList {
         return friendList.isEmpty();
     }
 
+    /**
+     * Gets the index of the friend in friendlist
+     * @param friendName name of the friend
+     * @return
+     */
     public int getFriendIndex(String friendName) {
        int i;
         for (i=0;i < friendList.size();i++){
@@ -97,5 +104,5 @@ public class FriendList {
         return i;
     }
 
-}//end FriendLis
+}
 

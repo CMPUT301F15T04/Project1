@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Holds all offline data until a connection to the server can be established again.
+ * @author Blake Sakaluk, Daniel Ren, Kynan Ly, Rupehra Chouhan , Preyanshu Kumar
+ * @version Part 4
  */
 public class Cache {
     /** The Items that were created offline that will be sent to the server */

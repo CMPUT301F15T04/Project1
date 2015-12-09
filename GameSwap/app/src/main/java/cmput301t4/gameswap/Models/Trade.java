@@ -7,12 +7,12 @@ import java.util.Date;
 import cmput301t4.gameswap.Exceptions.DateFormatException;
 
 /**
- * Created by kynan on 11/1/15. Gives information and functionality of the trade
+ * Gives information and functionality of the trade
+ * @author Kynan Ly, Rupehra Chouhan , Daniel Ren, Blake Sakaluk, Preyanshu Kumar
+ * @version Part 4
  */
+
 public class Trade  {
-    //Ownername =  the one who initiated the trade
-    //BorrowerName = the one who can accept the trade
-    //Ownername/Borrower are String (TEMP not sure if we want to use ID,etc)
     /** The one initiating the trades name */
     private String Ownername;
     /** The name of the person receiving the trade */
@@ -54,47 +54,85 @@ public class Trade  {
 
         //=====END CODE FOR NOTIFICATION=====//
 
-    }//End Trade Constructor
+    }
 
 
-
-    //=====Getters and Setters=====//
+    /**
+     *Gets the owner name
+     * @return owner name
+     */
     public String getOwnername() {
         return Ownername;
     }
 
+    /**
+     * Sets the owner name
+     * @param ownername
+     */
     public void setOwnername(String ownername) {
         Ownername = ownername;
     }
 
+    /**
+     * Gets the borrower name
+     * @return borrower name
+     */
     public String getBorrowerName() {
         return BorrowerName;
     }
 
+    /**
+     * Sets the borrower name
+     * @param borrowerName
+     */
     public void setBorrowerName(String borrowerName) {
         BorrowerName = borrowerName;
     }
 
+    /**
+     * Gets the owner items
+     * @return owner items
+     */
     public Inventory getOwnerItems() {
         return OwnerItems;
     }
 
+    /**
+     * Sets the owner items
+     * @param ownerItems
+     */
     public void setOwnerItems(Inventory ownerItems) {
         OwnerItems = ownerItems;
     }
 
+    /**
+     * Sets the borrower items
+     * @return borrower items
+     */
     public Inventory getBorrowerItems() {
         return BorrowerItems;
     }
 
+    /**
+     * Set borrower items
+     * @param borrowerItems
+     */
     public void setBorrowerItems(Inventory borrowerItems) {
         BorrowerItems = borrowerItems;
     }
 
+    /**
+     * Gets the date of transaction
+     * @return date of transaction
+     */
     public Date getDateTransaction() {
         return DateTransaction;
     }
 
+    /**
+     * Sets date of transaction
+     * @param dateTransaction
+     */
     public void setDateTransaction(Date dateTransaction) {
         DateTransaction = dateTransaction;
     }
@@ -102,11 +140,11 @@ public class Trade  {
 
     /**
      * Sets the values the user wants in the trade
+     * .equals Override
      *
      * @param trade the trade that the user wants to create
      * @throws DateFormatException This occurs when an improper date is given and can't be parsed
      */
-    //===== .equals Override =====//
     @Override
     public boolean equals(Object trade){
         Trade trade1 = (Trade) trade;
