@@ -189,6 +189,7 @@ public class myInventoryActivity extends Activity{
             intent.putExtra("Longitude", longitude);
             intent.putExtra("itemId", itemID);
             startActivity(intent);
+            finish();
         } else {
             Name = InventoryManager.getItem(position).getName();
             Description = InventoryManager.getItem(position).getDescription();
@@ -208,6 +209,7 @@ public class myInventoryActivity extends Activity{
             intent.putExtra("platform", Platform);
             intent.putExtra("itemId", itemID);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -218,6 +220,7 @@ public class myInventoryActivity extends Activity{
     public void addNewItem(View view){
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);
+        finish();
     }
 
     //=====Function needed for Testcases=====//
