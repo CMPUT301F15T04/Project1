@@ -18,6 +18,13 @@ import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+
+/**
+ * Offer trade to other users who are friends
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class OfferTradeActivity extends Activity {
 
     private ListView myInventoryItemsListView;

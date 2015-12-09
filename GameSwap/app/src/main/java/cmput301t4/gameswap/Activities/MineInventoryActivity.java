@@ -15,6 +15,12 @@ import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
+/**
+ * Allows user to select items from their inventory in order to trade
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class MineInventoryActivity extends Activity  {
 
     private ListView listView;

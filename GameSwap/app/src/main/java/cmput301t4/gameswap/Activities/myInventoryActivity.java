@@ -22,6 +22,12 @@ import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
+/**
+ * Shows all the items in user's inventory
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class myInventoryActivity extends Activity{
 
     private ListView myInventoryListView;

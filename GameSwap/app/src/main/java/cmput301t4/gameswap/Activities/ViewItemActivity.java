@@ -16,6 +16,13 @@ import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+
+/**
+ * View an item in detail
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class ViewItemActivity extends Activity {
 
     /*Declaring all the listViews here*/

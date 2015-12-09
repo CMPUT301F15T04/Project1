@@ -18,14 +18,26 @@ import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.R;
 
+
+/**
+ * Lets you browse through friend inventory
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class FriendInventoryActivity extends Activity {
 
+    /** ArrayList of names of items */
     private ArrayList<String> itemNamesList;
+    /** inventory is an object of class Inventory */
     private Inventory inventory;
+    /** Adapter for item names */
     private ArrayAdapter<String> adapter;
+    /*ListView to place these item names */
     private ListView listView;
-
+    /* item ID */
     private int itemID;
+    /* Item name */
     private String Name;
     /** A description of the Item */
     private String Description;
@@ -37,10 +49,16 @@ public class FriendInventoryActivity extends Activity {
     private Boolean IsPrivate;
     /*Platform of the game*/
     private int Platform;
+    /** latitude of the place */
     private double latitude;
+    /** longitude of the place */
     private double longitude;
 
 
+    /**
+     * Grabs friend inventory items and displays them
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +92,14 @@ public class FriendInventoryActivity extends Activity {
         });
     }
 
+    /**
+     * Called when user clicks DONE from on friend inventory page
+     * @param v: done button view
+     */
     public void frienddoneButtonClicked(View v){
         finish();
     }
+
 
     //==========Function needed for TestCases===========//
 

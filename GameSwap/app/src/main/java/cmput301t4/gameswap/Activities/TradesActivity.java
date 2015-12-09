@@ -17,6 +17,13 @@ import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.R;
 
+
+/**
+ * Class that displays user's current and past trades
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class TradesActivity extends Activity {
 
 

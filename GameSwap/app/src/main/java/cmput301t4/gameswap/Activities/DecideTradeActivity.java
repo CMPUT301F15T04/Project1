@@ -20,23 +20,36 @@ import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.R;
 
 /**
- * This activity allows the user to decide what they want to do
+ * * This activity allows the user to decide what they want to do
  * with a offered trade. They have three options to choose from
  * Reject, Counter Offer, Accept
+
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
  */
 public class DecideTradeActivity extends Activity {
 
+    /** ListView for user inventory */
     private ListView myInventoryItemsListView;
+    /** ListView for friend inventory */
     private ListView friendInventoryItemsListView;
+    /** ArrayAdapter for user items */
     private ArrayAdapter<String> myadapter;
+    /** ArrayAdapter for friend items */
     private ArrayAdapter<String> friendAdapter;
+    /** ArrayList for user items */
     private ArrayList<String> myItems;
+    /** ArrayList for friend items */
     private ArrayList<String> friendItems;
+    /** TextView for friend invetory title */
     private TextView friendInventoryTitle;
     int index;
-    //private CreateTradeManager CTM;
 
-
+    /**
+     * User decides if they want to accept, reject, or
+     * make a counter trade
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +64,7 @@ public class DecideTradeActivity extends Activity {
         }
 
 
-        Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), "Here", Toast.LENGTH_SHORT).show();
         myInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromMyInventory);
         friendInventoryItemsListView = (ListView) findViewById(R.id.decideitemsFromFriendInventory);
         myadapter = new ArrayAdapter<String>(this, R.layout.decidemyitemstextlistview, myItems);
@@ -63,6 +76,11 @@ public class DecideTradeActivity extends Activity {
 
     }
 
+    /**
+     * This is called when the user attempts to make
+     * a counter trade
+     * @param v: counter trade button view
+     */
     public void counterTradeButton(View v){
         Intent intent = new Intent(DecideTradeActivity.this,OfferTradeActivity.class);
         intent.putExtra("index", index);
@@ -75,6 +93,11 @@ public class DecideTradeActivity extends Activity {
         finish();
     }
 
+    /**
+     * This is called when the user attempts to reject the
+     * offered trade
+     * @param v: reject trade button view
+     */
     public void rejectTradeButtonClicked(View v){
         ServerManager.getFriendOnline(TradeManager.getCurrent().getTrade(index).getOwnername());
         UserManager.getFriend().getPendingTrades().delete(TradeManager.getCurrent().getTrade(index));
@@ -85,6 +108,11 @@ public class DecideTradeActivity extends Activity {
         finish();
     }
 
+    /**
+     * This is called when the user attempts to accept the
+     * trade
+     * @param v: accept trade button view
+     */
     public void acceptTradeButtonClicked(View v){
 
         TradeManager.getPast().add(TradeManager.getCurrent().getTrade(index));  //addes trade to past list current user

@@ -13,6 +13,12 @@ import android.widget.Toast;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+/**
+ * This class provides an open of viewing their inventory, browse trades and view trade offers
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class selectTaskActivity extends Activity {
 
     @Override

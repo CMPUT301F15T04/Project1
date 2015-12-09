@@ -40,6 +40,12 @@ import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.R;
 
+/**
+ * Searches for the friend in the friendlist
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class SearchFriendActivity extends Activity {
 
     private ArrayAdapter<String> adapter;

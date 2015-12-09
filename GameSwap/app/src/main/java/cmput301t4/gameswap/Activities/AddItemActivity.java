@@ -43,85 +43,70 @@ import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 /**
- * Adds item to user inventory based off of user input
- * Created by Preyanshu and Blake 2015-11-04
+ * Class to add an item to user's inventory
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
  */
 public class AddItemActivity extends Activity implements OnItemSelectedListener {
+
     //create the unique list views and adapters for console, quality, and public and private
     //code referenced from http://developer.android.com/guide/topics/ui/controls/spinner.html
 
-    /**
-     * The spinner to choose the console
-     */
+    /** The spinner to choose the console */
     private Spinner consoleSpinner;
 
-    /**
-     * The spinner to choose the quality
-     */
+    /** The spinner to choose the quality */
     private Spinner qualitySpinner;
 
-    /**
-     * The spinner to choose if the item is public or private
-     */
+    /** The spinner to choose if the item is public or private */
     private Spinner publicprivateSpinner;
 
-    /**
-     * The Date for the item being added
-     */
+    /** The Date for the item being added */
     final static String DATE_FORMAT = "dd-MM-yyyy";
 
-    /**
-     * The title for the item being added
-     */
+    /** The title for the item being added */
     private String title;
 
-    /**
-     * The release date for the item being added
-     */
+    /** The release date for the item being added */
     private String releaseDate;
 
-    /**
-     * The description for the item being added
-     */
+    /** The description for the item being added */
     private String description;
 
-    /**
-     * The check for if the date added is valid
-     */
+    /** The check for if the date added is valid */
     private Boolean isDateValid;
 
-    /**
-     * The text if the user wants to edit the title of the item
-     */
+    /** The text if the user wants to edit the title of the item */
     private EditText titleEditText;
-    /**
-     * This is storing the image taken by the camera
-     */
+    /** This is storing the image taken by the camera */
     private  Bitmap imageBitmap;
 
-    /**
-     * The text if the user wants to edit the description of the item
-     */
+    /** The text if the user wants to edit the description of the item */
     private EditText descEditText;
 
-    /**
-     * The text if the user wants to edit the release date of the item
-     */
+    /** The text if the user wants to edit the release date of the item */
     private EditText releaseEditText;
 
     private ImageView userImageButton;
 
+    /** Referring this to the name of this activity*/
     private AddItemActivity activity = this;
+
     private int saveImage = 0;
 
-
+    /** This is an adapter for for the items */
     private ArrayAdapter<Item> adapter;
     /**
      * the request to use the camera to take pictures
      */
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
-
+    /**
+     * Called when the activity is first created
+     * It creates the UI and initializes the spinners
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //loads it upon saving
@@ -166,18 +151,13 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
         publicprivateSpinner.setAdapter(public_private_adapter);
 
     }
-/*
-    private void selectImage(){
 
-        Intent choosePicIntent=new Intent();
-        choosePicIntent.setAction(Intent.ACTION_GET_CONTENT);
-
-        Intent takePicIntent = new Intent();
-        takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-    }
-/*
     /**
      * A necessary function that must be added to choose the item in the spinner
+     * @param parent : The AdapterView where the selection happened
+     * @param view: The view within the adapterView that was clicked
+     * @param pos: position of the item selected
+     * @param id: The row id of the item that is selected
      */
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         // An item was selected. You can retrieve the selected item using
@@ -198,15 +178,17 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
         prefEditor.commit();
     }
+
     /**
      * A necessary function to implement spinners if nothing is chosen
+     * @param parent: The AdapterView where the selection happened
      */
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
     /**
      * opens camera to take photo
-     * @param view
+     * @param view: Add image button view
      */
     public void addImageOption(View view){
 
@@ -224,8 +206,8 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
     /**
      * after taking a photo, displays the resulting image taken
      * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param resultCode:
+     * @param data: intent data returned from launched intent
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -241,8 +223,10 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
         }
     }
+
     /**
      * Saves the data from the inputs we enter
+     * @param view: save button view
      */
     public void saveButtonClick(View view) {
         Boolean isPrivate;
@@ -287,9 +271,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             }
             //String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-
-
-
             ServerManager.saveUserOnline(UserManager.getTrader());
             Intent intent = new Intent(AddItemActivity.this, myInventoryActivity.class);
             startActivity(intent);
@@ -298,11 +279,20 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
 
     }
 
+    /**
+     * Closes the activity when user clicks cancel button
+     * @param view : View of cancel button
+     */
     public void cancelButtonClick(View view) {
         this.finish();
     }
 
-
+    /**
+     * Function to check the valid date format
+     * @param date: Date that the user entered for the item
+     * @return: true if the date is in correct format
+     *              return false otherwise
+     */
     public  boolean checkDate(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
@@ -313,8 +303,6 @@ public class AddItemActivity extends Activity implements OnItemSelectedListener 
             return false;
         }
     }
-
-
 
 
     //=====Function needed for Testcases=====//

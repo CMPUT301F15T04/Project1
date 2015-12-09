@@ -17,6 +17,12 @@ import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
 import cmput301t4.gameswap.R;
 
+/**
+ * Class that let user pick items from friend inventory that they want in trade
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class SelectFromFriendInventoryActivity extends Activity {
 
     private ArrayList<String> itemNamesList;

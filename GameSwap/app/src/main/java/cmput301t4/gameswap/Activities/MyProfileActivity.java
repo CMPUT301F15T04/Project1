@@ -12,6 +12,12 @@ import android.widget.Toast;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+/**
+ * Views user's information on one page
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class MyProfileActivity extends Activity {
 
     private TextView nameTextView;

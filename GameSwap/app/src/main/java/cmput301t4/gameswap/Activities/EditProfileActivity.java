@@ -16,15 +16,29 @@ import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+/**
+ * Lets you edit personal information about yourself
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
+
 public class EditProfileActivity extends Activity {
 
+    /** name Edit Text field */
     private TextView nameEditText;
+    /** e-mail EditText field */
     private EditText emailEditText;
+    /** city EditText field */
     private EditText cityEditText;
+    /** phone EditText field */
     private EditText phoneEditText;
 
     //static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +77,10 @@ public class EditProfileActivity extends Activity {
     }*/
 
 
+    /**
+     * Called when the user clicks on Edit Profile button
+     * @param view: edit profile button view
+     */
     public void editProfileButton (View view) {
 
         UserManager.editCity(cityEditText.getText().toString());
@@ -75,6 +93,10 @@ public class EditProfileActivity extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * Called when user attempts to cancel editing profile
+     * @param view: cancel button view
+     */
     public void clickCancelButton(View view) {
         this.finish();
     }

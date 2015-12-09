@@ -15,18 +15,37 @@ import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+/**
+ * Views friend's profile and their information
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class FriendProfileActivity extends Activity {
 
+    /** Button for if the user is a friend*/
     private Button FriendStatusButton;
+    /** Button to view friend inventory */
     private Button friendInventory;
+    /** Button to trade with friend */
     private Button friendTrade;
+    /** TextView for trader name */
     private TextView traderNameTextView;
+    /** TextView for trader city */
     private TextView traderCityTextView;
+    /** TextView for trader phone */
     private TextView traderPhoneTextView;
+    /** TextView for trader e-mail */
     private TextView traderEmailTextView;
+    /** trader name  */
     private String traderName;
+    /** IsFriend status in boolean */
     private Boolean isFriend;
 
+    /**
+     *Sets the friend profile page with their information
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +83,10 @@ public class FriendProfileActivity extends Activity {
 
     }
 
+    /**
+     * Called when user attempts to remove friend from their friendlist
+     * @param view: remove trader button view
+     */
     public void removeTraderButtonClicked(View view){
         if (isFriend == Boolean.TRUE){
             int index;
@@ -82,6 +105,10 @@ public class FriendProfileActivity extends Activity {
     }
 
 
+    /**
+     * Called when user attempts to trade with friend by clicking on Trade button
+     * @param v: trade button view
+     */
     public void tradeButtonClicked(View v){
         //Toast.makeText(getBaseContext(), "Trade", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(FriendProfileActivity.this,OfferTradeActivity.class);
@@ -89,11 +116,18 @@ public class FriendProfileActivity extends Activity {
         //finish();
     }
 
+    /**
+     * Called when user clicks inventory button on friend profile
+     * @param v: Friend inventory button view
+     */
     public void friendInventoryButton(View v){
         Intent intent = new Intent(FriendProfileActivity.this,FriendInventoryActivity.class );
         startActivity(intent);
     }
 
+    /**
+     * @param areFriend: boolean to check whether the user is a friend
+     */
     public void stateswtich(Boolean areFriend){
         if(areFriend == Boolean.TRUE){
             Toast.makeText(getBaseContext(), traderName + " Removed From FriendList", Toast.LENGTH_SHORT).show();
