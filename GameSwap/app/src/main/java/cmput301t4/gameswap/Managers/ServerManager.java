@@ -35,6 +35,9 @@ import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 /**
  * Controller that houses all functions related
  * to the server
+ * @author  Daniel Ren, Blake Sakaluk, Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan
+ * @version Part 4
+ *
  */
 public class ServerManager {
 
@@ -97,11 +100,12 @@ public class ServerManager {
     }
 
     /**
+     * Function to search the traderm
      * Adapted from https://github.com/rayzhangcl/ESDemo on November 20, 2015
-     *
-     * @param username
-     * @return
+
+     * @param username name of the trader who we are searching for
      */
+
     public static void searchForUser(final String username) {
         if(!serverDown) {
             Thread serverThread = new Thread(new Runnable() {
@@ -144,14 +148,23 @@ public class ServerManager {
         }
     }
 
+    /**
+     *
+     */
     private static void resultFound() {foundResult = Boolean.TRUE;}
 
     private static void resultNotFound() {foundResult = Boolean.FALSE;}
 
     public static boolean checkResult() {return foundResult;}
 
+    /**
+     * Sets server down status to FALSE
+     */
     public static void serverNotDown(){serverDown = Boolean.FALSE;}
 
+    /**
+     * Sets server down status to TRUE
+     */
     public static void serverIsDown(){serverDown = Boolean.TRUE;}
 
     /**
