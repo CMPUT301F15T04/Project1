@@ -27,15 +27,27 @@ import cmput301t4.gameswap.R;
  */
 public class OfferTradeActivity extends Activity {
 
+    /** ListView for user inventory */
     private ListView myInventoryItemsListView;
+    /** ListView for friend inventory*/
     private ListView friendInventoryItemsListView;
+    /** adapter for user inventory */
     private ArrayAdapter<String> myadapter;
+    /** adapter for frienf inventory */
     private ArrayAdapter<String> friendAdapter;
+    /*ArrayList for user item names */
     private ArrayList<String> myItems;
+    /** ArrayList for friend item names */
     private ArrayList<String> friendItems;
+    /* TextView for friend name */
     private TextView friendName;
 
 
+    /**
+     * Called when the activity is first called and gathers necessary info to display
+     * on this activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +68,9 @@ public class OfferTradeActivity extends Activity {
 
     }
 
+    /**
+     * Called when activity is resumed to update the data on this activity
+     */
     private void resetAdapter(){
         myadapter = new ArrayAdapter<String>(this, R.layout.myselecteditemstext, CreateTradeManager.getOwnerSideName());
         friendAdapter = new ArrayAdapter<String>(this, R.layout.friendselecteditemstext, CreateTradeManager.getFriendSideName());
@@ -67,20 +82,32 @@ public class OfferTradeActivity extends Activity {
     @Override
     public void onResume(){
         super.onResume();
-        System.out.println("on resume has run");
+        //System.out.println("on resume has run");
         resetAdapter();
     }
 
+    /**
+     * Called when user tries to view friend inventory
+     * @param v: friend inventory button view
+     */
     public void friendInventoryButtonClicked(View v) {
         Intent intent = new Intent(OfferTradeActivity.this, SelectFromFriendInventoryActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Called when user clicks on Inventory button to view their items
+     * @param v: user inventory button view
+     */
     public void myInventoryButtonClicked(View v) {
         Intent intent = new Intent(OfferTradeActivity.this, MineInventoryActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Called when the user attempts to offer trade to another trader
+     * @param v: offer trade button view
+     */
     public void offerTradeClicked(View v){
         Intent intent2 = getIntent();
         Bundle b = intent2.getExtras();

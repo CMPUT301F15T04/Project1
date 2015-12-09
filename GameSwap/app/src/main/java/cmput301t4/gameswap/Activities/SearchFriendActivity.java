@@ -48,13 +48,19 @@ import cmput301t4.gameswap.R;
  */
 public class SearchFriendActivity extends Activity {
 
+    /** adapter for user friendlist */
     private ArrayAdapter<String> adapter;
+    /** ListView for user friendlist*/
     private ListView ListView;
+    /** friendList contains user's friends */
     private FriendList friendList;
-    private Boolean searchFriend = Boolean.TRUE;
 
+    private Boolean searchFriend = Boolean.TRUE;
+    /** position of friend selected from listview */
     protected int friendListViewItemPosition;
+    /** EditText for searching friend */
     private EditText searchFriendText;
+    /** EditText for friend name */
     private String friendName;
     private int size;
 
@@ -62,6 +68,10 @@ public class SearchFriendActivity extends Activity {
     private static final String FILENAME = "friends.sav"; // model
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -214,13 +224,18 @@ public class SearchFriendActivity extends Activity {
         resetAdapter();
     }
 
+    /**
+     * Called when this activity is resumed again to update friend list
+     */
     private void resetAdapter(){
         adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, friendList.getAllFriends());
         ListView.setAdapter(adapter);
     }
 
-    //================Functions used to handle between 2 different searches================//
-
+    /**
+     * Functions used to handle between 2 different searches
+     * @param swap: swap between friendlist and other traders list who are not friends
+     */
     private void switchSearch(Boolean swap){
         if (swap == Boolean.TRUE){
             search.setQueryHint("Search in Friendlist");
@@ -244,6 +259,11 @@ public class SearchFriendActivity extends Activity {
 
     }//end switchSearch
 
+    /**
+     *
+     * @param swap: swap between friendlist and other traders list who are not friends
+     * @param query: name of the trader that the user is searching up
+     */
     private void searchWhat(Boolean swap, String query){
         if(query.equals(UserManager.getTrader().getUserName())){
             Toast.makeText(getBaseContext(), "This is your Username", Toast.LENGTH_SHORT).show();
@@ -258,9 +278,10 @@ public class SearchFriendActivity extends Activity {
 
     //================end Functions used to handle between 2 different searches================//
 
-    //================Function used in "show Friendlist" option=================//
-
-
+    /**
+     * Function used in "show Friendlist" option
+     * @param friend: friend that user searched for
+     */
     public void searchFriend(String friend){
         friendList = UserManager.getTrader().getFriendList();
         Boolean isempty = Boolean.TRUE;
@@ -283,8 +304,10 @@ public class SearchFriendActivity extends Activity {
 
     //================End Function used in "show Friendlist" option============//
 
-    //================Function used in "Show User" option======================//
-
+    /**
+     * Function used in "Show User" option
+     * @param trader : trader that the user searched for
+     */
     public void findTrader(final String trader){
         //traderName = trader;
         //traderName = search.getQuery().toString();
@@ -349,6 +372,9 @@ public class SearchFriendActivity extends Activity {
 
     //================Fucntion that are unused================//
 
+    /**
+     * LoadFromFile initially used to do local saving of friendlist
+     */
     private void loadFromFile(){
 
         try {
@@ -367,7 +393,9 @@ public class SearchFriendActivity extends Activity {
         }
     }
 
-
+    /**
+     * SaveToFile initially used to do local saving of friendlist
+     */
     private void saveToFile() {
 
         try {

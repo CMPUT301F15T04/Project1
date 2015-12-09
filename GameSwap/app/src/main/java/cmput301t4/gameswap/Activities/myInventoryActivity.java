@@ -30,15 +30,20 @@ import cmput301t4.gameswap.R;
  */
 public class myInventoryActivity extends Activity{
 
+    /** ListView for user inventory */
     private ListView myInventoryListView;
+    /** Adapter for user inventory */
     private ArrayAdapter<String> adapter;
     //private ArrayList<Item> inventory;
+    /** ArrayList of item names */
     private ArrayList<String> nameOfItemsList;
    // private ArrayList<String> statusOfItemsList;
+    /** position of item selected from the listview */
     protected int myInventoryListViewPosition;
     private Boolean isEdit;
-
+    /** item ID */
     private int itemID;
+    /** Item name */
     private String Name;
     /** A description of the Item */
     private String Description;
@@ -46,24 +51,34 @@ public class myInventoryActivity extends Activity{
     private String ReleaseDate;
     /** Quality of the game*/
     private int Quality;
-    /*IsPRivate */
+    /**IsPRivate */
     private Boolean IsPrivate;
-    /*Platform of the game*/
+    /**Platform of the game*/
     private int Platform;
+    /** latitude of the item location*/
     private double latitude;
+    /** longitude of the item location */
     private double longitude;
 
     private static final String FILENAME = "file.sav"; // model
 
     //=====Varibles used in testcase=====//
 
+    /* popup menu to display options regardin the item */
     private PopupMenu popupMenu;
     private AlertDialog.Builder alert;
+    /* dialog to ask for confirmation */
     private AlertDialog alertDialog;
+    /** ArrayList of items */
     private ArrayList<String> items;
+    /** inventory is composed of items */
     private ArrayList<Item> inventory;
     //=====End Varibles used in testcases=====//
 
+    /**
+     * displays user inventory, perform action on item depending on the option selected
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,13 +150,13 @@ public class myInventoryActivity extends Activity{
         });
 
     }
-    
 
+    /**
+     * Refreshes user inventory page by grabbing new data
+     */
     @Override
       protected void onStart(){
-
         super.onStart();
-
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
         inventory = InventoryManager.getItems();
         nameOfItemsList = InventoryManager.getItemsNames();
@@ -151,6 +166,11 @@ public class myInventoryActivity extends Activity{
 
     }
 
+    /**
+     * Preparing to call other activities
+     * @param type: private/public status of the item
+     * @param position: position of the item clicked
+     */
     public void setPutExtraForMe(Boolean type, int position){
         if (type == Boolean.TRUE){
             Name = InventoryManager.getItem(position).getName();
@@ -191,6 +211,10 @@ public class myInventoryActivity extends Activity{
         }
     }
 
+    /**
+     * Called when user clicks on add item button
+     * @param view: add item view
+     */
     public void addNewItem(View view){
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);

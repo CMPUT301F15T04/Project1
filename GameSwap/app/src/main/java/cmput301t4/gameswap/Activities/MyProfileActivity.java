@@ -20,14 +20,21 @@ import cmput301t4.gameswap.R;
  */
 public class MyProfileActivity extends Activity {
 
+    /** TextView for user name*/
     private TextView nameTextView;
+    /** TextView for user location */
     private TextView locationTextView;
+    /** TextView for user contact info*/
     private TextView contactTextView;
+    /** TextView for user email*/
     private TextView emailTextView;
     //private ImageView profilePicture;
 
 
-
+    /**
+     * Displays user personal information about the user
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,10 @@ public class MyProfileActivity extends Activity {
     }
 
 
+    /**
+     * Called when the user clicks on Edit Profile button
+     * @param view: edit profile button view
+     */
     public void editProfileButtonClicked(View view){
         Intent intent = new Intent(MyProfileActivity.this,EditProfileActivity.class);
         finish();

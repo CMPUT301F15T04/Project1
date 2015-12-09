@@ -23,20 +23,23 @@ import cmput301t4.gameswap.R;
  */
 public class MineInventoryActivity extends Activity  {
 
+    /** ListView for inventory */
     private ListView listView;
-
-
-
     //Adapter.ItemHolder.ListViewAdapter adapter;
-    //private ArrayList<Item> inventory;
     private ArrayList<Item> inventory;
+    /*Adapter for the inventory */
     private ArrayAdapter<String> adapter;
+    /*ArrayList of the item names */
     private ArrayList<String> nameOfItemsList;
+    /** ArrayList of items that were selected by the user */
     private ArrayList<String> itemsSelected;
     private int size;
 
 
-
+    /**
+     * Grabs infromation about user inventory and displays it in this activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,12 @@ public class MineInventoryActivity extends Activity  {
         });
     }
 
+
+    /**
+     * Called when user is done selecting items from their inventory by clicking on
+     * done button
+     * @param v: done button view
+     */
     public void doneButtonClicked(View v){
         finish();
     }
