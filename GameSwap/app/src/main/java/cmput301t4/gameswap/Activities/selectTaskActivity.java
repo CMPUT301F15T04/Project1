@@ -55,14 +55,28 @@ public class selectTaskActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Button to view user inventory
+     * @param view: inventory button view
+     */
     public void openInventoryButton(View view){
         Intent intent = new Intent(selectTaskActivity.this,myInventoryActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Button to search for friends
+     * @param view: search friend button view
+     */
     public void openFriendsButton(View view){
         Intent intent = new Intent(selectTaskActivity.this,SearchFriendActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Button to view trade offers
+     * @param view: trade offer button view
+     */
     public void tradeOffersButton(View view){
         Intent intent = new Intent(selectTaskActivity.this,TradesActivity.class);
         startActivity(intent);

@@ -25,11 +25,20 @@ import cmput301t4.gameswap.R;
  */
 public class SelectFromFriendInventoryActivity extends Activity {
 
+    /** ArrayList of item names */
     private ArrayList<String> itemNamesList;
+    /** friend inventory*/
     private Inventory inventory;
+    /** adapter for friend inventory */
     private ArrayAdapter<String> adapter;
+    /** ListView for friend inventory */
     private ListView listView;
 
+    /**
+     * Called whent the activity is first created
+     * Grabs friend inventory items and displays them
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +48,6 @@ public class SelectFromFriendInventoryActivity extends Activity {
         listView = (ListView) findViewById(R.id.friendInventoryListView);
         adapter = new ArrayAdapter<String>(this,R.layout.friendinventorylistviewtext,itemNamesList);
         listView.setAdapter(adapter);
-
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,9 +62,12 @@ public class SelectFromFriendInventoryActivity extends Activity {
 
             }
         });
-
     }
 
+    /**
+     * Called when user is done selecting items from friend inventory
+     * @param v: done button view
+     */
     public void frienddoneButtonClicked(View v){
         finish();
     }

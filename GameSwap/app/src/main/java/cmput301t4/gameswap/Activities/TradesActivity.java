@@ -27,15 +27,27 @@ import cmput301t4.gameswap.R;
 public class TradesActivity extends Activity {
 
 
+    /** Current trade borrowers */
     private ArrayList<String> currentTradeBorrowers;
+    /** Past trade borrowers */
     private ArrayList<String> pastTradeBorrowers;
+    /** Current trades list view */
     private ListView currentListView;
+    /** Past trades list view */
     private ListView pastListView;
+    /** Adapter for current trades */
     private ArrayAdapter<String> currentAdapter;
+    /** Adapter for past trades */
     private ArrayAdapter<String> pastAdapter;
+    /** object trade */
     private Trade trade;
 
 
+    /**
+     * Called when the activity is created
+     * Collects current trades and past trades and displays them on this activity page
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +92,11 @@ public class TradesActivity extends Activity {
         });
 
     }
+
+    /**
+     * Called when this activity is resumed to update data that needs to be displayed
+     * on this page
+     */
     public void resetAdapter(){
 
         currentTradeBorrowers = TradeManager.getCurrentNames(true);

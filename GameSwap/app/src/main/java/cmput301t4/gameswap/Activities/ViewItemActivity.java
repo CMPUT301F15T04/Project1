@@ -25,21 +25,35 @@ import cmput301t4.gameswap.R;
  */
 public class ViewItemActivity extends Activity {
 
-    /*Declaring all the listViews here*/
+    /** Item name */
     private TextView name;
+    /** Item quality*/
     private TextView quality;
+    /** Item description*/
     private TextView description;
+    /** Item platform*/
     private TextView platform;
+    /** Item release date*/
     private TextView date;
+    /** Item public/private status*/
     private Boolean status;
     private String statusDisplay;
+    /** Item */
     private TextView statusView;
+    /** Item image view*/
     private ImageView imageView;
+    /** Item location */
     private TextView location;
     private ArrayList<String> platformList;
     private String platformString;
     private Integer platformIndex;
 
+    /**
+     * Called when this activity is first created
+     * Collects all the information of the item selected and displayes it on this
+     * activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
