@@ -71,12 +71,16 @@ public class DecideTradeActivity extends Activity {
         TradeManager.getPast().add(TradeManager.getCurrent().getTrade(index));  //addes trade to past list current user
         ServerManager.getFriendOnline(TradeManager.getCurrent().getTrade(index).getOwnername()); //loads most up to date version of frient
 
+        int ownerTradesize = TradeManager.getCurrent().getTrade(index).getOwnerItems().size();
+        int BorrowerTradesize = TradeManager.getCurrent().getTrade(index).getBorrowerItems().size();
+
         //deletes items from respective inventories
         UserManager.getTrader().getInventory().deleteItemAfterTrade(TradeManager.getCurrent().getTrade(index).getBorrowerItems());
         UserManager.getFriend().getInventory().deleteItemAfterTrade(TradeManager.getCurrent().getTrade(index).getOwnerItems());
         //adds items to respective inventories
         UserManager.getTrader().getInventory().addItemAfterTrade(TradeManager.getCurrent().getTrade(index).getOwnerItems(), UserManager.getTrader());
         UserManager.getFriend().getInventory().addItemAfterTrade(TradeManager.getCurrent().getTrade(index).getBorrowerItems(), UserManager.getFriend());
+
 
         UserManager.getFriend().getPendingTrades().delete(TradeManager.getCurrent().getTrade(index));//deleting trade from friend
         UserManager.getFriend().getPastTrades().add(TradeManager.getCurrent().getTrade(index));
