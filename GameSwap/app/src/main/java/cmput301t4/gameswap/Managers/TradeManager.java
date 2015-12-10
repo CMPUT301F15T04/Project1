@@ -7,74 +7,106 @@ import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 
 /**
- * Created by kynan on 11/1/15.
+ * TradeManager handles all the information related to trades
+ * @author Kynan Ly, Blake Sakaluk, Preyanshu Kumar, Daniel Ren, Rupehra Chouhan
+ * @version Part 4
  */
 public class TradeManager {
 
-    //Singleton Code for currentList
+    /** Singleton Code for currentList */
     static public TradeList getCurrent(){
         return UserManager.getPendingList();
     }
 
-    //Singleton Code for pastList
+    /**Singleton Code for pastList */
     static public TradeList getPast(){
         return UserManager.getPastList();
     }
 
-
-    //=====Basic Function=====//
-
-    //Create a new trade
+    /**
+     * This creates a new trade
+     * @param OwnerName owner of the item
+     * @param BorrowerName borrower of the item
+     * @param OwnerItems owner items to trade
+     * @param BorrowerItems borrower items to trade
+     */
     public static void createTrade(String OwnerName, String BorrowerName, Inventory OwnerItems, Inventory BorrowerItems){
         //String OwnerName, String BorrowerName, ArrayList<Item> OwnerItems, ArrayList<Item> BorrowerItems
         //Trade trade = new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems);
         getCurrent().add(new Trade(OwnerName, BorrowerName, OwnerItems, BorrowerItems));
 
-    }//end createTrade
+    }
 
-    //Del trade from current Trade (most likely only used offline)
+    /**
+     *Del trade from current Trade (most likely only used offline)
+     * @param position position at which the item resides that needs to be deleted
+     */
     public static void delTrade(int position){
         getCurrent().del(position);
     }//end deltrade
 
-    //Get trade from list (1 = Current, else = Past)
+    /**
+     * Gets trade from list (1 = Current, else = Past)
+     * @param position position of the trade in list
+     * @param list list of trades
+     * @return trade
+     */
     public Trade getTrade(int position, int list){
         if(list == 1){
             return getCurrent().getTrade(position);
         } else {
             return getPast().getTrade(position);
         }
-    }//end getTrade
+    }
 
+    /**
+     * Gets the most recent trade
+     * @return most recent trade
+     */
     public static Trade getMostRecentTrade(){
         int lastPosition = getCurrent().getSize() - 1;
         return getCurrent().getTrade(lastPosition);
     }
 
-
-    static public ArrayList<String> getBorrowerNames(){
-        return getCurrent().getBorrowerNames();
+    /**
+     * Gets the name of trades in progress
+     * @param trade trade
+     * @return name of trades in progress
+     */
+    static public ArrayList<String> getCurrentNames(Boolean trade){
+        if (trade == Boolean.TRUE){
+            return getCurrent().getNames();
+        } else {
+            return getPast().getNames();
+        }
     }
-    //Move trade from current to past
-    public void moveTrade(int position){
+
+    /**
+     * Move trade from current to past
+     * @param position
+     */
+    static public void moveTrade(int position){
         getPast().add(getCurrent().getTrade(position));
         getCurrent().del(position);
-    }//end moveTrade
+    }
 
-    //check if they have trade object
-    /*
-    Used more see the friend tradelist has the trade object
-    (situtation : counter trade offer)
+    /**
+     * checks if they have trade object
+     * @param trade trade to be checked if it exists
+     * @return true if the trade exits, false otherwise
      */
     public boolean hasTrade(Trade trade){
         return getCurrent().hasTrade(trade);
     }//end hasItem
 
-    //Wrote this in for testing, not sure if we really need
+
+    /**
+     * Clears the trade list
+     */
     public void clearTradelist(){
         getCurrent().clearTradelist();
         getPast().clearTradelist();
-    }//end clearTradelist
+    }
 
 
     //==More Advance Function (NOT IMPLEMENTED)==//
@@ -99,4 +131,4 @@ public class TradeManager {
     }//end createCounterTrade
     */
 
-}//end TradeManager
+}

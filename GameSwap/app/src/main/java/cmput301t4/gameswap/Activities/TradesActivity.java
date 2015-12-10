@@ -10,40 +10,54 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.TradeManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Trade;
 import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.R;
 
+
+/**
+ * Class that displays user's current and past trades
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class TradesActivity extends Activity {
 
-    private ArrayAdapter<String> adapter;
-    private ListView pendingtradeListView;
-    private ArrayList<String> trades;
-    private TradeList tradeList;
+
+    /** Current trade borrowers */
     private ArrayList<String> currentTradeBorrowers;
+    /** Past trade borrowers */
     private ArrayList<String> pastTradeBorrowers;
-    private TradeList currentTrades;
-    private TradeList pastTrades;
-    private TradeManager TM;
+    /** Current trades list view */
     private ListView currentListView;
+    /** Past trades list view */
     private ListView pastListView;
+    /** Adapter for current trades */
     private ArrayAdapter<String> currentAdapter;
+    /** Adapter for past trades */
     private ArrayAdapter<String> pastAdapter;
+    /** object trade */
     private Trade trade;
 
 
+    /**
+     * Called when the activity is created
+     * Collects current trades and past trades and displays them on this activity page
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trades);
-        TM = new TradeManager();
-        tradeList = new TradeList();
-        currentTrades = TM.getCurrent();
-        pastTrades = TM.getPast();
-        currentTradeBorrowers = currentTrades.getBorrowerNames();
-        pastTradeBorrowers = pastTrades.getBorrowerNames();
+
+        //reload user before viewing tradelist
+        ServerManager.getUserOnline(UserManager.getTrader().getUserName());
+
+        currentTradeBorrowers = TradeManager.getCurrentNames(true);
+        pastTradeBorrowers = TradeManager.getCurrentNames(false);
         currentListView = (ListView) findViewById(R.id.pendingtradeListView);
         pastListView = (ListView) findViewById(R.id.pasttradeListView);
         currentAdapter = new ArrayAdapter<String>(this, R.layout.currentofferalisttextview, currentTradeBorrowers);
@@ -55,7 +69,7 @@ public class TradesActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                trade = currentTrades.getTrade(position);;
+                trade = TradeManager.getCurrent().getTrade(position);
                 if(UserManager.getTrader().getUserName().equals(trade.getOwnername())){
                     Intent intent = new Intent(TradesActivity.this, CancelCreateTradeActivity.class);
                     intent.putExtra("index",position);
@@ -73,26 +87,24 @@ public class TradesActivity extends Activity {
         pastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                trade = pastTrades.getTrade(position);
+                trade = TradeManager.getPast().getTrade(position);
             }
         });
 
     }
+
+    /**
+     * Called when this activity is resumed to update data that needs to be displayed
+     * on this page
+     */
     public void resetAdapter(){
-        TM = new TradeManager();
-        tradeList = new TradeList();
-        currentTrades = TM.getCurrent();
-        pastTrades = TM.getPast();
-        currentTradeBorrowers = TM.getBorrowerNames();
-        pastTradeBorrowers = pastTrades.getBorrowerNames();
-        currentListView = (ListView) findViewById(R.id.pendingtradeListView);
-        pastListView = (ListView) findViewById(R.id.pasttradeListView);
+
+        currentTradeBorrowers = TradeManager.getCurrentNames(true);
+        pastTradeBorrowers = TradeManager.getCurrentNames(false);
         currentAdapter = new ArrayAdapter<String>(this, R.layout.currentofferalisttextview, currentTradeBorrowers);
         pastAdapter = new ArrayAdapter<String>(this, R.layout.pastofferlisttextview, pastTradeBorrowers);
         currentListView.setAdapter(currentAdapter);
         pastListView.setAdapter(pastAdapter);
-        currentAdapter.notifyDataSetChanged();
-        pastAdapter.notifyDataSetChanged();
     }
 
 
@@ -101,4 +113,12 @@ public class TradesActivity extends Activity {
         super.onResume();
         resetAdapter();
     }
+
+    //===================Function needed for TestCases===================//
+
+    public ListView getCurrentTrade(){
+        return currentListView;
+    }
+
+    //===================Function needed for TestCases===================//
 }

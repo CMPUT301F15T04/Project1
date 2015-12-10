@@ -22,17 +22,28 @@ import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
+/**
+ * Shows all the items in user's inventory
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class myInventoryActivity extends Activity{
 
+    /** ListView for user inventory */
     private ListView myInventoryListView;
+    /** Adapter for user inventory */
     private ArrayAdapter<String> adapter;
     //private ArrayList<Item> inventory;
+    /** ArrayList of item names */
     private ArrayList<String> nameOfItemsList;
    // private ArrayList<String> statusOfItemsList;
+    /** position of item selected from the listview */
     protected int myInventoryListViewPosition;
-    private myInventoryActivity activity = this;
-
+    private Boolean isEdit;
+    /** item ID */
     private int itemID;
+    /** Item name */
     private String Name;
     /** A description of the Item */
     private String Description;
@@ -40,24 +51,34 @@ public class myInventoryActivity extends Activity{
     private String ReleaseDate;
     /** Quality of the game*/
     private int Quality;
-    /*IsPRivate */
+    /**IsPRivate */
     private Boolean IsPrivate;
-    /*Platform of the game*/
+    /**Platform of the game*/
     private int Platform;
+    /** latitude of the item location*/
     private double latitude;
+    /** longitude of the item location */
     private double longitude;
 
     private static final String FILENAME = "file.sav"; // model
 
     //=====Varibles used in testcase=====//
 
+    /* popup menu to display options regardin the item */
     private PopupMenu popupMenu;
     private AlertDialog.Builder alert;
+    /* dialog to ask for confirmation */
     private AlertDialog alertDialog;
+    /** ArrayList of items */
     private ArrayList<String> items;
+    /** inventory is composed of items */
     private ArrayList<Item> inventory;
     //=====End Varibles used in testcases=====//
 
+    /**
+     * displays user inventory, perform action on item depending on the option selected
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,24 +102,8 @@ public class myInventoryActivity extends Activity{
                         switch (item.getItemId()) {
                             case R.id.editItemMenuId:
                                 //Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                                Name = InventoryManager.getItem(myInventoryListViewPosition).getName();
-                                Description = InventoryManager.getItem(myInventoryListViewPosition).getDescription();
-                                ReleaseDate = InventoryManager.getItem(myInventoryListViewPosition).getReleaseDate();
-                                itemID = InventoryManager.getItem(myInventoryListViewPosition).getItemid();
-                                latitude = inventory.get(myInventoryListViewPosition).getLocation().getLatitude();
-                                longitude = inventory.get(myInventoryListViewPosition).getLocation().getLongitude();
-
-                                final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
-                                intent.putExtra("name", Name);
-                                intent.putExtra("description", Description);
-                                intent.putExtra("releaseDate", ReleaseDate);
-                                intent.putExtra("index", myInventoryListViewPosition);
-                                intent.putExtra("Latitude", latitude);
-                                intent.putExtra("Longitude", longitude);
-                                System.out.println("Setting this number as item id for image" + itemID);
-                                intent.putExtra("itemId", itemID);
-                                startActivity(intent);
+                                isEdit = Boolean.TRUE;
+                                setPutExtraForMe(isEdit, myInventoryListViewPosition);
 
                                 return true;
                             case R.id.deleteItemMenuId:
@@ -139,39 +144,19 @@ public class myInventoryActivity extends Activity{
         myInventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Name = InventoryManager.getItem(position).getName();
-                Description = InventoryManager.getItem(position).getDescription();
-                ReleaseDate = InventoryManager.getItem(position).getReleaseDate();
-                Platform = InventoryManager.getItem(position).getPlatform();
-                IsPrivate = InventoryManager.getItem(position).getIsPrivate();
-                Quality = InventoryManager.getItem(position).getQuality();
-                itemID = inventory.get(position).getItemid();
-
-
-                final Intent intent = new Intent(myInventoryActivity.this, ViewItemActivity.class);
-                intent.putExtra("name", Name);
-                intent.putExtra("description", Description);
-                intent.putExtra("releaseDate", ReleaseDate);
-                intent.putExtra("index", myInventoryListViewPosition);
-                intent.putExtra("quality", Quality);
-                intent.putExtra("private", IsPrivate);
-                intent.putExtra("platform", Platform);
-                System.out.println("this is the name of the item at position" + Name);
-                System.out.println("Setting this number as item id for image" + itemID);
-                intent.putExtra("itemId", itemID);
-                startActivity(intent);
+                isEdit = Boolean.FALSE;
+                setPutExtraForMe(isEdit, position);
             }
         });
 
     }
-    
 
+    /**
+     * Refreshes user inventory page by grabbing new data
+     */
     @Override
       protected void onStart(){
-
         super.onStart();
-
         myInventoryListView = (ListView) findViewById(R.id.myInventoryListView);
         inventory = InventoryManager.getItems();
         nameOfItemsList = InventoryManager.getItemsNames();
@@ -181,10 +166,61 @@ public class myInventoryActivity extends Activity{
 
     }
 
+    /**
+     * Preparing to call other activities
+     * @param type: private/public status of the item
+     * @param position: position of the item clicked
+     */
+    public void setPutExtraForMe(Boolean type, int position){
+        if (type == Boolean.TRUE){
+            Name = InventoryManager.getItem(position).getName();
+            Description = InventoryManager.getItem(position).getDescription();
+            ReleaseDate = InventoryManager.getItem(position).getReleaseDate();
+            itemID = InventoryManager.getItem(position).getItemid();
+            latitude = inventory.get(position).getLocation().getLatitude();
+            longitude = inventory.get(position).getLocation().getLongitude();
+
+            final Intent intent = new Intent(myInventoryActivity.this, EditItemActivity.class);
+            intent.putExtra("name", Name);
+            intent.putExtra("description", Description);
+            intent.putExtra("releaseDate", ReleaseDate);
+            intent.putExtra("index", position);
+            intent.putExtra("Latitude", latitude);
+            intent.putExtra("Longitude", longitude);
+            intent.putExtra("itemId", itemID);
+            startActivity(intent);
+            finish();
+        } else {
+            Name = InventoryManager.getItem(position).getName();
+            Description = InventoryManager.getItem(position).getDescription();
+            ReleaseDate = InventoryManager.getItem(position).getReleaseDate();
+            Platform = InventoryManager.getItem(position).getPlatform();
+            IsPrivate = InventoryManager.getItem(position).getIsPrivate();
+            Quality = InventoryManager.getItem(position).getQuality();
+            itemID = inventory.get(position).getItemid();
+
+            final Intent intent = new Intent(myInventoryActivity.this, ViewItemActivity.class);
+            intent.putExtra("name", Name);
+            intent.putExtra("description", Description);
+            intent.putExtra("releaseDate", ReleaseDate);
+            intent.putExtra("index", myInventoryListViewPosition);
+            intent.putExtra("quality", Quality);
+            intent.putExtra("private", IsPrivate);
+            intent.putExtra("platform", Platform);
+            intent.putExtra("itemId", itemID);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    /**
+     * Called when user clicks on add item button
+     * @param view: add item view
+     */
     public void addNewItem(View view){
         Intent intent = new Intent(myInventoryActivity.this,AddItemActivity.class);
         startActivity(intent);
-        this.finish();
+        finish();
     }
 
     //=====Function needed for Testcases=====//

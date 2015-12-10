@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301t4.gameswap.Exceptions.DateFormatException;
+import cmput301t4.gameswap.Managers.ServerManager;
+import cmput301t4.gameswap.Managers.UserManager;
 
 /**
  * Stores the Items that the current user owns
+ * @author Kynan Ly, Rupehra Chouhan , Daniel Ren, Blake Sakaluk, Preyanshu Kumar
+ * @version Part 4
  */
+
 public class Inventory {
     private ArrayList<Item> inventory = new ArrayList<Item>();
 
@@ -56,6 +61,20 @@ public class Inventory {
     public void addItemAfterTrade(Inventory items, User user){
         for(int i = 0; i < items.size(); i++){
             Item item = items.getItem(i);
+            if(item.gethasPicture() == 1){
+                ServerManager.loadImage(item.getItemid());
+                String oldUsername = UserManager.getImageModel().getImageuserName();
+                int oldItemid = UserManager.getImageModel().getImageItemId();
+                item.setItemid(user.getCounter());
+                user.incrementCounter();
+                inventory.add(item);
+                UserManager.getImageModel().setImageItemId(item.getItemid());
+                UserManager.getImageModel().setImageUser(user.getUserName());
+                ServerManager.saveImage(UserManager.getImageModel());
+                ServerManager.deleteImage(oldUsername, oldItemid);
+                continue;
+
+            }
             item.setItemid(user.getCounter());
             user.incrementCounter();
             inventory.add(item);
@@ -87,11 +106,14 @@ public class Inventory {
      *
      * @return A Collection of Items that the current user owns
      */
-    //public Collection<? extends Item> getItems() {
     public ArrayList<Item> getItems(){
         return inventory;
     }
 
+    /**
+     * Gets the names of all the items in the inventory
+     * @return item names
+     */
     public ArrayList<String> getItemsNames() {
         ArrayList<String> name = new ArrayList<String>();
         for (int i=0;i<inventory.size();i++){
@@ -191,10 +213,19 @@ public class Inventory {
         return formatter.format(date);
     }
 
+    /**
+     *
+     * @param itemArrayPosition position of the item in the ListView
+     */
     public void setItemArrayPosition(int itemArrayPosition) {
         ItemArrayPosition = itemArrayPosition;
     }
 
+    /**
+     *
+     * @param id item ID
+     * @return index
+     */
     public int findItemByIndx(int id){
 
         for (int i = 0; i<inventory.size(); i++){

@@ -3,19 +3,29 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+/**
+ * This class provides an open of viewing their inventory, browse trades and view trade offers
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class selectTaskActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_task);
+        checkTrades();
     }
 
     @Override
@@ -45,14 +55,28 @@ public class selectTaskActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Button to view user inventory
+     * @param view: inventory button view
+     */
     public void openInventoryButton(View view){
         Intent intent = new Intent(selectTaskActivity.this,myInventoryActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Button to search for friends
+     * @param view: search friend button view
+     */
     public void openFriendsButton(View view){
-        Intent intent = new Intent(selectTaskActivity.this,FriendsNTradingActivity.class);
+        Intent intent = new Intent(selectTaskActivity.this,SearchFriendActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Button to view trade offers
+     * @param view: trade offer button view
+     */
     public void tradeOffersButton(View view){
         Intent intent = new Intent(selectTaskActivity.this,TradesActivity.class);
         startActivity(intent);
@@ -65,6 +89,25 @@ public class selectTaskActivity extends Activity {
         return button;
     }//end getInventoryButton
 
+    public Button getTraderButton(){
+        Button button = (Button) findViewById(R.id.friends);
+        return button;
+    }//end getTraderButton
+
 
     //=====End Function needed for Testcases
+
+    public void checkTrades(){
+        String message = "";
+        for(int i = 0; i < 4; i++){
+            if(i == 3){
+                message += UserManager.getTrader().IfNotify(i);
+            }else{
+                message += UserManager.getTrader().IfNotify(i) + "\n";
+            }
+        }
+        Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
+    }
 }

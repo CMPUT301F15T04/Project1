@@ -29,16 +29,25 @@ import cmput301t4.gameswap.Models.TradeList;
 import cmput301t4.gameswap.Models.User;
 
 /**
+ *
+ * UserManager handles all the information regarding the user
+ * @author  Kynan Ly, Preyanshu Kumar, Rupehra Chouhan , Daniel Ren, Blake Sakaluk,
+ * @version Part 4
+ *
  * functions needed to include: editUserName(), EditPhoneNumber(),EditEmail()
  * EditCity(), CreateTrader() ?, DeleteTrader() ?, AddFriend(), DeleteFriend()
  */
 public class UserManager {
 
+    /** Intializing trader to null */
     private static User trader = null;
+    /** Intializing friend to null */
     private static User friend = null;
+    /** Intializing image to null */
     private static ImageModel traderItemImage = null;
     private static byte[] imageByte = null;
-    public static int imageRdy = 0; //set to 1 if image pulled from server was not null
+    /**set to 1 if image pulled from server was not null */
+    public static int imageRdy = 0;
 
     /**
      * Used to get the app-wide singleton of <code>User</code>
@@ -55,6 +64,10 @@ public class UserManager {
         return trader;
     }
 
+    /**
+     *
+     * @return friend if they are in friend list
+     */
     static public User getFriend() {
 
         if (friend == null) {
@@ -63,10 +76,18 @@ public class UserManager {
         return friend;
     }
 
+    /**
+     * Sets user as the friend
+     * @param user user to set as friend
+     */
     public static void setFriend(User user) {
         friend = user;
     }
 
+    /**
+     * Sets the trader
+     * @param user user to set as trader
+     */
     public static void setTrader(User user) {
         trader = user;
     }
@@ -80,9 +101,9 @@ public class UserManager {
         trader.DisplayNotify(type);
     }
 
-    //=====End of Test Notifty related Code=====//
+    /** End of Test Notifty related Code */
 
-    //=====In-Work Trade Notifty=====//
+    /** In-Work Trade Notifty */
 
     // index 0: new Trade 1: Counter Trade 2: Trade Cancel
     public String findBorrowerFriend(String BorrowerName) {
@@ -330,6 +351,10 @@ public class UserManager {
         }, null);
     }
 
+    /**
+     * Gets user default location
+     * @return user location
+     */
     public static Location getDefaultLocation() {
         return getTrader().getDefaultLocation();
     }

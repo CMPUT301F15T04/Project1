@@ -12,16 +12,29 @@ import android.widget.Toast;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+/**
+ * Views user's information on one page
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class MyProfileActivity extends Activity {
 
+    /** TextView for user name*/
     private TextView nameTextView;
+    /** TextView for user location */
     private TextView locationTextView;
+    /** TextView for user contact info*/
     private TextView contactTextView;
+    /** TextView for user email*/
     private TextView emailTextView;
     //private ImageView profilePicture;
 
 
-
+    /**
+     * Displays user personal information about the user
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +56,10 @@ public class MyProfileActivity extends Activity {
     }
 
 
+    /**
+     * Called when the user clicks on Edit Profile button
+     * @param view: edit profile button view
+     */
     public void editProfileButtonClicked(View view){
         Intent intent = new Intent(MyProfileActivity.this,EditProfileActivity.class);
         finish();
@@ -76,8 +93,12 @@ public class MyProfileActivity extends Activity {
 
     public void checkNotifications(View v){
         String message = "";
-        for(int i = 0; i < 3; i++){
-            message += UserManager.getTrader().IfNotify(i) + "\n";
+        for(int i = 0; i < 4; i++){
+            if(i == 3){
+                message += UserManager.getTrader().IfNotify(i);
+            }else{
+                message += UserManager.getTrader().IfNotify(i) + "\n";
+            }
         }
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
     }

@@ -12,16 +12,30 @@ import cmput301t4.gameswap.Exceptions.ServerDownException;
 import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.R;
 
+
+/**
+ * This activity opens when the app launches, it asks for username in order to login
+ * or let new user create an account
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class MainActivity extends Activity {
 
-
+    /**
+     * Creates the main page of the app
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
-
+    /**
+     * Called when user clicks on login button
+     * @param view: login button view
+     */
     public void clickedLogin(View view) {
         //UserManager.loadUserLocally(this);
         EditText username = (EditText) findViewById(R.id.textView);
@@ -32,6 +46,7 @@ public class MainActivity extends Activity {
             public void run() {
 
                 try {
+                    //ServerManager.deleteUserOnline(user);
                     ServerManager.searchForUser(user);
                     ServerManager.serverNotDown();
                 }catch(ServerDownException e){
@@ -79,6 +94,10 @@ public class MainActivity extends Activity {
 
     }//end click Login
 
+    /**
+     * Called when user clicks Register button
+     * @param view: register button view
+     */
     public void clickedRegister(View view){
         Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
         startActivity(intent);

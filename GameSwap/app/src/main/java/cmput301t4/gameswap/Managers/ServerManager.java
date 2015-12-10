@@ -32,12 +32,19 @@ import cmput301t4.gameswap.Models.User;
 import cmput301t4.gameswap.serverTools.ElasticSearchResponse;
 import cmput301t4.gameswap.serverTools.ElasticSearchSearchResponse;
 
+/**
+ * Controller that houses all functions related
+ * to the server
+ * @author  Daniel Ren, Blake Sakaluk, Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan
+ * @version Part 4
+ *
+ */
 public class ServerManager {
 
     private static boolean foundResult = Boolean.FALSE;
     private static boolean serverDown = Boolean.FALSE;
 
-    private static HttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
+    private static HttpClient httpclient;
     private static Gson gson = new Gson();
 
     private static final String baseURL = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/";
@@ -55,6 +62,7 @@ public class ServerManager {
                 public void run() {
                     try {
                         //Taken from https://github.com/rayzhangcl/ESDemo
+                        httpclient = new DefaultHttpClient(new BasicHttpParams());
                         HttpGet getRequest = new HttpGet(baseURL + "users/" + username + "/_source");
                         getRequest.addHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(getRequest);
@@ -92,11 +100,12 @@ public class ServerManager {
     }
 
     /**
+     * Function to search the traderm
      * Adapted from https://github.com/rayzhangcl/ESDemo on November 20, 2015
-     *
-     * @param username
-     * @return
+
+     * @param username name of the trader who we are searching for
      */
+
     public static void searchForUser(final String username) {
         if(!serverDown) {
             Thread serverThread = new Thread(new Runnable() {
@@ -105,6 +114,7 @@ public class ServerManager {
                 public void run () {
                     try {
                         //this url request will ignore all the data of each id inside user
+                        httpclient = new DefaultHttpClient(new BasicHttpParams());
                         HttpGet searchRequest = new HttpGet(baseURL + "users/_search?pretty=1&q=" + username + "&_source=false");
                         searchRequest.setHeader("Accept", "application/json");
                         HttpResponse response = httpclient.execute(searchRequest);
@@ -138,20 +148,34 @@ public class ServerManager {
         }
     }
 
+    /**
+     *
+     */
     private static void resultFound() {foundResult = Boolean.TRUE;}
 
     private static void resultNotFound() {foundResult = Boolean.FALSE;}
 
     public static boolean checkResult() {return foundResult;}
 
+    /**
+     * Sets server down status to FALSE
+     */
     public static void serverNotDown(){serverDown = Boolean.FALSE;}
 
+    /**
+     * Sets server down status to TRUE
+     */
     public static void serverIsDown(){serverDown = Boolean.TRUE;}
 
+    /**
+     * checks the status of the server to see if it's up
+     * @return a boolean representing the state of the server
+     */
     public static boolean checkServerStatus(){
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                httpclient = new DefaultHttpClient(new BasicHttpParams());
                 HttpGet searchRequest = new HttpGet(baseURL + "_search?pretty=1");
                 searchRequest.setHeader("Accept", "application/json");
                 HttpResponse response = null;
@@ -183,14 +207,16 @@ public class ServerManager {
     }
 
     /**
-     * Loads user into server
-     * @param user
+     * Savesuser into server
+     * @param user User object that is beng saved
      */
     public static void saveUserOnline(final User user){
         if(!serverDown) {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
+
+                    httpclient = new DefaultHttpClient(new BasicHttpParams());
                     HttpPost httpPost = new HttpPost(baseURL + "users/" + user.getUserName());
                     StringEntity stringentity = null;
 
@@ -214,9 +240,16 @@ public class ServerManager {
 
             Thread serverThread = new Thread(runnable);
             serverThread.start();
+
+            try {
+                serverThread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException();
+            }
         } else {
             throw new ServerDownException();
         }
+
 
     }
 
@@ -238,6 +271,10 @@ public class ServerManager {
         return json;
     }
 
+    /**
+     * Locate and load the trader that the User is interacting with
+     * @param username the username of the trader that is currenty being interacted with
+     */
     public static void getFriendOnline(final String username){
         Runnable runnable = new Runnable() {
             @Override
@@ -314,6 +351,7 @@ public class ServerManager {
                 HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
                 String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/users/" + username;
+
                 System.out.println(url);
                 HttpClient httpClient = new DefaultHttpClient(httpParameters);
                 HttpDelete httpDel = new HttpDelete(url);
@@ -499,6 +537,10 @@ public class ServerManager {
         }
     }*/
 
+    /**
+     * Saves the image of the item onto he server
+     * @param image the image that is being saved
+     */
     public static void saveImage(final ImageModel image){
         Runnable runnable = new Runnable() {
             @Override
@@ -572,6 +614,10 @@ public class ServerManager {
         }
     }//end save image
 
+    /**
+     * loads the image of the item
+     * @param item the item that the image belongs to
+     */
     public static void loadImage(final int item){
         Runnable runnable = new Runnable() {
             @Override
@@ -640,10 +686,91 @@ public class ServerManager {
         }
     }
 
+    /**
+     * Delete Image from the server using inputted item id and username
+     * @param user The username of the person that the image belongs to
+     * @param itemId The id of the item that the image belongs to
+     */
+    public static void deleteImage(final String user, final int itemId){
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = 3000;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                // Set the default socket timeout (SO_TIMEOUT)
+                // in milliseconds which is the timeout for waiting for data.
+                int timeoutSocket = 5000;
+                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+                String url = "http://cmput301.softwareprocess.es:8080/cmput301f15t04/images/" + user + itemId;
+
+                System.out.println(url);
+                HttpClient httpClient = new DefaultHttpClient(httpParameters);
+                HttpDelete httpDel = new HttpDelete(url);
+                HttpResponse response = null;
+
+                try {                           //run URL
+                    response = httpClient.execute(httpDel);
+                } catch (ClientProtocolException e1) {
+                    throw new RuntimeException(e1);
+                } catch (IOException e1) {
+                    throw new RuntimeException();
+                }
+
+                String status = response.getStatusLine().toString();
+                System.out.println(status);
+                HttpEntity entity = response.getEntity();
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output;
+                    System.err.println("Output from Server -> ");
+                    while ((output = br.readLine()) != null) {
+                        System.err.println(output);
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        Thread serverThread = new Thread(runnable);
+        serverThread.start();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    /**
+     * Notify the other side of the trade what has happened
+     * @param type Integer representing what type of action has occured
+     */
     public static void notifyTrade(final int type) {
         getFriendOnline(UserManager.getFriend().getUserName());
-        UserManager.getFriend().IncreaseNotifiyAmount(type);
-        UserManager.getFriend().getPendingTrades().add(TradeManager.getMostRecentTrade());
+        switch(type){
+            case 0:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
+                UserManager.getFriend().getPendingTrades().add(TradeManager.getMostRecentTrade());
+                break;
+            case 1:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
+                break;
+            case 2:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
+                break;
+            case 3:
+                UserManager.getFriend().IncreaseNotifiyAmount(type);
+        }
         saveUserOnline(UserManager.getFriend());
     }
     public void deleteImage(final String imageId){

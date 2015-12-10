@@ -16,23 +16,44 @@ import cmput301t4.gameswap.Managers.ServerManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.R;
 
+
+/**
+ * View an item in detail
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class ViewItemActivity extends Activity {
 
-    /*Declaring all the listViews here*/
+    /** Item name */
     private TextView name;
+    /** Item quality*/
     private TextView quality;
+    /** Item description*/
     private TextView description;
+    /** Item platform*/
     private TextView platform;
+    /** Item release date*/
     private TextView date;
+    /** Item public/private status*/
     private Boolean status;
     private String statusDisplay;
+    /** Item */
     private TextView statusView;
+    /** Item image view*/
     private ImageView imageView;
+    /** Item location */
     private TextView location;
     private ArrayList<String> platformList;
     private String platformString;
     private Integer platformIndex;
 
+    /**
+     * Called when this activity is first created
+     * Collects all the information of the item selected and displayes it on this
+     * activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,28 +113,6 @@ public class ViewItemActivity extends Activity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_item, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
     //=====Function needed for Testcases=====//
 
     public TextView getNameText() {
@@ -140,7 +139,22 @@ public class ViewItemActivity extends Activity {
         return statusDisplay;
     }
 
-    //=====End function needed for Testcases=====//
+    public TextView getName() {
+        return name;
+    }
+
+    public TextView getDescription() {
+        return description;
+    }
+
+    public TextView getDate() {
+        return date;
+    }
+
+    public TextView getStatusView() {
+        return statusView;
+    }
+//=====End function needed for Testcases=====//
 
     public String getPlatform(){
         Intent intent = getIntent();

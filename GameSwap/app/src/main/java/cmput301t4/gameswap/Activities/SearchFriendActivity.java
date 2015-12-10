@@ -7,6 +7,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,14 +40,27 @@ import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.FriendList;
 import cmput301t4.gameswap.R;
 
+/**
+ * Searches for the friend in the friendlist
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
+ */
 public class SearchFriendActivity extends Activity {
 
+    /** adapter for user friendlist */
     private ArrayAdapter<String> adapter;
-    private ListView friendListView;
+    /** ListView for user friendlist*/
+    private ListView ListView;
+    /** friendList contains user's friends */
     private FriendList friendList;
 
+    private Boolean searchFriend = Boolean.TRUE;
+    /** position of friend selected from listview */
     protected int friendListViewItemPosition;
+    /** EditText for searching friend */
     private EditText searchFriendText;
+    /** EditText for friend name */
     private String friendName;
     private int size;
 
@@ -52,28 +68,31 @@ public class SearchFriendActivity extends Activity {
     private static final String FILENAME = "friends.sav"; // model
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
 
-        friendListView = (ListView) findViewById(R.id.friendlistView);
-        friendList = UserManager.getTrader().getFriendList();
+        ListView = (ListView) findViewById(R.id.friendlistView);
+        friendList = UserManager.getTrader().getFriendList(); //TBM
 
         // FriendManager.addFriend("Cory");
         //FriendManager.addFriend("Terri");
         adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList.getAllFriends());
-        friendListView.setAdapter(adapter);
+        ListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         //size = FriendManager.getAllUsers().size();
 
         //code referenced from http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu
         //code referenced from http://stackoverflow.com/questions/7201159/is-using-menuitem-getitemid-valid-in-finding-which-menuitem-is-selected-by-use
         //code referenced from http://stackoverflow.com/questions/4554435/how-to-get-the-index-and-string-of-the-selected-item-in-listview-in-android
-        friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View childView, final int position, long id) {
-
                 PopupMenu popupMenu = new PopupMenu(SearchFriendActivity.this, childView);
                 popupMenu.getMenuInflater().inflate(R.menu.friend_popup, popupMenu.getMenu());
 
@@ -97,8 +116,9 @@ public class SearchFriendActivity extends Activity {
                                 thread.start();
                                 try {
                                     thread.join();
-                                    Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
+                                    Intent intent = new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
                                     intent.putExtra("isfriend", Boolean.TRUE);
+                                    ServerManager.getFriendOnline(UserManager.getFriendlist().getFriend(position));
                                     //intent.putExtra("name",FriendManager.getUser(friendListViewItemPosition));
                                     startActivity(intent);
                                     return true;
@@ -108,11 +128,11 @@ public class SearchFriendActivity extends Activity {
 
                             case R.id.tradeFriendMenuId:
                                 ServerManager.getFriendOnline(FriendManager.getUser(position));
-                                Intent intent1 = new Intent(SearchFriendActivity.this,OfferTradeActivity.class);
+                                Intent intent1 = new Intent(SearchFriendActivity.this, OfferTradeActivity.class);
                                 startActivity(intent1);
                                 return true;
                             case R.id.removeFriendMenuId:
-                               // Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(getBaseContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
 
                                 AlertDialog.Builder alert = new AlertDialog.Builder(SearchFriendActivity.this);
                                 alert.setMessage("Are you sure, you want to remove friend");
@@ -151,74 +171,151 @@ public class SearchFriendActivity extends Activity {
         });
 
         search = (SearchView) findViewById(R.id.searchViewFriend);
-        search.setQueryHint("Search Friend");
-        search.setIconifiedByDefault(false);
-        search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                //Toast.makeText(getBaseContext(), "searching...", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        switchSearch(searchFriend);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //Toast.makeText(getBaseContext(), query,
-                //Toast.LENGTH_SHORT).show();
-                searchFriend(query);
+                search.clearFocus();
+                searchWhat(searchFriend, query);
 
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_search_friend, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.showPeople) {
+            searchFriend = Boolean.FALSE;
+            Toast toast = Toast.makeText(getBaseContext(),"Now Searching in All Users", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+            switchSearch(searchFriend);
+        }
+        else if(id == R.id.showFriend){
+            searchFriend = Boolean.TRUE;
+            Toast toast = Toast.makeText(getBaseContext(),"Now Searching in Friendlist", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+            switchSearch(searchFriend);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        resetAdapter();
+    }
+
+    /**
+     * Called when this activity is resumed again to update friend list
+     */
     private void resetAdapter(){
         adapter = new ArrayAdapter<String>(this,R.layout.listviewtext, friendList.getAllFriends());
-        friendListView.setAdapter(adapter);
+        ListView.setAdapter(adapter);
     }
 
-    public void searchFriend(View view){
+    /**
+     * Functions used to handle between 2 different searches
+     * @param swap: swap between friendlist and other traders list who are not friends
+     */
+    private void switchSearch(Boolean swap){
+        if (swap == Boolean.TRUE){
+            search.setQueryHint("Search in Friendlist");
+            search.setIconifiedByDefault(false);
+            search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    //Toast.makeText(getBaseContext(), "searching...", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            search.setQueryHint("Search for other Users");
+            search.setIconifiedByDefault(false);
+            search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    //Toast.makeText(getBaseContext(), "searching...", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
-        friendName = search.getQuery().toString();
-        //Toast.makeText(getBaseContext(), traderName, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SearchFriendActivity.this,FriendProfileActivity.class);
-        startActivity(intent);
-        this.finish();
+    }//end switchSearch
 
-    }
+    /**
+     *
+     * @param swap: swap between friendlist and other traders list who are not friends
+     * @param query: name of the trader that the user is searching up
+     */
+    private void searchWhat(Boolean swap, String query){
+        if(query.equals(UserManager.getTrader().getUserName())){
+            Toast.makeText(getBaseContext(), "This is your Username", Toast.LENGTH_SHORT).show();
+        }else {
+            if (swap == Boolean.TRUE) {
+                searchFriend(query);
+            } else {
+                findTrader(query);
+            }
+        }
+    }//end searchWhat
 
+    //================end Functions used to handle between 2 different searches================//
+
+    /**
+     * Function used in "show Friendlist" option
+     * @param friend: friend that user searched for
+     */
     public void searchFriend(String friend){
         friendList = UserManager.getTrader().getFriendList();
+        Boolean isempty = Boolean.TRUE;
         for(int i=0; i< friendList.getFriendlistSize();i++){
 
             if (friend.toLowerCase().equals(friendList.getFriend(i).toString().toLowerCase()) ){
-                Toast.makeText(getBaseContext(), friend, Toast.LENGTH_SHORT).show();
+                search.setQuery("", false);
                 Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+                intent.putExtra("isfriend", Boolean.TRUE);
+                ServerManager.getFriendOnline(friend);
+                isempty = Boolean.FALSE;
                 startActivity(intent);
-                finish();
             }
         }
+        if (isempty == Boolean.TRUE){
+        Toast toast = Toast.makeText(getBaseContext(), "User not on Friendlist", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();}
+    }//end Search Friend
 
-    }
+    //================End Function used in "show Friendlist" option============//
 
-
-    public boolean searchFriendOnline(final String friend){
-        if(friend.equals(UserManager.getTrader().getUserName())){
-           return false;
-        }
+    /**
+     * Function used in "Show User" option
+     * @param trader : trader that the user searched for
+     */
+    public void findTrader(final String trader){
+        //traderName = trader;
+        //traderName = search.getQuery().toString();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                ServerManager.searchForUser(friend);
-                if(ServerManager.checkResult()){
-                    ServerManager.getFriendOnline(friend);
-                }
+                ServerManager.searchForUser(trader);
+
             }
         });
         thread.start();
@@ -227,26 +324,57 @@ public class SearchFriendActivity extends Activity {
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
-        if(ServerManager.checkResult()){
-            Intent intent =  new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+        //search.setQuery("",false);
+
+        String user  = UserManager.getTrader().getUserName();
+        //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
+        int size = UserManager.getTrader().getFriendList().getFriendlistSize();
+        String sizeString  = Integer.toString(size);
+        android.util.Log.e("size",sizeString);
+
+        android.util.Log.e("name",user);
+        int i =0;
+        //UserManager.getTrader().getFriendList().hasFriend(trader)
+        if(UserManager.getTrader().getFriendList().hasFriend(trader)== Boolean.TRUE){
+            Intent intent = new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+            intent.putExtra("isfriend", Boolean.TRUE);
+            ServerManager.getFriendOnline(trader);
+            //intent.putExtra("name", traderName.toLowerCase());
+            startActivity(intent);
+
+        } else if(ServerManager.checkResult()) {
+            Intent intent = new Intent(SearchFriendActivity.this, FriendProfileActivity.class);
+            intent.putExtra("isfriend", Boolean.FALSE);
+            ServerManager.getFriendOnline(trader);
+            //intent.putExtra("name", traderName.toLowerCase());
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(getBaseContext(), "No user exist", Toast.LENGTH_SHORT).show();
         }
-        return true;
-    }
-
-    @Override
-    protected void onStart() {
-
-        super.onStart();
-        //loadFromFile();
-        friendListView = (ListView) findViewById(R.id.friendlistView);
-//        friendList = UserManager.getTrader().getFriendList().getAllFriends();
-        friendList = UserManager.getTrader().getFriendList();
-        adapter = new ArrayAdapter<String>(this, R.layout.listviewtext, friendList.getAllFriends());
-        friendListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
     }
+    //================end Function used in "Show User" option======================//
 
+    //================Function needed for Testcases================================//
+
+    public SearchView getSearchView(){
+        SearchView search = (SearchView) findViewById(R.id.searchViewFriend);
+        return search;
+    }//end getSearchView
+
+    public ListView getListView(){
+        ListView list = (ListView) findViewById(R.id.friendlistView);
+        return list;
+    }//end getListView
+
+    //================End function needed for Testcases============================//
+
+    //================Fucntion that are unused================//
+
+    /**
+     * LoadFromFile initially used to do local saving of friendlist
+     */
     private void loadFromFile(){
 
         try {
@@ -265,7 +393,9 @@ public class SearchFriendActivity extends Activity {
         }
     }
 
-
+    /**
+     * SaveToFile initially used to do local saving of friendlist
+     */
     private void saveToFile() {
 
         try {

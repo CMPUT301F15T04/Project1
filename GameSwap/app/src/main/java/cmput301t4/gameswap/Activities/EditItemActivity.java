@@ -43,45 +43,48 @@ import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 /**
- * Edits user info on a certain Item
- * created by Blake and Preyanshu 2015-11-05
+ * Lets you edit an item in user inventory
+ *
+ * @author Preyanshu Kumar, Kynan Ly, Daniel Ren, Rupehra Chouhan, Blake Sakaluk
+ * @version Part 4
  */
 public class EditItemActivity extends Activity {
 
-    /**
-     * The spinner to choose the console
-     */
+    /** The spinner to choose the console */
     private Spinner consoleSpinner;
-    /**
-     * The spinner to choose the quality
-     */
+    /** The spinner to choose the quality */
     private Spinner qualitySpinner;
-    /**
-     * The spinner to choose if the item is public or private
-     */
+    /** The spinner to choose if the item is public or private */
     private Spinner publicprivateSpinner;
-
-
+    /** String for date format */
     final static String DATE_FORMAT = "dd-MM-yyyy";
-
+    /** Game Title */
     private String title;
+    /** Release Date String */
     private String releaseDate;
+    /** Description string */
     private String description;
+    /** If the date is valid string */
     private Boolean isDateValid;
+    /** EditText for title */
     private EditText titleEditText;
+    /** EditText for release date */
     private EditText releaseEditText;
+    /** EditText for description */
     private EditText descEditText;
+    /** index */
     private Integer index;
+    /** ArrayList for inventory items */
     private ArrayList<Item> inventory;
-
-
-
-    private Button saveEditItemButton;
 
     private static final String FILENAME = "file.sav"; // model
 
     static final int REQUEST_IMAGE_CAPTURE=1;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //loads it upon saving
@@ -99,9 +102,7 @@ public class EditItemActivity extends Activity {
         releaseEditText = (EditText) findViewById(R.id.editReleaseDate);
         descEditText = (EditText) findViewById(R.id.editdescriptionBox);
 
-        System.out.println("at edit item activity");
-
-
+        //System.out.println("at edit item activity");
         if (b != null) {
             titleEditText.setText(b.getString("name"));
             descEditText.setText(b.getString("description"));
@@ -113,8 +114,10 @@ public class EditItemActivity extends Activity {
 
     }
 
+    /**
+     * function creates spinner data for us for the three spinners here.
+     */
     private void prepareSpinnerdata() {
-        //function creates spinner data for us for the three spinners here.
         // Create an ArrayAdapter for console array
         ArrayAdapter<CharSequence> console_adapter = ArrayAdapter.createFromResource(this,
                 R.array.Console, android.R.layout.simple_spinner_item);
@@ -142,6 +145,13 @@ public class EditItemActivity extends Activity {
 
     }
 
+    /**
+     * A necessary function that must be added to choose the item in the spinner
+     * @param parent : The AdapterView where the selection happened
+     * @param view: The view within the adapterView that was clicked
+     * @param pos: position of the item selected
+     * @param id: The row id of the item that is selected
+     */
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
@@ -160,10 +170,18 @@ public class EditItemActivity extends Activity {
         prefEditor.commit();
     }
 
+    /**
+     * Called when nothing is clicked
+     * @param parent: The AdapterView where the selection happened
+     */
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
 
+    /**
+     * Called when save button is clicked
+     * @param view: save button view
+     */
     public void saveButtonClick(View view) {
         //Toast.makeText(getBaseContext(), "Saving", Toast.LENGTH_SHORT).show();
         Boolean isPrivate;
@@ -200,6 +218,10 @@ public class EditItemActivity extends Activity {
 
     }
 
+    /**
+     *Called when cancel button is clicked
+     * @param view
+     */
     public void cancelButtonClick(View view) {
         this.finish();
     }
@@ -217,6 +239,12 @@ public class EditItemActivity extends Activity {
         });
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -227,7 +255,12 @@ public class EditItemActivity extends Activity {
         }
     }
 
-
+    /**\
+     *
+     * @param date : date that the user entered for item
+     * @return: true if the date format is valid
+     *                  false if the date format is not valid
+     */
     public static boolean checkDate(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
@@ -259,6 +292,10 @@ public class EditItemActivity extends Activity {
         }
     }
 
+    /**
+     *
+     * @param view:
+     */
     public void setToCurrentLocation(View view) {
         //TODO: Hook up the UI to this
         // Code acquired from http://www.vogella.com/tutorials/AndroidLocationAPI/article.html#locationapi on Nov 30, 2015
