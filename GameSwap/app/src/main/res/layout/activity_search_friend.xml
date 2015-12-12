@@ -32,7 +32,7 @@
         android:layout_gravity="center_horizontal" />
 
     <SearchView
-        android:layout_width="396dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchViewFriend"
         android:layout_weight="0.31" />

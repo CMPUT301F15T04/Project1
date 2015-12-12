@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import cmput301t4.gameswap.Managers.InvSearchManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 
@@ -53,6 +55,7 @@ public class FriendInventoryActivity extends Activity {
     private double latitude;
     /** longitude of the place */
     private double longitude;
+    private SearchView search;
 
 
     /**
@@ -88,6 +91,38 @@ public class FriendInventoryActivity extends Activity {
                 intent.putExtra("Longitude", longitude);
                 intent.putExtra("itemId", itemID);
                 startActivity(intent);
+            }
+        });
+
+        search = (SearchView)findViewById(R.id.browseByTextualQuery);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                search.clearFocus();
+                inventory = InvSearchManager.showFriendInventory(UserManager.getFriend().getInventory());
+                itemNamesList = inventory.getItemsNames();
+                for (int i =0; i < itemNamesList.size();i++){
+                    if(query.equals(itemNamesList.get(i).toLowerCase())){
+                        Item item = inventory.getItem(i);
+                        final Intent intent = new Intent(FriendInventoryActivity.this, ViewItemActivity.class);
+                        intent.putExtra("name", item.getName());
+                        intent.putExtra("description", item.getDescription());
+                        intent.putExtra("releaseDate", item.getReleaseDate());
+                        intent.putExtra("index", i);
+                        intent.putExtra("Latitude", latitude);
+                        intent.putExtra("Longitude", longitude);
+                        intent.putExtra("itemId", itemID);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
     }

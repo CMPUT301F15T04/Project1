@@ -19,14 +19,11 @@
         android:layout_height="413dp"
         android:id="@+id/friendInventoryListView"
         android:layout_gravity="center_horizontal" />
-
-    <Button
+    <SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:onClick="frienddoneButtonClicked"
-        android:id="@+id/friendInventoryDone"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/browseByTextualQuery"
+        android:queryHint="Browse by query" />
 
 
 </LinearLayout>
