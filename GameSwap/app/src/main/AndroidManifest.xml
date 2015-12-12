@@ -120,6 +120,14 @@
             android:name=".Activities.CounterTradeActivity"
             android:label="@string/title_activity_counter_trade" >
         </activity>
+        <activity
+            android:name=".Activities.SearchByPlatformActivity"
+            android:label="@string/title_activity_search_by_platform" >
+        </activity>
+        <activity
+            android:name=".Activities.SearchByQualityActivity"
+            android:label="@string/title_activity_search_by_quality" >
+        </activity>
     </application>
 
 </manifest>

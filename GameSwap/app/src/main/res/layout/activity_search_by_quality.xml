@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cmput301t4.gameswap.Activities.SearchByPlatformActivity"
+    android:weightSum="1">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Items by Quality"
+        android:id="@+id/qualityTextView"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/qualitylistView"
+        android:layout_gravity="center_horizontal" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/qualitySpinner"
+        android:entries="@array/Quality"
+        android:gravity="bottom"/>
+
+
+
+</LinearLayout>

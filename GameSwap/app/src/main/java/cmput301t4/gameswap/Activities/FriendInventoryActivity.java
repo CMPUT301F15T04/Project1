@@ -3,6 +3,9 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -127,6 +130,42 @@ public class FriendInventoryActivity extends Activity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_friend_inventory, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.byPlatform) {
+            //searchFriend = Boolean.FALSE;
+            Toast toast = Toast.makeText(getBaseContext(),"by Platfom", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            Intent intent = new Intent(FriendInventoryActivity.this,SearchByPlatformActivity.class);
+            startActivity(intent);
+            //switchSearch(searchFriend);
+        }
+        else if(id == R.id.byQuality){
+            //searchFriend = Boolean.TRUE;
+            Toast toast = Toast.makeText(getBaseContext(),"by quality", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            Intent intent = new Intent(FriendInventoryActivity.this,SearchByQualityActivity.class);
+            startActivity(intent);
+            //switchSearch(searchFriend);
+        }
+        return super.onOptionsItemSelected(item);
+    }
     /**
      * Called when user clicks DONE from on friend inventory page
      * @param v: done button view
