@@ -42,6 +42,7 @@ public class FriendProfileActivity extends Activity {
     /** IsFriend status in boolean */
     private Boolean isFriend;
 
+
     /**
      *Sets the friend profile page with their information
      * @param savedInstanceState

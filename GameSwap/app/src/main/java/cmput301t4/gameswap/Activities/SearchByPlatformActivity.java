@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import cmput301t4.gameswap.Managers.InvSearchManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class SearchByPlatformActivity extends Activity {
@@ -81,7 +82,8 @@ public class SearchByPlatformActivity extends Activity {
                 indices = new ArrayList<Integer>();
                 consoleValue = consoleSpinner.getSelectedItemPosition();
                 for (int i =0; i< inventory.size();i++){
-                    if (inventory.getItem(i).getPlatform().equals(consoleValue)){
+                    Item item = inventory.getItem(i);
+                    if ((item.getPlatform().equals(consoleValue)) && (item.getIsPrivate().equals(false))) {
                         indices.add(i);
                         itemNames.add(inventory.getItem(i).getName());
                     }
@@ -106,6 +108,8 @@ public class SearchByPlatformActivity extends Activity {
                 itemID = UserManager.getFriend().getInventory().getItem(index).getItemid();
                 latitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLatitude();
                 longitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLongitude();
+                Platform = UserManager.getFriend().getInventory().getItem(index).getPlatform();
+                Quality = UserManager.getFriend().getInventory().getItem(index).getQuality();
 
                 final Intent intent = new Intent(SearchByPlatformActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
@@ -115,13 +119,17 @@ public class SearchByPlatformActivity extends Activity {
                 intent.putExtra("Latitude", latitude);
                 intent.putExtra("Longitude", longitude);
                 intent.putExtra("itemId", itemID);
+                intent.putExtra("platform",Platform);
+                intent.putExtra("quality",Quality);
                 startActivity(intent);
             }
 
         });
     }
 
-
+    /**
+     * update the listview
+     */
     public void displayItems(){
         adapter = new ArrayAdapter<String>(this,R.layout.searchbyplatform,itemNames);
         listView.setAdapter(adapter);
