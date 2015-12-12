@@ -71,12 +71,10 @@ public class SearchByQualityActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 itemNames = new ArrayList<String>();
-                indices = new ArrayList<Integer>();
                 qualityValue = qualitySpinner.getSelectedItemPosition();
                 for (int i = 0; i < inventory.size(); i++) {
                     Item item = inventory.getItem(i);
                     if ((item.getQuality().equals(qualityValue)) && item.getIsPrivate().equals(false)) {
-                        indices.add(i);
                         itemNames.add(inventory.getItem(i).getName());
                     }
                 }
@@ -94,15 +92,22 @@ public class SearchByQualityActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                index = indices.get(position);
-                Name = UserManager.getFriend().getInventory().getItem(index).getName();
-                Description = UserManager.getFriend().getInventory().getItem(index).getDescription();
-                ReleaseDate = UserManager.getFriend().getInventory().getItem(index).getReleaseDate();
-                itemID = UserManager.getFriend().getInventory().getItem(index).getItemid();
-                latitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLatitude();
-                longitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLongitude();
-                Platform = UserManager.getFriend().getInventory().getItem(index).getPlatform();
-                Quality = UserManager.getFriend().getInventory().getItem(index).getQuality();
+                String name = listView.getItemAtPosition(position).toString();
+                for (int i =0; i<inventory.size();i++){
+                    if(inventory.getItem(i).getName().toLowerCase().equals(name.toLowerCase())){
+                        position = i;
+                        break;
+                    }
+                }
+                Name = inventory.getItem(position).getName();
+                Description = inventory.getItem(position).getDescription();
+                ReleaseDate = inventory.getItem(position).getReleaseDate();
+                itemID = inventory.getItem(position).getItemid();
+                latitude = inventory.getItem(position).getLocation().getLatitude();
+                longitude = inventory.getItem(position).getLocation().getLongitude();
+                Platform =  inventory.getItem(position).getPlatform();
+                Quality = inventory.getItem(position).getQuality();
+
                 final Intent intent = new Intent(SearchByQualityActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
                 intent.putExtra("description", Description);

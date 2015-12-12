@@ -59,8 +59,7 @@ public class FriendInventoryActivity extends Activity {
     /** longitude of the place */
     private double longitude;
     private SearchView search;
-    /** Indices of the items in inventory */
-    private ArrayList<Integer> indices;
+
 
 
     /**
@@ -73,16 +72,7 @@ public class FriendInventoryActivity extends Activity {
         setContentView(R.layout.activity_friend_inventory);
         itemNamesList = new ArrayList<String>();
         inventory = InvSearchManager.showFriendInventory(UserManager.getFriend().getInventory());
-        indices = new ArrayList<Integer>();
-        for (int i =0; i< inventory.size();i++){
-            if (inventory.getItem(i).getIsPrivate().equals(false)){
-                itemNamesList.add(inventory.getItem(i).getName().toUpperCase());
-                indices.add(i);
-                Toast.makeText(getBaseContext(),Integer.toString(i), Toast.LENGTH_LONG).show();
-
-            }
-        }
-        //itemNamesList = inventory.getItemsNames();
+        itemNamesList = inventory.getItemsNames();
         listView = (ListView) findViewById(R.id.friendInventoryListView);
         adapter = new ArrayAdapter<String>(this,R.layout.friendinventorylistviewtext,itemNamesList);
         listView.setAdapter(adapter);
@@ -90,21 +80,22 @@ public class FriendInventoryActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String p  = Integer.toString(position);
-                Toast.makeText(getBaseContext(),p, Toast.LENGTH_LONG).show();
-                position = indices.get(position);
-                Toast.makeText(getBaseContext(),Integer.toString(position), Toast.LENGTH_LONG).show();
-
-
-                Name = UserManager.getFriend().getInventory().getItem(position).getName();
-                Description = UserManager.getFriend().getInventory().getItem(position).getDescription();
-                ReleaseDate = UserManager.getFriend().getInventory().getItem(position).getReleaseDate();
-                itemID = UserManager.getFriend().getInventory().getItem(position).getItemid();
-                latitude = UserManager.getFriend().getInventory().getItem(position).getLocation().getLatitude();
-                longitude = UserManager.getFriend().getInventory().getItem(position).getLocation().getLongitude();
-                Platform = UserManager.getFriend().getInventory().getItem(position).getPlatform();
-                Quality = UserManager.getFriend().getInventory().getItem(position).getQuality();
-                IsPrivate = UserManager.getFriend().getInventory().getItem(position).getIsPrivate();
+                String name = listView.getItemAtPosition(position).toString();
+                for (int i =0; i<inventory.size();i++){
+                    if(inventory.getItem(i).getName().toLowerCase().equals(name.toLowerCase())){
+                        position = i;
+                        break;
+                    }
+                }
+                Name = inventory.getItem(position).getName();
+                Description = inventory.getItem(position).getDescription();
+                ReleaseDate = inventory.getItem(position).getReleaseDate();
+                itemID = inventory.getItem(position).getItemid();
+                latitude =inventory.getItem(position).getLocation().getLatitude();
+                longitude = inventory.getItem(position).getLocation().getLongitude();
+                Platform = inventory.getItem(position).getPlatform();
+                Quality = inventory.getItem(position).getQuality();
+                IsPrivate = inventory.getItem(position).getIsPrivate();
 
                 final Intent intent = new Intent(FriendInventoryActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
