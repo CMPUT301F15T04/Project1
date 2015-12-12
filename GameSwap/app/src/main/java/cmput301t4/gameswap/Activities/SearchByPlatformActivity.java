@@ -106,6 +106,8 @@ public class SearchByPlatformActivity extends Activity {
                 itemID = UserManager.getFriend().getInventory().getItem(index).getItemid();
                 latitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLatitude();
                 longitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLongitude();
+                Platform = UserManager.getFriend().getInventory().getItem(index).getPlatform();
+                Quality = UserManager.getFriend().getInventory().getItem(index).getQuality();
 
                 final Intent intent = new Intent(SearchByPlatformActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
@@ -115,6 +117,8 @@ public class SearchByPlatformActivity extends Activity {
                 intent.putExtra("Latitude", latitude);
                 intent.putExtra("Longitude", longitude);
                 intent.putExtra("itemId", itemID);
+                intent.putExtra("platform",Platform);
+                intent.putExtra("quality",Quality);
                 startActivity(intent);
             }
 

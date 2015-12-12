@@ -84,7 +84,8 @@ public class FriendInventoryActivity extends Activity {
                 itemID = UserManager.getFriend().getInventory().getItem(position).getItemid();
                 latitude = UserManager.getFriend().getInventory().getItem(position).getLocation().getLatitude();
                 longitude = UserManager.getFriend().getInventory().getItem(position).getLocation().getLongitude();
-
+                Platform = UserManager.getFriend().getInventory().getItem(position).getPlatform();
+                Quality = UserManager.getFriend().getInventory().getItem(position).getQuality();
                 final Intent intent = new Intent(FriendInventoryActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
                 intent.putExtra("description", Description);
@@ -93,6 +94,8 @@ public class FriendInventoryActivity extends Activity {
                 intent.putExtra("Latitude", latitude);
                 intent.putExtra("Longitude", longitude);
                 intent.putExtra("itemId", itemID);
+                intent.putExtra("platform",Platform);
+                intent.putExtra("quality",Quality);
                 startActivity(intent);
             }
         });

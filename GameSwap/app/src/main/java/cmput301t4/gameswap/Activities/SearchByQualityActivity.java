@@ -100,6 +100,7 @@ public class SearchByQualityActivity extends Activity {
                 latitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLatitude();
                 longitude = UserManager.getFriend().getInventory().getItem(index).getLocation().getLongitude();
                 Platform = UserManager.getFriend().getInventory().getItem(index).getPlatform();
+                Quality = UserManager.getFriend().getInventory().getItem(index).getQuality();
                 final Intent intent = new Intent(SearchByQualityActivity.this, ViewItemActivity.class);
                 intent.putExtra("name", Name);
                 intent.putExtra("description", Description);
@@ -109,6 +110,7 @@ public class SearchByQualityActivity extends Activity {
                 intent.putExtra("Longitude", longitude);
                 intent.putExtra("itemId", itemID);
                 intent.putExtra("platform",Platform);
+                intent.putExtra("quality",Quality);
                 startActivity(intent);
             }
 
