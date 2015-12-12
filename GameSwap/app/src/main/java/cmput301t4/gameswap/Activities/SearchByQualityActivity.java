@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import cmput301t4.gameswap.Managers.InvSearchManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class SearchByQualityActivity extends Activity {
@@ -73,7 +74,8 @@ public class SearchByQualityActivity extends Activity {
                 indices = new ArrayList<Integer>();
                 qualityValue = qualitySpinner.getSelectedItemPosition();
                 for (int i = 0; i < inventory.size(); i++) {
-                    if (inventory.getItem(i).getQuality().equals(qualityValue)) {
+                    Item item = inventory.getItem(i);
+                    if ((item.getQuality().equals(qualityValue)) && item.getIsPrivate().equals(false)) {
                         indices.add(i);
                         itemNames.add(inventory.getItem(i).getName());
                     }
@@ -117,6 +119,9 @@ public class SearchByQualityActivity extends Activity {
         });
     }
 
+    /**
+     * update the listview
+     */
     public void displayItems(){
         adapter = new ArrayAdapter<String>(this,R.layout.searchbyquality,itemNames);
         listView.setAdapter(adapter);

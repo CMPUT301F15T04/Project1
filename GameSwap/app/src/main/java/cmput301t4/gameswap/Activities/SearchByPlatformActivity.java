@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import cmput301t4.gameswap.Managers.InvSearchManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 public class SearchByPlatformActivity extends Activity {
@@ -81,7 +82,8 @@ public class SearchByPlatformActivity extends Activity {
                 indices = new ArrayList<Integer>();
                 consoleValue = consoleSpinner.getSelectedItemPosition();
                 for (int i =0; i< inventory.size();i++){
-                    if (inventory.getItem(i).getPlatform().equals(consoleValue)){
+                    Item item = inventory.getItem(i);
+                    if ((item.getPlatform().equals(consoleValue)) && (item.getIsPrivate().equals(false))) {
                         indices.add(i);
                         itemNames.add(inventory.getItem(i).getName());
                     }
@@ -125,7 +127,9 @@ public class SearchByPlatformActivity extends Activity {
         });
     }
 
-
+    /**
+     * update the listview
+     */
     public void displayItems(){
         adapter = new ArrayAdapter<String>(this,R.layout.searchbyplatform,itemNames);
         listView.setAdapter(adapter);
