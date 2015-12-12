@@ -24,15 +24,10 @@
         android:layout_height="345dp"
         android:id="@+id/friendlistView"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.45" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_weight="0.53" />
 
     <SearchView
-        android:layout_width="396dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchViewFriend"
         android:layout_weight="0.31" />

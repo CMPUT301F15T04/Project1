@@ -209,7 +209,7 @@ public class myInventoryActivity extends Activity{
             intent.putExtra("platform", Platform);
             intent.putExtra("itemId", itemID);
             startActivity(intent);
-            finish();
+            //finish();
         }
     }
 

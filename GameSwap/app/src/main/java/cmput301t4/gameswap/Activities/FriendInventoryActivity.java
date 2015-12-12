@@ -3,10 +3,14 @@ package cmput301t4.gameswap.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,6 +20,7 @@ import cmput301t4.gameswap.Managers.InvSearchManager;
 import cmput301t4.gameswap.Managers.InventoryManager;
 import cmput301t4.gameswap.Managers.UserManager;
 import cmput301t4.gameswap.Models.Inventory;
+import cmput301t4.gameswap.Models.Item;
 import cmput301t4.gameswap.R;
 
 
@@ -53,6 +58,7 @@ public class FriendInventoryActivity extends Activity {
     private double latitude;
     /** longitude of the place */
     private double longitude;
+    private SearchView search;
 
 
     /**
@@ -90,8 +96,76 @@ public class FriendInventoryActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        search = (SearchView)findViewById(R.id.browseByTextualQuery);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                search.clearFocus();
+                inventory = InvSearchManager.showFriendInventory(UserManager.getFriend().getInventory());
+                itemNamesList = inventory.getItemsNames();
+                for (int i =0; i < itemNamesList.size();i++){
+                    if(query.equals(itemNamesList.get(i).toLowerCase())){
+                        Item item = inventory.getItem(i);
+                        final Intent intent = new Intent(FriendInventoryActivity.this, ViewItemActivity.class);
+                        intent.putExtra("name", item.getName());
+                        intent.putExtra("description", item.getDescription());
+                        intent.putExtra("releaseDate", item.getReleaseDate());
+                        intent.putExtra("index", i);
+                        intent.putExtra("Latitude", latitude);
+                        intent.putExtra("Longitude", longitude);
+                        intent.putExtra("itemId", itemID);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_friend_inventory, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.byPlatform) {
+            //searchFriend = Boolean.FALSE;
+            Toast toast = Toast.makeText(getBaseContext(),"by Platfom", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            Intent intent = new Intent(FriendInventoryActivity.this,SearchByPlatformActivity.class);
+            startActivity(intent);
+            //switchSearch(searchFriend);
+        }
+        else if(id == R.id.byQuality){
+            //searchFriend = Boolean.TRUE;
+            Toast toast = Toast.makeText(getBaseContext(),"by quality", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            Intent intent = new Intent(FriendInventoryActivity.this,SearchByQualityActivity.class);
+            startActivity(intent);
+            //switchSearch(searchFriend);
+        }
+        return super.onOptionsItemSelected(item);
+    }
     /**
      * Called when user clicks DONE from on friend inventory page
      * @param v: done button view

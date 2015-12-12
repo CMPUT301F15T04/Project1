@@ -47,8 +47,10 @@ public class FriendList {
         return friendList.get(index);
     }
 
-    /* Setter to set the friendsList
-    */
+    /**
+     * sets the friendlist array
+     * @param friends the arraylist of friends that is passed in
+     */
     public void setFriendList(ArrayList<String> friends){friendList = friends;}
 
 

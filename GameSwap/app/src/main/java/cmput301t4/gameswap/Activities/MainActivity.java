@@ -77,7 +77,6 @@ public class MainActivity extends Activity {
                 } catch (InterruptedException e) {
                     throw new RuntimeException();
                 }
-
                 //ServerManager.getUserOnline(username.getText().toString());
                 Intent intent = new Intent(this, selectTaskActivity.class);
 
