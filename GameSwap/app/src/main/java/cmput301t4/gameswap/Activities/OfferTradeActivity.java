@@ -112,12 +112,14 @@ public class OfferTradeActivity extends Activity {
         Intent intent2 = getIntent();
         Bundle b = intent2.getExtras();
         if (b!=null){
+            TradeManager.createTrade(UserManager.getTrader().getUserName(), UserManager.getFriend().getUserName(), CreateTradeManager.getOwnerSide(), CreateTradeManager.getFriendSide());
             UserManager.getFriend().getPastTrades().add(TradeManager.getCurrent().getTrade(b.getInt("index")));
             UserManager.getFriend().getPendingTrades().delete(TradeManager.getCurrent().getTrade(b.getInt("index")));
             TradeManager.moveTrade(b.getInt("index"));
             CreateTradeManager.clearFriendSide();
             CreateTradeManager.clearOwnerSide();
             //Toast.makeText(getBaseContext(), "Offering Trade", Toast.LENGTH_SHORT).show();
+            UserManager.getFriend().getPendingTrades().add(TradeManager.getMostRecentTrade());
             ServerManager.saveUserOnline(UserManager.getTrader());
             ServerManager.saveUserOnline(UserManager.getFriend());
             Intent intent = new Intent(OfferTradeActivity.this, TradesActivity.class);
