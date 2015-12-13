@@ -1,5 +1,11 @@
 package cmput301t4.gameswap.Activities;
 
+/**
+ * Activity that lets user browse friend inventory by quality
+ *
+ * @author Rupehra Chouhan, Preyanshu Kumar, Kynan Ly, Daniel Ren, Blake Sakaluk
+ * @version Part 5
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,12 +39,8 @@ public class SearchByQualityActivity extends Activity {
     private Inventory inventory;
     /** Value of item platform in console */
     private Integer qualityValue;
-    /** Indices of the items in inventory */
-    private ArrayList<Integer> indices;
     /** Referring this to the name of this activity*/
     private SearchByQualityActivity activity = this;
-    /** Index of the selected item */
-    private Integer index;
     /* item ID */
     private int itemID;
     /* Item name */
@@ -66,7 +68,6 @@ public class SearchByQualityActivity extends Activity {
         inventory = InvSearchManager.showFriendInventory(UserManager.getFriend().getInventory());
         listView = (ListView) findViewById(R.id.qualitylistView);
         itemNames = new ArrayList<String>();
-        indices = new ArrayList<Integer>();
         qualitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -88,7 +89,7 @@ public class SearchByQualityActivity extends Activity {
         });
 
 
-
+        //when the item is clicked, a new screen opens which displays the details of the item
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

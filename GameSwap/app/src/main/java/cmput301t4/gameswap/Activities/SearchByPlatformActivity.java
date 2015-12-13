@@ -1,5 +1,11 @@
 package cmput301t4.gameswap.Activities;
 
+/**
+ * Activity that lets user browse friend inventory by platform
+ *
+ * @author Rupehra Chouhan, Preyanshu Kumar, Kynan Ly, Daniel Ren, Blake Sakaluk
+ * @version Part 5
+ */
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -90,7 +96,7 @@ public class SearchByPlatformActivity extends Activity {
 
             }
         });
-
+        //when the item is clicked, a new screen opens which displays the details of the item
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
